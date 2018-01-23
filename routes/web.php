@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('ingreso');
+});
+
+Route::get('/usuario', function () {
+    return view('plantilla.usuario');
 });
