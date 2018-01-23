@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('/usuario', function () {
     return view('plantilla.usuario');
 });
+Route::get('tedy', function () {
+    return 'teddy';
+});
