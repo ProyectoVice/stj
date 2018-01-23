@@ -21,3 +21,6 @@ Route::get('/usuario', function () {
 Route::get('tedy', function () {
     return 'teddy';
 });
+Route::get('yota', function () {
+    return 'yota';
+});
