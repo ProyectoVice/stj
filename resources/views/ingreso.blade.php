@@ -451,7 +451,8 @@ h3.tittle {
 						<div class="mask" style="width:100% !important; margin-top: -2em">
 							<h2><b>Bienvenido</b></h2>
 	                  <div class="main">
-								<form>
+								<form method="post" action="/login" >
+									{!!csrf_field() !!}
 								<input type="text" class="text" value="Usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Usuario';}" >
 								<input type="password" value="Contraseña" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Contraseña';}">
 								<div class="submit"><input type="submit" onclick="myFunction()" value="Iniciar Sesión" ></div>
