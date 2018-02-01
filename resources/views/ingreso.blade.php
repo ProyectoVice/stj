@@ -153,7 +153,7 @@ body a{
    filter: alpha(opacity=0);
    opacity: 0;
 }
-.view-tenth:hover span{
+.view-tenth:hover #btn-is{
 	opacity:0;
 	}
 .view-tenth:hover .mask {
@@ -314,7 +314,7 @@ h3.tittle {
     -o-border-top-right-radius: 0.3em;
     -moz-border-top-right-radius: 0.3em;
 }
-.main input[type="text"],.main input[type="password"]{
+.main input[type="text"],.main input[type="password"],.main input[type="email"]{
    width: 100%;
     padding: 1em 4em 1em 1em;
     color: #858282;
@@ -435,9 +435,13 @@ h3.tittle {
 <body>
  <div class="main" style="padding:2%;margin-top:2%;">        	
  <div class="col-lg-12">
-         <div class="container">          	 
-               <div class="col-lg-4"></div>
+         <div class="container">   
+					@if(session()->has('flash'))
+						<div class="alert alert-info col-offset-5 col-2 col-offset-5" align="center">{{ session('flash') }}</div>
+				 	 @endif
+             <div class="col-lg-4"></div>
 				 <div class="col-lg-4">
+				 	 
 				 <div class="row grids text-center">
 					<div class="view view-tenth">
 					    <!--  <a href="single.html">-->
@@ -446,18 +450,24 @@ h3.tittle {
 							<img src="plantilla/images/gallery/unheval-logo.png" class="img-responsive" alt="UNHEVAL" style="margin:0% auto;" >
 	               </div>
 						<div class="label-product" style="margin-top: 20px;" >
-							<span class="new">Iniciar Sesión </span> 
+							<span class="new" id="btn-is">Iniciar Sesión </span> 
 						</div>
 						<div class="mask" style="width:100% !important; margin-top: -2em">
 							<h2><b>Bienvenido</b></h2>
 	                  <div class="main">
-								<form method="post" action="/login" >
+							<form method="post" action="{{ route('login') }}" >
 									{!!csrf_field() !!}
-								<input type="text" class="text" value="Usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Usuario';}" >
-								<input type="password" value="Contraseña" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Contraseña';}">
-								<div class="submit"><input type="submit" onclick="myFunction()" value="Iniciar Sesión" ></div>
+								<div class="form-group">
+									<input type="text" name="dni" value="{{ old('dni') }}" placeholder="Ingresa tu Usuario">
+								{!! $errors->first('dni','<span class="help-block" style="background-color:yellow; color:red;"><b>:message<b/></span>') !!}	
+								</div>
+								
+								<input type="password" name="password" placeholder="Ingresa tu Contraseña">
+								{!! $errors->first('password','<span class="help-block"  style="background-color:yellow; color:red;"><b>:message</b></span>') !!}	
+								
+								<div class="submit"><input type="submit" value="Iniciar Sesión" ></div>
 								<div class="clearfix"></div>
-								</form>
+							</form>
 							</div>
 						</div>
 							

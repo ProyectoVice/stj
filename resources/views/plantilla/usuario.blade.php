@@ -7,8 +7,8 @@ $variable="";
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>RSU-Docente :: @yield('titulo')</title>
-		<link rel="icon" type="image/png" href="{{url('plantilla/images/gallery/icono-rsu-unheval.png')}}" />
+		<title>STJ :: @yield('titulo')</title>
+		<link rel="icon" type="image/png" href="{{url('plantilla/images/gallery/unheval-logo.png')}}" />
 
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -64,8 +64,8 @@ $variable="";
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
 						<small>
-							<img src="{{URL::to('plantilla/images/gallery/logo-rsu-unheval.png')}}" height="26px;">
-							
+							<img src="{{URL::to('plantilla/images/gallery/unheval-logo.png')}}" height="26px;">
+							UNHEVAL
 						</small>
 					</a>
 				</div>
@@ -78,8 +78,8 @@ $variable="";
 								<img class="nav-user-photo" src="{{URL::to('plantilla/images/avatars/avatar.png')}}"
 								alt="Foto" />
 								<span class="user-info">
-									<small>Nombres</small>
-									Apellidos
+									<small>{{ Auth::user()->nombres }}</small>
+									{{ Auth::user()->apellido_paterno.' '.Auth::user()->apellido_materno }}
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -98,12 +98,15 @@ $variable="";
 									</a>
 								</li>
 								<li class="divider"></li>
-
 								<li>
-									<a href="#">
+									<form method="POST" action="{{ route('logout') }}" name="salir">
+										{{ csrf_field() }}
+									</form>
+									<a href="javascript:document.salir.submit()">
 										<i class="ace-icon fa fa-power-off"></i>
 										Salir
 									</a>
+										
 								</li>
 							</ul>
 						</li>
@@ -125,7 +128,9 @@ $variable="";
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 						<b>
-						Rol
+						@foreach($roles as $rol)
+							{{$rol->rol_id}} - 
+						@endforeach
 						</b>
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
