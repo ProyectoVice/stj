@@ -4,6 +4,7 @@
 $variable="";
 
 ?>
+
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
@@ -40,14 +41,7 @@ $variable="";
 		@yield('activacion')
 		@yield('estilos')
 
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-		<!--[if lte IE 8]>
-		<script src="plantilla/js/html5shiv.min.js"></script>
-		<script src="plantilla/js/respond.min.js"></script>
-		<![endif]-->
 	</head>
-
 	<body class="no-skin">
 		<div id="navbar" class="navbar navbar-default          ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
@@ -127,15 +121,28 @@ $variable="";
 
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+
 						<b>
-						@foreach($roles as $rol)
-							{{$rol->rol_id}} - 
-						@endforeach
+							@foreach(Auth::user()->roles as $rol)
+								{{$rol->rol}} 
+							@endforeach
 						</b>
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
 
 				<ul class="nav nav-list">
+					<!--MODULOS-->
+						<!-- Administrador -->
+						@if(Auth::user()->hasRoles(['Administrador General']))
+						<li class="">
+							<a href="{{url('#')}}">
+								<i class="menu-icon fa fa-users"></i>
+								<span class="menu-text"> Usuarios </span>
+							</a>
+							<b class="arrow"></b>
+						</li>
+						@endif
+						<!-- Fin Administrador -->
 					<li class="">
 						<a href="{{url('')}}">
 							<i class="menu-icon fa fa-list-alt"></i>
@@ -314,6 +321,7 @@ $variable="";
 					<div class="page-content">
 						<div class="row">
 							@yield('contenido')
+
 						</div>
 					</div>
 
