@@ -1,485 +1,284 @@
-
-<!DOCTYPE>
-
-<style type="text/css">
-	/** Author: ArrayForm
-Author URL: http://arrayform.com **/
-h4, h5, h6,
-h1, h2, h3 {margin-top: 0;}
-ul, ol {margin: 0;}
-p {margin: 0;}
-html, body{
-	font-family: 'Open Sans', sans-serif;
-	background:#F6F6F6;
-	background-image:url('plantilla/images/gallery/slider-campus.jpg');
-	background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-	margin:0;
-	padding:0%;
-}
-body a{
-	transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-}
-.view {
-   overflow: hidden;
-   position: static;
-   text-align: center;
-   cursor: default;
-
-}
-.view .mask,.view .content {
-  position: absolute;
-   overflow: hidden;
-   top: 0;
-   left: 0;
-   height:auto;
-}
-.view img {
-   display: block;
-   position: relative;
-}
-.view h2 {
-   text-transform: uppercase;
-   color: #000;
-   text-align: center;
-   position: relative;
-   font-size: 17px;
-   padding: 10px;
-   background: rgba(0, 0, 0, 0.8);
-   margin: 20px 0 0 0;
-   
-}
-.view .main {
-   font-style: italic;
-   font-size: 12px;
-   position: relative;
-   color: #fff;
-   padding: 10px 20px 20px;
-   text-align: center;
-}
-.info {
-  	display: inline-block;
-	text-decoration: none;
-	color: #fff;
-	font-size:3em;
-	/*padding:10%;*/
-}
-.view-tenth img {
-   -webkit-transform: scaleY(1);
-   -moz-transform: scaleY(1);
-   -o-transform: scaleY(1);
-   -ms-transform: scaleY(1);
-   transform: scaleY(1);
-   -webkit-transition: all 0.7s ease-in-out;
-   -moz-transition: all 0.7s ease-in-out;
-   -o-transition: all 0.7s ease-in-out;
-   -ms-transition: all 0.7s ease-in-out;
-   transition: all 0.7s ease-in-out;
-}
-.view-tenth .mask {
-/*   background-color:#dcbc86;*/
-   -webkit-transition: all 0.5s linear;
-   -moz-transition: all 0.5s linear;
-   -o-transition: all 0.5s linear;
-   -ms-transition: all 0.5s linear;
-   transition: all 0.5s linear;
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-   filter: alpha(opacity=0);
-   opacity: 0;
-}
-.view-tenth h2 {
-   border-bottom: 1px solid #E9C78C;
-   background: transparent;
-   margin:40px 40px 0px 40px;
-   -webkit-transform: scale(0);
-   -moz-transform: scale(0);
-   -o-transform: scale(0);
-   -ms-transform: scale(0);
-   transform: scale(0);
-   color: #000000;
-   -webkit-transition: all 0.5s linear;
-   -moz-transition: all 0.5s linear;
-   -o-transition: all 0.5s linear;
-   -ms-transition: all 0.5s linear;
-   transition: all 0.5s linear;
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-   filter: alpha(opacity=0);
-   opacity: 0;
-}
-.view-tenth .main {
-   color: #fff;
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-   filter: alpha(opacity=0);
-   opacity: 0;
-   -webkit-transform: scale(0);
-   -moz-transform: scale(0);
-   -o-transform: scale(0);
-   -ms-transform: scale(0);
-   transform: scale(0);
-   -webkit-transition: all 0.5s linear;
-   -moz-transition: all 0.5s linear;
-   -o-transition: all 0.5s linear;
-   -ms-transition: all 0.5s linear;
-   transition: all 0.5s linear;
-}
-.view-tenth.info {
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-   filter: alpha(opacity=0);
-   opacity: 0;
-   -webkit-transform: scale(0);
-   -moz-transform: scale(0);
-   -o-transform: scale(0);
-   -ms-transform: scale(0);
-   transform: scale(0);
-   -webkit-transition: all 0.5s linear;
-   -moz-transition: all 0.5s linear;
-   -o-transition: all 0.5s linear;
-   -ms-transition: all 0.5s linear;
-   transition: all 0.5s linear;
-
-}
-.view-tenth:hover img {
-   -webkit-transform: scale(10);
-   -moz-transform: scale(10);
-   -o-transform: scale(10);
-   -ms-transform: scale(10);
-   transform: scale(10);
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
-   filter: alpha(opacity=0);
-   opacity: 0;
-}
-.view-tenth:hover #btn-is{
-	opacity:0;
-	}
-.view-tenth:hover .mask {
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-   filter: alpha(opacity=100);
-   opacity: 1;
-
-}
-.view-tenth:hover h2,.view-tenth:hover .main,.view-tenth:hover.info {
-   -webkit-transform: scale(1);
-   -moz-transform: scale(1);
-   -o-transform: scale(1);
-   -ms-transform: scale(1);
-   transform: scale(1);
-   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
-   filter: alpha(opacity=100);
-   opacity: 1;
-   
-}
-.label-product {
-	position: relative;
-}
-.product_container {
-	margin-top: 1em;
-}
-.product_container .main{
-	font-size:1.8em;
-	font-weight:700;
-	text-transform:uppercase;
-	margin: 1.5em 0 0.6em;
-	font-family: 'Open Sans Condensed', sans-serif;
-}
-.product_container .main a{
-	color:#000;
-}
-.product_container .main a:hover{
-	color:#F94B4B;
-	text-decoration:none;
-	
-}
-.product_container p{
-	color: #999;
-	font-size: 1.1em;
-}
-.label-product > span {
-	font-size: 15px;
-	text-transform: uppercase;
-	display: inline-block;
-	position: absolute;
-	left:0px;
-	top:-80px;
-	color: #fff;
-	padding:10px;
-	background:blue;
-}
-.grid_icon:hover{
-   background:#00B895;
-}
-.reservation{
-	background: #FFF;
-	padding:5em 0;
-}
-#main-reservation-text .main{
-	font-size: 1.8em;
-	font-weight:700;
-	text-transform: uppercase;
-	display: inline-block;
-	color: #555;
-	font-family: 'Open Sans Condensed', sans-serif;
-}
-#main-reservation-undertext p {
-	font-weight: 300;
-	color: #fff;
-	margin-top: 12px;
-	display: inline-block;
-	font-size: 0.7em;
-	text-transform: none;
-}
-#reservation-button {
-	color: #fff;
-	border: 2px solid #fff;
-	padding: 10px 26px;
-	margin-top: 0px;
-	font-size: 20px;
-	display:inline-block;
-	float:right;
-	font-weight:800;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-	cursor: pointer;
-	background-color:#00B895;
-}
-/* Effect 7: second border slides up */
-/***********************************************************/
-.btns{
-background-color:#000;
-color:#FFF;
-text-transform:none;
-font-size:18px;
-padding:2%;
-cursor:pointer;
-opacity:0.8;
-width:auto;
-border:#FFF solid 2px;
-border-radius:0.3em;
--webkit-border-radius:0.3em;
--moz-border-radius:0.3em;
--o-border-radius:0.3em;
--ms-border-radius:0.3em;
-}
-.btns:hover{
-	background-color:#CCCCCC;
-	color:#000;
-}
-
-.inner-content {
-    margin-top: 3em;
-}
-
-.main-inner {
-    background: #fff;
-    padding: 3em;
-	    border-top-left-radius: 0.3em;
-    -o-border-top-left-radius: 0.3em;
-    -moz-border-top-left-radius: 0.3em;
-    -webkit-border-top-right-radius: 0.3em;
-    border-top-right-radius: 0.3em;
-    -o-border-top-right-radius: 0.3em;
-    -moz-border-top-right-radius: 0.3em;
-}
-h3.tittle {
-    text-align: center;
-    margin-bottom: 1em;
-    text-transform: uppercase;
-    color: #34495E;
-    font-size: 1.6em;
-}
-/*--main--*/
-.new {
-    text-align: center;
-    margin-top: 1em;
-}
-.new h3 a {
-    font-size:0.8em;
-    font-weight: 600;
-    color: #626E79;
-    text-decoration: none;
-    display: block;
-    font-family: 'Lato', sans-serif;
-}
-.main{
-    border-top-left-radius: 0.3em;
-    -o-border-top-left-radius: 0.3em;
-    -moz-border-top-left-radius: 0.3em;
-    -webkit-border-top-right-radius: 0.3em;
-    border-top-right-radius: 0.3em;
-    -o-border-top-right-radius: 0.3em;
-    -moz-border-top-right-radius: 0.3em;
-}
-.main input[type="text"],.main input[type="password"],.main input[type="email"]{
-   width: 100%;
-    padding: 1em 4em 1em 1em;
-    color: #858282;
-    font-size: 16px;
-    outline: none;
-    background: #fff;
-    font-weight: 500;
-    border: 2px solid #bec3c7;
-    font-family: 'Open Sans', sans-serif;
-    border-radius: 0.3em;
-    -o-border-radius: 0.3em;
-    -moz-border-radius: 0.3em;
-    margin: 0.7em 0;
-    background: url("../images/mail.png") no-repeat 296px 18px #fff;
-		transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-}
-.main input[type="password"]{
-      background: url("../images/lock.png") no-repeat 296px 18px #fff;
-  }
-  .main input[type="text"]:hover,.main input[type="password"]:hover{
-   border: 2px solid #9E241A;
-  }
-.submit {
-    text-align: center;
-    margin-top: 1em;
-}
-.main input[type="submit"]{
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    padding: 15px 15px;
-    width: 48%;
-    border: none;
-    background:blue;
-    border-radius: 0.3em;
-    -o-border-radius: 0.3em;
-    -webkit-border-radius: 0.3em;
-    -moz-border-radius: 0.3em;
-    text-transform: uppercase;
-}
-.main input[type="submit"]:hover,.second-one input[type="submit"]:hover{
-  background:#9E241A;
-  		transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-
-}
-/*----footer-----*/
-.footer {
-  text-align: center;
-   margin:10px 10px 5px 10px;
-   padding-top:25%;
-   color:#fff;
-   position:relative;
-}
-.footer p {
-	color: #fff;
-	font-size: 16px;
-	font-weight:600;
-}
-.footer  a {
-	  color: #fff;
-}
-.footer a:hover {
-	color:#1cbdda;
-}
-/*----//footer-----*/
-@media screen and (max-width:1024px){
-	.label-product{
-		margin-left:34%;
-	}	
-}
-@media screen and (max-width:991px){
-	.label-product{
-		margin-left:28%;
-	}
-}
-@media screen and (max-width:768px){
-	.footrt{
-		padding-top:30%;
-	}
-}
-@media screen and (max-width:640px){
-	.label-product{
-		margin-left:18%;
-	}
-	.footer{
-		padding-top:35%;
-	}
-}
-@media screen and (max-width:460px){
-	.label-product{
-		margin-left:14%;
-	}
-}
-@media screen and (max-width:360px){
-	.label-product{
-		margin-left:0%;
-	}
-		.footer{
-		padding-top:38%;
-	}
-}
-</style>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="plantilla/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<title>Iniciar Sesión - STJ</title>
+	<link rel="icon" type="image/png" href="{{url('plantilla/images/gallery/unheval-logo.png')}}" />
+	<style type="text/css">
+		html { 
+  background: url('/plantilla/images/gallery/slider-campus.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+img{
+  display: block;
+  margin: auto;
+  width: 100%;
+  height: auto;
+}
+
+#login-button{
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.8s;
+  /*padding: 30px;*/
+  margin: auto;
+  width: 150px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(3,3,3,.8);
+  overflow: hidden;
+  opacity: 0.7;
+  box-shadow: 10px 10px 30px #000;
+  display: {{ $errors->has('dni') | $errors->has('password') ? 'none' : ''}};
+}
+
+#login-button:hover{
+	opacity: 1;
+
+}
+/* Login container */
+#container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 260px;
+  height: {{ $errors->has('dni') | $errors->has('password') ? '320px;' : '260px;'}};
+  border-radius: 5px;
+  background: rgba(3,3,3,0.7);
+  box-shadow: 1px 1px 50px #000;
+  display: {{ $errors->has('dni') | $errors->has('password') ? '' : 'none'}};
+}
+
+.close-btn{
+  position: absolute;
+  cursor: pointer;
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 18px;
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 10px;
+  opacity: .2;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+#btn-cerrar-olvidado:hover{
+  opacity: .9;
+  color: white;
+  background-color: rgba(233, 1, 1,.5);
+}
+
+/* Heading */
+h1{
+  font-family: 'Open Sans Condensed', sans-serif;
+  position: relative;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 40px;
+  color: #ddd;
+  text-shadow: 3px 3px 10px #000;
+}
+
+/* Inputs */
+a,
+input{
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-decoration: none;
+  position: relative;
+  width: 80%;
+  display: block;
+  margin: 9px auto;
+  font-size: 17px;
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(3,3,3,.5);
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus{
+  outline: none;
+  box-shadow: 3px 3px 10px #333;
+  background: rgba(3,3,3,.8);
+}
+
+/* Placeholders */
+::-webkit-input-placeholder {
+   color: #ddd; opacity: 0.5; }
+:-moz-placeholder { /* Firefox 18- */
+   color: red;   opacity: 0.5;}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: red;   opacity: 0.5;}
+:-ms-input-placeholder {  
+   color: #333;   opacity: 0.5;}
+
+/* Link */
+a{
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: center;
+  padding: 4px 8px;
+  background: rgba(107,255,3,0.3);
+}
+
+a:hover{
+  background-color: green;
+}
+
+#remember-container{
+  position: relative;
+  margin: -5px 20px;
+}
+
+
+#remember{
+  position: absolute;
+  font-size: 13px;
+  font-family: 'Hind', sans-serif;
+  color: rgba(255,255,255,.5);
+  top: 7px;
+  left: 20px;
+}
+
+#forgotten{
+  position: absolute;
+  font-size: 12px;
+  font-family: 'Hind', sans-serif;
+  color: rgba(255,255,255,.5);
+  right: 0px;
+  top: 8px;
+  cursor: pointer;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+#forgotten:hover{
+  color: rgba(255,255,255,.9);
+}
+
+#forgotten-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 260px;
+  height: 180px;
+  border-radius: 10px;
+  background: rgba(3,3,3,0.7);
+  box-shadow: 1px 1px 50px #000;
+  display: none;
+}
+
+.orange-btn{
+  background: rgba(87,198,255,.5);
+}
+	</style>
 </head>
+
 <body>
- <div class="main" style="padding:2%;margin-top:2%;">        	
- <div class="col-lg-12">
-         <div class="container">   
-					@if(session()->has('flash'))
-						<div class="alert alert-info col-offset-5 col-2 col-offset-5" align="center">{{ session('flash') }}</div>
-				 	 @endif
-             <div class="col-lg-4"></div>
-				 <div class="col-lg-4">
-				 	 
-				 <div class="row grids text-center">
-					<div class="view view-tenth">
-					    <!--  <a href="single.html">-->
-					<div class="inner_content clearfix">
-						<div class="product_image" >
-							<img src="plantilla/images/gallery/unheval-logo.png" class="img-responsive" alt="UNHEVAL" style="margin:0% auto;" >
-	               </div>
-						<div class="label-product" style="margin-top: 20px;" >
-							<span class="new" id="btn-is">Iniciar Sesión </span> 
-						</div>
-						<div class="mask" style="width:100% !important; margin-top: -2em">
-							<h2><b>Bienvenido</b></h2>
-	                  <div class="main">
-							<form method="post" action="{{ route('login') }}" >
-									{!!csrf_field() !!}
-								<div class="form-group">
-									<input type="text" name="dni" value="{{ old('dni') }}" placeholder="Ingresa tu Usuario">
-								{!! $errors->first('dni','<span class="help-block" style="background-color:yellow; color:red;"><b>:message<b/></span>') !!}	
-								</div>
-								
-								<input type="password" name="password" placeholder="Ingresa tu Contraseña">
-								{!! $errors->first('password','<span class="help-block"  style="background-color:yellow; color:red;"><b>:message</b></span>') !!}	
-								
-								<div class="submit"><input type="submit" value="Iniciar Sesión" ></div>
-								<div class="clearfix"></div>
-							</form>
-							</div>
-						</div>
-							
-			        </div>
-					</div>
-			        </div>
-				    <!--  </a> -->
-				</div>
-		</div>
-		<div class="col-lg-4"></div>
-        </div>
-        
-  </div>
+
+<div id="login-button">
+  <img src="{{URL::to('plantilla/images/gallery/unheval-logo.png')}}" title="Clic para Iniciar Sesión">
+  </img>
+</div>
+
+<!-- Login -->
+<div id="container">
+	<div align="center">
+	<table>
+		<tr>
+			<td style="vertical-align: 50%;">
+				<img src="{{URL::to('plantilla/images/gallery/unheval-logo.png')}}" style="height: 45px; width: auto;">
+			</td>
+			<td><h1>UNHEVAL</h1></td>
+		</tr>
+	</table>
+	</div>
+ 
+  <form method="post" action="{{ route('login') }}" name="login" align="center">
+  		{!!csrf_field() !!}
+	    <input type="text" name="dni" value="{{ old('dni') }}" placeholder="DNI" maxlength="8">
+			{!! $errors->first('dni',
+				'<span class="help-block" style="color:rgba(233, 1, 1,.9); ">*:message</span>'
+			) !!}
+    <input type="password" name="password" placeholder="Contraseña">
+			{!! $errors->first('password',
+				'<span class="help-block"  style=" color:rgba(233, 1, 1,.9);">*:message</span>') 
+			!!}	
+    <a href="javascript:document.login.submit()">Ingresar</a>
+    <div id="remember-container">
+      <span id="forgotten">Olvidaste tu contraseña</span>
+    </div>
+</form>
+</div>
+
+<!-- Forgotten Password Container -->
+<div id="forgotten-container">
+   <h1>Olvidado!</h1>
+  <span class="close-btn" id="btn-cerrar-olvidado">
+    <b>x</b>
+  </span>
+
+  <form>
+    <input type="email" name="email" placeholder="E-mail">
+    <a href="#" class="orange-btn">Nueva contraseña</a>
+	</form>
+
+{!!Html::script('plantilla/js/jquery-2.1.4.min.js')!!}
+
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='plantilla/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		{!!Html::script('plantilla/js/bootstrap.min.js')!!}
+
+<script>
+   
+   /* Mostrar Login */
+   $('#login-button').click(function(){
+  		$('#login-button').fadeOut("slow",function(){
+    		$("#container").fadeIn();
+    		TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
+    		TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
+  		});
+	});
+
+
+	/* Mostrar Olvidado */
+	$('#forgotten').click(function(){
+	  $("#container").fadeOut(function(){
+	    $("#forgotten-container").fadeIn();
+	  });
+	});
+	/* Volver Login */
+	$('#btn-cerrar-olvidado').click(function(){
+	  $("#forgotten-container").fadeOut(function(){
+	    $("#container").fadeIn();
+	  });
+	});
+</script>
+</div>
 </body>
 </html>
