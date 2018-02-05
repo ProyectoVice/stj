@@ -58,7 +58,7 @@ $variable="";
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
 						<small>
-							<img src="{{URL::to('plantilla/images/gallery/unheval-logo.png')}}" height="26px;">
+							<img src="{{URL::to('plantilla/images/gallery/unheval-logo.png')}}" height="23px;" style="vertical-align: top;">
 							UNHEVAL
 						</small>
 					</a>
@@ -66,7 +66,75 @@ $variable="";
 
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
-												
+						
+						<li class="blue dropdown-modal">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
+								<span class="badge badge-important">8</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar navbar-blue dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-exclamation-triangle"></i>
+									8 Notificaciones
+								</li>
+
+								<li class="dropdown-content">
+									<ul class="dropdown-menu dropdown-navbar navbar-blue">
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+														New Comments
+													</span>
+													<span class="pull-right badge badge-info">+12</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<i class="btn btn-xs btn-primary fa fa-user"></i>
+												Bob just signed up as an editor ...
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+														New Orders
+													</span>
+													<span class="pull-right badge badge-success">+8</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+														Followers
+													</span>
+													<span class="pull-right badge badge-info">+11</span>
+												</div>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+
+								<li class="dropdown-footer">
+									<a href="#">
+										Ver todas las Notificaciones
+										<i class="ace-icon fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li>					
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="{{URL::to('plantilla/images/avatars/avatar.png')}}"
@@ -143,13 +211,52 @@ $variable="";
 						</li>
 						@endif
 						<!-- Fin Administrador -->
-					<li class="">
-						<a href="{{url('')}}">
-							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> Encuestas </span>
-						</a>
-						<b class="arrow"></b>
-					</li>
+
+						{{-- Docente --}}
+						@if(Auth::user()->hasRoles(['Docente']))
+						
+						<li class="">
+							<a href="#" class="dropdown-toggle" title="Responsabilidad Social Universitaria">
+								<i class="menu-icon fa fa-leaf" ></i>
+								<span class="menu-text"> RSU </span>
+								<b class="arrow fa fa-angle-down"></b>
+							</a>
+
+							<b class="arrow"></b>
+
+							<ul class="submenu">
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Proyectos UNHEVAL
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Proyectos Facultad
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Mis Proyectos
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Invitaciones
+									</a>
+									<b class="arrow"></b>
+								</li>
+							</ul>
+						</li>
+						@endif
+						{{-- Fin Docente --}}
 					<!-- <li class="active open"> -->
 					<li class="">
 						<a href="#" class="dropdown-toggle">
@@ -313,7 +420,7 @@ $variable="";
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 						<!-- Rutas -->
-						&nbsp;<img src="{{URL::to('plantilla/images/gallery/icono-rsu-unheval.png')}}" height="20px">
+						
 						@yield('ruta') 
 						
 					</div>

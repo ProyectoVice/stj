@@ -15,6 +15,11 @@ Route::get('/', function () {
     //return view('plantilla.usuario');
 	return view('ingreso');
 });
+Route::get('rsu', function () {
+    //return view('plantilla.usuario');
+    return view('modulos.rsu.mis proyectos.proyectos');
+});
+
 
 
 
@@ -24,7 +29,7 @@ Route::get('/', function () {
  		  Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
         //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
         
-        Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+          Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
         // Registration Routes...
         // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -36,8 +41,8 @@ Route::get('/', function () {
         // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
         // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
