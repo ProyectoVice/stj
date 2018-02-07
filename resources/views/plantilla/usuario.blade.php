@@ -190,11 +190,12 @@ $variable="";
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 
-						<b>
+					
 							@foreach(Auth::user()->roles as $rol)
-								{{$rol->rol}} 
+								{{-- Mostrar los avatars/roles de usuario --}}
+								{!!Auth::user()->hasAvatar($rol)!!}
 							@endforeach
-						</b>
+						
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
 
@@ -240,7 +241,7 @@ $variable="";
 									<b class="arrow"></b>
 								</li>
 								<li class="">
-									<a href="">
+									<a href="{{ url('rsu-misproyectos') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Mis Proyectos
 									</a>

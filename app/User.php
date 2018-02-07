@@ -35,6 +35,27 @@ class User extends Authenticatable
         return false;
     }
 
+    public function hasAvatar($rol){
+     
+      $avatar="<button class='btn btn-inverse' title='Usuario Anónimo'><i class='ace-icon fa fa-user-secret'></i></button>";
+
+        switch ($rol->rol) {
+           case 'Administrador General': 
+               $avatar="<button class='btn btn-info' title='".$rol->descripcion."'><i class='ace-icon fa fa-laptop'></i></button>";break;
+           case 'Docente': 
+               $avatar="<button class='btn btn-primary' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+           case 'Estudiante': 
+               $avatar="<button class='btn btn-grey' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+           case 'DRSU': 
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-leaf'></i></button>";break;
+           case 'DRSU-F': 
+               $avatar="<button class='btn btn-warning' title='".$rol->descripcion."'><i class='ace-icon fa fa-leaf'></i></button>";break;
+
+            default: break;
+        }
+        return $avatar;
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

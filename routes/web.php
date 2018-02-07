@@ -43,6 +43,12 @@ Route::get('rsu', function () {
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+          //RSU
+          Route::get('rsu-misproyectos', function () {
+                return view('modulos.rsu.mis_proyectos.proyectos');
+            });
+          //Fin RSU
+
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');

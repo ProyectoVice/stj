@@ -218,7 +218,7 @@ a:hover{
 	</table>
 	</div>
  
-  <form method="post" action="{{ route('login') }}" name="login" align="center">
+  <form method="post" action="/login" name="login" align="center">
   		{!!csrf_field() !!}
 	    <input type="text" name="dni" value="{{ old('dni') }}" placeholder="DNI" maxlength="8">
 			{!! $errors->first('dni',

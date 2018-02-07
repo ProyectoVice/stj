@@ -5,7 +5,11 @@
 @section('estilos')
 @endsection
 @section('ruta')
-	
+<ul class="breadcrumb">
+	<i class="ace-icon fa fa-leaf"></i>
+	<li class="active">Responsabilidad Social Universitaria</li>
+	<li class="">Mis Proyectos</li>
+</ul>
 @endsection
 @section('contenido')
 
@@ -15,7 +19,7 @@
 		<div class="pull-right tableTools-container"></div>
 	</div>
 		<div class="table-header">
-			Lista de los informes nutricionales &nbsp;&nbsp;&nbsp;
+			Lista de Mis proyectos &nbsp;&nbsp;&nbsp;
 		</div>
 												
 
@@ -25,7 +29,7 @@
 					<tr>
 						<th class="center">Fecha</th>
 						<th class="center">Título</th>
-						<th class="center" class="hidden-480">Archivo</th>
+						<th class="center" class="hidden-480">Tipo</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 				</thead>

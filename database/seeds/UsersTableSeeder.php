@@ -36,26 +36,12 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('00000003'),
         ]);
         //===================================================
-        DB::table('rols')->insert([
-                'rol' => 'SuperAdmin',
-                'descripcion' => 'Zenosama',
-        ]);
-        DB::table('rols')->insert([
-                'rol' => 'Administrador General',
-                'descripcion' => 'Gestiona Usuarios',
-        ]);
-        DB::table('rols')->insert([
-                'rol' => 'Docente',
-                'descripcion' => 'El que enseña, dicta cursos',
-        ]);
-
-        DB::table('rols')->insert([
-                'rol' => 'Estudiante',
-                'descripcion' => 'lleva cursos',
-        ]);
-        //===================================================
         DB::table('rol_users')->insert([
                 'user_id' => '1',
+                'rol_id' => '2',
+        ]);
+        DB::table('rol_users')->insert([
+                'user_id' => '2',
                 'rol_id' => '2',
         ]);
         DB::table('rol_users')->insert([
@@ -63,8 +49,16 @@ class UsersTableSeeder extends Seeder
                 'rol_id' => '3',
         ]);
         DB::table('rol_users')->insert([
-                'user_id' => '3',
+                'user_id' => '2',
                 'rol_id' => '4',
+        ]);
+        DB::table('rol_users')->insert([
+                'user_id' => '2',
+                'rol_id' => '5',
+        ]);
+        DB::table('rol_users')->insert([
+                'user_id' => '2',
+                'rol_id' => '6',
         ]);
     }
 }
