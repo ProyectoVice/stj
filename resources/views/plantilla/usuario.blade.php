@@ -256,6 +256,34 @@ $variable="";
 								</li>
 							</ul>
 						</li>
+						<!--modulos de admisión!-->
+						<li class="">
+							<a href="#" class="dropdown-toggle" title="Gestión Admision">
+								<i class="menu-icon fa fa-leaf" ></i>
+								<span class="menu-text"> Admisión </span>
+								<b class="arrow fa fa-angle-down"></b>
+							</a>
+
+							<b class="arrow"></b>
+
+							<ul class="submenu">
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripciones
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción docente
+									</a>
+									<b class="arrow"></b>
+								</li>			
+							</ul>
+						</li>
+						<!--Fin modulos de admisión!-->
 						@endif
 						{{-- Fin Docente --}}
 					<!-- <li class="active open"> -->
