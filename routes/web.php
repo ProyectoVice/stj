@@ -15,40 +15,12 @@ Route::get('/', function () {
     //return view('plantilla.usuario');
 	return view('ingreso');
 });
-Route::get('rsu', function () {
-    //return view('plantilla.usuario');
-    return view('modulos.rsu.mis proyectos.proyectos');
-});
 
+// Authentication Routes...
+Route::post('login', 'Auth\LoginController@login');
+Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-
-
-
-        // Authentication Routes...
-		  Route::post('login', 'Auth\LoginController@login');
- 		  Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
-        //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-        
-          Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-        // Registration Routes...
-        // Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-        // Route::post('register', 'Auth\RegisterController@register');
-
-        // Password Reset Routes...
-        // Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-        // Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-        // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-        // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-//Route::get('/home', 'HomeController@index')->name('home');
-
-          //RSU
-          Route::get('rsu-misproyectos', function () {
-                return view('modulos.rsu.mis_proyectos.proyectos');
-            });
-          //Fin RSU
-
-//Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
+//RSU
+Route::resource('rsu-misproyectos', 'modulos\rsu\MisProyectosController');
+//Fin RSU

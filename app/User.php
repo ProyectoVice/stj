@@ -49,7 +49,7 @@ class User extends Authenticatable
            case 'DRSU': 
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-leaf'></i></button>";break;
            case 'DRSU-F': 
-               $avatar="<button class='btn btn-warning' title='".$rol->descripcion."'><i class='ace-icon fa fa-leaf'></i></button>";break;
+               $avatar="<button class='btn btn-warning' title='".$rol->descripcion."'><i class='ace-icon fa fa-users'></i></button>";break;
 
             default: break;
         }
