@@ -35,6 +35,23 @@ class UsersTableSeeder extends Seeder
                 'email' => '00000003@hotmail.com',
                 'password' => bcrypt('00000003'),
         ]);
+        DB::table('users')->insert([
+                'dni' => '44485816',
+                'nombres' => 'Teddy',
+                'apellido_paterno' => 'Tafur',
+                'apellido_materno' => 'Guerra',
+                'email' => 'ttafurg@gmail.com',
+                'password' => bcrypt('pichoncito'),
+        ]); 
+        //Usuario Jhonattan 
+        DB::table('users')->insert([
+                'dni' => '46181970',
+                'nombres' => 'Jhonattan',
+                'apellido_paterno' => 'Carlos',
+                'apellido_materno' => 'Simon',
+                'email' => 'yotacs14@gmail.com',
+                'password' => bcrypt('freedon'),
+        ]);   
         //===================================================
         DB::table('rol_users')->insert([
                 'user_id' => '1',
@@ -59,6 +76,38 @@ class UsersTableSeeder extends Seeder
         DB::table('rol_users')->insert([
                 'user_id' => '2',
                 'rol_id' => '6',
+        ]);
+        //Usuarios Teddy
+        DB::table('rol_users')->insert([
+    
+                 [
+                    'user_id' => '4',
+                    'rol_id' => '2',
+                ],
+                [
+                    'user_id' => '4',
+                    'rol_id' => '3',
+                ],
+                [
+                    'user_id' => '4',
+                    'rol_id' => '4',
+                ]
+        ]);
+        //Usuario-Rol Jhonattan 
+        DB::table('rol_users')->insert([
+    
+                 [
+                    'user_id' => '5',
+                    'rol_id' => '2',
+                ],
+                [
+                    'user_id' => '5',
+                    'rol_id' => '7',
+                ],
+                [
+                    'user_id' => '5',
+                    'rol_id' => '8',
+                ]
         ]);
     }
 }
