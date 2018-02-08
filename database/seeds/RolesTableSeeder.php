@@ -37,55 +37,59 @@ class RolesTableSeeder extends Seeder
         ]);
         //Usuarios Jhonattan
         DB::table('rols')->insert([
-                'rol' => 'PersonalAdmi',
+                'rol' => 'PersonalAdmision',
                 'descripcion' => 'Personal de Admision',
         ]); 
         DB::table('rols')->insert([
-                'rol' => 'AdmiAdmi',
+                'rol' => 'Administrador Admision',
                 'descripcion' => 'Administrador Admision',
         ]);
          DB::table('rols')->insert([
-                'rol' => 'AdmiCepre',
+                'rol' => 'Administrador CEPREVAL',
                 'descripcion' => 'Administrador CEPREVAL',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiPos',
+                'rol' => 'Administrador Posgrado',
                 'descripcion' => 'Administrador Escuela de Posgrado',
         ]);
          DB::table('rols')->insert([
-                'rol' => 'AdmiSeEs',
-                'descripcion' => 'Administrador Segunda Especialidad',
+                'rol' => 'AdministradorSegundaEEdu',
+                'descripcion' => 'Administrador Segunda Especialidad Educacion',
+        ]);
+         DB::table('rols')->insert([
+                'rol' => 'AdministradorSegundaEEnf',
+                'descripcion' => 'Administrador Segunda Especialidad Enfermeria',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiEsCo',
-                'descripcion' => 'Administrador Estudios Complementarios',
+                'rol' => 'AdministradorEstudiosCompEdu',
+                'descripcion' => 'Administrador Estudios Complementarios Educación',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiIdiomas',
+                'rol' => 'Administrador idiomas',
                 'descripcion' => 'Administrador Centro de Idiomas',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiEsDis',
+                'rol' => 'Administrador Estudios a Distancia',
                 'descripcion' => 'Administrador Estudios a Distancia',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiDiplomado',
+                'rol' => 'Administrador Diplomados',
                 'descripcion' => 'Administrador Diplomados',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiProcatp',
+                'rol' => 'Administrador PROCATP',
                 'descripcion' => 'Administrador PROCATP',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'AdmiPromaster',
+                'rol' => 'Administrador PROMASTER',
                 'descripcion' => 'Administrador PROMASTER',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'DirecAdmi',
+                'rol' => 'Director de Admision',
                 'descripcion' => 'Director de Admision',
         ]);
           DB::table('rols')->insert([
-                'rol' => 'CoordiCepre',
+                'rol' => 'Coordinador Cepre',
                 'descripcion' => 'Coordinador General de CEPREVAL',
         ]);
            DB::table('rols')->insert([
@@ -93,15 +97,15 @@ class RolesTableSeeder extends Seeder
                 'descripcion' => 'Presidente de la Comisión de Admision de Posgrado',
         ]);
            DB::table('rols')->insert([
-                'rol' => 'EncarSegunEsEdu',
+                'rol' => 'ESegundaEsEdu',
                 'descripcion' => 'Encargado de Segunda Especialidad Educacion',
         ]);
            DB::table('rols')->insert([
-                'rol' => 'EncarSegunEsEnf',
+                'rol' => 'ESegundaEsEnf',
                 'descripcion' => 'Encargado de Segunda Especialidad Enfermeria',
         ]);
            DB::table('rols')->insert([
-                'rol' => 'EncarEstuCom',
+                'rol' => 'EEstudiosComp',
                 'descripcion' => 'Encargado de Estudios Complementarios Educacion',
         ]);
            DB::table('rols')->insert([
@@ -113,15 +117,15 @@ class RolesTableSeeder extends Seeder
                 'descripcion' => 'Director de Estudios a Distancia y Complementarios',
         ]);
            DB::table('rols')->insert([
-                'rol' => 'EncargadoDipl',
+                'rol' => 'Encargado de Diplomados',
                 'descripcion' => 'Encargado de Diplomados',
         ]);
            DB::table('rols')->insert([
-                'rol' => 'EncargadoProc',
+                'rol' => 'Encargado de PROCATP',
                 'descripcion' => 'Encargado de PROCATP',
         ]);
            DB::table('rols')->insert([
-                'rol' => 'EncargadoProm',
+                'rol' => 'Encargado de PROMASTER',
                 'descripcion' => 'Encargado de PROMASTER',
         ]);
           //Fin usuarios Jhonattan 

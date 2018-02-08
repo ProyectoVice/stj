@@ -51,7 +51,23 @@ class UsersTableSeeder extends Seeder
                 'apellido_materno' => 'Simon',
                 'email' => 'yotacs14@gmail.com',
                 'password' => bcrypt('freedon'),
-        ]);   
+        ]); 
+        DB::table('users')->insert([
+                'dni' => '00000004',
+                'nombres' => 'Pepe',
+                'apellido_paterno' => 'Ramos',
+                'apellido_materno' => 'Simon',
+                'email' => 'pepe@gmail.com',
+                'password' => bcrypt('00000004'),
+        ]);
+        DB::table('users')->insert([
+                'dni' => '00000005',
+                'nombres' => 'cepre',
+                'apellido_paterno' => 'Ramos',
+                'apellido_materno' => 'Simon',
+                'email' => 'cepreval@gmail.com',
+                'password' => bcrypt('00000005'),
+        ]);  
         //===================================================
         DB::table('rol_users')->insert([
                 'user_id' => '1',
@@ -108,6 +124,30 @@ class UsersTableSeeder extends Seeder
                     'user_id' => '5',
                     'rol_id' => '8',
                 ]
+        ]);
+        DB::table('rol_users')->insert([
+    
+                 [
+                    'user_id' => '6',
+                    'rol_id' => '7',
+                ],
+                 [
+                    'user_id' => '6',
+                    'rol_id' => '8',
+                ]
+              
+        ]);
+           DB::table('rol_users')->insert([
+    
+                 [
+                    'user_id' => '7',
+                    'rol_id' => '7',
+                ],
+                 [
+                    'user_id' => '7',
+                    'rol_id' => '9',
+                ]
+              
         ]);
     }
 }

@@ -214,109 +214,13 @@ $variable="";
 						<!-- Fin Administrador -->
 
 
-						{{-- RSU --}}
-						@include('plantilla.modulos.rsu')
+						{{--Mòdulo RSU --}}
+							@include('plantilla.modulos.rsu')
 						{{-- Fin RSU --}}
 
-						<!--modulos de admisión!-->
-						<li class="">
-							<a href="#" class="dropdown-toggle" title="Gestión Admision">
-								<i class="menu-icon fa fa-leaf" ></i>
-								<span class="menu-text"> Admisión </span>
-								<b class="arrow fa fa-angle-down"></b>
-							</a>
-
-							<b class="arrow"></b>
-
-							<ul class="submenu">
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción General y Modalidades
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción CEPREVAL
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Posgrado
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Segunda Especialidad Educación
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Segunda Especialidad Enfermeria
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Estudios Complementarios Educación
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Idiomas
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Estudios a Distancia y Complementarios
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción Diplomado
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción PROCATP
-									</a>
-									<b class="arrow"></b>
-								</li>
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción PROMASTER
-									</a>
-									<b class="arrow"></b>
-								</li>
-
-								<li class="">
-									<a href="">
-										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripción docente
-									</a>
-									<b class="arrow"></b>
-								</li>			
-							</ul>
-						</li>
-						<!--Fin modulos de admisión!-->
+						{{--Mòdulo ADMISIÒN--}}
+							@include('plantilla.modulos.admision')
+						{{-- FinADMISIÒN--}}
 						
 					<!-- <li class="active open"> -->
 					<li class="">
