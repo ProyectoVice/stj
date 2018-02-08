@@ -70,6 +70,7 @@ class UsersTableSeeder extends Seeder
         ]);
         //Usuarios Teddy
         DB::table('rol_users')->insert([
+
                 ['user_id' => '4',
                 'rol_id' => '2'],
                 ['user_id' => '4',
@@ -77,5 +78,7 @@ class UsersTableSeeder extends Seeder
                 ['user_id' => '4',
                 'rol_id' => '4']
         ]);          
+                
+
     }
 }
