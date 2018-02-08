@@ -11,30 +11,41 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        //Usuarios Saúl
         DB::table('users')->insert([
-                'dni' => '00000001',
-                'nombres' => 'MiNombre',
+                ['dni' => '00000001',
+                'nombres' => 'Administrador ',
                 'apellido_paterno' => 'APaterno',
                 'apellido_materno' => 'Amaterno',
                 'email' => '00000001@hotmail.com',
                 'password' => bcrypt('00000001'),
-        ]);
-        DB::table('users')->insert([
-        		'dni' => '00000002',
-                'nombres' => 'MiNombre2',
+                ],
+                [
+                'dni' => '00000002',
+                'nombres' => 'Docente ',
                 'apellido_paterno' => 'APaterno2',
                 'apellido_materno' => 'Amaterno2',
                 'email' => '00000002@hotmail.com',
                 'password' => bcrypt('00000002'),
-        ]);
-        DB::table('users')->insert([
+                ],
+                [
                 'dni' => '00000003',
-                'nombres' => 'MiNombre3',
+                'nombres' => 'Estudiante',
                 'apellido_paterno' => 'APaterno3',
                 'apellido_materno' => 'Amaterno3',
                 'email' => '00000003@hotmail.com',
                 'password' => bcrypt('00000003'),
-        ]);
+                ],
+                [
+                'dni' => '48315690',
+                'nombres' => 'Saúl',
+                'apellido_paterno' => 'Escandón',
+                'apellido_materno' => 'Munguía',
+                'email' => 'aescandonmunguia@hotmail.com',
+                'password' => bcrypt('12345678'),
+                ]
+         ]);     
+        //Usuario Teddy
         DB::table('users')->insert([
                 'dni' => '44485816',
                 'nombres' => 'Teddy',
@@ -69,70 +80,69 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('00000005'),
         ]);  
         //===================================================
+        //RolesUsuario Generales
+            //Administrador General
         DB::table('rol_users')->insert([
                 'user_id' => '1',
                 'rol_id' => '2',
         ]);
-        DB::table('rol_users')->insert([
-                'user_id' => '2',
-                'rol_id' => '2',
-        ]);
+            //Docente
         DB::table('rol_users')->insert([
                 'user_id' => '2',
                 'rol_id' => '3',
         ]);
+            //Estudiante
         DB::table('rol_users')->insert([
-                'user_id' => '2',
+                'user_id' => '3',
                 'rol_id' => '4',
         ]);
+
+        //Roles Saúl
+            //all
         DB::table('rol_users')->insert([
-                'user_id' => '2',
+                ['user_id' => '4', 'rol_id' => '2',],
+                ['user_id' => '4', 'rol_id' => '3',],
+                ['user_id' => '4', 'rol_id' => '4',],
+                ['user_id' => '4', 'rol_id' => '5',],
+                ['user_id' => '4', 'rol_id' => '6',]
+        ]);
+            //DRSU
+        DB::table('rol_users')->insert([
+                'user_id' => '5',
                 'rol_id' => '5',
         ]);
+            //DRSU-F
         DB::table('rol_users')->insert([
-                'user_id' => '2',
+                'user_id' => '6',
                 'rol_id' => '6',
         ]);
+
         //Usuarios Teddy
-        DB::table('rol_users')->insert([
-    
-                 [
-                    'user_id' => '4',
-                    'rol_id' => '2',
-                ],
-                [
-                    'user_id' => '4',
-                    'rol_id' => '3',
-                ],
-                [
-                    'user_id' => '4',
-                    'rol_id' => '4',
-                ]
-        ]);
+        
         //Usuario-Rol Jhonattan 
         DB::table('rol_users')->insert([
     
                  [
-                    'user_id' => '5',
+                    'user_id' => '6',
                     'rol_id' => '2',
                 ],
                 [
-                    'user_id' => '5',
+                    'user_id' => '6',
                     'rol_id' => '7',
                 ],
                 [
-                    'user_id' => '5',
+                    'user_id' => '6',
                     'rol_id' => '8',
                 ]
         ]);
         DB::table('rol_users')->insert([
     
                  [
-                    'user_id' => '6',
+                    'user_id' => '7',
                     'rol_id' => '7',
                 ],
                  [
-                    'user_id' => '6',
+                    'user_id' => '7',
                     'rol_id' => '8',
                 ]
               
@@ -140,11 +150,11 @@ class UsersTableSeeder extends Seeder
            DB::table('rol_users')->insert([
     
                  [
-                    'user_id' => '7',
+                    'user_id' => '8',
                     'rol_id' => '7',
                 ],
                  [
-                    'user_id' => '7',
+                    'user_id' => '8',
                     'rol_id' => '9',
                 ]
               
