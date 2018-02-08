@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
                 'apellido_materno' => 'Guerra',
                 'email' => 'ttafurg@gmail.com',
                 'password' => bcrypt('pichoncito'),
-        ]);
+        ]);   
         //===================================================
         DB::table('rol_users')->insert([
                 'user_id' => '1',
@@ -76,6 +76,6 @@ class UsersTableSeeder extends Seeder
                 'rol_id' => '3'],
                 ['user_id' => '4',
                 'rol_id' => '4']
-        ]);
+        ]);          
     }
 }
