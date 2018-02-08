@@ -213,7 +213,7 @@ $variable="";
 						@endif
 						<!-- Fin Administrador -->
 
-						{{-- Docente --}}
+						{{-- RSU--}}
 						@if(Auth::user()->hasRoles(['Docente']))
 						
 						<li class="">
@@ -247,15 +247,17 @@ $variable="";
 									</a>
 									<b class="arrow"></b>
 								</li>
+
 								<li class="">
 									<a href="">
 										<i class="menu-icon fa fa-caret-right"></i>
-										Invitaciones
+											
 									</a>
 									<b class="arrow"></b>
 								</li>
 							</ul>
 						</li>
+						@endif
 						<!--modulos de admisión!-->
 						<li class="">
 							<a href="#" class="dropdown-toggle" title="Gestión Admision">
@@ -270,10 +272,81 @@ $variable="";
 								<li class="">
 									<a href="">
 										<i class="menu-icon fa fa-caret-right"></i>
-										Inscripciones
+										Inscripción General y Modalidades
 									</a>
 									<b class="arrow"></b>
 								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción CEPREVAL
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Posgrado
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Segunda Especialidad Educación
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Segunda Especialidad Enfermeria
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Estudios Complementarios Educación
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Idiomas
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Estudios a Distancia y Complementarios
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción Diplomado
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción PROCATP
+									</a>
+									<b class="arrow"></b>
+								</li>
+								<li class="">
+									<a href="">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Inscripción PROMASTER
+									</a>
+									<b class="arrow"></b>
+								</li>
+
 								<li class="">
 									<a href="">
 										<i class="menu-icon fa fa-caret-right"></i>
@@ -284,8 +357,8 @@ $variable="";
 							</ul>
 						</li>
 						<!--Fin modulos de admisión!-->
-						@endif
-						{{-- Fin Docente --}}
+						
+						{{-- Fin RSU --}}
 					<!-- <li class="active open"> -->
 					<li class="">
 						<a href="#" class="dropdown-toggle">
