@@ -1,7 +1,7 @@
 @if(Auth::user()->hasRoles(['PersonalAdmision']))					
 <li class="">
 	<a href="#" class="dropdown-toggle" title="Gestión Admision">
-		<i class="menu-icon fa fa-leaf" ></i>
+		<i class="menu-icon fa fa-desktop" ></i>
 			<span class="menu-text"> Admisión </span>
 				<b class="arrow fa fa-angle-down"></b>
 	</a>
@@ -113,6 +113,16 @@
 			<a href="">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción docente
+			</a>
+				<b class="arrow"></b>
+		</li>
+		@endif
+			<!-- Modulo inscripción del docente -->
+		@if(Auth::user()->hasRoles(['Docente']))
+		<li class="">
+			<a href="">
+				<i class="menu-icon fa fa-caret-right"></i>
+					Inscripción 
 			</a>
 				<b class="arrow"></b>
 		</li>

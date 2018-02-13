@@ -60,23 +60,23 @@ class User extends Authenticatable
             case 'Administrador CEPREVAL': 
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador Posgrado': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'AdministradorSegundaEEdu': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'AdministradorSegundaEEnf': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'AdministradorEstudiosCompEdu': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador idiomas': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador Estudios a Distancia': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador Diplomados': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador PROCATP': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador PROMASTER': 
-               $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Director de Admision': 
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Coordinador Cepre': 
