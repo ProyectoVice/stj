@@ -30,5 +30,6 @@ class DatosForUsersTableSeeder extends Seeder
                 ['est_civil' => 'Viudo',],
                 ['est_civil' => 'No Especifica',]
         	]);
+    	
     }
 }
