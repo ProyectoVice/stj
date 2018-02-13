@@ -36,6 +36,7 @@ class RolesTableSeeder extends Seeder
                 'descripcion' => 'Director de Responsabilidad Social Universitaria de Facultad',
         ]);
         //Usuarios Jhonattan
+        //para poder acceder al modulo admisión todos tienen que tener primero el rol de PersonalAdmision rol 7
         DB::table('rols')->insert([
                 'rol' => 'PersonalAdmision',
                 'descripcion' => 'Personal de Admision',

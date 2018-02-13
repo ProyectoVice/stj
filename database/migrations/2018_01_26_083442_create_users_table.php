@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('nombres');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
-            $table->date('f_nac')->default('2000-10-10');
+            $table->date('f_nac')->nullable();
             $table->string('email',30)->unique();
             $table->string('dni',8)->unique();
             $table->string('password');
@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('tel')->default('--------');
             $table->string('cel')->default('--------');
             //Otros
-            $table->string('tipo_sangre');
+            $table->string('tipo_sangre')->nullable();
             $table->string('estado_login')->default('0');
             $table->integer('est_civil_id')->default('7')->unsigned();
             $table->integer('religion_id')->default('1')->unsigned();
