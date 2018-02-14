@@ -15,8 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombres','apellido_paterno','apellido_materno','dni', 'email', 'password',
+        'nombres','apellido_paterno','apellido_materno','f_nac','dni', 'email', 'password','foto','distrito_nac','domicilio','n_domicilio','tel','cel','tipo_sangre','estado_login','est_civil_id','religion_id'
     ];
+
+
 
     public function roles(){
         return $this->belongsToMany(Rol::class,'rol_users');

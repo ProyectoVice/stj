@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRsuEjeProyectosTable extends Migration
+class CreateRsuLineamientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateRsuEjeProyectosTable extends Migration
      */
     public function up()
     {
-        Schema::create('rsu_eje_proyectos', function (Blueprint $table) {
+        Schema::create('rsu_lineamientos', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('rsu_eje_id')->unsigned();
-            $table->integer('rsu_proyecto_id')->unsigned();
-            $table->primary(['rsu_eje_id','rsu_proyecto_id']);
-
+            $table->string('lineamiento');
             $table->foreign('rsu_eje_id')->references('id')->on('rsu_ejes')->onDelete('cascade');
-            $table->foreign('rsu_proyecto_id')->references('id')->on('rsu_proyectos')->onDelete('cascade');
-        
+            $table->timestamps();
         });
     }
 
@@ -31,6 +29,6 @@ class CreateRsuEjeProyectosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rsu_eje_proyectos');
+        Schema::dropIfExists('rsu_lineamientos');
     }
 }

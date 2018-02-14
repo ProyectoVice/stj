@@ -25,11 +25,11 @@ class CreateUsersTable extends Migration
             $table->string('foto')->default('user.png');
             //Domicilio
             $table->integer('distrito_nac')->default('887')->unsigned();
-            $table->string('domicilio')->default('--------');
-            $table->string('n_domicilio')->default('--------');
+            $table->string('domicilio')->nullable();
+            $table->string('n_domicilio')->nullable();
             //Contacto
-            $table->string('tel')->default('--------');
-            $table->string('cel')->default('--------');
+            $table->string('tel')->nullable();
+            $table->string('cel')->nullable();
             //Otros
             $table->string('tipo_sangre')->nullable();
             $table->string('estado_login')->default('0');
