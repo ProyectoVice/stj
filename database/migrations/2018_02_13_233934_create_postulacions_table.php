@@ -13,7 +13,7 @@ class CreatePostulacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('postulacions', function (Blueprint $table) {
+            Schema::create('postulacions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('anio');
             $table->float('nota');
@@ -25,6 +25,8 @@ class CreatePostulacionsTable extends Migration
             $table->integer('postulacion_situacion_id')->unsigned();
             $table->integer('postulacion_preparacion_id')->unsigned();
             $table->integer('postulacion_etapa_id')->unsigned();
+            $table->integer('postulacion_ciclo_id')->unsigned();
+            
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
             $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');
@@ -33,6 +35,7 @@ class CreatePostulacionsTable extends Migration
             $table->foreign('postulacion_situacion_id')->references('id')->on('postulacion_situacions')->onDelete('cascade');
             $table->foreign('postulacion_preparacion_id')->references('id')->on('postulacion_preparacions')->onDelete('cascade');
             $table->foreign('postulacion_etapa_id')->references('id')->on('postulacion_etapas')->onDelete('cascade');
+            $table->foreign('postulacion_ciclo_id')->references('id')->on('postulacion_ciclos')->onDelete('cascade');
             $table->timestamps();
         });
     }
