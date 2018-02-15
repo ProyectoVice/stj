@@ -23,4 +23,10 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //RSU
 Route::resource('rsu-misproyectos', 'modulos\rsu\MisProyectosController');
+Route::get('departamentos', function () {
+    //return view('plantilla.usuario');
+    $variable=App\Distrito::find('38')->provincia->departamento;
+	return $variable;
+});
 //Fin RSU
+
