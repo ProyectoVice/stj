@@ -15,11 +15,12 @@ class CreateColegiosTable extends Migration
     {
         Schema::create('colegios', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('codigo_modular');
             $table->string('colegio');
             $table->string('direccion');
-            $table->integer('colegio_tipo_id')->unsigned();
+            $table->integer('colegio_tipo_dependencia_id')->unsigned();
             $table->integer('distrito_id')->unsigned();
-            $table->foreign('colegio_tipo_id')->references('id')->on('colegio_tipos')->onDelete('cascade');
+            $table->foreign('colegio_tipo_dependencia_id')->references('id')->on('colegio_tipo_dependencias')->onDelete('cascade');
             $table->foreign('distrito_id')->references('id')->on('distritos')->onDelete('cascade');
             $table->timestamps();
         });
