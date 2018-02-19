@@ -32,7 +32,7 @@ class DatosForColegioTableSeeder extends Seeder
                            
             ]);
          // Colegio
-        DB::table('colegio_tipo_dependencias')->insert([
+        DB::table('colegios')->insert([
                 ['codigo_modular' => '0597443', 'colegio' => 'HELLEN KELLER', 'direccion' => 'JIRON GUZMAN BARRON 471', 'colegio_tipo_dependencia_id' => '9', 'distrito_id' => '88'],
                 ['codigo_modular' => '0411736', 'colegio' => '86001 SANTA ROSA DE VITERBO', 'direccion' => 'JIRON RAMON CASTILLA 1219', 'colegio_tipo_dependencia_id' => '10', 'distrito_id' => '84'],
                 ['codigo_modular' => '735688', 'colegio' => 'CENTRO DE EDUCACION ESPECIAL', 'direccion' => 'AVENIDA SANCHEZ DULANTO 700', 'colegio_tipo_dependencia_id' => '9', 'distrito_id' => '109']                  

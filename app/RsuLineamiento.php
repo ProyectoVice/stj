@@ -10,4 +10,14 @@ class RsuLineamiento extends Model
     protected $fillable=[
     'rsu_eje_id','lineamiento'
     ];
+
+    public function eje(){
+        return $this->belongsto(RsuEje::class,'rsu_eje_id','id');
+    }
+
+    public function proyectos(){
+        return $this->belongsToMany(RsuProyecto::class,'rsu_proy_id');
+        //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 
+        //return $this->belongsToMany(NombreModeloRelacionarse::class,'Tabla_pivot');
+    }
 }

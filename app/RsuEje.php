@@ -10,4 +10,8 @@ class RsuEje extends Model
     protected $fillable=[
     'rsu_eje'
     ];
+
+    public function lineamientos(){
+        return $this->hasMany(RsuLineamiento::class,'rsu_eje_id','id');
+    }
 }

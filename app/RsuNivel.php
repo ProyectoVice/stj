@@ -10,4 +10,8 @@ class RsuNivel extends Model
     protected $fillable=[
     'rsu_nivel'
     ];
+
+    public function proyectos(){
+    	return hasMany(RsuProyecto::class,'rsu_nivel_id','id')
+    } 
 }
