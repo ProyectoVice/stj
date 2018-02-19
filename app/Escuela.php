@@ -16,4 +16,7 @@ class Escuela extends Model
     public function facultad(){
     	return $this->belongsto(Facultad::class);
     }
+    public function docentes(){
+    	return $this->hasMany(Docente::class,'docente_id','id');
+    }
 }

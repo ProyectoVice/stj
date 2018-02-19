@@ -20,6 +20,12 @@ class User extends Authenticatable
 
 
 
+    public function docente(){
+        return $this->hasOne(Docente::class,'user_id','id');
+        //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 
+        //return $this->belongsToMany(NombreModeloRelacionarse::class,'Tabla_pivot');
+    }
+
     public function roles(){
         return $this->belongsToMany(Rol::class,'rol_users');
         //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 
