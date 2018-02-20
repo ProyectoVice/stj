@@ -19,4 +19,11 @@ class Escuela extends Model
     public function docentes(){
     	return $this->hasMany(Docente::class,'docente_id','id');
     }
+    public function postulaciones() {
+      return $this->hasMany(Postulacion::class);
+    }
+    public function escuela_sedes() {
+      return $this->hasMany(EscuelaSede::class);
+    }
+
 }
