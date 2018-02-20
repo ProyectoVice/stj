@@ -26,6 +26,14 @@ class User extends Authenticatable
         //return $this->belongsToMany(NombreModeloRelacionarse::class,'Tabla_pivot');
     }
 
+    public function est_civil(){
+        return $this->belongsto(EstCivil::class,'est_civil_id','id');
+    }
+
+    public function rsu_participante(){
+      return hasOne(RsuParticipante::class,'user_id','id')
+    } 
+
     public function roles(){
         return $this->belongsToMany(Rol::class,'rol_users');
         //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 

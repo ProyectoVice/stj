@@ -10,6 +10,6 @@ class DocenteDedicacion extends Model
     protected $fillable=['docente_dedicacion'];
 
     public function docentes(){
-    	return $this->hasMany(Docente::class);
+    	return $this->hasMany(Docente::class,'docente_dedicacion_id','id');
     }    
 }

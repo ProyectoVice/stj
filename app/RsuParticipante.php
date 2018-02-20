@@ -12,4 +12,8 @@ class RsuParticipante extends Model
     protected $fillable=[
     'rsu_responsabilidad_id'
     ];
+
+    public function user(){
+    	return belongsto(User::class,'user_id','id')
+    } 
 }

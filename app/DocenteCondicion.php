@@ -10,6 +10,6 @@ class DocenteCondicion extends Model
     protected $fillable=['docente_condicion'];
 
     public function docentes(){
-    	return $this->hasMany(Docente::class);
+    	return $this->hasMany(Docente::class,'docente_condicion_id','id');
     }
 }
