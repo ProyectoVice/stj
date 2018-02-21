@@ -36,7 +36,8 @@ class MisProyectosController extends Controller
      */
     public function create()
     {
-        //
+        return view('modulos.rsu.mis_proyectos.crear');
+
     }
 
     /**

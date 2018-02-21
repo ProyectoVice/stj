@@ -20,7 +20,7 @@
 		<div class="pull-right tableTools-container"></div>
 	</div>
 		<div class="table-header">
-      <a href="#" class="stj-acciones stj-acciones-new" title="Nuevo"><i class="fa fa-plus"></i></a>
+      <a href="{{route('rsu-misproyectos.create')}}" class="stj-acciones stj-acciones-new" title="Nuevo"><i class="fa fa-plus"></i></a>
 			Lista de Mis proyectos &nbsp;&nbsp;&nbsp;
 		</div>
 												
@@ -55,7 +55,7 @@
                     <a href="#" class="stj-acciones"><i class="fa fa-edit"></i></a>
                     <a href="#" class="stj-acciones"><i class="fa fa-info"></i></a>
                     <a href="#" class="stj-acciones"><i class="fa fa-search"></i></a>  
-                    <a href="#" class="stj-acciones stj-acciones-delete" onclick="javascript:return confirmacion();">
+                    <a href="#" class="stj-acciones stj-acciones-delete" title="Eliminar" onclick="javascript:return confirmacion();">
                         <i class="fa fa-trash"></i>
                     </a>
                       
