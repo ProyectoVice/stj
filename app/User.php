@@ -31,7 +31,7 @@ class User extends Authenticatable
     }
 
     public function rsu_participante(){
-      return hasOne(RsuParticipante::class,'user_id','id')
+      return hasOne(RsuParticipante::class,'user_id','id');
     } 
 
     public function roles(){

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\modulos\rsu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\RsuProyecto;
+
 class MisProyectosController extends Controller
 {
     /**
@@ -20,7 +22,9 @@ class MisProyectosController extends Controller
 
     public function index()
     {
-        return view('modulos.rsu.mis_proyectos.proyectos');
+        $proyectos=RsuProyecto::get();
+        //return view('modulos.rsu.mis_proyectos.proyectos',compact('proyectos'));
+        return view('modulos.rsu.mis_proyectos.index',compact('proyectos'));
     }
 
     /**

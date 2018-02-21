@@ -30,5 +30,11 @@ class DatosForRsuTableSeeder extends Seeder
          ['rsu_eje_id' => '3','lineamiento' => 'Mitigación y adaptación al cambio climático',],
          ['rsu_eje_id' => '3','lineamiento' => 'Protección del medio ambiente, biodiversidad y restauración de hábitats naturales',],
         ]);
+
+        //Nivel
+        DB::table('rsu_nivels')->insert([
+                ['rsu_nivel' => 'Universidad',],
+                ['rsu_nivel' => 'Facultad',],
+        ]);
     }
 }

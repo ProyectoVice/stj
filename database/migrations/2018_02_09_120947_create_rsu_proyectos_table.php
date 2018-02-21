@@ -18,15 +18,15 @@ class CreateRsuProyectosTable extends Migration
             $table->string('aprobacion');
              $table->integer('rsu_nivel_id')->unsigned(); 
             $table->string('titulo');
-            $table->string('avance');
-            $table->string('objetivos',600);
-            $table->string('justificacion',600);
-            $table->string('logros',600);
-            $table->string('dificultades',600);
-            $table->string('lugar');
-            $table->string('beneficiarios');
-            $table->string('obs',600);
-            $table->string('culminacion');
+            $table->string('avance')->nullable();
+            $table->string('objetivos',600)->nullable();
+            $table->string('justificacion',600)->nullable();
+            $table->string('logros',600)->nullable();
+            $table->string('dificultades',600)->nullable();
+            $table->string('lugar')->nullable();
+            $table->string('beneficiarios')->nullable();
+            $table->string('obs',600)->nullable();
+            $table->string('culminacion')->nullable();
 
             $table->foreign('rsu_nivel_id')->references('id')->on('rsu_nivels')->onDelete('cascade');
             $table->timestamps();
