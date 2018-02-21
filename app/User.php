@@ -32,7 +32,14 @@ class User extends Authenticatable
 
     public function rsu_participante(){
       return hasOne(RsuParticipante::class,'user_id','id');
+
     } 
+    public function postulaciones(){
+      return hasMany(Postulacion::class,'postulacion_id','id');
+    }
+    public function colegio_users(){
+      return hasMany(ColegioUsers::class,'colegio_users_id','id');
+    }
 
     public function roles(){
         return $this->belongsToMany(Rol::class,'rol_users');
