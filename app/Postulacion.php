@@ -32,4 +32,7 @@ class Postulacion extends Model
   	public function escuela() {
       return $this->belongsto(Escuela::class,'escuela_id','id');
   	}
+    public function user() {
+      return $this->belongsto(User::class,'user_id','id');
+    }
 }

@@ -11,7 +11,7 @@
 	<ul class="submenu">
 		@if(Auth::user()->hasRoles(['Administrador Admision']))
 		<li class="">
-			<a href="">
+			<a href="{{ url('inscripcion-general') }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción General y Modalidades
 			</a>

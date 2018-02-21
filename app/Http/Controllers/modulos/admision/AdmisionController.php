@@ -1,26 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\modulos\rsu;
+namespace App\Http\Controllers\modulos\admision;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MisProyectosController extends Controller
+class AdmisionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct(){
-        $this->middleware('auth');
-        $this->middleware('docente');
-    }
-
     public function index()
     {
-        return view('modulos.Admision.inscripciones.inscripciones');
+         return view('modulos.rsu.mis_proyectos.proyectos');
     }
 
     /**

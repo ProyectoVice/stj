@@ -20,6 +20,6 @@ class ColegioUsers extends Model
   	}
   	public function colegiov() {
       return $this->belongsto(Colegio::class,'colegiov_id','id');
-  	}
+  	}  	
   	
 }
