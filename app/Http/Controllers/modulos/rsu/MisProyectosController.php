@@ -20,7 +20,7 @@ class MisProyectosController extends Controller
 
     public function index()
     {
-        return view('modulos.Admision.inscripciones.inscripciones');
+        return view('modulos.rsu.mis_proyectos.proyectos');
     }
 
     /**
