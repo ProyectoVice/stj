@@ -23,7 +23,6 @@
       <a href="{{route('rsu-misproyectos.create')}}" class="stj-acciones stj-acciones-new" title="Nuevo"><i class="fa fa-plus"></i></a>
 			Lista de Mis proyectos &nbsp;&nbsp;&nbsp;
 		</div>
-												
 
 		<div class="table-responsive">
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">

@@ -3,6 +3,7 @@
 @section('activacion')
 @endsection
 @section('estilos')
+
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -28,34 +29,29 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Título del Proyecto</label>
 				<div class="col-sm-9">
-					<input type="text" placeholder="Escribir aquí" class="col-xs-10 col-sm-5">
+
+					<input type="text" placeholder="Escribir aquí" name="titulo" class="col-xs-10 col-sm-5">
 				</div>
 			</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Nombres </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-1-1" placeholder="Text Field" class="col-xs-10 col-sm-5" disabled="true" value="JUBERTH">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Apellidos </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-1-1" placeholder="Text Field" class="col-xs-10 col-sm-5" disabled="true" value="CABELLO CANTEÑO">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Facultad </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-1-1" placeholder="Text Field" class="col-xs-10 col-sm-5" disabled="true" value="Medicina">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Escuela </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-1-1" placeholder="Text Field" class="col-xs-10 col-sm-5" disabled="true" value="MEDICINA HUMANA">
-										</div>
-									</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Doc. de Aprobación</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="N° / Nombre del doc." name="titulo" class="col-xs-10 col-sm-5">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1" style="color: #641E16;" title="Opcional">Adjuntar Doc. de Aprobación*</label>
+				<div class="col-xs-10 col-sm-4">
+					<input type="file" name="aprobacion-file" class="ace-file">
+				</div>
+			</div>
+										
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Doc. de Culminación</label>
+				<div class="col-sm-9">
+					<input type="text" placeholder="Escribir aquí" name="titulo" class="col-xs-10 col-sm-5">
+				</div>
+			</div>
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Tipo de Beca </label>
@@ -103,7 +99,12 @@
 	<!-- Fin -->									
 
 </div>	
+
+
+
 @endsection
 @section('script')
-
+		<script type="text/javascript">
+			$('.ace-file').ace_file_input();
+		</script>
 @endsection

@@ -32,3 +32,8 @@ Route::get('departamentos', function () {
 });
 //Fin RSU
 
+
+Route::get('probar', function () {
+    //return view('plantilla.usuario');
+	return view('modulos.rsu.mis_proyectos.crear2');
+});
