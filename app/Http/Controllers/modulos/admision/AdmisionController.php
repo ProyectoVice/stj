@@ -14,7 +14,8 @@ class AdmisionController extends Controller
      */
     public function __construct(){
         $this->middleware('auth');
-        $this->middleware('PersonalAdmision');
+        //$this->middleware('PersonalAdmision');
+        //$this->middleware('Administrador Admision');
     }
     public function index()
     {

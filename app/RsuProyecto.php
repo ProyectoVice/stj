@@ -11,7 +11,7 @@ class RsuProyecto extends Model
     'aprobacion','rsu_nivel_id','titulo','avance','objetivos','justificacion','logros','dificultades','lugar','beneficiarios','obs','culminacion'
     ];
     public function nivel(){
-    	return belongsto(RsuNivel::class,'rsu_nivel_id','id')
+    	return belongsto(RsuNivel::class,'rsu_nivel_id','id');
     } 
 
     public function lineamientos(){
