@@ -36,7 +36,14 @@ class MisProyectosController extends Controller
      */
     public function create()
     {
-        return view('modulos.rsu.mis_proyectos.crear');
+        $satisfacciones=array(
+                          '1' => 'Totalmente insatisfecho',
+                          '2' => 'Insatisfecho',
+                          '3' => 'Parcialmente satisfecho',
+                          '5' => 'Satisfecho',
+                          '6' => 'Totalmente satisfecho');
+
+        return view('modulos.rsu.mis_proyectos.crear',compact('satisfacciones'));
 
     }
 
