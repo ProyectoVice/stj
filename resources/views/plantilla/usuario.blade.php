@@ -268,17 +268,34 @@ $variable="";
 <script src="plantilla/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='plantilla/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='/plantilla/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		{!!Html::script('plantilla/js/bootstrap.min.js')!!}
 
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
-		{!!Html::script('plantilla/js/ace-elements.min.js')!!}
-		{!!Html::script('plantilla/js/ace.min.js')!!}
+		{!!Html::script('/plantilla/js/ace-elements.min.js')!!}
+		{!!Html::script('/plantilla/js/ace.min.js')!!}
+
+
+
+
+		{!!Html::script('plantilla/js/jquery.hotkeys.min.js')!!}
+		{!!Html::script('plantilla/js/bootstrap-wysiwyg.min.js')!!}
 		<!-- inline scripts related to this page -->
 		<!--Otros Scripts-->
+
+
+
+		<!-- page specific plugin scripts -->
+		<script src="/plantilla/js/bootstrap-tag.min.js"></script>
+		<script src="/plantilla/js/jquery.hotkeys.index.min.js"></script>
+		<script src="/plantilla/js/bootstrap-wysiwyg.min.js"></script>
+
+		
+
+
 		@yield('script')
 		<!--FIN de Otros Scripts-->
 	</body>
