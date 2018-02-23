@@ -23,7 +23,8 @@
 		<div class="hr dotted"></div>
 
 		<!-- PAGE CONTENT BEGINS -->
-		<form method="POST" class="form-horizontal">
+		{!! Form::open(['route' => 'rsu-misproyectos.store', 'method' => 'POST', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
+
 			<input name="_token" type="hidden" value="BtE7hzewiNmqDW9cC0InhpHThYPjNN4FbNWRv5pA">
 		<div class="col-xs-12">	
 			<div class="form-group">
@@ -141,7 +142,7 @@
 									
 									
 		</div>
-</form>
+{!! Form::close() !!}
 			                  
 								<!-- PAGE CONTENT ENDS -->
 
