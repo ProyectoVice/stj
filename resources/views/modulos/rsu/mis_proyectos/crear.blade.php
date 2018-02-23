@@ -35,6 +35,23 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Ejes</label>
+				<div class="col-sm-9">
+					@foreach($RsuEjes as $eje)
+							<label class=".clic">
+								<input name="c_tabaco_0" value="1" type="checkbox" class="ace RsuEjes-stj" id="{{$eje->id}}" />
+								<span class="lbl"> {{$eje->rsu_eje}}</span>
+							</label><br>
+					@endforeach
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Lineamientos</label>
+				<div class="col-sm-9 agregar">
+				</div>
+			</div>
+
+			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Doc. de Aprobación</label>
 				<div class="col-sm-9">
 					<input type="text" placeholder="N° / Nombre del doc." name="titulo" class="col-xs-10 col-sm-5">
@@ -162,7 +179,28 @@
 
 		<script type="text/javascript">
 			$('.ace-file').ace_file_input();
+
+			//Ejes
+			function ejesRsu(id) {
+					  alert(id);
+			    var checkBox = document.getElementById("myCheck");
+			    var text = document.getElementById("text");
+			    if (checkBox.checked == true){
+			        text.style.display = "block";
+			    } else {
+			       text.style.display = "none";
+			    }
+			}
 			
+			$(".RsuEjes-stj" ).click(function() {
+					var idCheck=$(this).attr("id");
+					if( $('#'+idCheck).prop('checked')){
+    						$(".agregar" ).append("<label class=\'.clic ejeCheck-"+idCheck+"\'><input type=\'checkbox\' class=\'ace RsuEjes-stj\'/><span class=\'lbl\'> Lineamientos - RSU </span></label><br class=\'ejeCheck-"+idCheck+"\'>" );		
+					}
+
+					else{	$(".ejeCheck-"+idCheck).remove();	}
+			});
+
 		</script>
 
 @endsection

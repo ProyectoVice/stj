@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\RsuProyecto;
+use App\RsuEje;
 
 class MisProyectosController extends Controller
 {
@@ -42,8 +43,8 @@ class MisProyectosController extends Controller
                           '3' => 'Parcialmente satisfecho',
                           '5' => 'Satisfecho',
                           '6' => 'Totalmente satisfecho');
-
-        return view('modulos.rsu.mis_proyectos.crear',compact('satisfacciones'));
+        $RsuEjes=RsuEje::get();
+        return view('modulos.rsu.mis_proyectos.crear',compact('satisfacciones', 'RsuEjes'));
 
     }
 
