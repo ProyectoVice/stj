@@ -39,7 +39,7 @@
           @foreach($proyectos as $p)
 						<tr>
 							<td align="center">1</td>
-							<td >2</td>
+							<td >{{$p->titulo}}</td>
 							<td align="center">3</td>
 							<td align="center">
 									<div align="center">
