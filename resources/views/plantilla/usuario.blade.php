@@ -281,8 +281,8 @@ $variable="";
 
 
 
-		{!!Html::script('plantilla/js/jquery.hotkeys.min.js')!!}
-		{!!Html::script('plantilla/js/bootstrap-wysiwyg.min.js')!!}
+	
+		{!!Html::script('/plantilla/js/bootstrap-wysiwyg.min.js')!!}
 		<!-- inline scripts related to this page -->
 		<!--Otros Scripts-->
 

@@ -24,14 +24,13 @@
 
 		<!-- PAGE CONTENT BEGINS -->
 		{!! Form::open(['route' => 'rsu-misproyectos.store', 'method' => 'POST', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
-
-			<input name="_token" type="hidden" value="BtE7hzewiNmqDW9cC0InhpHThYPjNN4FbNWRv5pA">
+			{{ csrf_field() }}
 		<div class="col-xs-12">	
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Título del Proyecto</label>
 				<div class="col-sm-9">
 
-					<input type="text" placeholder="Escribir aquí" name="titulo" class="col-xs-10 col-sm-5">
+					<input type="text" placeholder="Escribir aquí" name="titulo" class="col-xs-10 col-sm-5" required="required">
 				</div>
 			</div>
 			<div class="form-group">
@@ -181,24 +180,36 @@
 			$('.ace-file').ace_file_input();
 
 			//Ejes
-			function ejesRsu(id) {
-					  alert(id);
-			    var checkBox = document.getElementById("myCheck");
-			    var text = document.getElementById("text");
-			    if (checkBox.checked == true){
-			        text.style.display = "block";
-			    } else {
-			       text.style.display = "none";
-			    }
-			}
+			// function ejesRsu(id) {
+			// 		  alert(id);
+			//     var checkBox = document.getElementById("myCheck");
+			//     var text = document.getElementById("text");
+			//     if (checkBox.checked == true){
+			//         text.style.display = "block";
+			//     } else {
+			//        text.style.display = "none";
+			//     }
+			// }
 			
 			$(".RsuEjes-stj" ).click(function() {
-					var idCheck=$(this).attr("id");
-					if( $('#'+idCheck).prop('checked')){
-    						$(".agregar" ).append("<label class=\'.clic ejeCheck-"+idCheck+"\'><input type=\'checkbox\' class=\'ace RsuEjes-stj\'/><span class=\'lbl\'> Lineamientos - RSU </span></label><br class=\'ejeCheck-"+idCheck+"\'>" );		
+					var idCheckEje=$(this).attr("id");
+					if( $('#'+idCheckEje).prop('checked')){
+    						// $(".agregar" ).append("<label class=\'.clic ejeCheck-"+idCheckEje+"\'><input type=\'checkbox\' class=\'ace RsuEjes-stj\'/><span class=\'lbl\'> Lineamientos - RSU </span></label><br class=\'ejeCheck-"+idCheckEje+"\'>" );	
+    						$.get(`/hola/`+idCheckEje,function(res){
+					       res.forEach(element => {
+					       	var idCheckLinea=element.id;
+					        	//console.log(element.id);
+					        	$(".agregar" ).append("<label class='.clic ejeCheck-"+idCheckEje+"'><input type='checkbox' class='ace' name='lineas[]' value='"+idCheckLinea+"'/><span class='lbl'> <i style='font-size: 10px;'>"+element.rsu_eje+"</i> - "+element.lineamiento+"</span></label><br class='ejeCheck-"+idCheckEje+"'>" );
+					     	 });
+					        // $("#provincia_nac").append(`<option value=''>Provincia</option>`);
+					        // res.forEach(element => {
+					        //   $("#provincia_nac").append(`<option value=${element.id}>${element.lineamiento}</option>`);
+					        // });
+
+					      });	
 					}
 
-					else{	$(".ejeCheck-"+idCheck).remove();	}
+					else{	$(".ejeCheck-"+idCheckEje).remove();	}
 			});
 
 		</script>
