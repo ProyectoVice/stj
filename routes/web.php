@@ -41,7 +41,7 @@ Route::get('hola/{id}',function (Request $request, $id) {
     if ($request->ajax()) {
           $qry=App\RsuLineamiento::join('rsu_ejes','rsu_ejes.id','=','rsu_lineamientos.rsu_eje_id')
                    ->where('rsu_lineamientos.rsu_eje_id',$id)
-                   ->select('rsu_lineamientos.id','rsu_lineamientos.lineamiento','rsu_ejes.rsu_eje' )->get();
+                   ->select('rsu_lineamientos.id','rsu_lineamientos.lineamiento','rsu_ejes.abr' )->get();
                 return response()->json($qry);
     }
 });

@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 use App\RsuProyecto;
 use App\RsuEje;
+use App\RsuLineamiento;
+use App\RsuLineamientoProyecto;
+
+use Illuminate\Support\Facades\Storage;
 
 class MisProyectosController extends Controller
 {
@@ -56,7 +60,54 @@ class MisProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //return $request->all();
+        //inicializamos las ruta de los archivos
+        $urlAprobacion='';$urlCulminacion='';;$urlSatisfaccion='';
+        //si se cargaron archivos que guarden las imagenes en el servidor
+        if($request->file('aprobacion-file')){
+            $fileAprobacion= $request->file('aprobacion-file')->store('rsu/aprobacion');
+            $urlAprobacion=$fileAprobacion;
+        }
+        if($request->file('culminacion-file')){
+            $fileCulminacion= $request->file('culminacion-file')->store('rsu/culminacion');
+            $urlCulminacion=$fileCulminacion;
+        }
+        if($request->file('satisfaccion-file')){
+            $fileSatisfaccion=$request->file('satisfaccion-file')->store('rsu/satisfaccion');
+            $urlSatisfaccion=$fileSatisfaccion;
+        }
+        //guardar datos a la tabla rsu_proyectos
+        $myProyect=new RsuProyecto;
+        $myProyect->titulo=$request->get('titulo');
+        $myProyect->doc_aprobacion=$request->get('aprobacion');
+        $myProyect->file_aprobacion=$urlAprobacion;
+        $myProyect->lugar=$request->get('lugar');
+        $myProyect->beneficiarios=$request->get('beneficiarios');
+        $myProyect->aliados=$request->get('aliados');
+        $myProyect->porcentaje=$request->get('porcentaje');
+        $myProyect->objetivos=$request->get('objetivos');
+        $myProyect->justificacion=$request->get('justificacion');
+        $myProyect->logros=$request->get('logros');
+        $myProyect->dificultades=$request->get('dificultades');
+        $myProyect->doc_culminacion=$request->get('culminacion');
+        $myProyect->file_culminacion=$urlCulminacion;
+        $myProyect->satisfaccion=$request->get('satisfaccion');
+        $myProyect->file_satisfacion=$urlSatisfaccion;
+        $myProyect->save();
+
+        //Guardamos el ID del proyecto registrado
+        $ultimoID=$myProyect->id;
+
+        //registramos todos los lineamientos que corresponden al proyecto
+        if($request->get('lineas')){
+            foreach($request->get('lineas') as $linea){
+                $lineamientos=new RsuLineamientoProyecto;
+                $lineamientos->rsu_proy_id=$ultimoID;
+                $lineamientos->rsu_lin_id=$linea;
+                $lineamientos->save();
+            }
+        }
+        return redirect('rsu-misproyectos')->with('verde','Se registró el proyecto \''.$myProyect->titulo.'\' correctamente');
     }
 
     /**
@@ -102,5 +153,11 @@ class MisProyectosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //Metodos CONTROLLER
+    public function peru()
+    {
+        return "Holaaaaa";
     }
 }

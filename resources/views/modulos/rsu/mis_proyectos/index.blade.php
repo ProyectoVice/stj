@@ -3,7 +3,7 @@
 @section('activacion')
 @endsection
 @section('estilos')
-  {!!Html::style('plantilla/css/stj/tablas-acciones.css')!!}
+  
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -30,7 +30,7 @@
 					<tr>
 						<th class="center">Fecha</th>
 						<th class="center">Título</th>
-						<th class="center" class="hidden-480">Tipo</th>
+						<th class="center" class="hidden-480">Rol</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 				</thead>
@@ -38,11 +38,12 @@
 				<tbody>
           @foreach($proyectos as $p)
 						<tr>
-							<td align="center">1</td>
+							<td align="center">{{$p->created_at}}</td>
 							<td >{{$p->titulo}}</td>
 							<td align="center">3</td>
 							<td align="center">
-									<div align="center">
+					<div align="center">
+					<a href="#" class="stj-acciones" title="Ver más"><i class="fa fa-eye"></i></a>
                     <a href="#" class="stj-acciones" title="Descargar">
                       <i class="fa fa-download"></i></a>
                     <a href="#" class="stj-acciones" title="Abrir">
@@ -50,10 +51,11 @@
                     <a href="#" class="stj-acciones" title="Subir archivo">
                         <i class="fa fa-upload"></i>
                     </a>
+
+                      
                     <a href="#" class="stj-acciones"><i class="fa fa-users"></i></a>
                     <a href="#" class="stj-acciones"><i class="fa fa-edit"></i></a>
                     <a href="#" class="stj-acciones"><i class="fa fa-info"></i></a>
-                    <a href="#" class="stj-acciones"><i class="fa fa-search"></i></a>  
                     <a href="#" class="stj-acciones stj-acciones-delete" title="Eliminar" onclick="javascript:return confirmacion();">
                         <i class="fa fa-trash"></i>
                     </a>
@@ -71,13 +73,9 @@
 		<!-- page specific plugin scripts -->
 		{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
 		{!!Html::script('/plantilla/js/jquery.dataTables.bootstrap.min.js')!!}
-		{!!Html::script('/plantilla/js/dataTables.buttons.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.flash.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.html5.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.print.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.colVis.min.js')!!}
 		{!!Html::script('/plantilla/js/dataTables.select.min.js')!!}
-
+		
+		
 		<script type="text/javascript">
 		
 			jQuery(function($) {
