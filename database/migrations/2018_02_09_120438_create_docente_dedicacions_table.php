@@ -16,6 +16,8 @@ class CreateDocenteDedicacionsTable extends Migration
         Schema::create('docente_dedicacions', function (Blueprint $table) {
             $table->increments('id');
              $table->string('docente_dedicacion');
+             $table->string('h_lectivas');
+             $table->string('h_n_lectivas');
             $table->timestamps();
         });
     }

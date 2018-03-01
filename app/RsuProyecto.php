@@ -8,7 +8,7 @@ class RsuProyecto extends Model
 {
     protected $table='rsu_proyectos';
     protected $fillable=[
-    'aprobacion','rsu_nivel_id','titulo','avance','objetivos','justificacion','logros','dificultades','lugar','beneficiarios','obs','culminacion'
+    'titulo','doc_aprobacion','file_aprobacion','rsu_nivel_id','lugar','beneficiarios','aliados','porcentaje','avance', 'objetivos','justificacion','logros','dificultades','obs','doc_culminacion','file_culminacion','satisfacion','file_satisfacion','evidencias'
     ];
     public function nivel(){
     	return belongsto(RsuNivel::class,'rsu_nivel_id','id');

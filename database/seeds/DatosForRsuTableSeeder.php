@@ -13,9 +13,9 @@ class DatosForRsuTableSeeder extends Seeder
     {
         //Ejes
     	DB::table('rsu_ejes')->insert([
-                ['rsu_eje' => 'Proyección Social',],
-                ['rsu_eje' => 'Extención Cultural',],
-                ['rsu_eje' => 'Medio Ambiente',],
+                ['eje' => 'Proyección Social','abr' => 'PS',],
+                ['eje' => 'Extención Cultural','abr' => 'EC',],
+                ['eje' => 'Medio Ambiente','abr' => 'MA'],
         ]);
         //Lineamientos
     	DB::table('rsu_lineamientos')->insert([

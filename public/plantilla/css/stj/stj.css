@@ -26,3 +26,9 @@
 
   background-color: rgba(63,191,127,1);
 }
+
+/*Editor de texto básico*/
+  /*Fondo*/
+.stj-editor-basic{
+  background-color: #CEE3F6; border: 1px solid #CECECE;
+}

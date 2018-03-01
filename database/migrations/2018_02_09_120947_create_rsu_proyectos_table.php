@@ -15,18 +15,25 @@ class CreateRsuProyectosTable extends Migration
     {
         Schema::create('rsu_proyectos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('aprobacion');
-             $table->integer('rsu_nivel_id')->unsigned(); 
             $table->string('titulo');
+            $table->string('doc_aprobacion')->nullable();//Nombre
+            $table->string('file_aprobacion')->nullable();//archivo
+            $table->integer('rsu_nivel_id')->unsigned()->default('2');  
+            $table->string('lugar')->nullable();
+            $table->string('beneficiarios')->nullable();
+            $table->string('aliados')->nullable();
+            $table->string('porcentaje')->nullable();       
             $table->string('avance')->nullable();
             $table->string('objetivos',600)->nullable();
             $table->string('justificacion',600)->nullable();
             $table->string('logros',600)->nullable();
             $table->string('dificultades',600)->nullable();
-            $table->string('lugar')->nullable();
-            $table->string('beneficiarios')->nullable();
             $table->string('obs',600)->nullable();
-            $table->string('culminacion')->nullable();
+            $table->string('doc_culminacion')->nullable();//Nombre
+            $table->string('file_culminacion')->nullable();//archivo
+            $table->string('satisfaccion')->nullable();//texto
+            $table->string('file_satisfacion')->nullable();//archivo
+            $table->string('evidencias')->nullable();//archivo
 
             $table->foreign('rsu_nivel_id')->references('id')->on('rsu_nivels')->onDelete('cascade');
             $table->timestamps();

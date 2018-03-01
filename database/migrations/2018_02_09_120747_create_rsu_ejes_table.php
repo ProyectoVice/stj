@@ -15,7 +15,8 @@ class CreateRsuEjesTable extends Migration
     {
         Schema::create('rsu_ejes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('rsu_eje');
+            $table->string('eje');
+            $table->string('abr')->nullable();;
             $table->timestamps();
         });
     }

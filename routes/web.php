@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +31,17 @@ Route::get('departamentos', function () {
 	return $variable;
 });
 //Fin RSU
-
-
 Route::get('probar', function () {
     //return view('plantilla.usuario');
 	return view('modulos.rsu.mis_proyectos.crear2');
+});
+
+Route::get('hola/{id}',function (Request $request, $id) {
+    //return view('plantilla.usuario');
+    if ($request->ajax()) {
+          $qry=App\RsuLineamiento::join('rsu_ejes','rsu_ejes.id','=','rsu_lineamientos.rsu_eje_id')
+                   ->where('rsu_lineamientos.rsu_eje_id',$id)
+                   ->select('rsu_lineamientos.id','rsu_lineamientos.lineamiento','rsu_ejes.abr' )->get();
+                return response()->json($qry);
+    }
 });
