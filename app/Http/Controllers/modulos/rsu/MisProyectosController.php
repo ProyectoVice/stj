@@ -27,11 +27,9 @@ class MisProyectosController extends Controller
 
     public function index()
     {
-
         $proyectos=RsuProyecto::get();
         //return view('modulos.rsu.mis_proyectos.proyectos',compact('proyectos'));
         return view('modulos.rsu.mis_proyectos.index',compact('proyectos'));
-
     }
 
     /**

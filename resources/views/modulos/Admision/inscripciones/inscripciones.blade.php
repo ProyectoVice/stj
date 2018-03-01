@@ -42,7 +42,7 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th class="center">Fecha</th>
+						<th class="center">Nombre</th>
 						<th class="center">Título</th>
 						<th class="center" class="hidden-480">Tipo</th>
 						<th class="center" class="hidden-480">Acciones</th>
