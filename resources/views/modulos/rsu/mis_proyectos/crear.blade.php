@@ -149,7 +149,7 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-12" style="color: #641E16;" title="Opcional">Evidencias (fotos en PDF)*</label>
+				<label class="col-sm-12" style="color: #641E16;" title="Opcional">Evidencias (solo imágenes)*</label>
 				<div class="col-sm-12 col-xs-12">
 					<div class="dropzone"></div>
 				</div>
@@ -199,9 +199,23 @@
 
 	//Imagenes para las evidencias
 	new Dropzone('.dropzone', {
-		url: '/'
+		url: '/evidencias/1/imagen',
+		paramName: 'foto',
+		//acceptedFiles: 'image/*',
+		//maxFilesize: 2,
+		headers:{
+			'X-CSRF-TOKEN':'{{ csrf_token() }}'
+		},
+		dictDefaultMessage:'Arrastra las fotos aquí para subirlas'
 	});
-	Dropzone.autoDiscover='false';
+
+	myDropzone.on('error', function(file, res){
+		var msg = res.foto[0];
+		$('.dz-error-message:last > span').text(msg);
+	})
+
+	Dropzone.autoDiscover=false;
+
 	//llamar las librerias del file- pa' que se vea bonito XD
 	$('.ace-file').ace_file_input();		
 	//Checkbox Multiple	
@@ -209,7 +223,7 @@
 				var idCheckEje=$(this).attr("id");
 				if( $('#'+idCheckEje).prop('checked')){
 
-    				$.get(`/hola/`+idCheckEje,function(res){
+    				$.get(`/rsu-lineas/`+idCheckEje,function(res){
 					   res.forEach(element => {
 					   var idCheckLinea=element.id;
 					   //console.log(element.id);
