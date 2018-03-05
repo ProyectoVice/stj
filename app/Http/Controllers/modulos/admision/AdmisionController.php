@@ -12,9 +12,14 @@ class AdmisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth');
+        //$this->middleware('PersonalAdmision');
+        //$this->middleware('Administrador Admision');
+    }
     public function index()
     {
-         return view('modulos.rsu.mis_proyectos.proyectos');
+         return view('modulos.Admision.inscripciones.inscripciones');
     }
 
     /**

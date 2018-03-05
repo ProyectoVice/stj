@@ -27,11 +27,9 @@ class MisProyectosController extends Controller
 
     public function index()
     {
-
         $proyectos=RsuProyecto::get();
         //return view('modulos.rsu.mis_proyectos.proyectos',compact('proyectos'));
         return view('modulos.rsu.mis_proyectos.index',compact('proyectos'));
-
     }
 
     /**
@@ -156,8 +154,22 @@ class MisProyectosController extends Controller
     }
 
     //Metodos CONTROLLER
-    public function peru()
+    public function lineas(Request $request, $id)
     {
-        return "Holaaaaa";
+      if($request->ajax()){
+          $qry=RsuLineamiento::join('rsu_ejes','rsu_ejes.id','=','rsu_lineamientos.rsu_eje_id')
+                   ->where('rsu_lineamientos.rsu_eje_id',$id)
+                   ->select('rsu_lineamientos.id','rsu_lineamientos.lineamiento','rsu_ejes.abr' )->get();
+                return response()->json($qry);
+      }
+    }
+    public function evidencias($id)
+    {
+      $this->validate(request(),[
+         
+         'foto'=>'image'
+      ]);
+      $foto = request()->file('foto');
+      
     }
 }
