@@ -60,7 +60,7 @@ class MisProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
+        return $request->all();
         //inicializamos las ruta de los archivos
         $urlAprobacion='';$urlCulminacion='';;$urlSatisfaccion='';
         //si se cargaron archivos que guarden las imagenes en el servidor
