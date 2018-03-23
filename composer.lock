@@ -4242,6 +4242,7 @@
         },
         {
             "name": "symfony/thanks",
+
             "version": "v1.0.7",
             "source": {
                 "type": "git",
