@@ -14,6 +14,12 @@ class RsuParticipante extends Model
     ];
 
     public function user(){
-    	return belongsto(User::class,'user_id','id')
+    	return belongsto(User::class,'user_id','id');
+    }
+    public function proyecto(){
+    	return belongsto(RsuProyecto::class,'rsu_proyecto_id','id');
+    } 
+    public function responsabilidad(){
+    	return belongsto(RsuResponsabilidad::class,'rsu_responsabilidad_id','id');
     } 
 }

@@ -36,5 +36,12 @@ class DatosForRsuTableSeeder extends Seeder
                 ['rsu_nivel' => 'Universidad',],
                 ['rsu_nivel' => 'Facultad',],
         ]);
+
+        //Responsabilidad de los integrantes
+        DB::table('rsu_responsabilidads')->insert([
+                ['rsu_responsabilidad' => 'Docente - Responsable',],
+                ['rsu_responsabilidad' => 'Docente - Integrante',],
+                ['rsu_responsabilidad' => 'Estudiante',],
+        ]);
     }
 }

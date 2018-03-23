@@ -32,7 +32,7 @@ class CreateRsuProyectosTable extends Migration
             $table->string('doc_culminacion')->nullable();//Nombre
             $table->string('file_culminacion')->nullable();//archivo
             $table->string('satisfaccion')->nullable();//texto
-            $table->string('file_satisfacion')->nullable();//archivo
+            $table->string('file_satisfaccion')->nullable();//archivo
 
             $table->foreign('rsu_nivel_id')->references('id')->on('rsu_nivels')->onDelete('cascade');
             $table->timestamps();

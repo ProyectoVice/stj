@@ -28,7 +28,7 @@
 								</li>
 								@endif
 								<li class="">
-									<a href="{{ url('rsu-misproyectos') }}">
+									<a href="{{ route('rsu.mp.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Mis Proyectos
 									</a>

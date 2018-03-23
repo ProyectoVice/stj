@@ -30,7 +30,7 @@ $('.stj-edit-basic').css({'height':'115px','border': '1px','background-color':'w
 
 	//Capturar datos
 function stj_editor_enviar(nombreInput,idDiv){
-   	var hidden_input =  $('<input type = "hidden" name = "'+nombreInput+'"/>').appendTo('form');
+   	var hidden_input = $('<input type = "hidden" name = "'+nombreInput+'"/>').appendTo('form');
 	var html_content = $(idDiv).html ();
   	hidden_input.val(html_content);
   		// pone el HTML del editor en hidden_input y se enviará al servidor
