@@ -63,6 +63,7 @@ class MisProyectosController extends Controller
      */
     public function store(Request $request)
     {
+
        
        $this->validate(request(),[
          'el_título'=>'unique:rsu_proyectos,titulo|max:30'
