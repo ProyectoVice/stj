@@ -255,6 +255,14 @@ $variable="";
   									<strong>¡Error! </strong>{{ session('rojo') }}
 								</div>
 							@endif
+							@if (!$errors->isEmpty())
+								@foreach($errors->all() as $error)
+									<div class="alert alert-danger alert-dismissable">
+  										<button type="button" class="close" data-dismiss="alert">&times;</button>
+  										<strong>¡Error! </strong>{{ $error }}
+									</div>
+								@endforeach
+							@endif
 							@yield('contenido')
 						</div>
 					</div>

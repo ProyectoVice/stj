@@ -8,7 +8,7 @@ class RsuProyecto extends Model
 {
     protected $table='rsu_proyectos';
     protected $fillable=[
-    'titulo','doc_aprobacion','file_aprobacion','rsu_nivel_id','lugar','beneficiarios','aliados','porcentaje','avance', 'objetivos','justificacion','logros','dificultades','obs','doc_culminacion','file_culminacion','satisfacion','file_satisfacion'
+    'titulo','doc_aprobacion','file_aprobacion','rsu_nivel_id','lugar','beneficiarios','aliados','porcentaje','avance', 'objetivos','justificacion','logros','dificultades','obs','doc_culminacion','file_culminacion','satisfacion','file_satisfaccion','created_at'
     ];
     public function nivel(){
     	return belongsto(RsuNivel::class,'rsu_nivel_id','id');
@@ -18,5 +18,8 @@ class RsuProyecto extends Model
         return $this->belongsToMany(RsuLineamientoProyecto::class,'rsu_lin_id');
         //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 
         //return $this->belongsToMany(NombreModeloRelacionarse::class,'Tabla_pivot');
+    }
+    public function participantes(){
+         return $this->hasMany(RsuParticipante::class,'rsu_proyecto_id','id');
     }
 }
