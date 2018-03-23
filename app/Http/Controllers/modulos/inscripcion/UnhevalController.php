@@ -1,34 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\modulos\admision;
+namespace App\Http\Controllers\modulos\inscripcion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Programa;
 use App\Distrito;
 use App\Provincia;
 use App\Departamento;
-use App\Postulacion;
-
-class AdmisionController extends Controller
+use App\MaestriaArea;
+use App\Maestria;
+class UnhevalController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(){
-        $this->middleware('auth');
-        $this->middleware('personaladmision');
-        //$this->middleware('Administrador Admision');
-    }
     public function index()
     {
-        
-        $inscripcion=Postulacion::get();
-        return view('modulos.Admision.inscripciones.index',compact('inscripcion'));
-        
        
+        $programa=Programa::get();  
+        $departamentos=Departamento::pluck('departamento','id');
+        $provincias=Provincia::pluck('provincia','id');
+        $distritos=Distrito::pluck('distrito','id');
+        return view('modulos.inscripcion_unheval.unheval',compact('programa','departamentos','provincias','distritos'));
+            
     }
 
     /**
@@ -38,10 +35,7 @@ class AdmisionController extends Controller
      */
     public function create()
     {
-        $departamentos=Departamento::pluck('departamento','id');
-        $provincias=Provincia::pluck('provincia','id');
-        $distritos=Distrito::pluck('distrito','id');
-        return view('modulos.Admision.inscripciones.crear',compact('departamentos','provincias','distritos'));
+        
     }
 
     /**
@@ -52,28 +46,7 @@ class AdmisionController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
-        //inicializamos las ruta de los archivos
-        
-        //guardar datos a la tabla user
-        //User :: create($request->all());
-        $myInscrito=new User;        
-        $myInscrito->nombres=$request->get('nombres');
-        $myInscrito->apellido_paterno=$request->get('apellido_paterno');
-        $myInscrito->apellido_materno=$request->get('apellido_materno');
-        $myInscrito->f_nac=$request->get('f_nac');
-        $myInscrito->dni=$request->get('dni');
-        $myInscrito->email=$request->get('email');
-        $myInscrito->distrito_nac=$request->get('distrito_nac');
-        $myInscrito->domicilio=$request->get('domicilio');
-        $myInscrito->n_domicilio=$request->get('n_domicilio');
-        $myInscrito->tel=$request->get('tel');
-        $myInscrito->cel=$request->get('cel');
-        $myInscrito->tipo_sangre=$request->get('tipo_sangre');        
-        $myInscrito->save();
-
-       
-        return redirect('inscripcion-general')->with('verde','Se registró el proyecto \''.$myInscrito->nombres.'\' correctamente');
+        //
     }
 
     /**
@@ -84,7 +57,23 @@ class AdmisionController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $maestriaareas=MaestriaArea::pluck('maestria_area','id');
+        $maestrias=Maestria::pluck('maestria','id');
+        $departamentos=Departamento::pluck('departamento','id');
+        $provincias=Provincia::pluck('provincia','id');
+        $distritos=Distrito::pluck('distrito','id');
+
+        switch ($id) {
+
+            case '1': $ruta="modulos.inscripcion_unheval.programas.pregrado"; break;
+            case '2': $ruta="modulos.inscripcion_unheval.programas.posgrado-maestria"; break;
+            case '3': $ruta="modulos.inscripcion_unheval.programas.posgrado-doctorado"; break;
+            
+            default: break;
+        }
+        //return "g";
+        return view($ruta,compact('maestriaareas','maestrias','departamentos','provincias','distritos'));
     }
 
     /**
@@ -120,6 +109,15 @@ class AdmisionController extends Controller
     {
         //
     }
+
+    public function maestria(Request $request, $id)
+    {
+      if ($request->ajax()) {
+                $maestrias=Maestria::maestrias($id);
+                return response()->json($maestrias);
+            }
+    }
+
     public function provincia(Request $request, $id)
     {
       if ($request->ajax()) {

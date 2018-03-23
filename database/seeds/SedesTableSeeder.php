@@ -11,7 +11,7 @@ class SedesTableSeeder extends Seeder
      */
     public function run()
     {
-        $array = array('Panao', 'Aucayacu','Huacrachuco','Baños','Llata','Dos de mayo','Monzon','Huacaybamba');
+        $array = array('HUANUCO', 'Aucayacu','Huacrachuco','Baños','Llata','Dos de mayo','Monzon','Huacaybamba');
 
         for ($i=0; $i<count($array); $i++) { 
     		DB::table('sedes')->insert([

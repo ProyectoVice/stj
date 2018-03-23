@@ -11,10 +11,25 @@ class DatosForAdmisionTableSeeder extends Seeder
      */
     public function run()
     {
+        // Programa
+        DB::table('programas')->insert([
+                ['programa' => 'Pregrado',],
+                ['programa' => 'Posgrado maestria',],
+                ['programa' => 'Posgrado doctorado',],
+                ['programa' => 'Posgrado posdoctorado',],
+                ['programa' => 'Segunda especialidad',],
+                ['programa' => 'Estudios complementario',],
+                ['programa' => 'Idiomas',],
+                ['programa' => 'Educacióna Distancia y Formación Continua',],
+                ['programa' => 'PROCAPT',],
+                ['programa' => 'PROMASTER',],
+                ['programa' => 'Diplomado',]                
+            ]);
         // Postulacion examen tipo
         DB::table('postulacion_examen_tipos')->insert([
                 ['postulacion_examen_tipo' => 'Ordinario',],
-                ['postulacion_examen_tipo' => 'Preferencial',]                
+                ['postulacion_examen_tipo' => 'Preferencial',],
+                ['postulacion_examen_tipo' => 'No aplica',]                
             ]);
          // Postulacion modalidades
         DB::table('postulacion_modalidads')->insert([
@@ -35,37 +50,43 @@ class DatosForAdmisionTableSeeder extends Seeder
                 ['modalidad' => 'Egresados de la Institución Educativa Agropecuaria Mariano Adrián Meza Rosales', 'postulacion_examen_tipo_id' => '1',],
                 ['modalidad' => 'Deportistas Calicados y Deportistas Destacados', 'postulacion_examen_tipo_id' => '1',],
                 ['modalidad' => 'Hijos de Comunidades Campesinas y/o Nativas', 'postulacion_examen_tipo_id' => '1',],
-                ['modalidad' => 'Estudiantes del CENFOTEC UNHEVAL', 'postulacion_examen_tipo_id' => '1',]
+                ['modalidad' => 'Estudiantes del CENFOTEC UNHEVAL', 'postulacion_examen_tipo_id' => '1',],
+                ['modalidad' => 'No aplica', 'postulacion_examen_tipo_id' => '3',]
                 
             ]);
         // Postulacion etapa
         DB::table('postulacion_etapas')->insert([
                 ['postulacion_etapa' => 'I',],
-                ['postulacion_etapa' => 'II',]                
+                ['postulacion_etapa' => 'II',],
+                ['postulacion_etapa' => 'No aplica',]                 
             ]);
         // Postulacion ciclo
         DB::table('postulacion_ciclos')->insert([
                 ['postulacion_ciclo' => 'A',],
                 ['postulacion_ciclo' => 'B',],
-                ['postulacion_ciclo' => 'C',]                
+                ['postulacion_ciclo' => 'C',],
+                ['postulacion_ciclo' => 'No aplica',]                
             ]);
         // Postulacion tipo
         DB::table('postulacion_tipos')->insert([
                 ['postulacion_tipo' => 'Regular',],
-                ['postulacion_tipo' => 'Libre',]                
+                ['postulacion_tipo' => 'Libre',],
+                ['postulacion_tipo' => 'No aplica',]                
             ]);
         // Postulacion situacion
         DB::table('postulacion_situacions')->insert([
                 ['postulacion_situacion' => 'Alcanzó vacante',],
                 ['postulacion_situacion' => 'No alcanzó vacante',],
-                ['postulacion_situacion' => 'Libre',]                
+                ['postulacion_situacion' => 'Libre',],
+                ['postulacion_situacion' => 'No aplica',]                 
             ]);
         // Postulacion preparacion
         DB::table('postulacion_preparacions')->insert([
                 ['postulacion_preparacion' => 'CEPREVAL',],
                 ['postulacion_preparacion' => 'Academia',],
                 ['postulacion_preparacion' => 'Tutor particular',],
-                ['postulacion_preparacion' => 'Autoestudio',]                
+                ['postulacion_preparacion' => 'Autoestudio',],
+                ['postulacion_preparacion' => 'No aplica',]                 
             ]);
     }
 }

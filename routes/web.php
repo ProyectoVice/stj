@@ -22,6 +22,11 @@ Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 //RSU
+<<<<<<< HEAD
+Route::resource('rsu-misproyectos', 'modulos\rsu\MisProyectosController');
+Route::get('rsu-lineas/{id}', 'modulos\rsu\MisProyectosController@lineas')->name('lineas');
+Route::post('evidencias/{post}/imagen', 'modulos\rsu\MisProyectosController@evidencias')->name('evidencias');  
+=======
 Route::group(['prefix' => 'rsu'],function(){
 	Route::group(['prefix' => 'mis_proyectos'],function(){
 		Route::get('/','modulos\rsu\MisProyectosController@index')->name('rsu.mp.index');
@@ -42,8 +47,20 @@ Route::group(['prefix' => 'rsu'],function(){
  
 //Route::get('rsu-datos', 'modulos\rsu\MisProyectosController@datatables')->name('datos'); 
 //Route::post('evidencias/{post}/imagen', 'modulos\rsu\MisProyectosController@evidencias')->name('evidencias');  
+>>>>>>> fa6c0e1309a87020f5332bc5f91dc4c9248c2bb6
 //Fin RSU
 
 //Adminsión    
 Route::resource('inscripcion-general', 'modulos\admision\AdmisionController');
+Route::get('prov/{id}', 'modulos\admision\AdmisionController@provincia')->name('provincia');
+Route::get('dist/{id}', 'modulos\admision\AdmisionController@distrito')->name('distrito');   
 //Fin Admisión
+
+//Inscripciones-UNHEVAL
+Route::resource('unheval', 'modulos\inscripcion\UnhevalController');
+Route::get('maar/{id}', 'modulos\inscripcion\UnhevalController@maestria')->name('maestria');
+Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name('provincia');
+Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
+
+//Inscripciones-UNHEVAL
+Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');

@@ -16,7 +16,7 @@ class PersonalAdmision
     public function handle($request, Closure $next)
     {
         //if(Auth::user()->hasRoles(['Docente','Administrador General'])){
-        if(auth()->user()->hasRoles(['Jhonattan','Personal de Admision'])){
+        if(auth()->user()->hasRoles(['PersonalAdmision','Administrador Admision'])){
            //return  response('Exito Docente',403);
             return $next($request);
 
