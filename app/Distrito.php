@@ -17,4 +17,7 @@ class Distrito extends Model
   	public function colegios() {
       return $this->hasMany(Colegio::class);
   	}
+    public static function distritos($id){
+        return Distrito::where('provincia_id','=',$id)->get();
+    }
 }
