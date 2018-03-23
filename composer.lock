@@ -4241,7 +4241,6 @@
         },
         {
             "name": "symfony/thanks",
-<<<<<<< HEAD
             "version": "v1.0.5",
             "source": {
                 "type": "git",
@@ -4252,18 +4251,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/thanks/zipball/c757ee0c9dcfcc0e9e30fbbbdcadeb9dcc9aaaf4",
                 "reference": "c757ee0c9dcfcc0e9e30fbbbdcadeb9dcc9aaaf4",
-=======
-            "version": "v1.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/thanks.git",
-                "reference": "bade4992c46ed722162694b4af8d72f84402819a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/thanks/zipball/bade4992c46ed722162694b4af8d72f84402819a",
-                "reference": "bade4992c46ed722162694b4af8d72f84402819a",
->>>>>>> fa6c0e1309a87020f5332bc5f91dc4c9248c2bb6
+
                 "shasum": ""
             },
             "require": {
@@ -4293,11 +4281,8 @@
                 }
             ],
             "description": "Give thanks (in the form of a GitHub ⭐) to your fellow PHP package maintainers (not limited to Symfony components)!",
-<<<<<<< HEAD
-            "time": "2018-01-26T10:44:34+00:00"
-=======
+
             "time": "2018-03-14T21:51:39+00:00"
->>>>>>> fa6c0e1309a87020f5332bc5f91dc4c9248c2bb6
         },
         {
             "name": "theseer/tokenizer",
