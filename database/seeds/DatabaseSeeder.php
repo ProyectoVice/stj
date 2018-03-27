@@ -23,8 +23,15 @@ class DatabaseSeeder extends Seeder
         $this->call(DatosForAdmisionTableSeeder::class);
         $this->call(SedesTableSeeder::class);
         $this->call(DatosForRsuTableSeeder::class);                
+<<<<<<< HEAD
+        $this->call(DatosForColegioTableSeeder::class);    
+        $this->call(DatosForRsuTableSeeder::class);
+        $this->call(DatosForEnsenanzaTableSeeder::class);
+        
+=======
         $this->call(DatosForColegioTableSeeder::class);
         $this->call(DatosInscripcionTableSeeder::class);
         $this->call(DatosPosgradoTableSeeder::class);        
+>>>>>>> 0ec128b6a9b8518e9f462dd1ada1ae48d53869f9
     }
 }
