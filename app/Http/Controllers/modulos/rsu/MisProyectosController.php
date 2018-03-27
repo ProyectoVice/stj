@@ -127,6 +127,7 @@ class MisProyectosController extends Controller
                           '6' => 'Totalmente satisfecho');
         $RsuEjes=RsuEje::get();
         $proyecto=RsuProyecto::find($id);
+        $evidencias=RsuEvidencias::where('rsu_proyecto_id',$id)->get();
         return view('modulos.rsu.mis_proyectos.editar',compact('proyecto','satisfacciones', 'RsuEjes'));
     }
 
@@ -229,7 +230,7 @@ class MisProyectosController extends Controller
     public function img(Request $request, $id)
     {
       $this->validate(request(),[
-         'foto'=>'image|max:2048'
+         'foto'=>'required|image|max:2048'
       ]);
         $evidencia=new RsuEvidencias;
         $fileAprobacion= $request->file('foto')->store('public/rsu/evidencias');
@@ -238,5 +239,11 @@ class MisProyectosController extends Controller
         $evidencia->save();
 
       
+    }
+    public function img_delete($img, $proy)
+    {
+        $proyecto=RsuProyecto::find($id);
+        RsuEvidencias::destroy($id);
+        return redirect()->route('rsu.mp.edit',$proyecto->id)->with('verde','Se eliminó la imagen');      
     }
 }

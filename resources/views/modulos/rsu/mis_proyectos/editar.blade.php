@@ -157,9 +157,20 @@
 			</div>
 		</div>
 		
-
 		<div class="col-sm-12 col-xs-12" >
-			<div class="hr dotted"></div>
+			<div class="row">
+				@foreach($proyecto->evidencias as $e)
+					{{method_field('DELETE')}} {{ csrf_field() }}
+					<div class="col-md-2 col-sm-3 col-xs-4">
+						<a class="btn btn-danger btn-xs" style="position: absolute;border-radius: 30%" href="{{route('rsu.mp.img-d',$e->id)}}"><i class="fa fa-remove"></i></a>
+						<img src="{{ Storage::url($e->file) }}" class="img-responsive" style="border-radius: 10%;">
+					</div>
+				@endforeach
+			</div>
+		</div>
+
+		<div class="col-sm-12 col-xs-12" ><br><br>
+			<div class="hr dotted"></div><br><br><br>
 			<div class="form-group" align="center">
 					<button type="submit" class="width-30 btn btn-sm btn-primary">
 					<i class="ace-icon fa  fa-check"></i>
