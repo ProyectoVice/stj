@@ -14,11 +14,10 @@ class CreateEscuelaSedesTable extends Migration
     public function up()
     {
         Schema::create('escuela_sedes', function (Blueprint $table) {
-            $table->integer('sede_id')->unsigned();        
-
+            $table->increments('id');
+            $table->integer('sede_id')->unsigned();
             $table->integer('escuela_id')->unsigned();
-            $table->primary(['sede_id','escuela_id']);
-            
+           
             $table->foreign('sede_id')->references('id')->on('sedes')->onDelete('cascade');
             $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
             $table->timestamps();

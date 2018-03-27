@@ -1,5 +1,5 @@
 @extends('plantilla.usuario')
-@section('titulo','RSU - Mis proyectos')
+@section('titulo','Admision - Inscripciones')
 @section('activacion')
 @endsection
 @section('estilos')
@@ -22,8 +22,8 @@
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Responsabilidad Social Universitaria</li>
-	<li class="">Mis Proyectos</li>
+	<li class="active">Admision</li>
+	<li class="">Inscripciones</li>
 </ul>
 @endsection
 @section('contenido')
@@ -34,7 +34,7 @@
 		<div class="pull-right tableTools-container"></div>
 	</div>
 		<div class="table-header">
-			Lista de Mis proyectos &nbsp;&nbsp;&nbsp;
+			inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
 												
 
@@ -42,7 +42,7 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th class="center">Fecha</th>
+						<th class="center">Nombre</th>
 						<th class="center">Título</th>
 						<th class="center" class="hidden-480">Tipo</th>
 						<th class="center" class="hidden-480">Acciones</th>

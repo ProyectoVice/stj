@@ -8,7 +8,7 @@ class RsuLineamiento extends Model
 {
     protected $table='rsu_lineamientos';
     protected $fillable=[
-    'rsu_eje_id','lineamiento'
+    'rsu_eje_id','lineamiento','descripcion'
     ];
 
     public function eje(){

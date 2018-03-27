@@ -23,7 +23,7 @@ $variable="";
 		{!!Html::style('plantilla/css/fonts.googleapis.com.css')!!}
 
 		<!-- ace styles -->
-		{!!Html::style('plantilla/css/ace.min.css')!!}
+		{!!Html::style('/plantilla/css/ace.min.css')!!}
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="plantilla/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
@@ -38,6 +38,7 @@ $variable="";
 
 		<!-- ace settings handler -->
 		{!!Html::script('plantilla/js/ace-extra.min.js')!!}
+		{!!Html::style('plantilla/css/stj/stj.css')!!}
 		@yield('activacion')
 		@yield('estilos')
 
@@ -230,8 +231,39 @@ $variable="";
 
 					<div class="page-content">
 						<div class="row">
+							@if(session()->has('verde'))
+								<div class="alert alert-success alert-dismissable">
+  								<button type="button" class="close" data-dismiss="alert">&times;</button>
+  									<strong>¡Bien hecho! </strong>{{ session('verde') }}
+								</div>
+							@endif
+							@if(session()->has('azul'))
+								<div class="alert alert-info alert-dismissable">
+  								<button type="button" class="close" data-dismiss="alert">&times;</button>
+  									<strong>¡Atento! </strong>{{ session('azul') }}
+								</div>
+							@endif
+							@if(session()->has('naranja'))
+								<div class="alert alert-warning alert-dismissable">
+  								<button type="button" class="close" data-dismiss="alert">&times;</button>
+  									<strong>¡Cuidado! </strong>{{ session('naranja') }}
+								</div>
+							@endif
+							@if(session()->has('rojo'))
+								<div class="alert alert-danger alert-dismissable">
+  								<button type="button" class="close" data-dismiss="alert">&times;</button>
+  									<strong>¡Error! </strong>{{ session('rojo') }}
+								</div>
+							@endif
+							@if (!$errors->isEmpty())
+								@foreach($errors->all() as $error)
+									<div class="alert alert-danger alert-dismissable">
+  										<button type="button" class="close" data-dismiss="alert">&times;</button>
+  										<strong>¡Error! </strong>{{ $error }}
+									</div>
+								@endforeach
+							@endif
 							@yield('contenido')
-
 						</div>
 					</div>
 
@@ -268,17 +300,36 @@ $variable="";
 <script src="plantilla/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='plantilla/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='/plantilla/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		{!!Html::script('plantilla/js/bootstrap.min.js')!!}
 
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
-		{!!Html::script('plantilla/js/ace-elements.min.js')!!}
-		{!!Html::script('plantilla/js/ace.min.js')!!}
+		{!!Html::script('/plantilla/js/ace-elements.min.js')!!}
+		{!!Html::script('/plantilla/js/ace.min.js')!!}
+
+
+
+
+	
+		
 		<!-- inline scripts related to this page -->
 		<!--Otros Scripts-->
+
+
+
+		<!-- page specific plugin scripts -->
+		<script src="/plantilla/js/bootstrap-tag.min.js"></script>
+		<script src="/plantilla/js/jquery.hotkeys.index.min.js"></script>
+		{!!Html::script('/plantilla/js/bootstrap-wysiwyg.min.js')!!}
+
+		{!!Html::script('/plantilla/js/markdown.min.js')!!}
+		{!!Html::script('/plantilla/js/bootstrap-markdown.min.js')!!}
+		
+
+
 		@yield('script')
 		<!--FIN de Otros Scripts-->
 	</body>

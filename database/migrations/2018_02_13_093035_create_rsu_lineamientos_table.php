@@ -17,6 +17,7 @@ class CreateRsuLineamientosTable extends Migration
             $table->increments('id');
             $table->integer('rsu_eje_id')->unsigned();
             $table->string('lineamiento');
+            $table->string('descripcion',1200)->nullable();;
             $table->foreign('rsu_eje_id')->references('id')->on('rsu_ejes')->onDelete('cascade');
             $table->timestamps();
         });

@@ -11,7 +11,7 @@
 	<ul class="submenu">
 		@if(Auth::user()->hasRoles(['Administrador Admision']))
 		<li class="">
-			<a href="">
+			<a href="{{ url('inscripcion-general') }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción General y Modalidades
 			</a>
@@ -109,7 +109,7 @@
 		</li>
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador Admision']))
-		<li class="">
+		<li class="#">
 			<a href="">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción docente
@@ -119,7 +119,7 @@
 		@endif
 			<!-- Modulo inscripción del docente -->
 		@if(Auth::user()->hasRoles(['Docente']))
-		<li class="">
+		<li class="#">
 			<a href="">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción 
