@@ -10,6 +10,7 @@ use App\RsuEje;
 use App\RsuLineamiento;
 use App\RsuLineamientoProyecto;
 use App\RsuParticipante;
+use App\RsuEvidencias;
 use Auth;
 
 use Softon\SweetAlert\Facades\SWAL;  
@@ -225,14 +226,17 @@ class MisProyectosController extends Controller
                 return response()->json($qry);
       }
     }
-    public function evidencias($id)
+    public function img(Request $request, $id)
     {
       $this->validate(request(),[
-         
          'foto'=>'image|max:2048'
       ]);
+        $evidencia=new RsuEvidencias;
+        $fileAprobacion= $request->file('foto')->store('public/rsu/evidencias');
+        $evidencia->file=$fileAprobacion;
+        $evidencia->rsu_proyecto_id=$id;
+        $evidencia->save();
 
-      $foto = request()->file('foto');
       
     }
 }

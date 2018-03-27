@@ -22,4 +22,7 @@ class RsuProyecto extends Model
     public function participantes(){
          return $this->hasMany(RsuParticipante::class,'rsu_proyecto_id','id');
     }
+    public function evidencias(){
+         return $this->hasMany(RsuEvidencias::class,'rsu_proyecto_id','id');
+    }
 }

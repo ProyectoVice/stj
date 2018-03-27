@@ -200,7 +200,7 @@
 
 	//Imagenes para las evidencias
 	var myDropzone = new Dropzone('.dropzone', {
-		url: '/evidencias/1/imagen',
+		url: '/rsu/mis_proyectos/img/'+{{$proyecto->id}},
 		paramName: 'foto',
 		acceptedFiles: 'image/*',
 		maxFilesize: 2,
