@@ -12,9 +12,14 @@ class Facultad extends Model
 
     ];
 
-    public function escuelas(){
+    public function escuelas()
+    {
     	return $this->hasMany(Facultad::class);
     }
+    // Hereda su llave a Departamento Académico
+    public function dep_academico()
+    {
+    	return $this->hasMany(DepAcademico::class);
+    }
     
-
 }
