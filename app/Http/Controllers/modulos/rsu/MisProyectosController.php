@@ -240,10 +240,11 @@ class MisProyectosController extends Controller
 
       
     }
-    public function img_delete($img, $proy)
+    public function img_delete($img,$proy)
     {
-        $proyecto=RsuProyecto::find($id);
-        RsuEvidencias::destroy($id);
-        return redirect()->route('rsu.mp.edit',$proyecto->id)->with('verde','Se eliminó la imagen');      
+        $file=RsuEvidencias::find($img)->file;
+        Storage::delete($file);
+        RsuEvidencias::destroy($img);
+       return redirect()->route('rsu.mp.edit',$proy)->with('verde','Se eliminó la imagen');      
     }
 }
