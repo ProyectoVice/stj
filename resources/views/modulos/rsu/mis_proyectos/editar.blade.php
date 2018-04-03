@@ -157,9 +157,19 @@
 			</div>
 		</div>
 		
+		<div class="col-sm-12 col-xs-12">
+			<div class="row" style="background-color: #EDF4FC; padding: 10px; border-radius: 2%">
+				@foreach($proyecto->evidencias as $e)
+					<div class="col-md-2 col-sm-3 col-xs-4">
+						<a class="btn btn-danger btn-xs" style="position: absolute;border-radius: 30%;" href="{{route('rsu.mp.img-d',[$e->id,$proyecto->id])}}"><i class="fa fa-remove"></i></a>
+						<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" style="border-radius: 10%; padding-bottom: 10px;"  >
+					</div>
+				@endforeach
+			</div>
+		</div>
 
-		<div class="col-sm-12 col-xs-12" >
-			<div class="hr dotted"></div>
+		<div class="col-sm-12 col-xs-12" ><br><br>
+			<div class="hr dotted"></div><br><br><br>
 			<div class="form-group" align="center">
 					<button type="submit" class="width-30 btn btn-sm btn-primary">
 					<i class="ace-icon fa  fa-check"></i>

@@ -33,8 +33,9 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('editar/{id}','modulos\rsu\MisProyectosController@edit')->name('rsu.mp.edit');
 		Route::put('update/{id}','modulos\rsu\MisProyectosController@update')->name('rsu.mp.update');
 		Route::post('img/{id}','modulos\rsu\MisProyectosController@img')->name('rsu.mp.img');
+		Route::get('img-delete/{img}/{proy}','modulos\rsu\MisProyectosController@img_delete')->name('rsu.mp.img-d');
+		Route::get('calendario/{id}','modulos\rsu\MisProyectosController@cal_index')->name('rsu.mp.cal');
 	});
-        //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');
         
 });
 

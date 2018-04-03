@@ -15,10 +15,13 @@ class CreateCalPregraGensTable extends Migration
     {
         Schema::create('cal_pregra_gens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('f_inicio');
-            $table->string('f_fin');
-            $table->string('actividad');
-            $table->string('estado');
+            $table->string('title');
+            $table->string('descripcion',600);
+            $table->string('color')->nullable();
+            $table->string('textColor')->nullable();
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->string('responsable');
             $table->timestamps();
         });
     }

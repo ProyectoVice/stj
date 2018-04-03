@@ -14,11 +14,14 @@ class CreateRsuCalendariosTable extends Migration
     public function up()
     {
         Schema::create('rsu_calendarios', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('rsu_proyecto_id')->unsigned();
-            $table->primary('rsu_proyecto_id');
-            $table->string('actividad');
+            $table->string('title');
             $table->string('descripcion',600);
-            $table->date('fecha');
+            $table->string('color')->nullable();
+            $table->string('textColor')->nullable();
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->foreign('rsu_proyecto_id')->references('id')->on('rsu_proyectos')->onDelete('cascade');
         });
     }
