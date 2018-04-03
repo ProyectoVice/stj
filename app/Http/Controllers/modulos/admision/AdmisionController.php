@@ -23,14 +23,21 @@ class AdmisionController extends Controller
         //$this->middleware('Administrador Admision');
     }
     public function index()
-    {
-        
+    {        
         $inscripcion=Postulacion::get();
-        return view('modulos.Admision.inscripciones.index',compact('inscripcion'));
-        
-       
+        return view('modulos.Admision.inscripciones.index',compact('inscripcion'));    
     }
 
+    public function datatables()
+    {
+        $proyecto=Postulacion::get();
+
+        //join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
+        //                      ->join('rsu_responsabilidads AS r','r.id','=','p.rsu_responsabilidad_id')
+          //                    ->select('rsu_proyectos.*','r.rsu_responsabilidad AS rp')->get();
+        //return Datatables::of($proyecto)->make(true);
+        return datatables()->of($proyecto)->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,7 +59,7 @@ class AdmisionController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
+        return $request->all();
         //inicializamos las ruta de los archivos
         
         //guardar datos a la tabla user
@@ -133,5 +140,13 @@ class AdmisionController extends Controller
                 $distritos=Distrito::distritos($id);
                 return response()->json($distritos);
             }
+    }
+     public function validar(Request $request)
+    {
+        return $request->all();
+
+        $cajas=Caja::cajas($id);
+        $cajas->num_comprobante=$request->get('n_comprobante');
+
     }
 }

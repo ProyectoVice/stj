@@ -11,7 +11,7 @@ class PostulacionCiclo extends Model
     'postulacion_ciclo'
     ];
 
-    public function postulaciones() {
+    public function postulacions() {
       return $this->hasMany(Postulacion::class);
   	}
 }

@@ -3,7 +3,7 @@
 @section('activacion')
 @endsection
 @section('estilos')
-  
+  <link rel="stylesheet" type=/sweetalert/sweetalert2.min.css" href="">
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -15,31 +15,29 @@
 @section('contenido')
 
 <div class="col-xs-12">
+
 	<div class="clearfix">
 		<div class="pull-right tableTools-container"></div>
 	</div>
 		<div class="table-header">
       		<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-			inscripciones &nbsp;&nbsp;&nbsp;
+			Inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
+
 		<div class="table-responsive">
-			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
+			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th class="center">ID</th>
-						<th class="center">Nombres</th>
-						<th class="center" class="hidden-480">Apellidos</th>
-						<th class="center" class="hidden-480">Modalidad</th>
-						<th class="center" class="hidden-480">Escuela Profesional</th>
-						<th class="center" class="hidden-480">Sede</th>
-						<th class="center" class="hidden-480">Nota</th>
-						<th class="center" class="hidden-480">Condicion</th>
+						<th class="center" id="lll">Fecha</th>
+						<th class="center">Título</th>
+						<th class="center" class="hidden-480">Rol</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
-				</thead>			
+				</thead>
 			</table>
 		</div>
-</div>
+</div>	
+
 {{-- modal --}}
 								<!--Modal Nuevo-->
 <div id="nuevo" class="modal fade" tabindex="-1">
@@ -47,36 +45,19 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 class="smaller lighter blue no-margin">Registrar Inscripción</h3>
+				<h3 class="smaller lighter blue no-margin">Registrar Nueva Inscripción</h3>
 			</div>
 			{!! Form::open(['route' => 'rsu.mp.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
-			<div class="modal-body tab-pane" align="center">
+			<div class="modal-body" align="center"><br>
 			
-					{{ csrf_field() }}
-					<div class="row">		
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">DNI</label>
-							<div class="col-sm-7">
-							<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Nº de comprobante</label>
-							<div class="col-sm-7">
-							<input type="text" placeholder="Escribir aquí" name="n_comprobante" class="form-control" required="required">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Fecha de comprobante</label>
-							<div class="col-sm-7">
-							<input type="date" placeholder="Escribir aquí" name="f_comprobante" class="form-control" required="required">
-							</div>
-						</div>	
-					</div>
+			{{ csrf_field() }}
+					<input type="text" placeholder="Número de Comprobante" required="required" name="n_comprobante" class="form-control" value="{{ old('el_título') }}">
+					<input type="date" placeholder="Fecha de Comprobante" required="required" name="f_comprobante" class="form-control" value="{{ old('el_título') }}">
+			<br>
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-success btn-sm btn-round submit">
-					<i class="ace-icon fa fa-check"> Registrar</i>
+								<i class="ace-icon fa fa-check">Validar</i>
 				</button>
 			</div>
 			{!!Form::close()!!}
@@ -86,7 +67,6 @@
 
 {{-- fin modal --}}
 @endsection
-@section('script')
 @section('script')
 		<!-- page specific plugin scripts -->
 		{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
@@ -108,18 +88,13 @@
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
-			        "ajax": '{!!route('adminsion.ins.datos')!!}',
+			        "ajax": '{!!route('rsu.mp.datos')!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                  	"order": [[ 0, "desc" ]],
 			        "columns" : [
-				        {data:"id"},
-				        {data:"nota"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
+				        {data:"created_at"},
+				        {data:"titulo"},
+				        {data:"rp"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
 				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";

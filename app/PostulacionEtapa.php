@@ -11,7 +11,7 @@ class PostulacionEtapa extends Model
     'postulacion_etapa'
     ];
 
-    public function postulaciones() {
+    public function postulacions() {
       return $this->hasMany(Postulacion::class);
   	}
 }

@@ -45,10 +45,25 @@ Route::group(['prefix' => 'rsu'],function(){
 
 //Fin RSU
 
-//Adminsión    
-Route::resource('inscripcion-general', 'modulos\admision\AdmisionController');
+//Adminsión
+Route::group(['prefix' => 'adminsion'],function(){
+	Route::group(['prefix' => 'inscripciones'],function(){
+		Route::get('/','modulos\admision\AdmisionController@index')->name('adminsion.ins.index');
+		Route::post('store', 'modulos\admision\AdmisionController@store')->name('adminsion.ins.store');
+		Route::post('validar', 'modulos\admision\AdmisionController@validar')->name('adminsion.ins.validar');
+		Route::get('create', 'modulos\admision\AdmisionController@create')->name('adminsion.ins.create');
+		Route::get('datos','modulos\admision\AdmisionController@datatables')->name('adminsion.ins.datos');
+		//Route::get('lineas/{id}', 'modulos\admision\AdmisionController@lineas')->name('Adminsion.ins.lineas');
+		Route::delete('delete/{id}','modulos\admision\AdmisionController@destroy')->name('adminsion.ins.delete');
+		Route::get('editar/{id}','modulos\admision\AdmisionController@edit')->name('adminsion.ins.edit');
+		Route::put('update/{id}','modulos\admision\AdmisionController@update')->name('adminsion.ins.update');		
+	});
+        //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');
+        
+}); 
+/*Route::resource('inscripcion-general', 'modulos\admision\AdmisionController');
 Route::get('prov/{id}', 'modulos\admision\AdmisionController@provincia')->name('provincia');
-Route::get('dist/{id}', 'modulos\admision\AdmisionController@distrito')->name('distrito');   
+Route::get('dist/{id}', 'modulos\admision\AdmisionController@distrito')->name('distrito');*/   
 //Fin Admisión
 
 //Inscripciones-UNHEVAL

@@ -34,12 +34,27 @@ class User extends Authenticatable
       return hasOne(RsuParticipante::class,'user_id','id');
 
     } 
-    public function postulaciones(){
+    public function postulacions(){
       return hasMany(Postulacion::class,'postulacion_id','id');
     }
     public function colegio_users(){
-      return hasMany(ColegioUsers::class,'colegio_users_id','id');
+      return hasMany(ColegioUsers::class);
     }
+    public function diplomados_inscripcions(){
+      return hasMany(DiplomadoInscripcion::class);
+    }
+    public function procapt_inscripcions(){
+      return hasMany(ProcaptInscripcion::class);
+    }
+    public function promaster_inscripcions(){
+      return hasMany(PromasterInscripcion::class);
+    }
+    public function docente_otros(){
+      return hasMany(DocenteOtro::class,'postulacion_id','id');
+    }
+    public function inscripcion_alumnos(){
+      return hasMany(InscripcionAlumno::class,'postulacion_id','id');
+    }  
 
     public function roles(){
         return $this->belongsToMany(Rol::class,'rol_users');

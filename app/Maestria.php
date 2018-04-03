@@ -17,4 +17,8 @@ class Maestria extends Model
   	public static function maestrias($id){
         return Maestria::where('maestria_area_id','=',$id)->get();
     }
+    public function postulacions() {
+      return $this->hasMany(Postulacion::class);
+    }
+   
 }

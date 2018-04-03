@@ -14,4 +14,7 @@ class ColegioTipo extends Model
     public function dependencias() {
       return $this->hasMany(ColegioTipoDependencia::class);
   	}
+  	public function escuela_modalidads() {
+      return $this->hasMany(EscuelaModalidad::class);
+  	}
 }

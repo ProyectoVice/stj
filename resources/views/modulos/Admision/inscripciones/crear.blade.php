@@ -21,7 +21,7 @@
 		<div class="hr dotted"></div>
 
 		<!-- PAGE CONTENT BEGINS -->
-		{!! Form::open(['route' => 'inscripcion-general.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
+		{!! Form::open(['route' => 'adminsion.ins.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
 			{{ csrf_field() }}
 		<div class="col-sm-6">
 			<div class="form-group">

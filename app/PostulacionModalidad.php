@@ -15,7 +15,7 @@ class PostulacionModalidad extends Model
     public function postulacion_examen_tipo() {
       return $this->belongsto(PostulacionExamenTipo::class);
   	}
-  	public function postulaciones() {
-      return $this->hasMany(Postulacion::class);
+  	public function escuela_modalidads() {
+      return $this->hasMany(EscuelaModalidad::class);
   	}
 }

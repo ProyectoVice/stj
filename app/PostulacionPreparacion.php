@@ -11,7 +11,7 @@ class PostulacionPreparacion extends Model
     'postulacion_preparacion'
     ];
 
-    public function postulaciones() {
+    public function postulacions() {
       return $this->hasMany(Postulacion::class);
   	}
 }

@@ -25,5 +25,14 @@ class Escuela extends Model
     public function escuela_sedes() {
       return $this->hasMany(EscuelaSede::class);
     }
+    public function diplomados() {
+      return $this->hasMany(Diplomado::class);
+    }
+    public function segunda_especialidads() {
+      return $this->hasMany(SegundaEspecialidad::class);
+    }
+    public function procapt_especialidads() {
+      return $this->hasMany(ProcaptEspecialidad::class);
+    }
 
 }
