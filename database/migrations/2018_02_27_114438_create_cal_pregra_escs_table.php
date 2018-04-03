@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRsuCalendariosTable extends Migration
+class CreateCalPregraEscsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateRsuCalendariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('rsu_calendarios', function (Blueprint $table) {
+        Schema::create('cal_pregra_escs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('rsu_proyecto_id')->unsigned();
             $table->string('title');
             $table->string('descripcion',600);
             $table->string('color')->nullable();
             $table->string('textColor')->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->foreign('rsu_proyecto_id')->references('id')->on('rsu_proyectos')->onDelete('cascade');
+            $table->string('responsable');
+            $table->integer('escuela_id')->unsigned();
+            $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +35,6 @@ class CreateRsuCalendariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rsu_calendarios');
+        Schema::dropIfExists('cal_pregra_escs');
     }
 }

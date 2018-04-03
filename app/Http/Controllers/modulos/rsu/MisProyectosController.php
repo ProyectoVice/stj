@@ -10,6 +10,7 @@ use App\RsuEje;
 use App\RsuLineamiento;
 use App\RsuLineamientoProyecto;
 use App\RsuParticipante;
+use App\RsuEvidencias;
 use Auth;
 
 use Softon\SweetAlert\Facades\SWAL;  
@@ -126,6 +127,7 @@ class MisProyectosController extends Controller
                           '6' => 'Totalmente satisfecho');
         $RsuEjes=RsuEje::get();
         $proyecto=RsuProyecto::find($id);
+        $evidencias=RsuEvidencias::where('rsu_proyecto_id',$id)->get();
         return view('modulos.rsu.mis_proyectos.editar',compact('proyecto','satisfacciones', 'RsuEjes'));
     }
 
@@ -225,14 +227,32 @@ class MisProyectosController extends Controller
                 return response()->json($qry);
       }
     }
-    public function evidencias($id)
+    public function img(Request $request, $id)
     {
       $this->validate(request(),[
-         
-         'foto'=>'image|max:2048'
+         'foto'=>'required|image|max:2048'
       ]);
+        $evidencia=new RsuEvidencias;
+        $fileAprobacion= $request->file('foto')->store('public/rsu/evidencias');
+        $evidencia->file=$fileAprobacion;
+        $evidencia->rsu_proyecto_id=$id;
+        $evidencia->save();
 
-      $foto = request()->file('foto');
       
     }
+    public function img_delete($img,$proy)
+    {
+        $file=RsuEvidencias::find($img)->file;
+        Storage::delete($file);
+        RsuEvidencias::destroy($img);
+       return redirect()->route('rsu.mp.edit',$proy)->with('verde','Se eliminó la imagen');      
+    }
+
+    //Calendario Inicio
+    public function cal_index($id)
+    {
+        $proyecto=RsuProyecto::find($id);
+        return view('modulos.rsu.mis_proyectos.calendario',compact('proyecto'));    
+    }
+    //Calendario Fin
 }

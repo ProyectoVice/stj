@@ -129,6 +129,5 @@ class RolesTableSeeder extends Seeder
                 'rol' => 'Encargado de PROMASTER',
                 'descripcion' => 'Encargado de PROMASTER',
         ]);
-          //Fin usuarios Jhonattan 
     }
 }
