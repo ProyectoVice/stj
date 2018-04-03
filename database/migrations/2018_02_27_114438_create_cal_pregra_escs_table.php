@@ -15,10 +15,13 @@ class CreateCalPregraEscsTable extends Migration
     {
         Schema::create('cal_pregra_escs', function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('f_inicio');
-            $table->datetime('f_fin');
-            $table->string('actividad');
-            $table->string('estado');
+            $table->string('title');
+            $table->string('descripcion',600);
+            $table->string('color')->nullable();
+            $table->string('textColor')->nullable();
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->string('responsable');
             $table->integer('escuela_id')->unsigned();
             $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
             $table->timestamps();

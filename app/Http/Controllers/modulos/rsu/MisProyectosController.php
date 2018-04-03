@@ -247,4 +247,12 @@ class MisProyectosController extends Controller
         RsuEvidencias::destroy($img);
        return redirect()->route('rsu.mp.edit',$proy)->with('verde','Se eliminó la imagen');      
     }
+
+    //Calendario Inicio
+    public function cal_index($id)
+    {
+        $proyecto=RsuProyecto::find($id);
+        return view('modulos.rsu.mis_proyectos.calendario',compact('proyecto'));    
+    }
+    //Calendario Fin
 }
