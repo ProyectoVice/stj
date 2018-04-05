@@ -18,8 +18,8 @@ class CreateRsuCalendariosTable extends Migration
             $table->integer('rsu_proyecto_id')->unsigned();
             $table->string('title');
             $table->string('descripcion',600);
-            $table->string('color')->nullable();
-            $table->string('textColor')->nullable();
+            $table->string('color')->default('#3A87AD');
+            $table->string('textColor')->default('#FFF');
             $table->dateTime('start');
             $table->dateTime('end');
             $table->foreign('rsu_proyecto_id')->references('id')->on('rsu_proyectos')->onDelete('cascade');

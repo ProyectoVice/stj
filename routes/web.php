@@ -35,6 +35,7 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::post('img/{id}','modulos\rsu\MisProyectosController@img')->name('rsu.mp.img');
 		Route::get('img-delete/{img}/{proy}','modulos\rsu\MisProyectosController@img_delete')->name('rsu.mp.img-d');
 		Route::get('calendario/{id}','modulos\rsu\MisProyectosController@cal_index')->name('rsu.mp.cal');
+		Route::post('calendario/new','modulos\rsu\MisProyectosController@cal_new')->name('rsu.mp.cal-new');
 	});
         
 });

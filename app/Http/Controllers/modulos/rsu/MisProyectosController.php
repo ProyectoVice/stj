@@ -11,6 +11,8 @@ use App\RsuLineamiento;
 use App\RsuLineamientoProyecto;
 use App\RsuParticipante;
 use App\RsuEvidencias;
+use App\RsuCalendario;
+use Carbon\Carbon;
 use Auth;
 
 use Softon\SweetAlert\Facades\SWAL;  
@@ -253,6 +255,18 @@ class MisProyectosController extends Controller
     {
         $proyecto=RsuProyecto::find($id);
         return view('modulos.rsu.mis_proyectos.calendario',compact('proyecto'));    
+    }
+    public function cal_new(Request $request){
+        $proyecto=new RsuCalendario;
+        $proyecto->title=$request->get('title');
+        $proyecto->descripcion=$request->get('descripcion');
+        $proyecto->color=$request->get('color');
+        $proyecto->textColor=$request->get('textColor');
+        $proyecto->start=Carbon::parse($request->get('start'))->format('Y-m-d H:i:s');
+        $proyecto->end=Carbon::parse($request->get('end'))->format('Y-m-d H:i:s');
+        $proyecto->rsu_proyecto_id=$request->get('proyecto_id');
+        $proyecto->save();
+        //return $request;
     }
     //Calendario Fin
 }
