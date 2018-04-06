@@ -257,13 +257,17 @@ class MisProyectosController extends Controller
         return view('modulos.rsu.mis_proyectos.calendario',compact('proyecto'));    
     }
     public function cal_new(Request $request){
+        
+        //$formato='d/m/Y H:i';
+        //return Carbon::parse($date)->format('Y-m-d H:i:s');
+        //$date = Carbon::parse($date)->format('Y-m-d H:i:s');
         $proyecto=new RsuCalendario;
         $proyecto->title=$request->get('title');
         $proyecto->descripcion=$request->get('descripcion');
         $proyecto->color=$request->get('color');
         $proyecto->textColor=$request->get('textColor');
-        $proyecto->start=Carbon::parse($request->get('start'))->format('Y-m-d H:i:s');
-        $proyecto->end=Carbon::parse($request->get('end'))->format('Y-m-d H:i:s');
+        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
         $proyecto->rsu_proyecto_id=$request->get('proyecto_id');
         $proyecto->save();
         //return $request;

@@ -108,7 +108,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Color Texto</label>
                   <div class="col-sm-2 col-xs-2 col-lg-2">
-                    <input type="color" class="form-control" id="txtTextColor-new" value="#fff">
+                    <input type="color" class="form-control" id="txtTextColor-new" value="#FFFFFF">
                   </div>
 
                   <label class="col-sm-3 control-label">Color fondo</label>
