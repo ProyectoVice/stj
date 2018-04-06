@@ -66,7 +66,7 @@
 
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel">Nueva Actividad</h4>
+            <h4 class="modal-title" id="titleModal"></h4>
           </div>
           <div class="modal-body">
             <div id="testmodal" style="padding: 5px 20px;">
@@ -140,32 +140,46 @@
 
 
 <script type="text/javascript">
-	$(function () {
-                $('#datetimepicker1').datetimepicker();
-                $('#datetimepicker2').datetimepicker();
-            });
-$(document).ready(function() {
-	var myTable = $('#dynamic-table').DataTable({
-		"language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
-	});
+	
+$(document).ready(function(){
+	    $('#datetimepicker1').datetimepicker();
+      $('#datetimepicker2').datetimepicker();
+    var myTable = $('#dynamic-table').DataTable({
+		  "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
+	   });
+    
     $('#calendar').fullCalendar({
       header: {
         left: 'month,agendaWeek,agendaDay,listWeek',
         center: 'title',
         right: 'prev,today,next'
       },
-     dayClick: function(date, jsEvent, view) {
-     	var diaCapturado=date.format('DD/MM/YYYY hh:mm');
-     	$('#dateStar-new').val(diaCapturado);
-     	$('#dateEnd-new').val(diaCapturado);
-     	 //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
-     	 $('#CalenderModalNew').modal();
-  	},
-  	events: {!! $proyecto->actividades !!},
-  })
+      //Click en un día sin evento
+      dayClick: function(date, jsEvent, view) {
+         	var diaCapturado=date.format('DD/MM/YYYY hh:mm');
+         	$('#dateStar-new').val(diaCapturado);
+         	$('#dateEnd-new').val(diaCapturado);
+          $('#titleModal').html("Nuevo Evento/Actividad");
+         	 //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
+         	$('#CalenderModalNew').modal();
+          
+  	   },
+  	     events: {!! route('rsu.mp.cal.date',$proyecto->id) !!},
+        //Click en un evento
+      eventClick: function(date, jsEvent, view) {
+          //alert(date.title);
+          $('#dateStar-new').val(date.start.format('DD/MM/YYYY hh:mm'));
+          $('#dateEnd-new').val(date.end.format('DD/MM/YYYY hh:mm'));
+          $('#txtTitulo-new').val(date.title);
+          $('#txtColor-new').val(date.color);
+          $('#txtTextColor-new').val(date.textColor);
+          $('#txtdescripcion-new').val(date.descripcion);
+          $('#titleModal').html("Actualizar Evento");
+           //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
+          $('#CalenderModalNew').modal();
 
-  //Eventos
-
+       },
+      });
   	
 
   //Agregar un evento
@@ -182,23 +196,23 @@ $(document).ready(function() {
 	  		_token:'{!! csrf_token() !!}',
 	  	}
 
-	$.ajax({ 
-		url: '{{ route('rsu.mp.cal-new') }}',
-		type: 'POST',
-		data: NuevoEvento,
-		success: function (data) {
-				//alert(data.);
-				console.log(data);      
-		},
-		complete: function (data) {
-			console.log('perú campeon');
-		},
-		error: function(error){
-				   alert(data);
-		}
-	});
-  })
+    	$.ajax({ 
+    		url: '{{ route('rsu.mp.cal-new') }}',
+    		type: 'POST',
+    		data: NuevoEvento,
+    		success: function (data) {
 
+          $('#calendar').fullCalendar('refetchEvents');
+          $('#CalenderModalNew').modal('toggle');
+    		},
+    		complete: function (data) {
+    			//console.log('perú campeon');
+    		},
+    		error: function(error){
+    				   alert(error);
+    		}
+    	})
+  })
 });
 
 </script>

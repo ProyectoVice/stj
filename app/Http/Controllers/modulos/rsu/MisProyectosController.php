@@ -256,6 +256,11 @@ class MisProyectosController extends Controller
         $proyecto=RsuProyecto::find($id);
         return view('modulos.rsu.mis_proyectos.calendario',compact('proyecto'));    
     }
+     public function cal_date($id)
+    {
+        return RsuProyecto::where('id',$id)->get();    
+    }
+
     public function cal_new(Request $request){
         
         //$formato='d/m/Y H:i';
