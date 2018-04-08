@@ -25,28 +25,18 @@
 		<div class="pull-right tableTools-container"></div>
 	</div>
 		<div class="table-header">
-     		 <a href="#CalenderModalNew" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
+     		 <a href="#" class="stj-acciones stj-acciones-new" title="Nuevo" onclick="prepararModal()"><i class="fa fa-plus"></i></a>
 			Actividades &nbsp;&nbsp;&nbsp;
 		</div>
 				<div class="table-responsive">
 					<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th class="center">Actividad</th>
-								<th class="center" class="hidden-480">Periodo</th>
-								<th class="center" class="hidden-480">Acciones</th>
+								<th class="center">Actividades</th>
+								<th class="center" class="hidden-480">Inicio</th>
+                <th class="center" class="hidden-480">Fin</th>
 							</tr>
 						</thead>
-						<tbody>
-							@foreach($proyecto->actividades as $p)
-								<tr>
-									<td>{{ $p->title }}</td>
-									<td class="center">{{ $p->start }} ~ {{ $p->end }}</td>
-									<td class="center"><a href='#' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a>
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
 					</table>
 				</div>
 
@@ -106,12 +96,12 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Color Texto</label>
+                  <label class="col-sm-3 col-xs-6 control-label">Color Texto</label>
                   <div class="col-sm-2 col-xs-2 col-lg-2">
                     <input type="color" class="form-control" id="txtTextColor-new" value="#FFFFFF">
                   </div>
 
-                  <label class="col-sm-3 control-label">Color fondo</label>
+                  <label class="col-sm-3 col-xs-6 control-label">Color fondo</label>
                   <div class="col-sm-2 col-xs-2 col-lg-2">
                     <input type="color" class="form-control" id="txtColor-new" value="#3a87ad">
                   </div>
@@ -120,8 +110,11 @@
             </div>
           </div>
           <div class="modal-footer">
+            <input type="hidden" name="id-calendario" id="id-cal">
             <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-success antosubmit" id="btn-guardar">Guardar</button>
+            <button type="button" class="btn btn-info antosubmit" id="btn-actualizar">Actualizar</button>
+            <button type="button" class="btn btn-danger antosubmit" id="btn-eliminar">Eliminar</button>
           </div>
         </div>
       </div>
@@ -144,10 +137,20 @@
 $(document).ready(function(){
 	    $('#datetimepicker1').datetimepicker();
       $('#datetimepicker2').datetimepicker();
-    var myTable = $('#dynamic-table').DataTable({
-		  "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
-	   });
-    
+      //Tabla
+          var myTable=$('#dynamic-table').DataTable( {
+              "processing": true,
+              "serverSide": true,
+              "ajax": '{!! route('rsu.mp.cal-table',$proyecto->id) !!}',
+              "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
+                  "order": [[ 1, "asc" ]],
+              "columns" : [
+                {data:"title"},
+                {data:"start"},
+                {data:"end"}
+              ],
+          } );
+    //Calendario
     $('#calendar').fullCalendar({
       header: {
         left: 'month,agendaWeek,agendaDay,listWeek',
@@ -156,26 +159,46 @@ $(document).ready(function(){
       },
       //Click en un día sin evento
       dayClick: function(date, jsEvent, view) {
-         	var diaCapturado=date.format('DD/MM/YYYY hh:mm');
+         	var diaCapturado=date.format('DD/MM/YYYY HH:mm');
+          var diaCapturado2=date.add(23, 'hours').add(59, 'minutes').format('DD/MM/YYYY HH:mm');
          	$('#dateStar-new').val(diaCapturado);
-         	$('#dateEnd-new').val(diaCapturado);
-          $('#titleModal').html("Nuevo Evento/Actividad");
-         	 //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
+         	$('#dateEnd-new').val(diaCapturado2);
+          $('#txtTitulo-new').val('');
+          $('#txtdescripcion-new').val('');
+          $('#titleModal').html("Nueva Actividad/evento");
+          //Botones
+          $('#btn-eliminar').hide();
+          $('#btn-actualizar').hide();
+          $('#btn-guardar').show();
+         	 //alert('Current view: ' + date.format('YYYY-MM-DD HH:mm:ss'));
          	$('#CalenderModalNew').modal();
           
   	   },
-  	     events: {!! route('rsu.mp.cal.date',$proyecto->id) !!},
+  	     events: '{!! route('rsu.mp.cal.date',$proyecto->id) !!}',
         //Click en un evento
       eventClick: function(date, jsEvent, view) {
           //alert(date.title);
-          $('#dateStar-new').val(date.start.format('DD/MM/YYYY hh:mm'));
-          $('#dateEnd-new').val(date.end.format('DD/MM/YYYY hh:mm'));
+          $('#dateStar-new').val(date.start.format('DD/MM/YYYY HH:mm'));
+
+          if(date.end==null){
+           var dateEnd=date.start.add(11, 'hours').format('DD/MM/YYYY HH:mm');
+          }else{
+           var dateEnd=date.end.add(11, 'hours').format('DD/MM/YYYY HH:mm');  
+          }
+          $('#dateEnd-new').val(dateEnd);
           $('#txtTitulo-new').val(date.title);
           $('#txtColor-new').val(date.color);
           $('#txtTextColor-new').val(date.textColor);
           $('#txtdescripcion-new').val(date.descripcion);
+          $('#id-cal').val(date.id);
           $('#titleModal').html("Actualizar Evento");
            //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
+
+           //Botones
+          $('#btn-guardar').hide();
+          $('#btn-eliminar').show();
+          $('#btn-actualizar').show();
+
           $('#CalenderModalNew').modal();
 
        },
@@ -185,17 +208,11 @@ $(document).ready(function(){
   //Agregar un evento
   $('#btn-guardar').click(function(){
   		//capturamos los datos
-  		NuevoEvento={
-	  		proyecto_id:{{ $proyecto->id }},
-	  		title:$('#txtTitulo-new').val(),
-	  		descripcion:$('#txtdescripcion-new').val(),
-	  		color:$('#txtColor-new').val(),
-	  		textColor:$('#txtTextColor-new').val(),
-	  		start:$('#dateStar-new').val(),
-	  		end:$('#dateEnd-new').val(),
-	  		_token:'{!! csrf_token() !!}',
-	  	}
-
+      recolectarDatos();
+      if(NuevoEvento['title']=='' || NuevoEvento['descripcion']==''){
+        alert('Llene todos los campos');
+        return 0;
+      }
     	$.ajax({ 
     		url: '{{ route('rsu.mp.cal-new') }}',
     		type: 'POST',
@@ -203,17 +220,87 @@ $(document).ready(function(){
     		success: function (data) {
 
           $('#calendar').fullCalendar('refetchEvents');
+          myTable.ajax.reload();
           $('#CalenderModalNew').modal('toggle');
-    		},
-    		complete: function (data) {
-    			//console.log('perú campeon');
     		},
     		error: function(error){
     				   alert(error);
     		}
     	})
   })
+
+    //Eliminar un evento
+  $('#btn-eliminar').click(function(){
+      //capturamos los datos
+      recolectarDatos();
+      $.ajax({ 
+        url: '{{ route('rsu.mp.cal-del') }}',
+        type: 'POST',
+        data: NuevoEvento,
+        success: function (data) {
+
+          $('#calendar').fullCalendar('refetchEvents');
+          myTable.ajax.reload();
+          $('#CalenderModalNew').modal('toggle');
+        },
+        complete: function (data) {
+          //console.log('perú campeon');
+        },
+        error: function(error){
+               alert(error);
+        }
+      })
+  })
+
+    //Actualizar un evento
+  $('#btn-actualizar').click(function(){
+      //capturamos los datos
+      recolectarDatos();
+      $.ajax({ 
+        url: '{{ route('rsu.mp.cal-act') }}',
+        type: 'POST',
+        data: NuevoEvento,
+        success: function (data) {
+
+          $('#calendar').fullCalendar('refetchEvents');
+           myTable.ajax.reload();
+          $('#CalenderModalNew').modal('toggle');
+        },
+        error: function(error){
+               alert(error);
+        }
+      })
+  })
+  function recolectarDatos(){
+  
+   return NuevoEvento={
+          proyecto_id:{{ $proyecto->id }},
+          title:$('#txtTitulo-new').val(),
+          descripcion:$('#txtdescripcion-new').val(),
+          color:$('#txtColor-new').val(),
+          textColor:$('#txtTextColor-new').val(),
+          start:$('#dateStar-new').val(),
+          id:$('#id-cal').val(),
+          end:$('#dateEnd-new').val(),
+          _token:'{!! csrf_token() !!}',
+        }
+  
+  }
+
+
 });
+
+
+  function prepararModal(){
+    //Botones
+          $('#btn-guardar').show();
+          $('#btn-eliminar').hide();
+          $('#txtTitulo-new').val('');
+          $('#txtdescripcion-new').val('');
+          $('#btn-actualizar').hide();
+          $('#titleModal').html("Nueva Actividad/evento");
+          $('#CalenderModalNew').modal();
+  }
 
 </script>
 

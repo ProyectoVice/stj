@@ -258,7 +258,7 @@ class MisProyectosController extends Controller
     }
      public function cal_date($id)
     {
-        return RsuProyecto::where('id',$id)->get();    
+        return RsuCalendario::where('rsu_proyecto_id',$id)->get();    
     }
 
     public function cal_new(Request $request){
@@ -276,6 +276,28 @@ class MisProyectosController extends Controller
         $proyecto->rsu_proyecto_id=$request->get('proyecto_id');
         $proyecto->save();
         //return $request;
+    }
+
+    public function cal_del(Request $request){
+        $id=$request->get('id');
+        RsuCalendario::destroy($id);
+    }
+    public function cal_act(Request $request){
+        $id=$request->get('id');
+        $proyecto=RsuCalendario::find($id);
+        $proyecto->title=$request->get('title');
+        $proyecto->descripcion=$request->get('descripcion');
+        $proyecto->color=$request->get('color');
+        $proyecto->textColor=$request->get('textColor');
+        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+        $proyecto->rsu_proyecto_id=$request->get('proyecto_id');
+        $proyecto->save();
+    }
+    public function cal_table($id){
+        $proyecto=RsuCalendario::where('rsu_proyecto_id',$id)->get();
+        //return Datatables::of($proyecto)->make(true);
+        return datatables()->of($proyecto)->toJson();
     }
     //Calendario Fin
 }
