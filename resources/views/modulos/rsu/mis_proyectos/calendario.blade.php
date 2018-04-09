@@ -183,7 +183,7 @@ $(document).ready(function(){
           if(date.end==null){
            var dateEnd=date.start.add(11, 'hours').format('DD/MM/YYYY HH:mm');
           }else{
-           var dateEnd=date.end.add(11, 'hours').format('DD/MM/YYYY HH:mm');  
+           var dateEnd=date.end.format('DD/MM/YYYY HH:mm');  
           }
           $('#dateEnd-new').val(dateEnd);
           $('#txtTitulo-new').val(date.title);
