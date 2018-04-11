@@ -41,6 +41,7 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::post('calendario/act','modulos\rsu\MisProyectosController@cal_act')->name('rsu.mp.cal-act');
 		Route::get('calendario/table/{id}','modulos\rsu\MisProyectosController@cal_table')->name('rsu.mp.cal-table');
 		Route::get('download/{id}','modulos\rsu\MisProyectosController@download')->name('rsu.mp.dw');
+		Route::get('ver/{id}','modulos\rsu\MisProyectosController@ver_detalle')->name('rsu.mp.ver');
 	});
         
 });

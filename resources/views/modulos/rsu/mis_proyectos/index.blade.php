@@ -39,7 +39,6 @@
 </div>	
 
 {{-- modal --}}
-								<!--Modal Nuevo-->
 <div id="nuevo" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -65,6 +64,45 @@
 </div>
 
 {{-- fin modal --}}
+{{-- modal detalles --}}
+<div id="verDetalle" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="smaller lighter blue no-margin" id="py-titulo"></h3>
+			</div>
+			
+			<div class="modal-body">
+				<p class="col-sm-3 control-label no-padding-right"><b>Doc. de Aprobación: </b></p>
+					<p id="py-aprobacion" class="col-sm-9"></p>
+				<p><b>Lugar: </b><label id="py-lugar"></label></p>
+				<p><b>Beneficiarios: </b><label id="py-aprobacion"></label></p>
+				<p><b>Aliados: </b><label id="py-aprobacion"></label></p>
+				<p><b>Porcentaje de avance: </b><label id="py-aprobacion"></label></p>		
+				<p><b>Doc. de Culminación: </b><label id="py-aprobacion"></label></p>
+				<p><b>Satisfación de Beneficiarios: </b><label id="py-aprobacion"></label></p>
+				<p><b>Objetivos: </b><label id="py-aprobacion"></label></p>
+				<p><b>Justificación: </b><label id="py-aprobacion"></label></p>
+				<p><b>Logros: </b><label id="py-aprobacion"></label></p>
+				<p><b>Dificultades: </b><label id="py-aprobacion"></label></p>
+				<p><b>Evidencias: </b><label id="py-aprobacion"></label></p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-info btn-round submit" id="btn-calendar">
+						<i class="ace-icon fa fa-calendar"> Actividades</i>
+				</a>
+				<a href="#" class="btn btn-info btn-round submit" id="btn-download">
+						<i class="ace-icon fa fa-download"> Descargar</i>
+				</a>
+				<a href="#" class="btn btn-info btn-round submit" id="btn-editar">
+						<i class="ace-icon fa fa-edit"> Editar</i>
+				</a>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+{{-- fin modal --}}
 @endsection
 @section('script')
 		<!-- page specific plugin scripts -->
@@ -79,7 +117,7 @@
 		{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
 		{!!Html::script('/sweetalert/core.js')!!}
 		
-		<script type="text/javascript">
+<script type="text/javascript">
 		
 			//Datatables
 			jQuery(function($) {
@@ -96,7 +134,7 @@
 				        {data:"rp"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/calendario/"+data.id+"' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='/rsu/mis_proyectos/download/"+data.id+"' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones stj-acciones-ver' title='Ver detalles' data-id='"+data.id+"'><i class='fa fa-eye'></i></a><a href='#' class='stj-acciones' title='Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
@@ -168,14 +206,31 @@
 			                   }
 						         });
 							} 
-
 						})
         		});
-				
-				
 
+        		$(document).on('click', '.stj-acciones-ver', function(event) {
+		         var id = $(this).data('id');
+		         $.ajax({ 
+					     	url: '/rsu/mis_proyectos/ver/'+id,
+					     	type: 'GET',
+					     	data: {_token: '{{csrf_token()}}' },
+					     success: function (data) {
+					        $('#py-titulo').html(data.titulo);
+					        $('#py-aprobacion').html(data.doc_aprobacion);
+					        $('#btn-calendar').attr("href", "/rsu/mis_proyectos/calendario/"+data.id);
+					        $('#btn-editar').attr("href", "/rsu/mis_proyectos/editar/"+data.id);
+					        $('#btn-download').attr("href", "/rsu/mis_proyectos/download/"+data.id);
+					        $('#verDetalle').modal();
+					     },
+					     error: function(error){
+				        	var r = error.responseJSON.message;
+				        	swal("Error",r, "error");
+			           }
+					});
+		      });
+				
+				
 			});
-
-			
-		</script>
+</script>
 @endsection

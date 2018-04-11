@@ -300,6 +300,11 @@ class MisProyectosController extends Controller
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($proyecto)->toJson();
     }
+
+    public function ver_detalle($id){
+        return RsuProyecto::find($id);
+    }
+
     //Calendario Fin
     //Word
     public function download($id){
@@ -358,5 +363,6 @@ $myTextElement->setFontStyle($fontStyle);
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 $objWriter->save('probando el word.docx');
 return response()->download('probando el word.docx');
+
     }
 }
