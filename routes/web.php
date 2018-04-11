@@ -75,3 +75,18 @@ Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name(
 
 //Inscripciones-UNHEVAL
 Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
+
+//Calendario Asuntos
+
+Route::group(['prefix' => 'academico'],function(){
+	Route::group(['prefix' => 'calendario'],function(){
+		Route::get('Calendary','modulos\academico\AcademicoController@index')->name('academico.cal.index');
+				
+	});
+	});
+Route::group(['prefix' => 'academico'],function(){
+	Route::group(['prefix' => 'calendarioEsc'],function(){
+		Route::get('Calendary','modulos\academico\AcademicoEscuelaController@index')->name('academico.cal_escuela.index');
+				
+	});
+	});

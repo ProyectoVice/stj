@@ -9,7 +9,7 @@
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Calendario Académico</li>
+	<li class="active">Responsabilidad Social Universitaria</li>
 	<li class=""><a href="{{ route('rsu.mp.index') }}"> Mis Proyectos</a></li>
 	<li class="">Calendario</li>
 </ul>
@@ -17,7 +17,7 @@
 @section('contenido')
 	<div class="row">
 		<div class="col-sm-12">
-			<h3><u> Proyecto</u>: {{ $proyecto->titulo }}</h3><hr><br>
+			<h3><u> Proyecto</u>: </h3><hr><br>
 		</div>
 			<div class="col-sm-6 hidden-xs">
 				<p><b>Actividades:</b></p>
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<p>
-		{{ $proyecto->actividades }}
+	
 	</p>
 
 	<!-- calendar modal -->

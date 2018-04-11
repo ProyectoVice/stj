@@ -129,5 +129,18 @@ class RolesTableSeeder extends Seeder
                 'rol' => 'Encargado de PROMASTER',
                 'descripcion' => 'Encargado de PROMASTER',
         ]);
+           //roles control académico rol 30
+           DB::table('rols')->insert([
+                'rol' => 'ViceAcademico',
+                'descripcion' => 'Vicerrector Académico',
+        ]);
+           DB::table('rols')->insert([
+                'rol' => 'UsuarioAsuntos',
+                'descripcion' => 'Asuntos Académicos',
+        ]);
+           DB::table('rols')->insert([
+                'rol' => 'DirEscuela',
+                'descripcion' => 'Director de Escuela',
+        ]);
     }
 }
