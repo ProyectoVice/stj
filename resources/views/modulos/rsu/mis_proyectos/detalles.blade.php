@@ -7,57 +7,66 @@
 			</div>
 			
 			<div class="modal-body">
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Doc. de Aprobación: </b></p>
-					<p id="py-aprobacion" class="col-sm-9"> {{ $proyecto->doc_aprobacion }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Lugar: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->lugar }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Beneficiarios: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->beneficiarios }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Aliados: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->aliados }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Porcentaje de avance: </b></p>	
-					<p class="col-sm-9"> {{ $proyecto->porcentaje }}</p>	
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Doc. de Culminación: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->doc_culminacion }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Objetivos: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->doc_culminacion }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Justificación: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->justificacion }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Logros: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->logros }}</p>
-				</div>
-				<div class="col-sm-12">
-					<p class="col-sm-3 control-label no-padding-right"><b>Dificultades: </b></p>
-					<p class="col-sm-9"> {{ $proyecto->dificultades }}</p>
-				</div>
-					<p><b>Evidencias: </b></p>
+					
+				<div class="row">
+					<label class="col-sm-4" align="right"><b>Doc. de Aprobación: </b></label>
+					<label class="col-sm-8"> @if($proyecto->doc_aprobacion=='') - @else {{ $proyecto->doc_aprobacion }} @endif</label>					
+					
+					<label class="col-sm-4" align="right"><b>Lugar: </b></label>
+					<label class="col-sm-8" >@if($proyecto->lugar=='') -- @else {{ $proyecto->lugar }} @endif</label>
+
+					<label class="col-sm-4" align="right"><b>Beneficiarios: </b></label>
+					<label class="col-sm-8">@if($proyecto->beneficiarios=='') - @else{{ $proyecto->beneficiarios }} @endif</label>
+
+					<label class="col-sm-4" align="right"><b>Aliados: </b></label>
+					<label class="col-sm-8">@if($proyecto->aliados=='') - @else {{ $proyecto->aliados }} @endif</label>
+
+					<label class="col-sm-4" align="right"><b>Porcentaje de avance: </b></label>	
+					<label class="col-sm-8">
+								@if($proyecto->porcentaje=='') - @else {{ $proyecto->porcentaje }} @endif
+					</label>	
+					
+					<label class="col-sm-4" align="right"><b>Doc. de Culminación: </b></label>
+					<label class="col-sm-8">
+							@if($proyecto->doc_culminacion=='') - @else {{ $proyecto->doc_culminacion }} @endif
+					</label>
+
+					<label class="col-sm-4" align="right"><b>Objetivos: </b></label>
+					<label class="col-sm-8">
+								@if($proyecto->objetivos=='') - @else  {!! $proyecto->objetivos !!} @endif
+					</label>
+					
+					<label class="col-sm-4" align="right"><b>Justificación: </b></label>
+					<label class="col-sm-8">
+								@if($proyecto->justificacion=='') - @else  {!! $proyecto->justificacion !!}@endif
+					</label>
+					
 				
+					<label class="col-sm-4" align="right"><b>Logros: </b></label>
+					<label class="col-sm-8">
+								@if($proyecto->logros=='') - @else {!! $proyecto->logros !!}@endif
+					</label>
+					
+				
+					<label class="col-sm-4" align="right"><b>Dificultades: </b></label>
+					<label class="col-sm-8">
+								@if($proyecto->dificultades=='') - @else {!! $proyecto->dificultades !!}@endif
+					</label>
+					
+					<label class="col-sm-12"><b>Evidencias: </b></label>
+					
+				</div>
+			
 			</div>
+
 			<div class="modal-footer">
-				<a href="#" class="btn btn-info btn-round submit" id="btn-calendar">
+				<a href="{!!route('rsu.mp.cal',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-calendar">
 						<i class="ace-icon fa fa-calendar"> Actividades</i>
 				</a>
-				<a href="#" class="btn btn-info btn-round submit" id="btn-download">
+				<a href="{!!route('rsu.mp.dw',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-download">
 						<i class="ace-icon fa fa-download"> Descargar</i>
 				</a>
-				<a href="#" class="btn btn-info btn-round submit" id="btn-editar">
+				<a href="{!! route('rsu.mp.edit', $proyecto->id) !!}" class="btn btn-info btn-round submit" id="btn-editar">
 						<i class="ace-icon fa fa-edit"> Editar</i>
 				</a>
 			</div>
