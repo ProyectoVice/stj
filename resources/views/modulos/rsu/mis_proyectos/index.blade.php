@@ -62,47 +62,8 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-
 {{-- fin modal --}}
-{{-- modal detalles --}}
-<div id="verDetalle" class="modal fade" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 class="smaller lighter blue no-margin" id="py-titulo"></h3>
-			</div>
-			
-			<div class="modal-body">
-				<p class="col-sm-3 control-label no-padding-right"><b>Doc. de Aprobación: </b></p>
-					<p id="py-aprobacion" class="col-sm-9"></p>
-				<p><b>Lugar: </b><label id="py-lugar"></label></p>
-				<p><b>Beneficiarios: </b><label id="py-aprobacion"></label></p>
-				<p><b>Aliados: </b><label id="py-aprobacion"></label></p>
-				<p><b>Porcentaje de avance: </b><label id="py-aprobacion"></label></p>		
-				<p><b>Doc. de Culminación: </b><label id="py-aprobacion"></label></p>
-				<p><b>Satisfación de Beneficiarios: </b><label id="py-aprobacion"></label></p>
-				<p><b>Objetivos: </b><label id="py-aprobacion"></label></p>
-				<p><b>Justificación: </b><label id="py-aprobacion"></label></p>
-				<p><b>Logros: </b><label id="py-aprobacion"></label></p>
-				<p><b>Dificultades: </b><label id="py-aprobacion"></label></p>
-				<p><b>Evidencias: </b><label id="py-aprobacion"></label></p>
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn btn-info btn-round submit" id="btn-calendar">
-						<i class="ace-icon fa fa-calendar"> Actividades</i>
-				</a>
-				<a href="#" class="btn btn-info btn-round submit" id="btn-download">
-						<i class="ace-icon fa fa-download"> Descargar</i>
-				</a>
-				<a href="#" class="btn btn-info btn-round submit" id="btn-editar">
-						<i class="ace-icon fa fa-edit"> Editar</i>
-				</a>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div>
-{{-- fin modal --}}
+<div id="verDetalle" class="modal fade" tabindex="-1"></div>
 @endsection
 @section('script')
 		<!-- page specific plugin scripts -->
@@ -216,11 +177,7 @@
 					     	type: 'GET',
 					     	data: {_token: '{{csrf_token()}}' },
 					     success: function (data) {
-					        $('#py-titulo').html(data.titulo);
-					        $('#py-aprobacion').html(data.doc_aprobacion);
-					        $('#btn-calendar').attr("href", "/rsu/mis_proyectos/calendario/"+data.id);
-					        $('#btn-editar').attr("href", "/rsu/mis_proyectos/editar/"+data.id);
-					        $('#btn-download').attr("href", "/rsu/mis_proyectos/download/"+data.id);
+					        $('#verDetalle').html(data);
 					        $('#verDetalle').modal();
 					     },
 					     error: function(error){

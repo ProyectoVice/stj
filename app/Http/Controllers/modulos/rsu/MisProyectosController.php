@@ -295,14 +295,15 @@ class MisProyectosController extends Controller
         $proyecto->save();
     }
     public function cal_table($id){
-        return $id;
+        //return $id;
         $proyecto=RsuCalendario::where('rsu_proyecto_id',$id)->get();
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($proyecto)->toJson();
     }
 
     public function ver_detalle($id){
-        return RsuProyecto::find($id);
+        $proyecto = RsuProyecto::find($id);
+        return view('modulos.rsu.mis_proyectos.detalles',compact('proyecto'));
     }
 
     //Calendario Fin
