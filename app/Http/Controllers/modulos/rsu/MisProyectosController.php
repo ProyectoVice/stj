@@ -303,7 +303,7 @@ class MisProyectosController extends Controller
 
     public function ver_detalle($id){
         $proyecto = RsuProyecto::find($id);
-        return view('modulos.rsu.mis_proyectos.detalles',compact('proyecto'));
+        return view('modulos.rsu.mis_proyectos.ver_detalles',compact('proyecto'));
     }
 
     //Calendario Fin
