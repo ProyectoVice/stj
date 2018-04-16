@@ -3,7 +3,12 @@
 @section('activacion')
 @endsection
 @section('estilos')
-	{!!Html::style('plantilla/css/dropzone.min.css')!!}
+			
+
+		<!-- page specific plugin styles -->
+		{!!Html::style('/plantilla/css/colorbox.min.css')!!}
+
+
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -73,24 +78,37 @@
 					</label>
 		</div>
 		
-		<div class="col-sm-12 col-xs-12">
-			<div class="row" style="background-color: #EDF4FC; padding: 10px; border-radius: 2%">
-				@foreach($proyecto->evidencias as $e)
-					<div class="col-md-2 col-sm-3 col-xs-4">
-						<a class="btn btn-danger btn-xs" style="position: absolute;border-radius: 30%;" href="{{route('rsu.mp.img-d',[$e->id,$proyecto->id])}}"><i class="fa fa-remove"></i></a>
-						<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" style="border-radius: 10%; padding-bottom: 10px;"  >
-					</div>
-				@endforeach
+		<div class="row">
+			<div class="col-xs-12" >
+				<div >
+					<ul class="ace-thumbnails clearfix" >
+						@foreach($proyecto->evidencias as $e)
+
+							<li>
+								<a href="{{ Storage::url($e->file) }}" title="Evidencia: {{ $proyecto->titulo }}" data-rel="colorbox">
+												<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" />
+								</a>
+
+							</li>
+						@endforeach
+					</ul>
+			</div>
 			</div>
 		</div>
 
 		<div class="col-sm-12 col-xs-12" ><br><br>
 			<div class="hr dotted"></div><br><br><br>
 			<div class="form-group" align="center">
-					<button type="submit" class="width-30 btn btn-sm btn-primary">
-					<i class="ace-icon fa  fa-check"></i>
-					<span class="bigger-110">Enviar</span>
-					</button>								
+				
+            <a href="{!!route('rsu.mp.cal',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-calendar">
+						<i class="ace-icon fa fa-calendar"> Actividades</i>
+				</a>
+				<a href="{!!route('rsu.mp.dw',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-download">
+						<i class="ace-icon fa fa-download"> Descargar</i>
+				</a>
+				<a href="{!! route('rsu.mp.edit', $proyecto->id) !!}" class="btn btn-info btn-round submit" id="btn-editar">
+						<i class="ace-icon fa fa-edit"> Editar</i>
+				</a>						
 			</div>	
 			<div>
 				<div class="btn-toolbar" data-role="editor-toolbar"
@@ -101,4 +119,47 @@
 	<!-- Fin -->									
 
 </div>	
+@endsection
+@section('script')
+
+		<!-- page specific plugin scripts -->
+		{!!Html::script('/plantilla/js/jquery.colorbox.min.js')!!}
+
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			jQuery(function($) {
+	var $overflow = '';
+	var colorbox_params = {
+		rel: 'colorbox',
+		reposition:true,
+		scalePhotos:true,
+		scrolling:false,
+		previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+		next:'<i class="ace-icon fa fa-arrow-right"></i>',
+		close:'&times;',
+		current:'{current} de {total}',
+		maxWidth:'100%',
+		maxHeight:'100%',
+		onOpen:function(){
+			$overflow = document.body.style.overflow;
+			document.body.style.overflow = 'hidden';
+		},
+		onClosed:function(){
+			document.body.style.overflow = $overflow;
+		},
+		onComplete:function(){
+			$.colorbox.resize();
+		}
+	};
+
+	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+	$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		$('#colorbox, #cboxOverlay').remove();
+   });
+})
+</script>
 @endsection

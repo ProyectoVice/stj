@@ -41,6 +41,13 @@
 									</a>
 									<b class="arrow"></b>
 								</li>
+								<li class="">
+									<a href="#">
+										<i class="menu-icon fa fa-caret-right"></i>
+										Repositorio
+									</a>
+									<b class="arrow"></b>
+								</li>
 							</ul>
 						</li>
 @endif
