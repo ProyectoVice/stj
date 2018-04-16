@@ -3,12 +3,8 @@
 @section('activacion')
 @endsection
 @section('estilos')
-			
-
 		<!-- page specific plugin styles -->
 		{!!Html::style('/plantilla/css/colorbox.min.css')!!}
-
-
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -27,66 +23,66 @@
 
 		<!-- PAGE CONTENT BEGINS -->
 		
-		<div class="col-sm-5">
-					<label class="col-sm-4" align="right"><b>Doc. de Aprobación: </b></label>
-					<label class="col-sm-8"> @if($proyecto->doc_aprobacion=='') - @else {{ $proyecto->doc_aprobacion }} @endif</label>					
+		<div class="col-sm-4">
+					<label class="col-sm-6" align="right"><b>Doc. de Aprobación: </b></label>
+					<label class="col-sm-6"> @if($proyecto->doc_aprobacion=='') - @else {{ $proyecto->doc_aprobacion }} @endif</label><br>			
 					
-					<label class="col-sm-4" align="right"><b>Lugar: </b></label>
-					<label class="col-sm-8" >@if($proyecto->lugar=='') -- @else {{ $proyecto->lugar }} @endif</label>
+					<label class="col-sm-6" align="right"><b>Lugar: </b></label>
+					<label class="col-sm-6" >@if($proyecto->lugar=='') -- @else {{ $proyecto->lugar }} @endif</label><br>	
 
-					<label class="col-sm-4" align="right"><b>Beneficiarios: </b></label>
-					<label class="col-sm-8">@if($proyecto->beneficiarios=='') - @else{{ $proyecto->beneficiarios }} @endif</label>
+					<label class="col-sm-6" align="right"><b>Beneficiarios: </b></label>
+					<label class="col-sm-6">@if($proyecto->beneficiarios=='') - @else{{ $proyecto->beneficiarios }} @endif</label><br>	
 
-					<label class="col-sm-4" align="right"><b>Aliados: </b></label>
-					<label class="col-sm-8">@if($proyecto->aliados=='') - @else {{ $proyecto->aliados }} @endif</label>
+					<label class="col-sm-6" align="right"><b>Aliados: </b></label>
+					<label class="col-sm-6">@if($proyecto->aliados=='') - @else {{ $proyecto->aliados }} @endif</label><br>	
 
-					<label class="col-sm-4" align="right"><b>Porcentaje de avance: </b></label>	
-					<label class="col-sm-8">
+					<label class="col-sm-6" align="right"><b>Porcentaje de avance: </b></label>	
+					<label class="col-sm-6">
 								@if($proyecto->porcentaje=='') - @else {{ $proyecto->porcentaje }} @endif
-					</label>	
+					</label><br>	
 					
-					<label class="col-sm-4" align="right"><b>Doc. de Culminación: </b></label>
-					<label class="col-sm-8">
+					<label class="col-sm-6" align="right"><b>Doc. de Culminación: </b></label>
+					<label class="col-sm-6">
 							@if($proyecto->doc_culminacion=='') - @else {{ $proyecto->doc_culminacion }} @endif
-					</label>
+					</label><br>	
 
 					
 							
 		</div>
 
-		<div class="col-sm-7">
-			<label class="col-sm-4" align="right"><b>Objetivos: </b></label>
-					<label class="col-sm-8">
+		<div class="col-sm-8">
+					<label class="col-sm-2" align="right"><b>Objetivos: </b></label>
+					<label class="col-sm-10">
 								@if($proyecto->objetivos=='') - @else  {!! $proyecto->objetivos !!} @endif
 					</label>
 					
-					<label class="col-sm-4" align="right"><b>Justificación: </b></label>
-					<label class="col-sm-8">
+					<label class="col-sm-2" align="right"><b>Justificación: </b></label>
+					<label class="col-sm-10">
 								@if($proyecto->justificacion=='') - @else  {!! $proyecto->justificacion !!}@endif
 					</label>
 					
 				
-					<label class="col-sm-4" align="right"><b>Logros: </b></label>
-					<label class="col-sm-8">
+					<label class="col-sm-2" align="right"><b>Logros: </b></label>
+					<label class="col-sm-10">
 								@if($proyecto->logros=='') - @else {!! $proyecto->logros !!}@endif
 					</label>
 					
 				
-					<label class="col-sm-4" align="right"><b>Dificultades: </b></label>
-					<label class="col-sm-8">
+					<label class="col-sm-2" align="right"><b>Dificultades: </b></label>
+					<label class="col-sm-10">
 								@if($proyecto->dificultades=='') - @else {!! $proyecto->dificultades !!}@endif
 					</label>
 		</div>
 		
 		<div class="row">
 			<div class="col-xs-12" >
-				<div >
+				<div ><hr>
 					<ul class="ace-thumbnails clearfix" >
 						@foreach($proyecto->evidencias as $e)
 
 							<li>
 								<a href="{{ Storage::url($e->file) }}" title="Evidencia: {{ $proyecto->titulo }}" data-rel="colorbox">
-												<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" />
+								<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" />
 								</a>
 
 							</li>

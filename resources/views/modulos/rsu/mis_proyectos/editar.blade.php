@@ -4,6 +4,7 @@
 @endsection
 @section('estilos')
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
+	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -156,15 +157,27 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="col-sm-12 col-xs-12">
-			<div class="row" style="background-color: #EDF4FC; padding: 10px; border-radius: 2%">
-				@foreach($proyecto->evidencias as $e)
-					<div class="col-md-2 col-sm-3 col-xs-4">
-						<a class="btn btn-danger btn-xs" style="position: absolute;border-radius: 30%;" href="{{route('rsu.mp.img-d',[$e->id,$proyecto->id])}}"><i class="fa fa-remove"></i></a>
-						<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" style="border-radius: 10%; padding-bottom: 10px;"  >
-					</div>
-				@endforeach
+
+		<div class="row">
+			<div class="col-xs-12" >
+				<div ><hr>
+					<ul class="ace-thumbnails clearfix" >
+						@foreach($proyecto->evidencias as $e)
+
+							<li>
+								<a href="{{ Storage::url($e->file) }}" title="Evidencia: {{ $proyecto->titulo }}" data-rel="colorbox">
+									<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" />
+								</a>
+								<div class="tools tools-top">
+									
+									<a href="{{route('rsu.mp.img-d',[$e->id,$proyecto->id])}}">
+										Eliminar <i class="ace-icon fa fa-times red" ></i>
+									</a>
+								</div>
+							</li>
+						@endforeach
+					</ul>
+			</div>
 			</div>
 		</div>
 
@@ -181,6 +194,7 @@
         data-target="#editor"></div> 
 			</div>
 		</div>
+
 		
 {!! Form::close() !!}
 			                  
@@ -196,6 +210,7 @@
 		
 {!!Html::script('plantilla/js/stj/stj-editor-basic.js')!!}
 {!!Html::script('/plantilla/js/dropzone.min.js')!!}
+{!!Html::script('/plantilla/js/jquery.colorbox.min.js')!!}
 
 <script type="text/javascript">
 
@@ -245,6 +260,39 @@
 		else{	$(".ejeCheck-"+idCheckEje).remove();	}
 	});
 
+jQuery(function($) {
+	var $overflow = '';
+	var colorbox_params = {
+		rel: 'colorbox',
+		reposition:true,
+		scalePhotos:true,
+		scrolling:false,
+		previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+		next:'<i class="ace-icon fa fa-arrow-right"></i>',
+		close:'&times;',
+		current:'{current} de {total}',
+		maxWidth:'100%',
+		maxHeight:'100%',
+		onOpen:function(){
+			$overflow = document.body.style.overflow;
+			document.body.style.overflow = 'hidden';
+		},
+		onClosed:function(){
+			document.body.style.overflow = $overflow;
+		},
+		onComplete:function(){
+			$.colorbox.resize();
+		}
+	};
+
+	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+	$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		$('#colorbox, #cboxOverlay').remove();
+   });
+})
 </script>
 
 @endsection

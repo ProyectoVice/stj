@@ -4,6 +4,11 @@
 @endsection
 @section('estilos')
   <link rel="stylesheet" type=/sweetalert/sweetalert2.min.css" href="">
+  <style type="text/css">
+  	.table tbody tr.warning td {
+  background-color: lightgoldenrodyellow;
+}
+  </style>
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -30,7 +35,7 @@
 					<tr>
 						<th class="center" id="lll">Fecha</th>
 						<th class="center">Título</th>
-						<th class="center" class="hidden-480">Rol</th>
+						<th class="center" class="hidden-480">Etapa</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 				</thead>
@@ -89,10 +94,32 @@
 			        "ajax": '{!!route('rsu.mp.datos')!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                  	"order": [[ 0, "desc" ]],
+
 			        "columns" : [
 				        {data:"created_at"},
 				        {data:"titulo"},
-				        {data:"rp"},
+				        {data:null,bSortable: false, render: 
+				        		function ( data, type, row ) {
+				        			
+				        			switch(data.etapa){
+				        				case '1':
+				        					$etapa = "<div align='center' title='Presentación, esperando aprobación'><i class='fa fa-circle red' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '2':
+				        					$etapa = "<div align='center' title='Aprobado, en ejecución'><i class='fa fa-circle green' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '3':
+				        					$etapa = "<div align='center' title='En observación, corregir errores'><i class='fa fa-circle orange' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '4':
+				        					$etapa = "<div align='center' title='Culminado satisfactoriamente'><i class='fa fa-circle blue' style='font-size: 20px;'></i></div>"; break;
+
+				        				defaul: $etapa='no definido'; break;
+				        			}
+				        			return $etapa;
+				        			
+				        		}
+                		},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
 				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' class='stj-acciones' title='Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
