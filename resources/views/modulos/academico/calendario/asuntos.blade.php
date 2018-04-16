@@ -1,5 +1,5 @@
 @extends('plantilla.usuario')
-@section('titulo','RSU - Mis proyectos')
+@section('titulo','Calendario E-A')
 @section('activacion')
 @endsection
 @section('estilos')
@@ -9,7 +9,7 @@
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Responsabilidad Social Universitaria</li>
+	<li class="active">Calendario Académico</li>
 	<li class=""><a href="{{ route('rsu.mp.index') }}"> Mis Proyectos</a></li>
 	<li class="">Calendario</li>
 </ul>
