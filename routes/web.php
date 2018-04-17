@@ -42,6 +42,7 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('calendario/table/{id}','modulos\rsu\MisProyectosController@cal_table')->name('rsu.mp.cal-table');
 		Route::get('download/{id}','modulos\rsu\MisProyectosController@download')->name('rsu.mp.dw');
 		Route::get('ver/{id}','modulos\rsu\MisProyectosController@ver_detalle')->name('rsu.mp.ver');
+		Route::get('ver-file/{id}','modulos\rsu\MisProyectosController@ver_archivos')->name('rsu.mp.ver-file');
 	});
         
 });

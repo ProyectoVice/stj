@@ -306,6 +306,11 @@ class MisProyectosController extends Controller
         return view('modulos.rsu.mis_proyectos.ver_detalles',compact('proyecto'));
     }
 
+    public function ver_archivos($id){
+        $proyecto = RsuProyecto::find($id);
+        return view('modulos.rsu.mis_proyectos.ver_archivos',compact('proyecto'));
+    }
+
     //Calendario Fin
     //Word
     public function download($id){

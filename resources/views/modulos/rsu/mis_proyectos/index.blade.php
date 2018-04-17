@@ -68,7 +68,7 @@
 	</div><!-- /.modal-dialog -->
 </div>
 {{-- fin modal --}}
-<div id="verDetalle" class="modal fade" tabindex="-1"></div>
+<div id="verArchivos" class="modal fade" tabindex="-1"></div>
 @endsection
 @section('script')
 		<!-- page specific plugin scripts -->
@@ -122,7 +122,7 @@
                 		},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' class='stj-acciones' title='Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' data-id='"+data.id+"' class='stj-acciones stj-acciones-verArchivos' title='Subir/Descargar Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
@@ -197,15 +197,15 @@
 						})
         		});
 
-        		$(document).on('click', '.stj-acciones-ver', function(event) {
+        		$(document).on('click', '.stj-acciones-verArchivos', function(event) {
 		         var id = $(this).data('id');
 		         $.ajax({ 
-					     	url: '/rsu/mis_proyectos/ver/'+id,
+					     	url: '/rsu/mis_proyectos/ver-file/'+id,
 					     	type: 'GET',
 					     	data: {_token: '{{csrf_token()}}' },
 					     success: function (data) {
-					        $('#verDetalle').html(data);
-					        $('#verDetalle').modal();
+					        $('#verArchivos').html(data);
+					        $('#verArchivos').modal();
 					     },
 					     error: function(error){
 				        	var r = error.responseJSON.message;
