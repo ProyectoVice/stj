@@ -199,12 +199,13 @@
 
         		$(document).on('click', '.stj-acciones-verArchivos', function(event) {
 		         var id = $(this).data('id');
-		         $.ajax({ 
-					     	url: '/rsu/mis_proyectos/ver-file/'+id,
+		         $.ajax({
+		         		url: '/rsu/mis_proyectos/ver-file/'+id,
 					     	type: 'GET',
 					     	data: {_token: '{{csrf_token()}}' },
 					     success: function (data) {
 					        $('#verArchivos').html(data);
+					        $('.ace-file').ace_file_input();
 					        $('#verArchivos').modal();
 					     },
 					     error: function(error){
@@ -216,6 +217,5 @@
 				
 				
 			});
-
 </script>
 @endsection

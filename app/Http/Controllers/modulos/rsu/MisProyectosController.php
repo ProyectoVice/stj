@@ -67,7 +67,6 @@ class MisProyectosController extends Controller
     public function store(Request $request)
     {
 
-       
        $this->validate(request(),[
          'el_título'=>'unique:rsu_proyectos,titulo|max:30'
       ]);
@@ -309,6 +308,27 @@ class MisProyectosController extends Controller
     public function ver_archivos($id){
         $proyecto = RsuProyecto::find($id);
         return view('modulos.rsu.mis_proyectos.ver_archivos',compact('proyecto'));
+    }
+
+    public function update_file(Request $request, $id){
+        $myProyect= RsuProyecto::find($id);
+        //solo si el proyecto pertence a este usuario puede borrar
+        $participante=RsuParticipante::where('rsu_proyecto_id',$myProyect->id)->first();
+        if($participante==''){
+         return back()->with('rojo','Ud. no tiene permiso');
+        }
+        if($request->file('rsu-file')){
+            //Eliminamos el archivo que existía
+            Storage::delete($myProyect->file_informe);
+            $file= $request->file('rsu-file')->store('public/rsu/informes');
+            $myProyect->file_informe=$file;
+            $myProyect->save();
+            return redirect()->route('rsu.mp.index')->with('verde','se registró un archivo');
+        }
+
+         return back()->with('azul','No se envió ningun archivo');
+
+
     }
 
     //Calendario Fin

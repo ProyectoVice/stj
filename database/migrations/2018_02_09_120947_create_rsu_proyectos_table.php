@@ -33,6 +33,7 @@ class CreateRsuProyectosTable extends Migration
             $table->string('file_culminacion')->nullable();//archivo
             $table->string('satisfaccion')->nullable();//texto
             $table->string('file_satisfaccion')->nullable();//archivo
+            $table->string('file_informe')->nullable();//archivo
 
             $table->string('etapa',1)->default('1');
             //1 => color: rojo, etapa: presentación

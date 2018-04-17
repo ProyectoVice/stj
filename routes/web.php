@@ -43,6 +43,7 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('download/{id}','modulos\rsu\MisProyectosController@download')->name('rsu.mp.dw');
 		Route::get('ver/{id}','modulos\rsu\MisProyectosController@ver_detalle')->name('rsu.mp.ver');
 		Route::get('ver-file/{id}','modulos\rsu\MisProyectosController@ver_archivos')->name('rsu.mp.ver-file');
+		Route::put('informe/subir/{id}','modulos\rsu\MisProyectosController@update_file')->name('rsu.mp.file-up');
 	});
         
 });

@@ -9,19 +9,22 @@
 			<div class="modal-body">
 					
 				<div class="row">
-					<div class="col-sm-12">
-						<h2>subir</h2>
+					<div class="col-sm-8 col-xs-12">
+						{!! Form::open(['route' => ['rsu.mp.file-up',$proyecto->id], 'method' => 'PUT', 'class'=>'form-horizontal form-label-left','enctype'=>'multipart/form-data']) !!} 
+                          {{csrf_field()}}
+                          <div class="col-sm-10 col-xs-10">
+							<input type="file" name="rsu-file" class="ace-file" required="true">
+						  </div>
+							<button type="submit" class="btn btn-success btn-xs"><i class="icon fa fa-arrow-right"></i> </button>
+						  
+						{!! Form::close() !!}
 					</div>
-					<div class="col-sm-12">
-						<h2>Descargar</h2>
+					<div class="col-sm-4 col-xs-12" align="center">
+						<a href="{{ Storage::url($proyecto->file_informe) }}" target="_blank"><label style="font-size: 15px;"><i class="icon fa fa-download"></i> Descargar informe</label></a>
 					</div>
 					
 				</div>
 			
-			</div>
-
-			<div class="modal-footer">
-				<p>cerrar</p>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
