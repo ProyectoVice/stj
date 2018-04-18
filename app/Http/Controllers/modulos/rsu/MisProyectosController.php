@@ -47,6 +47,19 @@ class MisProyectosController extends Controller
         return datatables()->of($proyecto)->toJson();
     }
 
+    public function equipo_show($id)
+    {
+        $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+               ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+               ->where('rsu_participantes.rsu_proyecto_id',$id)
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad')->get();
+         
+         
+         //return $equipo;
+
+        //return Datatables::of($proyecto)->make(true);
+        return datatables()->of($equipo)->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -88,8 +88,17 @@ class UsersTableSeeder extends Seeder
         ]);
             //Docente
         DB::table('rol_users')->insert([
-                'user_id' => '2',
-                'rol_id' => '3',
+            'user_id' => '2',
+            'rol_id' => '3',
+        ]);
+
+        DB::table('docentes')->insert([
+             'user_id'=>'2',
+             'escuela_id'=>'10',
+             'docente_categoria_id'=>'1',
+             'docente_condicion_id'=>'1',
+             'docente_dedicacion_id',=>'1',
+             'dep_academico_id'=>'1',
         ]);
             //Estudiante
         DB::table('rol_users')->insert([

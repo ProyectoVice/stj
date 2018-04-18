@@ -163,7 +163,7 @@
 				<div >
 					<div class="table-header">
       				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-								Equipo &nbsp;&nbsp;&nbsp;
+								Equipo {{\App\RsuProyecto::find('1')->id}} &nbsp;&nbsp;&nbsp;
 					</div>
 					<div class="table-responsive">
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -334,39 +334,32 @@ jQuery(function($) {
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
-			        "ajax": '{!!route('rsu.mp.datos')!!}',
+			        "ajax": '{!!route('rsu.mp.equipo-show', $proyecto->id)!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                  	"order": [[ 0, "desc" ]],
 
 			        "columns" : [
-				        {data:"created_at"},
-				        {data:"titulo"},
-				        {data:"id"},
-				        {data:null,bSortable: false, render: 
-				        		function ( data, type, row ) {
-				        			
-				        			switch(data.etapa){
-				        				case '1':
-				        					$etapa = "<div align='center' title='Presentación, esperando aprobación'><i class='fa fa-circle red' style='font-size: 20px;'></i></div>"; break;
-
-				        				case '2':
-				        					$etapa = "<div align='center' title='Aprobado, en ejecución'><i class='fa fa-circle green' style='font-size: 20px;'></i></div>"; break;
-
-				        				case '3':
-				        					$etapa = "<div align='center' title='En observación, corregir errores'><i class='fa fa-circle orange' style='font-size: 20px;'></i></div>"; break;
-
-				        				case '4':
-				        					$etapa = "<div align='center' title='Culminado satisfactoriamente'><i class='fa fa-circle blue' style='font-size: 20px;'></i></div>"; break;
-
-				        				defaul: $etapa='no definido'; break;
-				        			}
-				        			return $etapa;
-				        			
+				        {data:"dni"},
+				        {data:"nombres"},
+				        {data:null, render:
+				        	function(data,type,row){
+				        		if(data.id_responsabilidad=='1' || data.id_responsabilidad=='2'){
+				        			var escuela=\App\D
+				        			return escuela;
+				        		}else if(data.id_responsabilidad=='3'){
+				        			return "Estudiante";
+				        		}else{
+				        			return "No definido";
 				        		}
-                		},
+		            		 return  data.id_user;
+				        		//return '{';
+				        		//return "{!!App\RsuProyecto::find("+data.id+")!!}";
+				        	}
+				        },
+				        {data:"tipo"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' data-id='"+data.id+"' class='stj-acciones stj-acciones-verArchivos' title='Subir/Descargar Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "Hola Mundo";
                 			}
                 		}
 			        ],
