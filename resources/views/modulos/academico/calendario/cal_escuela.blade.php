@@ -1,5 +1,5 @@
 @extends('plantilla.usuario')
-@section('titulo','RSU - Mis proyectos')
+@section('titulo','Cronograma Académico')
 @section('activacion')
 @endsection
 @section('estilos')
@@ -9,29 +9,29 @@
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Responsabilidad Social Universitaria</li>
+	<li class="active">Cronograma Académico</li>
 	<li class=""><a href="{{ route('rsu.mp.index') }}"> Mis Proyectos</a></li>
 	<li class="">Calendario</li>
 </ul>
 @endsection
 @section('contenido')
-	<div class="row">
-		<div class="col-sm-12">
-			<h3><u> Proyecto</u>: </h3><hr><br>
-		</div>
-			<div class="col-sm-6 hidden-xs">
-				<p><b>Actividades:</b></p>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3><u> Proyecto</u>: </h3><hr><br>
+    </div>
+      <div class="col-sm-6 hidden-xs">
+        <p><b>Actividades:</b></p>
 
-			</div>
-		<div class="col-sm-6 col-xs-12">
-			<div id='calendar'></div>		
-		</div>
-	</div>
-	<p>
-	
-	</p>
+      </div>
+    <div class="col-sm-6 col-xs-12">
+      <div id='calendar'></div>   
+    </div>
+  </div>
+  <p>
+    
+  </p>
 
-	<!-- calendar modal -->
+  <!-- calendar modal -->
     <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -59,22 +59,22 @@
                   <label class="col-sm-3 control-label">Inicio</label>
                   <div class="col-sm-9">
                     <div class='input-group date' id='datetimepicker1'>
-                    	<input type='text' class="form-control" />
-                    		<span class="input-group-addon">
-                        		<span class="glyphicon glyphicon-calendar"></span>
-                    		</span>
-                	</div>
+                      <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                  </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Fin</label>
                   <div class="col-sm-9">
                     <div class='input-group date' id='datetimepicker1'>
-                    	<input type='text' class="form-control" />
-                    		<span class="input-group-addon">
-                        		<span class="glyphicon glyphicon-calendar"></span>
-                    		</span>
-                	</div>
+                      <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                  </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -93,15 +93,15 @@
         </div>
       </div>
     </div>
-	
+  
 @endsection
 @section('script')
-		{!!Html::script('/plantilla/js/moment.min.js')!!}
-		{!!Html::script('/plantilla/js/fullcalendar.min.js')!!}
-		{!!Html::script('/plantilla/js/es.js')!!}
-		{!!Html::script('/plantilla/js/bootstrap-datetimepicker.min.js')!!}
+    {!!Html::script('/plantilla/js/moment.min.js')!!}
+    {!!Html::script('/plantilla/js/fullcalendar.min.js')!!}
+    {!!Html::script('/plantilla/js/es.js')!!}
+    {!!Html::script('/plantilla/js/bootstrap-datetimepicker.min.js')!!}
 <script type="text/javascript">
-	$(function () {
+  $(function () {
                 $('#datetimepicker1').datetimepicker();
             });
 $(document).ready(function() {
@@ -112,15 +112,15 @@ $(document).ready(function() {
         right: 'prev,today,next'
       },
      dayClick: function(date, jsEvent, view) {
-     	 $('#CalenderModalNew').modal();
-    	//alert('Clicked on: ' + date.format());
-    	//alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-    	//alert('Current view: ' + view.name);
+       $('#CalenderModalNew').modal();
+      //alert('Clicked on: ' + date.format());
+      //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+      //alert('Current view: ' + view.name);
 
-    	// change the day's background color just for fun
-    		//$(this).css('background-color', 'red');
+      // change the day's background color just for fun
+        //$(this).css('background-color', 'red');
 
-  	}
+    }
     })
 });
 
