@@ -20,7 +20,11 @@
 						{!! Form::close() !!}
 					</div>
 					<div class="col-sm-4 col-xs-12" align="center">
+						@if($proyecto->file_informe!='')
 						<a href="{{ Storage::url($proyecto->file_informe) }}" target="_blank"><label style="font-size: 15px;"><i class="icon fa fa-download"></i> Descargar informe</label></a>
+						@else
+						<label><i class="icon fa fa-times"></i> No hay archivo para descargar</label>
+						@endif
 					</div>
 					
 				</div>

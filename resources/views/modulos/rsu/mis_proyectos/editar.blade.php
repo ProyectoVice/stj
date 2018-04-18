@@ -157,6 +157,30 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-xs-12" >
+				<div >
+					<div class="table-header">
+      				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
+								Equipo &nbsp;&nbsp;&nbsp;
+					</div>
+					<div class="table-responsive">
+						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="center" id="lll">DNI</th>
+									<th class="center">Nombres y Apellidos</th>
+									<th class="center" class="hidden-480">Escuela</th>
+									<th class="center" class="hidden-480">Tipo</th>
+									<th class="center" class="hidden-480">Acciones</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-xs-12" >
@@ -211,6 +235,17 @@
 {!!Html::script('plantilla/js/stj/stj-editor-basic.js')!!}
 {!!Html::script('/plantilla/js/dropzone.min.js')!!}
 {!!Html::script('/plantilla/js/jquery.colorbox.min.js')!!}
+
+{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
+{!!Html::script('/plantilla/js/jquery.dataTables.bootstrap.min.js')!!}
+{!!Html::script('/plantilla/js/dataTables.buttons.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.flash.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.html5.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.print.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.colVis.min.js')!!}
+{!!Html::script('/plantilla/js/dataTables.select.min.js')!!}
+{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
+{!!Html::script('/sweetalert/core.js')!!}
 
 <script type="text/javascript">
 
@@ -292,6 +327,50 @@ jQuery(function($) {
 	$(document).one('ajaxloadstart.page', function(e) {
 		$('#colorbox, #cboxOverlay').remove();
    });
+
+
+   //datatables
+
+				var myTable=$('#dynamic-table').DataTable( {
+			        "processing": true,
+			        "serverSide": true,
+			        "ajax": '{!!route('rsu.mp.datos')!!}',
+			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
+                 	"order": [[ 0, "desc" ]],
+
+			        "columns" : [
+				        {data:"created_at"},
+				        {data:"titulo"},
+				        {data:"id"},
+				        {data:null,bSortable: false, render: 
+				        		function ( data, type, row ) {
+				        			
+				        			switch(data.etapa){
+				        				case '1':
+				        					$etapa = "<div align='center' title='Presentación, esperando aprobación'><i class='fa fa-circle red' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '2':
+				        					$etapa = "<div align='center' title='Aprobado, en ejecución'><i class='fa fa-circle green' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '3':
+				        					$etapa = "<div align='center' title='En observación, corregir errores'><i class='fa fa-circle orange' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '4':
+				        					$etapa = "<div align='center' title='Culminado satisfactoriamente'><i class='fa fa-circle blue' style='font-size: 20px;'></i></div>"; break;
+
+				        				defaul: $etapa='no definido'; break;
+				        			}
+				        			return $etapa;
+				        			
+				        		}
+                		},
+				        {data:null,bSortable: false, render: 
+				        	function ( data, type, row ) {
+				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' data-id='"+data.id+"' class='stj-acciones stj-acciones-verArchivos' title='Subir/Descargar Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+                			}
+                		}
+			        ],
+			    } )
 })
 </script>
 
