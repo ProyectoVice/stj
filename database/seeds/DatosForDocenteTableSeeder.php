@@ -22,9 +22,9 @@ class DatosForDocenteTableSeeder extends Seeder
                 ['docente_condicion' => 'Contratado']        
         ]);
         DB::table('docente_dedicacions')->insert([
-                ['docente_dedicacion' => 'Exclusiva'],
-                ['docente_dedicacion' => 'Completa'],
-                ['docente_dedicacion' => 'Parcial']         
+                ['docente_dedicacion' => 'Exclusiva','h_lectivas' => '40', 'h_n_lectivas' => '10',],
+                ['docente_dedicacion' => 'Completa','h_lectivas' => '40', 'h_n_lectivas' => '10',],
+                ['docente_dedicacion' => 'Parcial','h_lectivas' => '20', 'h_n_lectivas' => '1',]         
         ]);
 
     }

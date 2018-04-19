@@ -97,8 +97,9 @@ class UsersTableSeeder extends Seeder
              'escuela_id'=>'10',
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
-             'docente_dedicacion_id',=>'1',
+             'docente_dedicacion_id'=>'1',
              'dep_academico_id'=>'1',
+             'h_lectivas'=>'12','h_n_lectivas'=>'12',
         ]);
             //Estudiante
         DB::table('rol_users')->insert([
