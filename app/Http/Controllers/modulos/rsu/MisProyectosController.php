@@ -35,7 +35,6 @@ class MisProyectosController extends Controller
 
     public function index()
     {
-
         return view('modulos.rsu.mis_proyectos.index');
     }
     public function datatables()

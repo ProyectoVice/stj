@@ -5,6 +5,7 @@
 @section('estilos')
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
 	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
+
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -163,7 +164,7 @@
 				<div >
 					<div class="table-header">
       				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-								Equipo {{\App\RsuProyecto::find('1')->id}} &nbsp;&nbsp;&nbsp;
+								Equipo &nbsp;&nbsp;&nbsp;
 					</div>
 					<div class="table-responsive">
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -343,17 +344,19 @@ jQuery(function($) {
 				        {data:"nombres"},
 				        {data:null, render:
 				        	function(data,type,row){
+				        		
 				        		if(data.id_responsabilidad=='1' || data.id_responsabilidad=='2'){
-				        			var escuela=\App\D
-				        			return escuela;
+				        			
+				        			
+				        			return "{!!\App\Docente::find('2')->escuela->escuela!!}";
+
 				        		}else if(data.id_responsabilidad=='3'){
 				        			return "Estudiante";
 				        		}else{
 				        			return "No definido";
 				        		}
-		            		 return  data.id_user;
-				        		//return '{';
-				        		//return "{!!App\RsuProyecto::find("+data.id+")!!}";
+		            		 	return  data.id_user;
+				        		
 				        	}
 				        },
 				        {data:"tipo"},
@@ -363,7 +366,7 @@ jQuery(function($) {
                 			}
                 		}
 			        ],
-			    } )
+			    })
 })
 </script>
 
