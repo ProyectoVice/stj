@@ -79,9 +79,11 @@ Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
 //Calendario Asuntos
 
 Route::group(['prefix' => 'academico'],function(){
-	Route::group(['prefix' => 'calendario'],function(){
-		Route::get('Calendary','modulos\academico\AcademicoController@index')->name('academico.cal.index');
-				
+	Route::group(['prefix' => 'calendarioGen'],function(){
+		Route::get('calendario','modulos\academico\AcademicoController@index')->name('academico.cal_gen.index');
+		Route::get('calendario/data','modulos\rsu\AcademicoController@cal_date')->name('academico.cal_gen.data');
+		Route::get('calendario/tabla','modulos\rsu\AcademicoController@cal_tabla')->name('academico.cal_gen.tabla');
+						
 	});
 	});
 Route::group(['prefix' => 'academico'],function(){
