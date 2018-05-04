@@ -5,6 +5,7 @@ namespace App\Http\Controllers\modulos\academico;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\CalPregraGen;
+use Carbon\Carbon;
 
 class AcademicoController extends Controller
 {
@@ -24,6 +25,39 @@ class AcademicoController extends Controller
 
     public function cal_tabla(){
         return datatables()->of(CalPregraGen::get())->toJson();
+    }
+
+    public function cal_new(Request $request){
+        
+        $proyecto=new CalPregraGen;
+        $proyecto->title=$request->get('title');
+        $proyecto->descripcion=$request->get('descripcion');
+        $proyecto->color=$request->get('color');
+        $proyecto->textColor=$request->get('textColor');
+        $proyecto->responsable=$request->get('responsable');
+        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+        $proyecto->save();
+        //return $request;
+    }
+
+    public function cal_del(Request $request){
+        $id=$request->get('id');
+        CalPregraGen::destroy($id);
+    }
+
+    public function cal_act(Request $request, $act){
+        //$id=$request->get('id');
+        $proyecto=CalPregraGen::find($act);
+        $proyecto->title=$request->get('title');
+        $proyecto->descripcion=$request->get('descripcion');
+        $proyecto->color=$request->get('color');
+        $proyecto->textColor=$request->get('textColor');
+        $proyecto->responsable=$request->get('responsable');
+        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+        //$proyecto->cal_pregra_gen_id=$request->get('id');
+        $proyecto->save();
     }
 
     /**

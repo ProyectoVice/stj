@@ -8,16 +8,16 @@
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
-	<i class="ace-icon fa fa-leaf"></i>
+	<i class="ace-icon fa fa-calendar"></i>
 	<li class="active">Calendario Académico</li>
-	<li class=""><a href="{{ route('academico.cal_gen.index') }}"> '/' </a></li>
-	<li class="">Calendario</li>
+	<li class=""><a href="{{ route('academico.cal_gen.index') }}"
+	<li class="">General Pre Grado</li>
 </ul>
 @endsection
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
-      <h3><u> Proyecto</u>: </h3><hr><br>
+      <h3><u> Regular </u>: </h3><hr><br>
       {{ csrf_field() }}
     </div>
     <div class="col-sm-7 hidden-xs">
@@ -35,6 +35,7 @@
                 <th class="center">Actividades</th>
                 <th class="center" class="hidden-480">Inicio</th>
                 <th class="center" class="hidden-480">Fin</th>
+                <th class="center" class="hidden-480">Responsable</th>
               </tr>
             </thead>
           </table>
@@ -74,6 +75,12 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Responsable</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="txtResponsable" name="responsable" required="true">
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="col-sm-3 control-label">Inicio</label>
                   <div class="col-sm-9">
                     <div class='input-group date' id='datetimepicker1'>
@@ -104,7 +111,7 @@
                   <label class="col-sm-3 col-xs-6 control-label">Color fondo</label>
                   <div class="col-sm-2 col-xs-2 col-lg-2">
                     <input type="color" class="form-control" id="txtColor-new" value="#3a87ad">
-                  </div>
+                  </div>                  
                 </div>
               </form>
             </div>
@@ -141,13 +148,15 @@ $(document).ready(function(){
           var myTable=$('#dynamic-table').DataTable( {
               "processing": true,
               "serverSide": true,
-              "ajax": '{!! route('academico.cal_gen.tabla') !!}',
+              "ajax": '{!! route('academico.cal_gen.tabla')!!}',
               "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
               "order": [[ 1, "asc" ]],
               "columns" : [
                 {data:"title"},
                 {data:"start"},
-                {data:"end"}
+                {data:"end"},
+                {data:"responsable"}
+
               ],
           } );
     //Calendario
@@ -165,6 +174,7 @@ $(document).ready(function(){
           $('#dateEnd-new').val(diaCapturado2);
           $('#txtTitulo-new').val('');
           $('#txtdescripcion-new').val('');
+          $('#txtResponsable').val('');
           $('#titleModal').html("Nueva Actividad/evento");
           //Botones
           $('#btn-eliminar').hide();
@@ -190,6 +200,7 @@ $(document).ready(function(){
           $('#txtColor-new').val(date.color);
           $('#txtTextColor-new').val(date.textColor);
           $('#txtdescripcion-new').val(date.descripcion);
+          $('#txtResponsable').val(date.responsable);
           $('#id-cal').val(date.id);
           $('#titleModal').html("Actualizar Evento");
            //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
@@ -206,17 +217,87 @@ $(document).ready(function(){
     
 
   //Agregar un evento
-
+$('#btn-guardar').click(function(){
+//capturamos los datos
+      recolectarDatos();
+      if(NuevoEvento['title']=='' || NuevoEvento['descripcion']==''){
+        alert('Llene todos los campos');
+        return 0;
+      }
+     $.ajax({ 
+       url: '{{ route('academico.cal_gen.new') }}',
+       type: 'POST',
+       data: NuevoEvento,
+       success: function (data) {
+          $('#calendar').fullCalendar('refetchEvents');
+          myTable.ajax.reload();
+          $('#CalenderModalNew').modal('toggle');
+       },
+       error: function(error){
+              alert('Algo salió mal');
+       }
+     })
+  })
 
     //Eliminar un evento
+$('#btn-eliminar').click(function(){
+      //capturamos los datos
+      recolectarDatos();
+      $.ajax({ 
+        url: '{{ route('academico.cal_gen.del') }}',
+        type: 'POST',
+        data: NuevoEvento,
+        success: function (data) {
 
-    //Actualizar un evento
+          $('#calendar').fullCalendar('refetchEvents');
+          myTable.ajax.reload();
+          $('#CalenderModalNew').modal('toggle');
+        },
+        complete: function (data) {
+          //console.log('perú campeon');
+        },
+        error: function(error){
+               alert(error);
+        }
+      })
+})
+    
+    //actualizar un evento
+  $('#btn-actualizar').click(function(){
+      //capturamos los datos
+      recolectarDatos();
+      $.ajax({ 
+        url: '{{ route('academico.cal_gen.act') }}',
+        type: 'POST',
+        data: NuevoEvento,
+        success: function (data) {
+
+          $('#calendar').fullCalendar('refetchEvents');
+           myTable.ajax.reload();
+          $('#CalenderModalNew').modal('toggle');
+        },
+        error: function(error){
+               alert(error);
+        }
+      })
+});
+function recolectarDatos(){
   
+   return NuevoEvento={
 
+          title:$('#txtTitulo-new').val(),
+          descripcion:$('#txtdescripcion-new').val(),
+          responsable:$('#txtResponsable').val(),
+          color:$('#txtColor-new').val(),
+          textColor:$('#txtTextColor-new').val(),
+          start:$('#dateStar-new').val(),
+          id:$('#id-cal').val(),
+          end:$('#dateEnd-new').val(),
+          _token:'{!! csrf_token() !!}',
+        }  
+  }
 
 });
-
-
   function prepararModal(){
     //Botones
           $('#btn-guardar').show();
@@ -227,7 +308,5 @@ $(document).ready(function(){
           $('#titleModal').html("Nueva Actividad/evento");
           $('#CalenderModalNew').modal();
   }
-
 </script>
-
 @endsection

@@ -79,10 +79,13 @@ Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
 //Calendario Asuntos
 
 Route::group(['prefix' => 'academico'],function(){
-	Route::group(['prefix' => 'calendarioGen'],function(){
+	Route::group(['prefix' => 'general'],function(){
 		Route::get('calendario','modulos\academico\AcademicoController@index')->name('academico.cal_gen.index');
-		Route::get('calendario/data','modulos\rsu\AcademicoController@cal_date')->name('academico.cal_gen.data');
-		Route::get('calendario/tabla','modulos\rsu\AcademicoController@cal_tabla')->name('academico.cal_gen.tabla');
+		Route::get('calendario/data','modulos\academico\AcademicoController@cal_date')->name('academico.cal_gen.data');
+		Route::post('calendario/new','modulos\academico\AcademicoController@cal_new')->name('academico.cal_gen.new');
+		Route::post('calendario/del','modulos\academico\AcademicoController@cal_del')->name('academico.cal_gen.del');
+		Route::post('calendario/act','modulos\academico\AcaddemicoController@cal_act')->name('academico.cal_gen.act');
+		Route::get('tabla','modulos\academico\AcademicoController@cal_tabla')->name('academico.cal_gen.tabla');
 						
 	});
 	});
