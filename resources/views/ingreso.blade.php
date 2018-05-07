@@ -96,7 +96,7 @@ h1{
 }
 
 /* Inputs */
-a,
+#botonLogin,a,
 input{
   font-family: 'Open Sans Condensed', sans-serif;
   text-decoration: none;
@@ -133,16 +133,17 @@ input:focus{
    color: #333;   opacity: 0.5;}
 
 /* Link */
-a{
+#botonLogin,a{
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: center;
   padding: 4px 8px;
   background: rgba(107,255,3,0.3);
 }
 
-a:hover{
+#botonLogin:hover,a:hover{
   background-color: green;
 }
+
 
 #remember-container{
   position: relative;
@@ -228,7 +229,9 @@ a:hover{
 			{!! $errors->first('password',
 				'<span class="help-block"  style=" color:rgba(233, 1, 1,.9);">*:message</span>') 
 			!!}	
-    <a href="javascript:document.login.submit()">Ingresar</a>
+    {{-- <a href="javascript:document.login.submit()">Ingresar</a> --}}
+    <button type="submit" id="botonLogin">Ingresar</button>
+
     <div id="remember-container">
       <span id="forgotten">Olvidaste tu contraseña</span>
     </div>
@@ -252,8 +255,8 @@ a:hover{
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='plantilla/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		{!!Html::script('plantilla/js/bootstrap.min.js')!!}
-
+{!!Html::script('plantilla/js/bootstrap.min.js')!!}
+{!!Html::script('plantilla/js/TweenLite.min.js')!!}
 <script>
    
    /* Mostrar Login */
