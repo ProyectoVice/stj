@@ -35,25 +35,19 @@ class User extends Authenticatable
 
     } 
     public function postulacions(){
-      return hasMany(Postulacion::class,'postulacion_id','id');
+      return hasMany(Postulacion::class,'user_id','id');
     }
     public function colegio_users(){
       return hasMany(ColegioUsers::class);
     }
-    public function diplomados_inscripcions(){
-      return hasMany(DiplomadoInscripcion::class);
-    }
-    public function procapt_inscripcions(){
-      return hasMany(ProcaptInscripcion::class);
-    }
-    public function promaster_inscripcions(){
-      return hasMany(PromasterInscripcion::class);
-    }
+    public function inscripcion_ncgts(){
+      return hasMany(InscripcionNcgt::class, 'user_id','id');
+    }    
     public function docente_otros(){
-      return hasMany(DocenteOtro::class,'postulacion_id','id');
+      return hasMany(DocenteOtro::class,'user_id','id');
     }
     public function inscripcion_alumnos(){
-      return hasMany(InscripcionAlumno::class,'postulacion_id','id');
+      return hasMany(InscripcionAlumno::class,'user_id','id');
     }  
 
     public function roles(){

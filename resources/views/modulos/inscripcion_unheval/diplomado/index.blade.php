@@ -1,19 +1,17 @@
 @extends('plantilla.usuario')
-@section('titulo','Admision - Inscripciones')
+@section('titulo','Diplomado - Inscripciones')
 @section('activacion')
 @endsection
-@section('estilos')
-  
+@section('estilos')  
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Admision</li>
+	<li class="active">Diplomados</li>
 	<li class="">Inscripciones</li>
 </ul>
 @endsection
 @section('contenido')
-
 <div class="col-xs-12">
 	<div class="clearfix">
 		<div class="pull-right tableTools-container"></div>
@@ -26,14 +24,15 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
-						<th class="center">Id</th>
+						<th class="center">N</th>
 						<th class="center">Nombres</th>
 						<th class="center" class="hidden-480">Apellidos</th>
-						<th class="center" class="hidden-480">Modalidad</th>
-						<th class="center" class="hidden-480">Escuela Profesional</th>
-						<th class="center" class="hidden-480">Sede</th>
-						<th class="center" class="hidden-480">Nota</th>
-						<th class="center" class="hidden-480">Condicion</th>
+						<th class="center" class="hidden-480">email</th>
+						<th class="center" class="hidden-480">N Celular</th>
+						<th class="center" class="hidden-480">Programa</th>
+						<th class="center" class="hidden-480">N Modulo</th>
+						<th class="center" class="hidden-480">N Modulo<br>cancelado</th>
+						<th class="center" class="hidden-480">Deuda</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 				</thead>			
@@ -49,9 +48,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h3 class="smaller lighter blue no-margin">Registrar Inscripción</h3>
 			</div>
-			{!! Form::open(['route' => 'adminsion.ins.validar', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
+			{!! Form::open(['route' => 'diplomado.ins.validar', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
 			<div class="modal-body tab-pane" align="center">
-			
 					{{ csrf_field() }}
 					<div class="row">		
 						<div class="form-group">
@@ -83,10 +81,45 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-
+								<!--Modal Nuevo-->
+<div id="nuevo1" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="smaller lighter blue no-margin">Registrar Pago</h3>
+			</div>
+			{!! Form::open(['route' => 'diplomado.ins.validar1', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
+			<div class="modal-body tab-pane" align="center">
+					{{ csrf_field() }}
+					<div class="row">
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Nº de comprobante</label>
+							<div class="col-sm-7">
+							<input type="text" placeholder="Escribir aquí" name="n_comprobante" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Fecha de comprobante</label>
+							<div class="col-sm-7">
+							<input type="date" placeholder="Escribir aquí" name="f_comprobante" class="form-control" required="required">
+							</div>
+						</div>	
+					</div>
+			</div>
+			<div class="modal-footer">
+				<<input type="hidden" name="id" id="id_inscrito" value="">				
+				<button class="btn btn-success btn-sm btn-round submit" name="enviando" id="enviando">					
+					<i class="ace-icon fa fa-check"> Registrar</i>
+				</button>
+			</div>
+			{!!Form::close()!!}
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
 {{-- fin modal --}}
+
 @endsection
-@section('script')
 @section('script')
 		<!-- page specific plugin scripts -->
 		{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
@@ -104,25 +137,29 @@
 		
 			//Datatables
 			jQuery(function($) {
-				
+				function enviarId($id){
+        			console.log($id);
+        		}
+
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
-			        "ajax": '{!!route('adminsion.ins.datos')!!}',
+			        "ajax": '{!!route('diplomado.ins.datos')!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
-                 	"order": [[ 0, "desc" ]],
+                 	"order": [[ 0, "asc" ]],
 			        "columns" : [
 				        {data:"id"},
-				        {data:"nota"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
+				        {data:"nombres"},
+				        {data:"apellidos"},
+				        {data:"email"},
+				        {data:"cel"},
+				        {data:"descripcion"},
+				        {data:"numero_modulo"},
+				        {data:"numero_modulo"},
+				        {data:"cancelacion"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/diplomado/inscripciones/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
@@ -150,7 +187,16 @@
 					  }
 					]
 				} );
+//
+				$(document).on('click', '.enviarId', function(event) {
+					
+        		 var button = $(this);
+		         var id = button.data('id');
+		         $("#id_inscrito").val(id);
+		           
 
+        		});
+//////////////
 				$(document).on('click', '.stj-acciones-delete', function(event) {
 					
         			var button = $(this);
@@ -159,7 +205,7 @@
 		            //----------------
 		            swal({
 						  title: '¿Está seguro que desea eliminar?',
-						  text: 'El proyecto se perderá permanentemente',
+						  text: 'La inscripcion se perderá permanentemente',
 						  type: 'warning',
 						  showCancelButton: true,
 						  confirmButtonColor: '#3085d6',
@@ -173,14 +219,14 @@
 						}).then((result) => {
 							if(result.value){
 								 	$.ajax({ 
-					               url: '/rsu/mis_proyectos/delete/'+id,
+					               url: '/diplomado/inscripciones/delete/'+id,
 					               type: 'DELETE',
 					               data: {_token: '{{csrf_token()}}' },
 					               success: function (data) {
 					                   myTable.ajax.reload();
 					                   swal(
 										      '¡Eliminado!',
-										      'Tu proyecto se ha eliminado',
+										      'Tu Inscripción se ha eliminado',
 										      'success'
 										    )
 					               },
@@ -197,11 +243,8 @@
 
 						})
         		});
-				
-				
+
 
 			});
-
-			
 		</script>
 @endsection

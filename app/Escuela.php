@@ -29,6 +29,13 @@ class Escuela extends Model
     {
       return $this->hasMany(EscuelaSede::class);
     }
+<<<<<<< HEAD
+=======
+    
+    public function segunda_especialidads() {
+      return $this->hasMany(SegundaEspecialidad::class);
+    }   
+>>>>>>> master
 
     //Se vincula uno a uno al calendario pregrado de escuelas
     public function cal_pregra_esc() 
@@ -70,4 +77,8 @@ class Escuela extends Model
     {
        return $this->hasMany(Horario::class);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 }
