@@ -32,7 +32,7 @@ class CreatePostulacionsTable extends Migration
             $table->integer('grado_bachiller_id')->unsigned();
             $table->integer('grado_magister_id')->unsigned();
             $table->integer('grado_doctor_id')->unsigned();
-            $table->integer('caja_id')->unsigned();
+            $table->integer('pago_id')->unsigned();
 
 
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
@@ -52,7 +52,7 @@ class CreatePostulacionsTable extends Migration
             $table->foreign('grado_bachiller_id')->references('id')->on('grado_bachillers')->onDelete('cascade');
             $table->foreign('grado_magister_id')->references('id')->on('grado_magisters')->onDelete('cascade');
             $table->foreign('grado_doctor_id')->references('id')->on('grado_doctors')->onDelete('cascade');
-            $table->foreign('caja_id')->references('id')->on('cajas')->onDelete('cascade');
+            $table->foreign('pago_id')->references('id')->on('pagos')->onDelete('cascade');
         });
     }
 

@@ -8,7 +8,7 @@ class InscripcionAlumno extends Model
 {
     protected $table = 'inscripcion_alumnos';  
    	protected $fillable = [
-   		'user_id', 'inscripcion_curso_disponible_id', 'caja_id'
+   		'user_id', 'inscripcion_curso_disponible_id', 'pago_id'
     ];
     public function user() {
       return $this->belongsto(User::class,'user_id','id');
@@ -16,7 +16,7 @@ class InscripcionAlumno extends Model
   	public function inscripcion_curso_disponible() {
       return $this->belongsto(InscripcionCursoDisponible::class);
   	}
-  	public function caja() {
-      return $this->belongsto(Caja::class);
+  	public function pago() {
+      return $this->belongsto(Pago::class);
   	}
 }

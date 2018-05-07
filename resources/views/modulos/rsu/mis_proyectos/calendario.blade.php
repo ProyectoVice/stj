@@ -9,7 +9,7 @@
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Calendario Académico</li>
+	<li class="active">Responsabilidad Social Universitaria</li>
 	<li class=""><a href="{{ route('rsu.mp.index') }}"> Mis Proyectos</a></li>
 	<li class="">Calendario</li>
 </ul>
