@@ -6,6 +6,9 @@
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
 	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -164,7 +167,11 @@
 				<div >
 					<div class="table-header">
       				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-								Equipo &nbsp;&nbsp;&nbsp;
+								
+								<input type="text" placeholder="Escribir nombres o DNI" required="required" name="el_título" value="{{ old('el_título') }}" id="developer" style="color: black">
+								<div class="ui-widget">
+					</div>
+
 					</div>
 					<div class="table-responsive">
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -225,9 +232,34 @@
 			                  
 								<!-- PAGE CONTENT ENDS -->
 	<!-- Fin -->									
-
 </div>	
 
+{{-- modal --}}
+<div id="nuevo" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="smaller lighter blue no-margin">Registrar nuevo integrante</h3>
+			</div>
+			{!! Form::open(['route' => 'rsu.mp.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
+			<div class="modal-body" align="center"><br>
+			
+			{{ csrf_field() }}
+					<input type="text" placeholder="Escribir nombres o DNI" required="required" name="el_título" class="form-control" value="{{ old('el_título') }}">
+					
+			<br>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-sm btn-round submit">
+								<i class="ace-icon fa fa-plus"> Agregar</i>
+				</button>
+			</div>
+			{!!Form::close()!!}
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+{{-- fin modal --}}
 
 
 @endsection
@@ -248,8 +280,34 @@
 {!!Html::script('/sweetalert/sweetalert2.all.js')!!}
 {!!Html::script('/sweetalert/core.js')!!}
 
-<script type="text/javascript">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script type="text/javascript">
+$( function() {
+    var names = [ "87654346 - Jörn Zaefferer", "2134656443 - Scott González", "11111111 - John Resig", "48315690 - Saul escandón", "22435442 - Jonatan" ];
+ 
+    var accentMap = {
+      "á": "a",
+      "ö": "o"
+    };
+    var normalize = function( term ) {
+      var ret = "";
+      for ( var i = 0; i < term.length; i++ ) {
+        ret += accentMap[ term.charAt(i) ] || term.charAt(i);
+      }
+      return ret;
+    };
+ 
+    $( "#developer" ).autocomplete({
+      source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+        response( $.grep( names, function( value ) {
+          value = value.label || value.value || value;
+          return matcher.test( value ) || matcher.test( normalize( value ) );
+        }) );
+      }
+    });
+  } );
 //Enviar datos al servidor
 	$('form').on('submit', function() {
 		//stj_editor_enviar('Nombre_px_enviar_a_servidor','#ID_del_div_con_la_clase_<stj-editor-basic>');

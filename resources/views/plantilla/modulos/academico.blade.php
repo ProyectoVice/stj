@@ -11,7 +11,7 @@
 	<ul class="submenu">
 		@if(Auth::user()->hasRoles(['ViceAcademico']))
 		<li class="">
-			<a href="{{ route('academico.cal.index') }}">
+			<a href="{{ route('academico.cal_gen.index') }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Calendario Asuntos
 			</a>
