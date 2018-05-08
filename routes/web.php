@@ -98,7 +98,9 @@ Route::group(['prefix' => 'usuario'],function(){
 		Route::post('store', 'Auth\UsersController@store')->name('usuario.nue.store');
 		Route::post('validar', 'Auth\UsersController@validar')->name('usuario.nue.validar');		
 		Route::get('editar/{id}','Auth\UsersController@edit')->name('usuario.nue.edit');
-		Route::put('update/{id}','Auth\UsersController@update')->name('usuario.nue.update');		
+		Route::put('update/{id}','Auth\UsersController@update')->name('usuario.nue.update');
+		Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
+
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 });
