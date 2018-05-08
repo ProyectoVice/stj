@@ -131,7 +131,6 @@ Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name
 Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
 
 //Inscripciones-UNHEVAL
-<<<<<<< HEAD
 Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
 
 //Calendario Asuntos
@@ -153,6 +152,3 @@ Route::group(['prefix' => 'academico'],function(){
 				
 	});
 	});
-=======
-Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
->>>>>>> 481843399ed40188b808402139c96af3c77ffb94
