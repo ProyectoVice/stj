@@ -12,6 +12,8 @@ use App\RsuLineamientoProyecto;
 use App\RsuParticipante;
 use App\RsuEvidencias;
 use App\RsuCalendario;
+use App\Docente;
+use App\Estudiante;
 use Carbon\Carbon;
 use Auth;
 
@@ -49,16 +51,46 @@ class MisProyectosController extends Controller
 
     public function equipo_show($id)
     {
-        $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+        $estudiantes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+               ->join('docentes AS doc','doc.user_id','=','users.id')
+               ->join('escuelas','escuelas.id','=','doc.escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
-               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad')->get();
-         
-         
-         //return $equipo;
+               ->where('rsu_participantes.rsu_responsabilidad_id','<>',3)
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela')->get();
+        $docentes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+               ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+               ->join('estudiantes AS doc','doc.user_id','=','users.id')
+               ->join('escuelas','escuelas.id','=','doc.escuela_id')
+               ->where('rsu_participantes.rsu_proyecto_id',$id)
+               ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela')->get();
+        $equipo=array();
+        //Fusionamos los controladores
+        foreach ($docentes as $d) {
+            $equipo[]=$d;
+        }
+        foreach ($estudiantes as $e) {
+            $equipo[]=$e;
+        }
+
+        
 
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($equipo)->toJson();
+    }
+
+    public function equipo_escuela($tipo,$id)
+    {
+
+        if($tipo=='1' || $tipo=='2'){
+            return Docente::find($id)->escuela->escuela;
+            
+        }else if($tipo=='3'){
+            return Estudiante::find($id)->escuela->escuela;
+        }else{
+            return "No definido";
+        }
     }
     /**
      * Show the form for creating a new resource.

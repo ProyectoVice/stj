@@ -331,39 +331,26 @@ jQuery(function($) {
 
    //datatables
 
+
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
 			        "ajax": '{!!route('rsu.mp.equipo-show', $proyecto->id)!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
-                 	"order": [[ 0, "desc" ]],
+                 	
 
 			        "columns" : [
 				        {data:"dni"},
 				        {data:"nombres"},
-				        {data:null, render:
-				        	function(data,type,row){
-				        		if(data.id_responsabilidad=='1' || data.id_responsabilidad=='2'){
-				        			var escuela=\App\D
-				        			return escuela;
-				        		}else if(data.id_responsabilidad=='3'){
-				        			return "Estudiante";
-				        		}else{
-				        			return "No definido";
-				        		}
-		            		 return  data.id_user;
-				        		//return '{';
-				        		//return "{!!App\RsuProyecto::find("+data.id+")!!}";
-				        	}
-				        },
+				        {data:"escuela"},
 				        {data:"tipo"},
 				        {data:null,bSortable: false, render: 
-				        	function ( data, type, row ) {
-				        	return "Hola Mundo";
-                			}
+					        	function ( data, type, row ) {
+					        	return "<div class='center action-buttons'><a href='#' class='stj-acciones stj-acciones' title='Ver más' data-id='"+data.id_user+"'><i class='fa fa-plus'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id_user+"'><i class='fa fa-trash'></i></a></div>";
+	                			}
                 		}
 			        ],
-			    } )
+			    } );
 })
 </script>
 

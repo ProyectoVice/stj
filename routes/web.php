@@ -45,6 +45,7 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('ver-file/{id}','modulos\rsu\MisProyectosController@ver_archivos')->name('rsu.mp.ver-file');
 		Route::put('informe/subir/{id}','modulos\rsu\MisProyectosController@update_file')->name('rsu.mp.file-up');
 		Route::get('equipo/{id}','modulos\rsu\MisProyectosController@equipo_show')->name('rsu.mp.equipo-show');
+		Route::get('equipo/escuela/{tipo}/{id}','modulos\rsu\MisProyectosController@equipo_escuela')->name('rsu.mp.equipo-escuela');
 	});
         
 });
