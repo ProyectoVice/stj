@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 ]
          ]);     
-        //Usuario Teddy 5
+        //Usuario Teddy
         DB::table('users')->insert([
                 'dni' => '44485816',
                 'nombres' => 'Teddy',
@@ -88,8 +88,18 @@ class UsersTableSeeder extends Seeder
         ]);
             //Docente
         DB::table('rol_users')->insert([
-                'user_id' => '2',
-                'rol_id' => '3',
+            'user_id' => '2',
+            'rol_id' => '3',
+        ]);
+
+        DB::table('docentes')->insert([
+             'user_id'=>'2',
+             'escuela_id'=>'10',
+             'docente_categoria_id'=>'1',
+             'docente_condicion_id'=>'1',
+             'docente_dedicacion_id'=>'1',
+             'dep_academico_id'=>'1',
+             'h_lectivas'=>'12','h_n_lectivas'=>'12',
         ]);
             //Estudiante
         DB::table('rol_users')->insert([
@@ -106,12 +116,18 @@ class UsersTableSeeder extends Seeder
                 ['user_id' => '4', 'rol_id' => '5',],
                 ['user_id' => '4', 'rol_id' => '6',]
         ]);
-            
+            //DRSU
+        DB::table('rol_users')->insert([
+                'user_id' => '5',
+                'rol_id' => '5',
+        ]);
             //DRSU-F
         DB::table('rol_users')->insert([
                 'user_id' => '6',
                 'rol_id' => '6',
-        ]);       
+        ]);
+
+        //Usuarios Teddy
         
         //Usuario-Rol Jhonattan 
         DB::table('rol_users')->insert([
@@ -152,14 +168,6 @@ class UsersTableSeeder extends Seeder
                     'rol_id' => '9',
                 ]
               
-        ]);
-
-           //Roles tedy
-            //all
-        DB::table('rol_users')->insert([
-                ['user_id' => '5', 'rol_id' => '30',],
-                ['user_id' => '5', 'rol_id' => '31',],
-                ['user_id' => '5', 'rol_id' => '32',]
         ]);
     }
 }

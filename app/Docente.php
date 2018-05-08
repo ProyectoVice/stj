@@ -9,7 +9,7 @@ class Docente extends Model
     protected $table='docentes';
     protected $primaryKey='user_id';
     protected $fillable=[
-    'escuela_id','docente_categoria_id','docente_condicion_id','docente_dedicacion_id','dep_academico_id'
+    'escuela_id','docente_categoria_id','docente_condicion_id','docente_dedicacion_id','dep_academico_id','h_lectivas','h_n_lectivas',
     ];
 
     public function user() 

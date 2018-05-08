@@ -7,12 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class RsuCalendario extends Model
 {
     protected $table='rsu_calendarios';
-    public $incrementing = false;
+    public $timestamps = false;
     protected $fillable=[
-    'rsu_proyecto_id','actividad','descripcion','fecha'
+    'title','descripcion','color','textColor','start','end','responsable','rsu_proyecto_id'
     ];
-    public function proyecto(){
-    	return belongsto(RsuProyecto::class,'rsu_proyecto_id','id');
-    }
-
 }

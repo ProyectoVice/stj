@@ -20,4 +20,5 @@ class EscuelaSede extends Model
     public function escuela_modalidads(){
       return $this->hasMany(EscuelaModalidad::class);
     }
+
 }

@@ -16,6 +16,8 @@ class CreateSedesTable extends Migration
         Schema::create('sedes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sede');
+            $table->integer('distrito_id')->unsigned();            
+            $table->foreign('distrito_id')->references('id')->on('distritos')->onDelete('cascade');
             $table->timestamps();
         });
     }

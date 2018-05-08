@@ -4,6 +4,11 @@
 @endsection
 @section('estilos')
   <link rel="stylesheet" type=/sweetalert/sweetalert2.min.css" href="">
+  <style type="text/css">
+  	.table tbody tr.warning td {
+  background-color: lightgoldenrodyellow;
+}
+  </style>
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -30,7 +35,7 @@
 					<tr>
 						<th class="center" id="lll">Fecha</th>
 						<th class="center">Título</th>
-						<th class="center" class="hidden-480">Rol</th>
+						<th class="center" class="hidden-480">Etapa</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 				</thead>
@@ -39,7 +44,6 @@
 </div>	
 
 {{-- modal --}}
-								<!--Modal Nuevo-->
 <div id="nuevo" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -63,8 +67,8 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-
 {{-- fin modal --}}
+<div id="verArchivos" class="modal fade" tabindex="-1"></div>
 @endsection
 @section('script')
 		<!-- page specific plugin scripts -->
@@ -79,7 +83,7 @@
 		{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
 		{!!Html::script('/sweetalert/core.js')!!}
 		
-		<script type="text/javascript">
+<script type="text/javascript">
 		
 			//Datatables
 			jQuery(function($) {
@@ -90,13 +94,35 @@
 			        "ajax": '{!!route('rsu.mp.datos')!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                  	"order": [[ 0, "desc" ]],
+
 			        "columns" : [
 				        {data:"created_at"},
 				        {data:"titulo"},
-				        {data:"rp"},
+				        {data:null,bSortable: false, render: 
+				        		function ( data, type, row ) {
+				        			
+				        			switch(data.etapa){
+				        				case '1':
+				        					$etapa = "<div align='center' title='Presentación, esperando aprobación'><i class='fa fa-circle red' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '2':
+				        					$etapa = "<div align='center' title='Aprobado, en ejecución'><i class='fa fa-circle green' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '3':
+				        					$etapa = "<div align='center' title='En observación, corregir errores'><i class='fa fa-circle orange' style='font-size: 20px;'></i></div>"; break;
+
+				        				case '4':
+				        					$etapa = "<div align='center' title='Culminado satisfactoriamente'><i class='fa fa-circle blue' style='font-size: 20px;'></i></div>"; break;
+
+				        				defaul: $etapa='no definido'; break;
+				        			}
+				        			return $etapa;
+				        			
+				        		}
+                		},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/calendario/"+data.id+"' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' data-id='"+data.id+"' class='stj-acciones stj-acciones-verArchivos' title='Subir/Descargar Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
@@ -168,14 +194,28 @@
 			                   }
 						         });
 							} 
-
 						})
         		});
-				
-				
 
+        		$(document).on('click', '.stj-acciones-verArchivos', function(event) {
+		         var id = $(this).data('id');
+		         $.ajax({
+		         		url: '/rsu/mis_proyectos/ver-file/'+id,
+					     	type: 'GET',
+					     	data: {_token: '{{csrf_token()}}' },
+					     success: function (data) {
+					        $('#verArchivos').html(data);
+					        $('.ace-file').ace_file_input();
+					        $('#verArchivos').modal();
+					     },
+					     error: function(error){
+				        	var r = error.responseJSON.message;
+				        	swal("Error",r, "error");
+			           }
+					});
+		      });
+				
+				
 			});
-
-			
-		</script>
+</script>
 @endsection

@@ -4,6 +4,11 @@
 @endsection
 @section('estilos')
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
+	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -157,14 +162,54 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-12 col-xs-12">
-			<div class="row" style="background-color: #EDF4FC; padding: 10px; border-radius: 2%">
-				@foreach($proyecto->evidencias as $e)
-					<div class="col-md-2 col-sm-3 col-xs-4">
-						<a class="btn btn-danger btn-xs" style="position: absolute;border-radius: 30%;" href="{{route('rsu.mp.img-d',[$e->id,$proyecto->id])}}"><i class="fa fa-remove"></i></a>
-						<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" style="border-radius: 10%; padding-bottom: 10px;"  >
+		<div class="row">
+			<div class="col-xs-12" >
+				<div >
+					<div class="table-header">
+      				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
+								
+								<input type="text" placeholder="Escribir nombres o DNI" required="required" name="el_título" value="{{ old('el_título') }}" id="developer" style="color: black">
+								<div class="ui-widget">
 					</div>
-				@endforeach
+
+					</div>
+					<div class="table-responsive">
+						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="center" id="lll">DNI</th>
+									<th class="center">Nombres y Apellidos</th>
+									<th class="center" class="hidden-480">Escuela</th>
+									<th class="center" class="hidden-480">Tipo</th>
+									<th class="center" class="hidden-480">Acciones</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12" >
+				<div ><hr>
+					<ul class="ace-thumbnails clearfix" >
+						@foreach($proyecto->evidencias as $e)
+
+							<li>
+								<a href="{{ Storage::url($e->file) }}" title="Evidencia: {{ $proyecto->titulo }}" data-rel="colorbox">
+									<img width="150" height="150" alt="150x150" src="{{ Storage::url($e->file) }}" />
+								</a>
+								<div class="tools tools-top">
+									
+									<a href="{{route('rsu.mp.img-d',[$e->id,$proyecto->id])}}">
+										Eliminar <i class="ace-icon fa fa-times red" ></i>
+									</a>
+								</div>
+							</li>
+						@endforeach
+					</ul>
+			</div>
 			</div>
 		</div>
 
@@ -181,14 +226,40 @@
         data-target="#editor"></div> 
 			</div>
 		</div>
+
 		
 {!! Form::close() !!}
 			                  
 								<!-- PAGE CONTENT ENDS -->
 	<!-- Fin -->									
-
 </div>	
 
+{{-- modal --}}
+<div id="nuevo" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="smaller lighter blue no-margin">Registrar nuevo integrante</h3>
+			</div>
+			{!! Form::open(['route' => 'rsu.mp.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
+			<div class="modal-body" align="center"><br>
+			
+			{{ csrf_field() }}
+					<input type="text" placeholder="Escribir nombres o DNI" required="required" name="el_título" class="form-control" value="{{ old('el_título') }}">
+					
+			<br>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-sm btn-round submit">
+								<i class="ace-icon fa fa-plus"> Agregar</i>
+				</button>
+			</div>
+			{!!Form::close()!!}
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+{{-- fin modal --}}
 
 
 @endsection
@@ -196,9 +267,47 @@
 		
 {!!Html::script('plantilla/js/stj/stj-editor-basic.js')!!}
 {!!Html::script('/plantilla/js/dropzone.min.js')!!}
+{!!Html::script('/plantilla/js/jquery.colorbox.min.js')!!}
+
+{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
+{!!Html::script('/plantilla/js/jquery.dataTables.bootstrap.min.js')!!}
+{!!Html::script('/plantilla/js/dataTables.buttons.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.flash.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.html5.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.print.min.js')!!}
+{!!Html::script('/plantilla/js/buttons.colVis.min.js')!!}
+{!!Html::script('/plantilla/js/dataTables.select.min.js')!!}
+{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
+{!!Html::script('/sweetalert/core.js')!!}
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-
+$( function() {
+    var names = [ "87654346 - Jörn Zaefferer", "2134656443 - Scott González", "11111111 - John Resig", "48315690 - Saul escandón", "22435442 - Jonatan" ];
+ 
+    var accentMap = {
+      "á": "a",
+      "ö": "o"
+    };
+    var normalize = function( term ) {
+      var ret = "";
+      for ( var i = 0; i < term.length; i++ ) {
+        ret += accentMap[ term.charAt(i) ] || term.charAt(i);
+      }
+      return ret;
+    };
+ 
+    $( "#developer" ).autocomplete({
+      source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+        response( $.grep( names, function( value ) {
+          value = value.label || value.value || value;
+          return matcher.test( value ) || matcher.test( normalize( value ) );
+        }) );
+      }
+    });
+  } );
 //Enviar datos al servidor
 	$('form').on('submit', function() {
 		//stj_editor_enviar('Nombre_px_enviar_a_servidor','#ID_del_div_con_la_clase_<stj-editor-basic>');
@@ -245,6 +354,78 @@
 		else{	$(".ejeCheck-"+idCheckEje).remove();	}
 	});
 
+jQuery(function($) {
+	var $overflow = '';
+	var colorbox_params = {
+		rel: 'colorbox',
+		reposition:true,
+		scalePhotos:true,
+		scrolling:false,
+		previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+		next:'<i class="ace-icon fa fa-arrow-right"></i>',
+		close:'&times;',
+		current:'{current} de {total}',
+		maxWidth:'100%',
+		maxHeight:'100%',
+		onOpen:function(){
+			$overflow = document.body.style.overflow;
+			document.body.style.overflow = 'hidden';
+		},
+		onClosed:function(){
+			document.body.style.overflow = $overflow;
+		},
+		onComplete:function(){
+			$.colorbox.resize();
+		}
+	};
+
+	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+	$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		$('#colorbox, #cboxOverlay').remove();
+   });
+
+
+   //datatables
+
+				var myTable=$('#dynamic-table').DataTable( {
+			        "processing": true,
+			        "serverSide": true,
+			        "ajax": '{!!route('rsu.mp.equipo-show', $proyecto->id)!!}',
+			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
+                 	"order": [[ 0, "desc" ]],
+
+			        "columns" : [
+				        {data:"dni"},
+				        {data:"nombres"},
+				        {data:null, render:
+				        	function(data,type,row){
+				        		
+				        		if(data.id_responsabilidad=='1' || data.id_responsabilidad=='2'){
+				        			
+				        			
+				        			return "{!!\App\Docente::find('2')->escuela->escuela!!}";
+
+				        		}else if(data.id_responsabilidad=='3'){
+				        			return "Estudiante";
+				        		}else{
+				        			return "No definido";
+				        		}
+		            		 	return  data.id_user;
+				        		
+				        	}
+				        },
+				        {data:"tipo"},
+				        {data:null,bSortable: false, render: 
+				        	function ( data, type, row ) {
+				        	return "Hola Mundo";
+                			}
+                		}
+			        ],
+			    })
+})
 </script>
 
 @endsection

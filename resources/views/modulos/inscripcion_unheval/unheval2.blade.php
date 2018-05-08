@@ -60,12 +60,16 @@
                                   <h4 class="info-text"> Inscripciones</h4>                               
                                   <div class="form-group" col-sm-10 col-sm-offset-1">
                                       <div class="form-group col-md-6">
+                                        <label>DNI <small>(requiredo)</small></label>
+                                        <input name="dni" type="text" class="form-control" placeholder="">
+                                      </div>
+                                      <div class="form-group col-md-6">
                                         <label>N de comprobante <small>(requiredo)</small></label>
                                         <input name="n_comprobante" type="text" class="form-control" placeholder="">
                                       </div>
                                       <div class="form-group col-md-6">
                                         <label>Fecha del comprobante <small>(requiredo)</small></label>
-                                        <input name="f_comprobate" type="text" class="form-control" placeholder="">
+                                        <input name="f_comprobate" type="date" class="form-control" placeholder="">
                                       </div>
                                   </div>                                 
                               </div>

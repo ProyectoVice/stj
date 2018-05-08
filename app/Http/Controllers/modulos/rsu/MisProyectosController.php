@@ -11,6 +11,8 @@ use App\RsuLineamiento;
 use App\RsuLineamientoProyecto;
 use App\RsuParticipante;
 use App\RsuEvidencias;
+use App\RsuCalendario;
+use Carbon\Carbon;
 use Auth;
 
 use Softon\SweetAlert\Facades\SWAL;  
@@ -33,7 +35,6 @@ class MisProyectosController extends Controller
 
     public function index()
     {
-
         return view('modulos.rsu.mis_proyectos.index');
     }
     public function datatables()
@@ -45,6 +46,19 @@ class MisProyectosController extends Controller
         return datatables()->of($proyecto)->toJson();
     }
 
+    public function equipo_show($id)
+    {
+        $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+               ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+               ->where('rsu_participantes.rsu_proyecto_id',$id)
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad')->get();
+         
+         
+         //return $equipo;
+
+        //return Datatables::of($proyecto)->make(true);
+        return datatables()->of($equipo)->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -65,7 +79,6 @@ class MisProyectosController extends Controller
     public function store(Request $request)
     {
 
-       
        $this->validate(request(),[
          'el_título'=>'unique:rsu_proyectos,titulo|max:30'
       ]);
@@ -254,5 +267,140 @@ class MisProyectosController extends Controller
         $proyecto=RsuProyecto::find($id);
         return view('modulos.rsu.mis_proyectos.calendario',compact('proyecto'));    
     }
+     public function cal_date($id)
+    {
+        return RsuCalendario::where('rsu_proyecto_id',$id)->get();    
+    }
+
+    public function cal_new(Request $request){
+        
+        //$formato='d/m/Y H:i';
+        //return Carbon::parse($date)->format('Y-m-d H:i:s');
+        //$date = Carbon::parse($date)->format('Y-m-d H:i:s');
+        $proyecto=new RsuCalendario;
+        $proyecto->title=$request->get('title');
+        $proyecto->descripcion=$request->get('descripcion');
+        $proyecto->color=$request->get('color');
+        $proyecto->textColor=$request->get('textColor');
+        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+        $proyecto->rsu_proyecto_id=$request->get('proyecto_id');
+        $proyecto->save();
+        //return $request;
+    }
+
+    public function cal_del(Request $request){
+        $id=$request->get('id');
+        RsuCalendario::destroy($id);
+    }
+    public function cal_act(Request $request){
+        $id=$request->get('id');
+        $proyecto=RsuCalendario::find($id);
+        $proyecto->title=$request->get('title');
+        $proyecto->descripcion=$request->get('descripcion');
+        $proyecto->color=$request->get('color');
+        $proyecto->textColor=$request->get('textColor');
+        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+        $proyecto->rsu_proyecto_id=$request->get('proyecto_id');
+        $proyecto->save();
+    }
+    public function cal_table($id){
+        //return $id;
+        $proyecto=RsuCalendario::where('rsu_proyecto_id',$id)->get();
+        //return Datatables::of($proyecto)->make(true);
+        return datatables()->of($proyecto)->toJson();
+    }
+
+    public function ver_detalle($id){
+        $proyecto = RsuProyecto::find($id);
+        return view('modulos.rsu.mis_proyectos.ver_detalles',compact('proyecto'));
+    }
+
+    public function ver_archivos($id){
+        $proyecto = RsuProyecto::find($id);
+        return view('modulos.rsu.mis_proyectos.ver_archivos',compact('proyecto'));
+    }
+
+    public function update_file(Request $request, $id){
+        $myProyect= RsuProyecto::find($id);
+        //solo si el proyecto pertence a este usuario puede borrar
+        $participante=RsuParticipante::where('rsu_proyecto_id',$myProyect->id)->first();
+        if($participante==''){
+         return back()->with('rojo','Ud. no tiene permiso');
+        }
+        if($request->file('rsu-file')){
+            //Eliminamos el archivo que existía
+            Storage::delete($myProyect->file_informe);
+            $file= $request->file('rsu-file')->store('public/rsu/informes');
+            $myProyect->file_informe=$file;
+            $myProyect->save();
+            return redirect()->route('rsu.mp.index')->with('verde','se registró un archivo');
+        }
+
+         return back()->with('azul','No se envió ningun archivo');
+
+
+    }
+
     //Calendario Fin
+    //Word
+    public function download($id){
+        //return $id;
+       // Creating the new document...
+$phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+/* Note: any element you append to a document must reside inside of a Section. */
+
+// Adding an empty Section to the document...
+$section = $phpWord->addSection();
+// Adding Text element to the Section having font styled by default...
+$section->addText(
+    '"Learn from yesterday, live for today, hope for tomorrow. '
+        . 'The important thing is not to stop questioning." '
+        . '(Albert Einstein)'
+);
+
+/*
+ * Note: it's possible to customize font style of the Text element you add in three ways:
+ * - inline;
+ * - using named font style (new font style object will be implicitly created);
+ * - using explicitly created font style object.
+ */
+
+// Adding Text element with font customized inline...
+$section->addText(
+    '"Great achievement is usually born of great sacrifice, '
+        . 'and is never the result of selfishness." '
+        . '(Napoleon Hill)',
+    array('name' => 'Tahoma', 'size' => 10)
+);
+
+// Adding Text element with font customized using named font style...
+$fontStyleName = 'oneUserDefinedStyle';
+$phpWord->addFontStyle(
+    $fontStyleName,
+    array('name' => 'Tahoma', 'size' => 10, 'color' => '1B2232', 'bold' => true)
+);
+$section->addText(
+    '"The greatest accomplishment is not in never falling, '
+        . 'but in rising again after you fall." '
+        . '(Vince Lombardi)',
+    $fontStyleName
+);
+
+// Adding Text element with font customized using explicitly created font style object...
+$fontStyle = new \PhpOffice\PhpWord\Style\Font();
+$fontStyle->setBold(true);
+$fontStyle->setName('Tahoma');
+$fontStyle->setSize(13);
+$myTextElement = $section->addText('"Believe you can and you\'re halfway there." (Theodor Roosevelt)');
+$myTextElement->setFontStyle($fontStyle);
+
+// Saving the document as OOXML file...
+$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+$objWriter->save('probando el word.docx');
+return response()->download('probando el word.docx');
+
+    }
 }

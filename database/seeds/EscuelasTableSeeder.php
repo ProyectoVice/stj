@@ -41,6 +41,7 @@ class EscuelasTableSeeder extends Seeder
             'INGENIERIA DE SISTEMAS',
             'MEDICINA VETERINARIA',
 );
+        //Escuelas
          for ($i=0; $i<3; $i++) { 
     		DB::table('escuelas')->insert([
                 'escuela' => $array[$i],
@@ -125,5 +126,91 @@ class EscuelasTableSeeder extends Seeder
                 'facultad_id' => "14",
         	]);
     	}
+
+        //Departamento académicos
+        for ($i=0; $i<3; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "1",
+            ]);
+        }
+        for ($i=3; $i<5; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "2",
+            ]);
+        }
+        for ($i=5; $i<6; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "3",
+            ]);
+        }
+        for ($i=6; $i<7; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "4",
+            ]);
+        }
+        for ($i=7; $i<8; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "5",
+            ]);
+        }
+        for ($i=8; $i<10; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "6",
+            ]);
+        }
+        for ($i=10; $i<11; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "7",
+            ]);
+        }
+        for ($i=11; $i<12; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "8",
+            ]);
+        }
+        for ($i=12; $i<14; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "9",
+            ]);
+        }
+        for ($i=14; $i<22; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "10",
+            ]);
+        }
+        for ($i=22; $i<23; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "11",
+            ]);
+        }
+        for ($i=23; $i<25; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "12",
+            ]);
+        }
+        for ($i=25; $i<27; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "13",
+            ]);
+        }
+        for ($i=27; $i<28; $i++) { 
+            DB::table('dep_academicos')->insert([
+                'dep_academico' => $array[$i],
+                'facultad_id' => "14",
+            ]);
+        }
     }
 }

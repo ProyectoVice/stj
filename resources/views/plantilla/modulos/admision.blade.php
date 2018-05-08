@@ -5,7 +5,6 @@
 			<span class="menu-text"> Admisión </span>
 				<b class="arrow fa fa-angle-down"></b>
 	</a>
-
 	<b class="arrow"></b>
 
 	<ul class="submenu">
@@ -34,7 +33,7 @@
 					Inscripción Posgrado
 			</a>
 				<b class="arrow"></b>
-		</li>
+		</li>		
 		@endif
 		@if(Auth::user()->hasRoles(['AdministradorSegundaEEdu']))
 		<li class="">
@@ -83,13 +82,13 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador Diplomados']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('diplomado.ins.index') }}">
 				<i class="menu-icon fa fa-caret-right"></i>
-					Inscripción Diplomado
+					Inscripción Diplomados
 			</a>
 				<b class="arrow"></b>
 		</li>
-		@endif
+		@endif		
 		@if(Auth::user()->hasRoles(['Administrador PROCATP']))
 		<li class="">
 			<a href="">

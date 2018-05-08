@@ -17,11 +17,11 @@ class CreateInscripcionAlumnosTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();            
             $table->integer('inscripcion_curso_disponible_id')->unsigned();
-            $table->integer('caja_id')->unsigned();                     
+            $table->integer('pago_id')->unsigned();                     
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');          
             $table->foreign('inscripcion_curso_disponible_id')->references('id')->on('inscripcion_curso_disponibles')->onDelete('cascade');
-            $table->foreign('caja_id')->references('id')->on('cajas')->onDelete('cascade');
+            $table->foreign('pago_id')->references('id')->on('pagos')->onDelete('cascade');
             $table->timestamps();
         });
     }

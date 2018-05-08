@@ -9,6 +9,13 @@ use App\Distrito;
 use App\Provincia;
 use App\Departamento;
 use App\Postulacion;
+use App\Pago;
+Use App\PostulacionTipo;
+Use App\Sede;
+Use App\Escuela;
+Use App\PostulacionModalidad;
+Use App\Colegio;
+Use App\EscuelaSede;
 
 class AdmisionController extends Controller
 {
@@ -24,33 +31,40 @@ class AdmisionController extends Controller
     }
     public function index()
     {        
-        $inscripcion=Postulacion::get();
-        return view('modulos.Admision.inscripciones.index',compact('inscripcion'));    
+        //$inscripcion=Postulacion::get();
+        return view('modulos.Admision.inscripciones.index');    
     }
 
     public function datatables()
     {
-        $proyecto=Postulacion::get();
-
-        //join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
-        //                      ->join('rsu_responsabilidads AS r','r.id','=','p.rsu_responsabilidad_id')
-          //                    ->select('rsu_proyectos.*','r.rsu_responsabilidad AS rp')->get();
-        //return Datatables::of($proyecto)->make(true);
-        return datatables()->of($proyecto)->toJson();
+        $inscripcion=Postulacion::get();
+        
+        return datatables()->of($inscripcion)->toJson();
     }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create($dni)
+    {      
         $departamentos=Departamento::pluck('departamento','id');
         $provincias=Provincia::pluck('provincia','id');
         $distritos=Distrito::pluck('distrito','id');
-        return view('modulos.Admision.inscripciones.crear',compact('departamentos','provincias','distritos'));
-    }
+        $postulaciont=PostulacionTipo::pluck('postulacion_tipo','id');
+        $sede=Sede::pluck('sede','id');
+        $escuela=Escuela::pluck('escuela','id');
+        $modalidad=PostulacionModalidad::pluck('modalidad','id');
+        $colegio=Colegio::pluck('colegio','id');
+        $escuelasede=EscuelaSede::join('escuelas','escuelas.id',"=", "escuela_sedes.escuela_id")->join('sedes','sedes.id',"=", "escuela_sedes.sede_id")->where('escuela_sedes.sede_id','1')->pluck('escuelas.escuela', 'escuelas.id');//pluck('escuela_id', 'id');
 
+        $usuario=User::where("dni",$dni)->first();
+        if($usuario!=""){
+            return view('modulos.Admision.inscripciones.crear',compact('departamentos','provincias','distritos', 'postulaciont', 'sede', 'escuela', 'modalidad', 'colegio', 'escuelasede', 'usuario'));
+        }
+        $dni=$dni;
+        return view('modulos.Admision.inscripciones.crear',compact('departamentos','provincias','distritos', 'postulaciont', 'sede', 'escuela', 'modalidad', 'colegio', 'escuelasede', "dni"));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -59,17 +73,21 @@ class AdmisionController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        //return $request->all();
         //inicializamos las ruta de los archivos
         
         //guardar datos a la tabla user
         //User :: create($request->all());
+        $usuario=User::Where("dni",'=',$request->dni)->first();
+        //$request->get('dni')
+        if($usuario==""){
         $myInscrito=new User;        
         $myInscrito->nombres=$request->get('nombres');
         $myInscrito->apellido_paterno=$request->get('apellido_paterno');
         $myInscrito->apellido_materno=$request->get('apellido_materno');
         $myInscrito->f_nac=$request->get('f_nac');
         $myInscrito->dni=$request->get('dni');
+        $myInscrito->password=bcrypt($request->get('dni'));
         $myInscrito->email=$request->get('email');
         $myInscrito->distrito_nac=$request->get('distrito_nac');
         $myInscrito->domicilio=$request->get('domicilio');
@@ -78,9 +96,22 @@ class AdmisionController extends Controller
         $myInscrito->cel=$request->get('cel');
         $myInscrito->tipo_sangre=$request->get('tipo_sangre');        
         $myInscrito->save();
+        //guardamos escuela_modalidad
+        /*$escuelam=new EscuelaModalidad;
+        $escuelam->escuela_sede_id=     //28
+
+        //Guardamos el ID del usuario registrado
+        $ultimoID=$myInscrito->id;
+        //registramos la inscripcion del usuario 
+        $inscripcion=new Postulacion;
+        $inscripcion->anio='2018';
+        $inscripcion->users_id=$ultimoID;*/
 
        
-        return redirect('inscripcion-general')->with('verde','Se registró el proyecto \''.$myInscrito->nombres.'\' correctamente');
+        return redirect()->route('adminsion.ins.index')->with('verde','Se registró la inscripcion de\''.$myInscrito->nombres.'\' correctamente');  
+        }else{
+            return"aaaaaaaaaa";
+        }        
     }
 
     /**
@@ -141,12 +172,23 @@ class AdmisionController extends Controller
                 return response()->json($distritos);
             }
     }
+    public function listaescuela($id)
+    {
+        return $escuelasede=EscuelaSede::join('escuelas','escuelas.id',"=", "escuela_sedes.escuela_id")->join('sedes','sedes.id',"=", "escuela_sedes.sede_id")->where('escuela_sedes.sede_id',$id)->select('escuelas.escuela AS escuela', 'escuelas.id AS id')->get();
+            
+    }
      public function validar(Request $request)
     {
-        return $request->all();
-
-        $cajas=Caja::cajas($id);
-        $cajas->num_comprobante=$request->get('n_comprobante');
-
+        
+        $cajas=Pago::where('num_comprobante','=',$request->n_comprobante)
+                    ->where('fecha_comprobante','=',$request->f_comprobante)->first();
+        if ($cajas!='') {
+           if ( $cajas->estado_recibo!="0") {
+                return redirect()->route('adminsion.ins.index')->with('rojo','El recibo ingresado ya ha sido usado');
+           }
+            return redirect()->route("adminsion.ins.create",$request->dni);
+        }else{            
+            return redirect()->route('adminsion.ins.index')->with('rojo','Recibo no valido');
+        }  
     }
 }
