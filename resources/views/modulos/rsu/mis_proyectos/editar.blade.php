@@ -5,10 +5,53 @@
 @section('estilos')
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
 	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
+  <style type="text/css">
+#search {
+    
+    margin-top: 9px;
+    width: 250px;
+}
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+}
 
+    .search input {
+        position: absolute;
+        width: 0px;
+        float: Left;
+        margin-left: 210px;
+        -webkit-transition: all 0.7s ease-in-out;
+        -moz-transition: all 0.7s ease-in-out;
+        -o-transition: all 0.7s ease-in-out;
+        transition: all 0.7s ease-in-out;
+        height: 30px;
+        line-height: 18px;
+        padding: 0 2px 0 2px;
+        border-radius:1px;
+    }
+
+        .search:hover input, .search input:focus {
+            width: 200px;
+            margin-left: 0px;
+        }
+
+.btn {
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    border-radius:1px;
+}
+
+
+  </style>
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -166,12 +209,16 @@
 			<div class="col-xs-12" >
 				<div >
 					<div class="table-header">
-      				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-								
-								<input type="text" placeholder="Escribir nombres o DNI" required="required" name="el_título" value="{{ old('el_título') }}" id="developer" style="color: black">
-								<div class="ui-widget">
-					</div>
-
+           				<div id="custom-search-input">
+			                <div class="container">
+							
+						        <div class="search">
+									<input type="text" class="form-control input-sm" maxlength="100" placeholder="Nuevo" />
+									 <button type="submit" class="btn btn-primary btn-sm"><i class="icon fa fa-plus"></i></button>
+								</div>
+							</div>
+					
+			            </div>
 					</div>
 					<div class="table-responsive">
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -213,7 +260,7 @@
 			</div>
 		</div>
 
-		<div class="col-sm-12 col-xs-12" ><br><br>
+		<div class="col-sm-12 col-xs-12" align="center" ><br><br>
 			<div class="hr dotted"></div><br><br><br>
 			<div class="form-group" align="center">
 					<button type="submit" class="width-30 btn btn-sm btn-primary">
@@ -233,33 +280,6 @@
 								<!-- PAGE CONTENT ENDS -->
 	<!-- Fin -->									
 </div>	
-
-{{-- modal --}}
-<div id="nuevo" class="modal fade" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 class="smaller lighter blue no-margin">Registrar nuevo integrante</h3>
-			</div>
-			{!! Form::open(['route' => 'rsu.mp.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
-			<div class="modal-body" align="center"><br>
-			
-			{{ csrf_field() }}
-					<input type="text" placeholder="Escribir nombres o DNI" required="required" name="el_título" class="form-control" value="{{ old('el_título') }}">
-					
-			<br>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-success btn-sm btn-round submit">
-								<i class="ace-icon fa fa-plus"> Agregar</i>
-				</button>
-			</div>
-			{!!Form::close()!!}
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div>
-{{-- fin modal --}}
 
 
 @endsection
