@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombres','apellido_paterno','apellido_materno','f_nac','dni', 'email', 'password','foto','distrito_nac','domicilio','n_domicilio','tel','cel','tipo_sangre','estado_login','est_civil_id','religion_id'
+        'nombres','apellido_paterno','apellido_materno','f_nac','dni', 'email', 'password','foto','distrito_nac','domicilio','n_domicilio','tel','cel','tipo_sangre', 'genero', 'colegio_id_iv', 'colegio_id_v','estado_login','est_civil_id','religion_id'
     ];
 
 
@@ -28,6 +28,12 @@ class User extends Authenticatable
 
     public function est_civil(){
         return $this->belongsto(EstCivil::class,'est_civil_id','id');
+    }
+     public function religion(){
+        return $this->belongsto(Religion::class,'religion_id','id');
+    }
+    public function distrito(){
+      return $this->belongsto(Distrito::class, 'distrito_nac','id');
     }
 
     public function rsu_participante(){

@@ -28,7 +28,7 @@
 						<th class="center">Nombres</th>
 						<th class="center" class="hidden-480">Apellidos</th>
 						<th class="center" class="hidden-480">DNI</th>
-						<th class="center" class="hidden-480">Roles</th>
+						<th class="center" class="hidden-480">N Celular</th>
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 				</thead>			
@@ -94,7 +94,7 @@
 				        {data:"cel"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/usuario/nuevo/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='/usuario/nuevo/mostrar/"+data.id+"' class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/usuario/nuevo/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
