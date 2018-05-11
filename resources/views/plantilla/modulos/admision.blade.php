@@ -82,7 +82,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador Diplomados']))
 		<li class="">
-			<a href="{{ route('diplomado.ins.index') }}">
+			<a href="{{ route('diplomado.ins.index', ['tipo'=>'diplomado']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Diplomados
 			</a>
@@ -91,7 +91,7 @@
 		@endif		
 		@if(Auth::user()->hasRoles(['Administrador PROCATP']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('diplomado.ins.index', ['tipo'=>'procapt']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción PROCATP
 			</a>
@@ -100,7 +100,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador PROMASTER']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('diplomado.ins.index', ['tipo'=>'promaster']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción PROMASTER
 			</a>

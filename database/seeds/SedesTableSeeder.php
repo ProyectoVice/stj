@@ -81,14 +81,6 @@ class SedesTableSeeder extends Seeder
                 ['sede_id' => '15', 'escuela_id' => '9',],
                 ['sede_id' => '16', 'escuela_id' => '11',],
                 ['sede_id' => '17', 'escuela_id' => '16',]
-                           
         ]);
-        //escuela_modalidad
-       /* DB::table('escuela_modalidads')->insert([
-        ['escuela_sede_id' => '1', 'modalidad_id' => '1', 'colegio_tipo_id'=>'2', 'postulacion_tipo_id'=>'1', 'costo'=>'280',],
-        ['escuela_sede_id' => '2', 'modalidad_id' => '1', 'colegio_tipo_id'=>'2', 'postulacion_tipo_id'=>'1', 'costo'=>'280',],
-        ['escuela_sede_id' => '', 'modalidad_id' => '', 'colegio_tipo_id'=>'', 'postulacion_tipo_id'=>'', 'costo'=>'',]
-        ]);*/
-      
     }
 }

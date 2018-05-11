@@ -53,6 +53,12 @@
 					{{ csrf_field() }}
 					<div class="row">		
 						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Programa</label>
+							<div class="col-sm-7">
+							  {!!Form::select('descripcion',$programa,null,['required','id'=>'descripcion', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Programa'])!!}
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">DNI</label>
 							<div class="col-sm-7">
 							<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{{ old('dni') }}">
@@ -77,6 +83,7 @@
 					<i class="ace-icon fa fa-check"> Registrar</i>
 				</button>
 			</div>
+			<input type="hidden" name="tipo" value="{{$tipo}}">
 			{!!Form::close()!!}
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -87,12 +94,24 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 class="smaller lighter blue no-margin">Registrar Pago</h3>
+				<h3 class="smaller lighter blue no-margin">Registrar Pago de Módulo</h3>
 			</div>
-			{!! Form::open(['route' => 'diplomado.ins.validar1', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
+			{!! Form::open(['route' => 'diplomado.ins.validar_pago', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
 			<div class="modal-body tab-pane" align="center">
 					{{ csrf_field() }}
 					<div class="row">
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tipo de Pago de Módulo</label>
+							<div class="col-sm-7">
+								<select name="select" class="col-xs-12 col-sm-9">
+  									<option name="pago1" selected value="1">Pago de Módulo - Interno</option> 
+  									<option name="pago2" value="2">Pago de Módulo - Externo</option>
+  									<option name="pago3" value="3">Pago total de Módulo - Interno</option>
+  									<option name="pago4" value="4">Pago total de Módulo - Externo</option>
+								</select>
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Nº de comprobante</label>
 							<div class="col-sm-7">
@@ -108,7 +127,7 @@
 					</div>
 			</div>
 			<div class="modal-footer">
-				<<input type="hidden" name="id" id="id_inscrito" value="">				
+				<input type="hidden" name="id" id="id_inscrito" value="">
 				<button class="btn btn-success btn-sm btn-round submit" name="enviando" id="enviando">					
 					<i class="ace-icon fa fa-check"> Registrar</i>
 				</button>
@@ -144,7 +163,7 @@
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
-			        "ajax": '{!!route('diplomado.ins.datos')!!}',
+			        "ajax": '{!!route('diplomado.ins.datos')!!}?tipo={{$tipo}}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                  	"order": [[ 0, "asc" ]],
 			        "columns" : [
@@ -159,7 +178,7 @@
 				        {data:"cancelacion"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/diplomado/inscripciones/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Pago total módulo'><i class='fa fa-download'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar pago modulo' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/diplomado/inscripciones/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
@@ -187,14 +206,11 @@
 					  }
 					]
 				} );
-//
+//////envio el Id de la inscripcion
 				$(document).on('click', '.enviarId', function(event) {
-					
         		 var button = $(this);
 		         var id = button.data('id');
 		         $("#id_inscrito").val(id);
-		           
-
         		});
 //////////////
 				$(document).on('click', '.stj-acciones-delete', function(event) {

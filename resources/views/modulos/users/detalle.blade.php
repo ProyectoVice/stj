@@ -146,7 +146,4 @@
 								</div>
 								<!-- PAGE CONTENT ENDS -->
 							</div>
-<!--bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-->
-
-
 @endsection

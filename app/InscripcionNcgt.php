@@ -14,7 +14,7 @@ class InscripcionNcgt extends Model
       return $this->belongsto(User::class,'user_id','id');
   	}
   	public function programa_ncgt() {
-      return $this->belongsto(ProgramaNcgt::class);
+      return $this->belongsto(ProgramaNcgt::class, 'programa_ncgt_id','id');
   	}
   	public function control_pagos() {
       return $this->hasMany(ControlPago::class);

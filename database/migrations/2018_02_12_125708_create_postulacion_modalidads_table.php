@@ -16,8 +16,7 @@ class CreatePostulacionModalidadsTable extends Migration
         Schema::create('postulacion_modalidads', function (Blueprint $table) {
             $table->increments('id');
             $table->string('modalidad');
-            $table->integer('postulacion_examen_tipo_id')->unsigned();
-            $table->foreign('postulacion_examen_tipo_id')->references('id')->on('postulacion_examen_tipos')->onDelete('cascade');
+            $table->integer('tipo_examen');
             $table->timestamps();
         });
     }
