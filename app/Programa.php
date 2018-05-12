@@ -10,7 +10,10 @@ class Programa extends Model
    	protected $fillable = [
    		'programa'        
     ];
-    public function postulacions() {
-      return $this->hasMany(Postulacion::class);
+    public function proceso_seleccions() {
+      return $this->hasMany(ProcesoSeleccion::class);
   	}
+    public function programa_ncgts() {
+        return $this->hasMany(ProgramaNcgt::class);
+    }
 }

@@ -100,18 +100,7 @@
 			<div class="modal-body tab-pane" align="center">
 					{{ csrf_field() }}
 					<div class="row">
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tipo de Pago de Módulo</label>
-							<div class="col-sm-7">
-								<select name="select" class="col-xs-12 col-sm-9">
-  									<option name="pago1" selected value="1">Pago de Módulo - Interno</option> 
-  									<option name="pago2" value="2">Pago de Módulo - Externo</option>
-  									<option name="pago3" value="3">Pago total de Módulo - Interno</option>
-  									<option name="pago4" value="4">Pago total de Módulo - Externo</option>
-								</select>
-							</div>
-						</div>
-						
+
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Nº de comprobante</label>
 							<div class="col-sm-7">

@@ -106,6 +106,7 @@
 				<div>
 					<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div> 
 				</div>
+			<input type="hidden" name="tipo" value="{{$tipo}}">
 		</div>		
 {!! Form::close() !!}			                  
 								<!-- PAGE CONTENT ENDS -->

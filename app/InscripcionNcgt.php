@@ -8,7 +8,7 @@ class InscripcionNcgt extends Model
 {
     protected $table = 'inscripcion_ncgts';
    	protected $fillable = [
-   		'user_id', 'programa_ncgt_id', 'cancelacion'
+   		'user_id', 'programa_ncgt_id', 'es_interno', 'es_pago_total', 'cancelacion'
     ];
    public function user() {
       return $this->belongsto(User::class,'user_id','id');

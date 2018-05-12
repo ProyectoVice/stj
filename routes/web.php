@@ -77,7 +77,7 @@ Route::group(['prefix' => 'adminsion'],function(){
 Route::group(['prefix' => 'diplomado'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
 		Route::get('/','modulos\diplomado\DiplomadoController@index')->name('diplomado.ins.index');
-		Route::get('create/{descripcion}/{dni}/{n_comprobante}/{f_comprobante}', 'modulos\diplomado\DiplomadoController@create')->name('diplomado.ins.create');
+		Route::get('create/{descripcion}/{dni}/{n_comprobante}/{f_comprobante}/{tipo}', 'modulos\diplomado\DiplomadoController@create')->name('diplomado.ins.create');
 		Route::post('store', 'modulos\diplomado\DiplomadoController@store')->name('diplomado.ins.store');
 		Route::post('validar', 'modulos\diplomado\DiplomadoController@validar')->name('diplomado.ins.validar');
 		Route::post('validar1', 'modulos\diplomado\DiplomadoController@validar_pago')->name('diplomado.ins.validar_pago');			

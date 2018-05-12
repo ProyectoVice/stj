@@ -67,7 +67,7 @@ class DiplomadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($descripcion,$dni, $n_comprobante, $f_comprobante)
+    public function create($descripcion,$dni, $n_comprobante, $f_comprobante, $tipo)
     {
         
         $departamentos=Departamento::pluck('departamento','id');
@@ -75,10 +75,13 @@ class DiplomadoController extends Controller
         $distritos=Distrito::pluck('distrito','id');
         $usuario=User::where("dni",$dni)->first();
         if($usuario!=""){
-            return view('modulos.inscripcion_unheval.diplomado.crear',compact('departamentos','provincias','distritos', 'usuario', "descripcion",  "n_comprobante", "f_comprobante"));
+            return view('modulos.inscripcion_unheval.diplomado.crear', ['departamentos'=>$departamentos,'provincias'=> $provincias,'distritos'=> $distritos, 'usuario'=> $usuario,
+                'descripcion'=> $descripcion, 'n_comprobante'=> $n_comprobante, 'f_comprobante'=> $f_comprobante, 'tipo'=>$tipo]);
+            //return view('modulos.inscripcion_unheval.diplomado.crear',compact('departamentos','provincias','distritos', 'usuario', "descripcion",  "n_comprobante", "f_comprobante"));
         }
         $dni=$dni;
-        return view('modulos.inscripcion_unheval.diplomado.crear',compact('departamentos','provincias','distritos',"descripcion", "dni", "n_comprobante", "f_comprobante"));
+        return view('modulos.inscripcion_unheval.diplomado.crear',['departamentos'=>$departamentos,'provincias'=> $provincias,'distritos'=> $distritos, 'usuario'=> $usuario,
+            'descripcion'=> $descripcion, 'n_comprobante'=> $n_comprobante, 'f_comprobante'=> $f_comprobante, 'tipo'=>$tipo, 'dni'=>$dni]);
     }
 
     /**
@@ -89,10 +92,6 @@ class DiplomadoController extends Controller
      */
     public function store(Request $request)
     {
-       
-        /*$inscripcion=InscripcionNcgt::join('programa_ncgts','programa_ncgts.id','=','inscripcion_ncgts.programa_ncgt_id')
-                    ->where('programa_ncgt_id','=', $request->descripcion)->first();
-        return  $inscripcion;*/
         //
         $usuario=User::Where("dni",'=',$request->dni)->first();
         //consultando el registro de la tabla pago
@@ -126,7 +125,7 @@ class DiplomadoController extends Controller
             $control->save();
             $pagos->estado_recibo='1';
             $pagos->save();
-            return redirect()->route('diplomado.ins.index')->with('verde','Se registró la inscripcion de \''.$myInscrito->nombres.'\' correctamente'); 
+            return redirect()->route('diplomado.ins.index',['tipo'=>$request->tipo])->with('verde','Se registró la inscripcion de \''.$myInscrito->nombres.'\' correctamente');
             }else{
             $inscripcionp=new InscripcionNcgt;
             $inscripcionp->programa_ncgt_id=$request->get('descripcion');
@@ -141,7 +140,7 @@ class DiplomadoController extends Controller
             $pagos->estado_recibo='1';
             $pagos->save();
                 }
-        return redirect()->route('diplomado.ins.index')->with('verde','Se registró la inscripcion de \''.$usuario->nombres.'\' correctamente');
+        return redirect()->route('diplomado.ins.index',['tipo'=>$request->tipo])->with('verde','Se registró la inscripcion de \''.$usuario->nombres.'\' correctamente');
         
     }
 
@@ -220,7 +219,7 @@ class DiplomadoController extends Controller
         if ($pagos!='') {
            if ( $pagos->estado_recibo=="0"){
                 if($pagos->importe==$programa->costo_matricula){
-                    return redirect()->route("diplomado.ins.create",[$request->descripcion, $request->dni, $request->n_comprobante,$request->f_comprobante]);
+                    return redirect()->route("diplomado.ins.create",[$request->descripcion, $request->dni, $request->n_comprobante,$request->f_comprobante, $request->tipo]);
                 }else{
                     return redirect()->route('diplomado.ins.index',['tipo'=>$request->tipo])->with('rojo','El importe de pago del recibo no coincide con el costtro de matricula');
                 }
