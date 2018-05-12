@@ -132,7 +132,7 @@ class RolesTableSeeder extends Seeder
            // usuarios teddy - 30 - 32
            DB::table('rols')->insert([
                 'rol' => 'UsuarioAsuntos',
-                'descripcion' => 'Encargado de Asuntos Académicos: Realiza la Programación',
+                'descripcion' => 'Asuntos Académicos: Realiza la Programación',
         ]);
            DB::table('rols')->insert([
                 'rol' => 'ViceAcademico',
@@ -140,7 +140,7 @@ class RolesTableSeeder extends Seeder
         ]);
            DB::table('rols')->insert([
                 'rol' => 'DirEscuela',
-                'descripcion' => 'Gestiona la Escuela Profesional',
+                'descripcion' => 'Director de Escuela: Gestiona la Escuela Profesional',
         ]);
     }
 }

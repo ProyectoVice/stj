@@ -46,17 +46,17 @@ class AcademicoController extends Controller
         CalPregraGen::destroy($id);
     }
 
-    public function cal_act(Request $request, $act){
-        //$id=$request->get('id');
-        $proyecto=CalPregraGen::find($act);
-        $proyecto->title=$request->get('title');
-        $proyecto->descripcion=$request->get('descripcion');
-        $proyecto->color=$request->get('color');
-        $proyecto->textColor=$request->get('textColor');
-        $proyecto->responsable=$request->get('responsable');
-        $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
-        $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
-        //$proyecto->cal_pregra_gen_id=$request->get('id');
+    public function cal_act(Request $request){
+        $id=$request->get('id');
+        CalPregraGen::find($id);
+        //$proyecto->title=$request->get('title');
+        //$proyecto->descripcion=$request->get('descripcion');
+        //$proyecto->color=$request->get('color');
+        //$proyecto->textColor=$request->get('textColor');
+        //$proyecto->responsable=$request->get('responsable');
+        //$proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
+        //$proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+        //$proyecto->id=$request->get('id');
         $proyecto->save();
     }
 

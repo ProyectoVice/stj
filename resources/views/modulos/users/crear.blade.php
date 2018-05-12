@@ -23,7 +23,7 @@
 		<!-- PAGE CONTENT BEGINS -->
 		{!! Form::open(['route' => 'usuario.nue.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
 			
-		@include('modulos.users.form', ['user'=>new App\User])	
+		@include('modulos.users.form', ['usuario'=>new App\User])	
 		<div class="col-sm-12 col-xs-12" >
 			<div class="hr dotted"></div>
 				<div class="form-group" align="center">

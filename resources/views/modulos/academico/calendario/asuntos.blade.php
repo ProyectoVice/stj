@@ -10,17 +10,18 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-calendar"></i>
 	<li class="active">Calendario Académico</li>
-	<li class=""><a href="{{ route('academico.cal_gen.index') }}"
+	
 	<li class="">General Pre Grado</li>
 </ul>
 @endsection
+
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
-      <h3> Regular : </h3><br>
+      <h3> Ciclo Regular </h3>
       {{ csrf_field() }}
     </div>
-    <div class="col-sm-7 hidden-xs">
+    <div class="col-sm-6 hidden-xs">
       <div class="clearfix">
         <div class="pull-right tableTools-container"></div>
       </div>
@@ -33,6 +34,7 @@
           <thead>
             <tr>
               <th class="center">Actividades</th>
+              <th class="center" class="hidden-480">Descripción</th>
               <th class="center" class="hidden-480">Inicio</th>
               <th class="center" class="hidden-480">Fin</th>
               <th class="center" class="hidden-480">Responsable</th>
@@ -41,7 +43,7 @@
         </table>
       </div>
     </div>
-    <div class="col-sm-5 col-xs-12">
+    <div class="col-sm-6 col-xs-12">
       <div id='calendar'></div>   
     </div>
   </div>
@@ -122,6 +124,7 @@
     </div>
   </div>  
 @endsection
+
 @section('script')
     {!!Html::script('/plantilla/js/moment.min.js')!!}
     {!!Html::script('/plantilla/js/fullcalendar.min.js')!!}
@@ -144,17 +147,19 @@ $(document).ready(function(){
       "order": [[ 1, "asc" ]],
       "columns" : [
         {data:"title"},
+        {data:"descripcion"},
         {data:"start"},
         {data:"end"},
-        {data:"responsable"}                  ],
+        {data:"responsable"}                  
+        ],
         } );
   
-  //Calendario
+  //Calendario Asuntos
   $('#calendar').fullCalendar({
     header: {
-    left: 'month,agendaWeek,agendaDay,listWeek',
-    center: 'title',
-    right: 'prev,today,next'
+      left: 'prevYear,prev, title, next,nextYear',
+      center: '',
+      right: 'month,agendaWeek,agendaDay,listWeek'
     },
   
   //Click en un día sin evento
@@ -185,13 +190,14 @@ $(document).ready(function(){
       }else{
         var dateEnd=date.end.format('DD/MM/YYYY HH:mm');  
           }
+          $('#id-cal').val(date.id);
           $('#dateEnd-new').val(dateEnd);
           $('#txtTitulo-new').val(date.title);
           $('#txtColor-new').val(date.color);
           $('#txtTextColor-new').val(date.textColor);
           $('#txtdescripcion-new').val(date.descripcion);
           $('#txtResponsable').val(date.responsable);
-          $('#id-cal').val(date.id);
+          
           $('#titleModal').html("Actualizar Evento");
           //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
 
@@ -262,19 +268,20 @@ $('#btn-actualizar').click(function(){
         $('#CalenderModalNew').modal('toggle');
         },
         error: function(error){
-               alert(error);
+               alert('que paso aquí');
         }
       })
 });
 function recolectarDatos(){  
   return NuevoEvento={
+    id:$('#id-cal').val(),
     title:$('#txtTitulo-new').val(),
     descripcion:$('#txtdescripcion-new').val(),
     responsable:$('#txtResponsable').val(),
     color:$('#txtColor-new').val(),
     textColor:$('#txtTextColor-new').val(),
     start:$('#dateStar-new').val(),
-    id:$('#id-cal').val(),
+    
     end:$('#dateEnd-new').val(),
     _token:'{!! csrf_token() !!}',
     }  

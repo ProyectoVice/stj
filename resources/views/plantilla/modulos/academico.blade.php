@@ -2,32 +2,29 @@
 <li class="">
 	<a href="#" class="dropdown-toggle" title="Academico">
 		<i class="menu-icon fa fa-desktop" ></i>
-			<span class="menu-text"> Academico </span>
-				<b class="arrow fa fa-angle-down"></b>
+		<span class="menu-text"> Academico </span>
+		<b class="arrow fa fa-angle-down"></b>
 	</a>
-
 	<b class="arrow"></b>
-
 	<ul class="submenu">
 		@if(Auth::user()->hasRoles(['ViceAcademico']))
 		<li class="">
-			<a href="{{ route('academico.cal_gen.index') }}">
-				<i class="menu-icon fa fa-caret-right"></i>
-					Calendario Asuntos
+	 		<a href="{{ route('academico.cal_gen.index') }}">
+			<i class="menu-icon fa fa-caret-right"></i>
+			Calendario Asuntos
 			</a>
-				<b class="arrow"></b>
+			<b class="arrow"></b>
 		</li>
 		@endif
 		@if(Auth::user()->hasRoles(['DirEscuela']))						
 		<li class="">						
 			<a href="{{ route('academico.cal_escuela.index') }}">
 				<i class="menu-icon fa fa-caret-right"></i>
-					Calendario Escuela
+				Calendario Escuela
 			</a>
-				<b class="arrow"></b>
+			<b class="arrow"></b>
 		</li>
-		@endif
-		
+		@endif		
 	</ul>
 </li>
 @endif

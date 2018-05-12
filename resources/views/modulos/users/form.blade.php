@@ -4,7 +4,7 @@
 			<div class="row form-group">				
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">DNI</label>
 				<div class="col-sm-4 col-sm-offset-0">
-					<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{!! $usuario->dni or old('dni')!!}">
+					<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{!! $usuario->dni or $dni!!}">
 				</div>
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Nombre</label>
 				<div class="col-sm-4">				

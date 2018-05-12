@@ -39,12 +39,12 @@ class UsersController extends Controller
     public function create($dni)
     {
         $roles=Rol::pluck('rol','id');
-       // return $roles;
+        //return $roles;
         $departamentos=Departamento::pluck('departamento','id');
         $provincias=Provincia::pluck('provincia','id');
         $distritos=Distrito::pluck('distrito','id');
-        $usuario=User::where("dni",$dni)->first();
-        return view('modulos.users.crear',compact('departamentos','provincias','distritos', 'programa', 'usuario', 'roles', "dni"));
+       
+        return view('modulos.users.crear',compact('departamentos','provincias','distritos', 'programa', 'roles', "dni"));
         
       // return redirect()->route('usuario.nue.index')->with('rojo','El Usurario ya se encuentra registra');
     }
@@ -70,6 +70,7 @@ class UsersController extends Controller
         $myInscrito->n_domicilio=$request->get('n_domicilio');
         $myInscrito->cel=$request->get('cel');
         $myInscrito->save();
+        $myInscrito->roles()->sync($request->roles);
         return redirect()->route('usuario.nue.index')->with('verde','Se registró el usuario \''.$myInscrito->nombres.'\' correctamente');
     }
 
@@ -81,11 +82,13 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $roles=Rol::pluck('rol','id');
+        $usuario=User::find($id); 
+        return view('modulos.users.detalle', compact('usuario', 'roles'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.s
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -116,7 +119,6 @@ class UsersController extends Controller
         $myInscrito->apellido_materno=$request->get('apellido_materno');
         $myInscrito->f_nac=$request->get('f_nac');
         $myInscrito->dni=$request->get('dni');
-        //$myInscrito->password=bcrypt($request->get('dni'));
         $myInscrito->email=$request->get('email');
         $myInscrito->distrito_nac=$request->get('distrito_nac');
         $myInscrito->domicilio=$request->get('domicilio');
