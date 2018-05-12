@@ -8,14 +8,10 @@ class PostulacionModalidad extends Model
 {
     protected $table='postulacion_modalidads';
     protected $fillable=[
-    'modalidad',
-    'postulacion_examen_tipo_id'
+    'modalidad','tipo_examen'
     ];
 
-    public function postulacion_examen_tipo() {
-      return $this->belongsto(PostulacionExamenTipo::class);
-  	}
-  	public function escuela_modalidads() {
-      return $this->hasMany(EscuelaModalidad::class);
+    public function procesos_seleccions() {
+      return $this->belongsto(ProcesoSeleccion::class);
   	}
 }

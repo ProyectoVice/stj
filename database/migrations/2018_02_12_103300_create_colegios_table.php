@@ -17,11 +17,9 @@ class CreateColegiosTable extends Migration
             $table->increments('id');
             $table->integer('codigo_modular');
             $table->string('colegio');
-            $table->string('direccion');
-            $table->integer('colegio_tipo_dependencia_id')->unsigned();
-            $table->integer('distrito_id')->unsigned();
-            $table->foreign('colegio_tipo_dependencia_id')->references('id')->on('colegio_tipo_dependencias')->onDelete('cascade');
-            $table->foreign('distrito_id')->references('id')->on('distritos')->onDelete('cascade');
+            $table->string('direccion')->nullable();
+            $table->integer('colegio_tipo')->nullable();//1 publico, 2 privada
+            $table->integer('distrito_id')->nullable();
             $table->timestamps();
         });
     }

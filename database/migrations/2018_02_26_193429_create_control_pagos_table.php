@@ -15,10 +15,11 @@ class CreateControlPagosTable extends Migration
     {
         Schema::create('control_pagos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('inscripcion_ncgt_id')->unsigned();
+            $table->integer('inscripcion_ncgt_id')->nullable();
+            $table->integer('postulacion_id')->nullable();
             $table->integer('pago_id')->unsigned();
             $table->integer('tipo');
-            $table->foreign('inscripcion_ncgt_id')->references('id')->on('inscripcion_ncgts')->onDelete('cascade');
+
             $table->foreign('pago_id')->references('id')->on('pagos')->onDelete('cascade');
             $table->timestamps();
         });
