@@ -12,6 +12,8 @@ use App\RsuLineamientoProyecto;
 use App\RsuParticipante;
 use App\RsuEvidencias;
 use App\RsuCalendario;
+use App\Docente;
+use App\Estudiante;
 use Carbon\Carbon;
 use Auth;
 use App\User;
@@ -72,6 +74,7 @@ class MisProyectosController extends Controller
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
                ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela','rsu_participantes.id AS id')->get();
+
         $equipo=array();
         //Fusionamos los controladores
         foreach ($docentes as $d) {
@@ -84,7 +87,7 @@ class MisProyectosController extends Controller
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($equipo)->toJson();
     }
-
+    
     public function equipo_users(Request $request,$id)
     {
 
@@ -122,6 +125,7 @@ class MisProyectosController extends Controller
     {
       //Filtros
        RsuParticipante::destroy($id);
+
     }
     /**
      * Show the form for creating a new resource.

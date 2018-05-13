@@ -388,12 +388,13 @@ jQuery(function($) {
 
    //datatables
 
+
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
 			        "ajax": '{!!route('rsu.mp.equipo-show', $proyecto->id)!!}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
-                 	"order": [[ 0, "desc" ]],
+                 	
 
 			        "columns" : [
 				        {data:"dni"},
@@ -496,7 +497,6 @@ jQuery(function($) {
 						})
         		});
 		})
-
 </script>
 
 @endsection

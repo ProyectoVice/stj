@@ -41,10 +41,10 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('ver-file/{id}','modulos\rsu\MisProyectosController@ver_archivos')->name('rsu.mp.ver-file');
 		Route::put('informe/subir/{id}','modulos\rsu\MisProyectosController@update_file')->name('rsu.mp.file-up');
 		Route::get('equipo/{id}','modulos\rsu\MisProyectosController@equipo_show')->name('rsu.mp.equipo-show');
-
 		Route::get('users/{id}','modulos\rsu\MisProyectosController@equipo_users')->name('rsu.mp.users');
 		Route::post('users_n','modulos\rsu\MisProyectosController@equipo_users_new')->name('rsu.mp.users_new');
 		Route::get('users_d/{id}','modulos\rsu\MisProyectosController@equipo_users_d')->name('rsu.mp.users_d');
+
 	});
 });
 //Route::resource('rsu-misproyectos', 'modulos\rsu\MisProyectosController');
