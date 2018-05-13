@@ -35,13 +35,13 @@
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Departamento de Nacimiento</label>
 				<div class="col-sm-4">
 					<div class="clearfix">
-                        {!!Form::select('departamento',$departamentos,null,['required','id'=>'departamento_nac', 'class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Departamento'])!!}
+                        {!!Form::select('departamento',$departamentos,null,['id'=>'departamento_nac', 'class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Departamento'])!!}
                     </div>
 				</div>
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Provincia de Nacimiento</label>
 				<div class="col-sm-4">
 					<div class="clearfix">
-                        {!!Form::select('provincia',$provincias,null,['required','id'=>'provincia_nac', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Provincia'])!!}
+                        {!!Form::select('provincia',$provincias,null,['id'=>'provincia_nac', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Provincia'])!!}
                      </div>
 				</div>
 			</div>

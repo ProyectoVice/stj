@@ -21,13 +21,13 @@ class Escuela extends Model
     {
     	return $this->hasMany(Docente::class,'docente_id','id');
     }
-    public function postulaciones() 
-    {
-      return $this->hasMany(Postulacion::class);
-    }
     public function escuela_sedes() 
     {
       return $this->hasMany(EscuelaSede::class);
+    }
+    public function segunda_especialidads()
+    {
+        return $this->hasMany(SegundaEspecialidad::class);
     }
 
 

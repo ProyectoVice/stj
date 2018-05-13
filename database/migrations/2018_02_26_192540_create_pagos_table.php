@@ -15,7 +15,7 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('num_comprobante');
+            $table->integer('num_comprobante')->unsigned()->unique();
             $table->date('fecha_comprobante');
             $table->string('nombre_cliente');
             $table->integer('dni_cliente');

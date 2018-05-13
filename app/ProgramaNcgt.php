@@ -8,7 +8,7 @@ class ProgramaNcgt extends Model
 {
     protected $table='programa_ncgts';
     protected $fillable=[
-    'programa_id', 'descripcion', 'fecha_inicio', 'fecha_fin', 'horas', 'costo_matricula', 'costo_modulo_interno', 'costo_modulo_externo', 'costo_diploma', 'numero_modulo', 'maestria_id', 'estado', 'dependencia_id'
+    'programa_id', 'descripcion', 'fecha_inicio', 'fecha_fin', 'horas', 'numero_modulo', 'costo_matricula', 'costo_modulo', 'costo_diploma', 'descuento_interno', 'descuento_modulo_total', 'maestria_id', 'estado', 'dependencia_id'
     ];
     public function inscripcion_ncgts() {
       return $this->hasMany(InscripcionNcgt::class);

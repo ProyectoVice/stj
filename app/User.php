@@ -135,8 +135,15 @@ class User extends Authenticatable
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Encargado de PROMASTER': 
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-
-            //fin roles jhonattan 
+            //fin roles jhonattan
+            //roles Teddy
+            case 'UsuarioAsuntos': 
+               $avatar="<button class='btn btn-info' title='".$rol->descripcion."'><i class='ace-icon fa fa-folder-open'></i></button>";break;
+            case 'ViceAcademico': 
+               $avatar="<button class='btn btn-primary' title='".$rol->descripcion."'><i class='ace-icon fa fa-eye'></i></button>";break;
+            case 'DirEscuela': 
+               $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-lightbulb-o'></i></button>";break;
+            //fin roles Teddy 
 
             default: break;
         }

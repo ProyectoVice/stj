@@ -213,6 +213,10 @@ $variable="";
 						{{--Mòdulo ADMISIÒN--}}
 							@include('plantilla.modulos.admision')
 						{{-- FinADMISIÒN--}}
+
+						{{--Mòdulo asuntos--}}
+							@include('plantilla.modulos.academico')
+						{{-- FinADMISIÒN--}}
 				</ul>
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

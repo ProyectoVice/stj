@@ -12,13 +12,13 @@ class EscuelaSede extends Model
     ];
 
     public function sede() {
-      return $this->belongsto(Sedes::class);
+      return $this->belongsto(Sede::class);
   	}
   	public function escuela() {
       return $this->belongsto(Escuela::class);
   	}
-    public function escuela_modalidads(){
-      return $this->hasMany(EscuelaModalidad::class);
+    public function postulacions(){
+      return $this->hasMany(Postulacion::class);
     }
 
 }

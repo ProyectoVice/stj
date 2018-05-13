@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             //Otros
             $table->string('tipo_sangre')->nullable();
             $table->integer('genero')->default('1');
+            $table->integer('dependencia_id_depende')->nullable();
             $table->integer('colegio_id_iv')->nullable();
             $table->integer('colegio_id_v')->nullable();
             $table->string('estado_login')->default('0');

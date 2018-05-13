@@ -53,6 +53,7 @@ class UsersTableSeeder extends Seeder
                 'apellido_materno' => 'Guerra',
                 'email' => 'ttafurg@gmail.com',
                 'password' => bcrypt('pichoncito'),
+                'dependencia_id_depende' => 30,
         ]); 
         //Usuario Jhonattan 
         DB::table('users')->insert([
@@ -117,17 +118,24 @@ class UsersTableSeeder extends Seeder
                 ['user_id' => '4', 'rol_id' => '6',]
         ]);
             //DRSU
-        DB::table('rol_users')->insert([
-                'user_id' => '5',
-                'rol_id' => '5',
-        ]);
+        //DB::table('rol_users')->insert([
+                //'user_id' => '5',
+                //'rol_id' => '5',
+        //]);
             //DRSU-F
-        DB::table('rol_users')->insert([
-                'user_id' => '6',
-                'rol_id' => '6',
-        ]);
+        //DB::table('rol_users')->insert([
+                //'user_id' => '6',
+                //'rol_id' => '6',
+        //]);
 
         //Usuarios Teddy
+        DB::table('rol_users')->insert([
+    
+                 ['user_id' => '5', 'rol_id' => '2',],
+                 ['user_id' => '5', 'rol_id' => '30',],
+                 ['user_id' => '5', 'rol_id' => '31',],
+                 ['user_id' => '5', 'rol_id' => '32',]                
+        ]);
         
         //Usuario-Rol Jhonattan 
         DB::table('rol_users')->insert([

@@ -16,7 +16,7 @@ class DatosInscripcionTableSeeder extends Seeder
         DB::table('dependencias')->insert([
 
                 //Facultades
-                ['dependencia' => 'Vicerrectorado Academico', 'es_facultad'=>'0', 'es_escuela'=>'0', 'dependencia_id'=> '0',],
+                ['dependencia' => 'Vicerrectorado Academico', 'es_facultad'=>'0', 'es_escuela'=>'0', 'dependencia_id'=> null,],
                 //Facultades
                 ['dependencia' => 'Facultad de Ciencias Agrarias', 'es_facultad'=>'1', 'es_escuela'=>'0', 'dependencia_id'=> '1',],
                 ['dependencia' => 'Facultad de Medicina', 'es_facultad'=>'1', 'es_escuela'=>'0', 'dependencia_id'=> '1',],
@@ -61,8 +61,9 @@ class DatosInscripcionTableSeeder extends Seeder
                 ['dependencia' => 'Escuela Profesional INGENIERIA INDUSTRIAL', 'es_facultad'=>'0', 'es_escuela'=>'1', 'dependencia_id'=> '14',],
                 ['dependencia' => 'Escuela Profesional INGENIERIA DE SISTEMAS', 'es_facultad'=>'0', 'es_escuela'=>'1', 'dependencia_id'=> '14',],
                 ['dependencia' => 'Escuela Profesional MEDICINA VETERINARIA', 'es_facultad'=>'0', 'es_escuela'=>'1', 'dependencia_id'=> '15',],  
-                ['dependencia' => 'Escuela de Posgrado', 'es_facultad'=>'0', 'es_posgrado'=>'1', 'dependencia_id'=> '1',],
-                ['dependencia' => 'PROCAPT', 'es_facultad'=>'0', 'es_oficina'=>'1', 'dependencia_id'=> '1',]
+                ['dependencia' => 'Escuela de Posgrado', 'es_facultad'=>'0', 'es_posgrado'=>'1', 'dependencia_id'=> null,],
+                ['dependencia' => 'PROCAPT', 'es_facultad'=>'0', 'es_oficina'=>'1', 'dependencia_id'=> '1',],
+                ['dependencia' => 'PROMASTER', 'es_facultad'=>'0', 'es_oficina'=>'1', 'dependencia_id'=> 44,]
             ]);
         //tarifarios
         DB::table('tarifarios')->insert([
@@ -101,27 +102,44 @@ class DatosInscripcionTableSeeder extends Seeder
                  ['descripcion' => 'Maestria derecho de postulacion', 'monto'=>'250', 'es_modalidades'=>'0', 'es_maestria'=>'1',],
                  ['descripcion' => 'Doctorado derecho de postulacion', 'monto'=>'380', 'es_modalidades'=>'0', 'es_doctorado'=>'1',],
                  ['descripcion' => 'Diplomado en Gestion por Procesos-matricula', 'monto'=>'150', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
-                 ['descripcion' => 'Diplomado en Gestion por Procesos-modulo', 'monto'=>'200', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
+                 ['descripcion' => 'Diplomado en Gestion por Procesos-modulo', 'monto'=>'250', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
                  ['descripcion' => 'Diplomado en Gestion por Procesos-diploma', 'monto'=>'20', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
+                 ['descripcion' => 'Diplomado en Tics-matricula', 'monto'=>'100', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
+                 ['descripcion' => 'Diplomado en Tics-modulo', 'monto'=>'250', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
+                 ['descripcion' => 'Diplomado en Tics-diploma', 'monto'=>'30', 'es_modalidades'=>'0', 'es_diplomado'=>'1',],
                  ['descripcion' => 'PROCAPT-matricula', 'monto'=>'500', 'es_modalidades'=>'0', 'es_procapt'=>'1',],
-                 ['descripcion' => 'PROCAPT-modulo', 'monto'=>'700', 'es_modalidades'=>'0', 'es_procapt'=>'1',]
+                 ['descripcion' => 'PROCAPT-modulo', 'monto'=>'700', 'es_modalidades'=>'0', 'es_procapt'=>'1',],
+                ['descripcion' => 'PROMASTER-matricula', 'monto'=>'500', 'es_modalidades'=>'0', 'es_procapt'=>'1',],
+                ['descripcion' => 'PROMASTER-modulo', 'monto'=>'900', 'es_modalidades'=>'0', 'es_procapt'=>'1',]
+
             ]);
 
         //pagos
         DB::table('pagos')->insert([
                 ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-04-14', 'nombre_cliente'=> 'Juan', 'dni_cliente'=> '12345678', 'detalle'=> 'Seleccion General Medicina Humana-Nacional', 'importe'=> '350', 'estado_recibo'=> '0',],
                 ['num_comprobante' => '1234566', 'fecha_comprobante' => '2018-04-14', 'nombre_cliente'=> 'Maria', 'dni_cliente'=> '12345666', 'detalle'=> 'CEPREVAL Medicina Humana-Nacional', 'importe'=> '600', 'estado_recibo'=> '1',],
-                ['num_comprobante' => '1111111', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '2222222', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '3333333', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-diploma', 'importe'=> '20', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111111', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '1',],
+                ['num_comprobante' => '2222222', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '250', 'estado_recibo'=> '1',],
+                ['num_comprobante' => '3333333', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-diploma', 'importe'=> '20', 'estado_recibo'=> '1',],
                 ['num_comprobante' => '4444444', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678', 'detalle'=> 'PROCAPT-matricula', 'importe'=> '500', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '5555555', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678', 'detalle'=> 'PROCAPT-modulo', 'importe'=> '700', 'estado_recibo'=> '0',]
+                ['num_comprobante' => '5555555', 'fecha_comprobante' => '2018-04-18', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678', 'detalle'=> 'PROCAPT-modulo', 'importe'=> '700', 'estado_recibo'=> '0',],
+                ///
+                ['num_comprobante' => '1111222', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Juanito', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111333', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111444', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Karol', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-matricula', 'importe'=> '100', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111555', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Jesus', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111666', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-modulo', 'importe'=> '250', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111666', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-modulo', 'importe'=> '300', 'estado_recibo'=> '0',],
+                ['num_comprobante' => '1111777', 'fecha_comprobante' => '2018-05-10', 'nombre_cliente'=> 'Rafael', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-todos los modulo', 'importe'=> '550', 'estado_recibo'=> '0',]
+
         ]);
 
         //programa_ncgt
         DB::table('programa_ncgts')->insert([
-                ['programa_id' => '11', 'descripcion' => 'Diplomado en Gestion por Procesos', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '100', 'costo_matricula'=> '150', 'costo_modulo_interno'=> '200', 'costo_modulo_externo'=> '250','costo_diploma'=> '20', 'numero_modulo'=> '3', 'dependencia_id'=> '27',],
-                ['programa_id' => '9', 'descripcion' => 'PROCAPT Ingenieria de Sistemas', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-07-20', 'horas'=> '0','costo_matricula'=> '500', 'costo_modulo_interno'=> '700', 'costo_modulo_externo'=> '0', 'costo_diploma'=> '0', 'numero_modulo'=> '3', 'dependencia_id'=> '30',]
+                ['programa_id' => '11', 'descripcion' => 'Diplomado en Gestion por Procesos', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '100', 'numero_modulo'=> '3',  'costo_matricula'=> '150', 'costo_modulo'=> '250', 'costo_diploma'=> '20', 'descuento_interno' => '50', 'descuento_modulo_total'=> '100', 'dependencia_id'=> '27',],
+                ['programa_id' => '11', 'descripcion' => 'Diplomado en Tics', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '150', 'numero_modulo'=> '4',  'costo_matricula'=> '100', 'costo_modulo'=> '300', 'costo_diploma'=> '30', 'descuento_interno' => '50', 'descuento_modulo_total'=> '100', 'dependencia_id'=> '27',],
+                ['programa_id' => '9', 'descripcion' => 'PROCAPT Ingenieria de Sistemas', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null, 'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> '100', 'dependencia_id'=> '45',],
+                ['programa_id' => '10', 'descripcion' => 'PROMASTER Ingenieria de Sistemas mencion TICs', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null, 'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '900', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> '100', 'dependencia_id'=> '46',]
         ]);
         //modulo_ncgts
         DB::table('modulo_ncgts')->insert([
@@ -133,7 +151,7 @@ class DatosInscripcionTableSeeder extends Seeder
          //inscripcion_ncgts
         DB::table('inscripcion_ncgts')->insert([
                 ['user_id' => '3', 'programa_ncgt_id' => '1',],
-                ['user_id' => '3', 'programa_ncgt_id' => '2',]
+                ['user_id' => '3', 'programa_ncgt_id' => '3',]
                 
         ]);
 

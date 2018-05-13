@@ -8,6 +8,7 @@ class Curso extends Model
 {
     //
     protected $table='cursos';
+    protected $primaryKey = 'codigo';
     protected $fillable=[
     'codigo','nombre','ciclo','creditos','hteoria','hpractica','plan_estudio_id'
     ];
@@ -17,7 +18,8 @@ class Curso extends Model
       return $this->belongsto(PlanEstudio::class);
   	}
   	//hereda su llave a Carga lectiva
-    public function carga_lectivas() 
+    public function carga_lectivas()
     {
-      return $this->hasMany(CargaLectiva::class);
+        return $this->hasMany(CargaLectiva::class);
+    }
 }

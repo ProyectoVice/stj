@@ -17,6 +17,7 @@ class CreateCargaLectivasTable extends Migration
             $table->increments('id');
             $table->string('semestre');
             $table->string('estado')->default('1');
+            $table->integer('anio');
             $table->string('elaborar_clase');
             $table->integer('curso_id')->unsigned();
             $table->integer('docente_id')->unsigned();

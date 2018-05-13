@@ -19,7 +19,7 @@ class CreateInscripcionCursoDisponiblesTable extends Migration
             $table->integer('ciclo')->nullable();
             $table->integer('grupo')->nullable();
             $table->integer('inscripcion_curso_id')->unsigned();
-            $table->integer('nivel')->nullable();
+            $table->integer('nivel')->nullable();//1 basico 2 intermedio 3 avanzado
             $table->integer('docente_otros_user_id')->unsigned();            
 
             $table->foreign('inscripcion_curso_id')->references('id')->on('inscripcion_cursos')->onDelete('cascade');
