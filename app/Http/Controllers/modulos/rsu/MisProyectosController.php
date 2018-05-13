@@ -53,13 +53,33 @@ class MisProyectosController extends Controller
 
     public function equipo_show($id)
     {
-        $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+      // $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+      //          ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+      //          ->where('rsu_participantes.rsu_proyecto_id',$id)
+      //          ->select(DB::raw('CONCAT(users.nombres,", ",users.apellido_paterno," ",users.apellido_materno) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad', 'rsu_participantes.id AS id')->get();
+
+       $docentes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+               ->join('docentes AS doc','doc.user_id','=','users.id')
+               ->join('escuelas','escuelas.id','=','doc.escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
-               ->select(DB::raw('CONCAT(users.nombres,", ",users.apellido_paterno," ",users.apellido_materno) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad', 'rsu_participantes.id AS id')->get();
-         
-         
-         //return $equipo;
+               ->where('rsu_participantes.rsu_responsabilidad_id','<>',3)
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela', 'rsu_participantes.id AS id')->get();
+        $estudiantes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
+               ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
+               ->join('estudiantes AS doc','doc.user_id','=','users.id')
+               ->join('escuelas','escuelas.id','=','doc.escuela_id')
+               ->where('rsu_participantes.rsu_proyecto_id',$id)
+               ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela','rsu_participantes.id AS id')->get();
+        $equipo=array();
+        //Fusionamos los controladores
+        foreach ($docentes as $d) {
+            $equipo[]=$d;
+        }
+        foreach ($estudiantes as $e) {
+            $equipo[]=$e;
+        }
 
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($equipo)->toJson();

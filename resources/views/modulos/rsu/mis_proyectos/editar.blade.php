@@ -398,20 +398,8 @@ jQuery(function($) {
 			        "columns" : [
 				        {data:"dni"},
 				        {data:"nombres"},
-				        {data:null, render:
-				        	function(data,type,row){
-				        		
-				        		if(data.id_responsabilidad=='1' || data.id_responsabilidad=='2'){
-				        			return "{!!\App\Docente::find('2')->escuela->escuela!!}";
-
-				        		}else if(data.id_responsabilidad=='3'){
-				        			return "Estudiante";
-				        		}else{
-				        			return "No definido";
-				        		}
-		            		 	return  data.id_user;
-				        	}
-				        },
+				         {data:"dni"},
+				        
 				        {data:"tipo"},
 				        {data:null,bSortable: false, render: 
 				        		function ( data, type, row ) {
