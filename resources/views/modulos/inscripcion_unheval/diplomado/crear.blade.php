@@ -9,7 +9,7 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Programa</li>
-	<li class=""><a href="{{ route('diplomado.ins.index') }}"> Inscripciones</a></li>
+	<li class=""><a href="{{ route('diplomado.ins.index', ['tipo'=>$tipo]) }}"> Inscripciones</a></li>
 	<li class="">Nuevo</li>
 </ul>
 @endsection

@@ -77,11 +77,12 @@ Route::group(['prefix' => 'adminsion'],function(){
 Route::group(['prefix' => 'diplomado'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
 		Route::get('/','modulos\diplomado\DiplomadoController@index')->name('diplomado.ins.index');
-		Route::get('create/{descripcion}/{dni}/{n_comprobante}/{f_comprobante}/{tipo}', 'modulos\diplomado\DiplomadoController@create')->name('diplomado.ins.create');
+		Route::post('create', 'modulos\diplomado\DiplomadoController@create')->name('diplomado.ins.create');
 		Route::post('store', 'modulos\diplomado\DiplomadoController@store')->name('diplomado.ins.store');
 		Route::post('validar', 'modulos\diplomado\DiplomadoController@validar')->name('diplomado.ins.validar');
-		Route::post('validar1', 'modulos\diplomado\DiplomadoController@validar_pago')->name('diplomado.ins.validar_pago');			
-		Route::get('datos','modulos\diplomado\DiplomadoController@datatables')->name('diplomado.ins.datos');
+		Route::post('validar1', 'modulos\diplomado\DiplomadoController@validar_pago')->name('diplomado.ins.validar_pago');
+        Route::post('validar2', 'modulos\diplomado\DiplomadoController@validar_descuento')->name('diplomado.ins.validar_descuento');
+        Route::get('datos','modulos\diplomado\DiplomadoController@datatables')->name('diplomado.ins.datos');
 		Route::delete('delete/{id}','modulos\diplomado\DiplomadoController@destroy')->name('diplomado.ins.delete');
 		Route::get('editar/{id}','modulos\diplomado\DiplomadoController@edit')->name('diplomado.ins.edit');
 		Route::put('update/{id}','modulos\diplomado\DiplomadoController@update')->name('diplomado.ins.update');			

@@ -9,7 +9,7 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Programa</li>
-	<li class=""><a href="{{ route('diplomado.ins.index') }}"> Inscripciones</a></li>
+	<li class=""><a href="{{ route('diplomado.ins.index', ['tipo'=>$tipo]) }}"> Inscripciones</a></li>
 	<li class="">Nuevo</li>
 </ul>
 @endsection
@@ -25,14 +25,7 @@
 
 			{{ csrf_field() }}
 		<div class="col-sm-12">
-			<div class="row form-group">
-				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Programa</label>
-				<div class="col-sm-4">
-					 <div class="clearfix">
-                        {!!Form::select('descripcion',$programa,null,['id'=>'descripcion', 'class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Programa'])!!}
-                      </div>
-				</div>
-			</div>
+
 			<div class="row form-group">				
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">DNI</label>
 				<div class="col-sm-4 col-sm-offset-0">
@@ -113,6 +106,7 @@
 				<div>
 					<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div> 
 				</div>
+			<input type="hidden" name="tipo" value="{{$tipo}}">
 		</div>		
 {!! Form::close() !!}			                  
 								<!-- PAGE CONTENT ENDS -->

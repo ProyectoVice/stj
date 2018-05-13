@@ -19,7 +19,7 @@ class CreateInscripcionNcgtsTable extends Migration
             $table->integer('programa_ncgt_id')->unsigned();
             $table->integer('es_interno')->nullable();
             $table->integer('es_pago_total')->nullable();
-            $table->integer('cancelacion')->default(0);//aun no cancela el total
+            $table->integer('estado')->default(1);//1 activo 0 inactivo
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('programa_ncgt_id')->references('id')->on('programa_ncgts')->onDelete('cascade');
