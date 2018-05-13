@@ -20,7 +20,7 @@ class CreatePlanEstudiosTable extends Migration
             $table->integer('anio');
             $table->integer('estado');
             $table->integer('escuela_id')->unsigned();
-            $table->foreign('escuela_id')->references('id')->on('dependencia')->onDelete('cascade');
+            $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
             $table->timestamps();
         });
     }
