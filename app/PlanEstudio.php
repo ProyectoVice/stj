@@ -21,4 +21,15 @@ class PlanEstudio extends Model
     {
      return $this->hasMany(Curso::class);
     }
+
+    public static function getForSelect($escuela){
+        $plan = [];
+        $esp = PlanEstudio::select(['anio','resolucion', 'id'])
+            ->where('escuela_id', '=', $escuela);
+        foreach ($esp->get() as $data){
+            $plan[$data->id]=$data->anio.' - '. $data->resolucion;
+        }
+        return $plan;
+
+    }
 }

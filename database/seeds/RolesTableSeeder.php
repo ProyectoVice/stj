@@ -129,5 +129,18 @@ class RolesTableSeeder extends Seeder
                 'rol' => 'Encargado de PROMASTER',
                 'descripcion' => 'Encargado de PROMASTER',
         ]);
+           // usuarios teddy - 30 - 32
+           DB::table('rols')->insert([
+                'rol' => 'UsuarioAsuntos',
+                'descripcion' => 'Asuntos Académicos: Realiza la Programación',
+        ]);
+           DB::table('rols')->insert([
+                'rol' => 'ViceAcademico',
+                'descripcion' => 'Vicerrector Académico: Visualisa la programación',
+        ]);
+           DB::table('rols')->insert([
+                'rol' => 'DirEscuela',
+                'descripcion' => 'Director de Escuela: Gestiona la Escuela Profesional',
+        ]);
     }
 }

@@ -10,19 +10,15 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     //return view('plantilla.usuario');
 	return view('ingreso');
 });
-
 // Authentication Routes...
 Route::post('login', 'Auth\LoginController@login');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
 //RSU
-
 Route::group(['prefix' => 'rsu'],function(){
 	Route::group(['prefix' => 'mis_proyectos'],function(){
 		Route::get('/','modulos\rsu\MisProyectosController@index')->name('rsu.mp.index');
@@ -45,17 +41,12 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('ver-file/{id}','modulos\rsu\MisProyectosController@ver_archivos')->name('rsu.mp.ver-file');
 		Route::put('informe/subir/{id}','modulos\rsu\MisProyectosController@update_file')->name('rsu.mp.file-up');
 		Route::get('equipo/{id}','modulos\rsu\MisProyectosController@equipo_show')->name('rsu.mp.equipo-show');
-	});
-        
+	});        
 });
-
 //Route::resource('rsu-misproyectos', 'modulos\rsu\MisProyectosController');
- 
 //Route::get('rsu-datos', 'modulos\rsu\MisProyectosController@datatables')->name('datos'); 
 //Route::post('evidencias/{post}/imagen', 'modulos\rsu\MisProyectosController@evidencias')->name('evidencias');  
-
 //Fin RSU
-
 //Adminsión
 Route::group(['prefix' => 'adminsion'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
@@ -72,7 +63,6 @@ Route::group(['prefix' => 'adminsion'],function(){
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 }); 
-
 //Adminsión
 Route::group(['prefix' => 'diplomado'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
@@ -89,7 +79,6 @@ Route::group(['prefix' => 'diplomado'],function(){
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 });
-
 //Usuarios
 Route::group(['prefix' => 'usuario'],function(){
 	Route::group(['prefix' => 'nuevo'],function(){
@@ -109,49 +98,41 @@ Route::group(['prefix' => 'usuario'],function(){
 Route::get('prov/{id}', 'modulos\admision\AdmisionController@provincia')->name('provincia');
 Route::get('dist/{id}', 'modulos\admision\AdmisionController@distrito')->name('distrito');*/   
 //Fin Admisión
-
 //Inscripciones-UNHEVAL
 /*Route::group(['prefix' => 'unheval'],function(){
 	Route::group(['prefix' => 'inscripcion'],function(){
 		Route::get('unheval1','modulos\inscripcion\ProgramasController@index')->name('unheval.ins.index');
 
 		Route::get('create/{dni}', 'modulos\inscripcion\ProgramasController@create')->name('unheval.ins.create');
-		//Route::post('store', 'modulos\admision\AdmisionController@store')->name('adminsion.ins.store');
+		Route::post('store', 'modulos\admision\AdmisionController@store')->name('adminsion.ins.store');
 		Route::post('validar', 'modulos\inscripcion\ProgramasController@validar')->name('unheval.ins.validar');		
-		//Route::get('datos','modulos\admision\AdmisionController@datatables')->name('adminsion.ins.datos');
-		//Route::get('lineas/{id}', 'modulos\admision\AdmisionController@lineas')->name('Adminsion.ins.lineas');
-		//Route::delete('delete/{id}','modulos\inscripcion\ProgramasController@destroy')->name('unheval.ins.delete');
-		//Route::get('editar/{id}','modulos\inscripcion\ProgramasController@edit')->name('unheval.ins.edit');
-		//Route::put('update/{id}','modulos\inscripcion\ProgramasController@update')->name('unheval.ins.update');		
+		Route::get('datos','modulos\admision\AdmisionController@datatables')->name('adminsion.ins.datos');
+		Route::get('lineas/{id}', 'modulos\admision\AdmisionController@lineas')->name('Adminsion.ins.lineas');
+		Route::delete('delete/{id}','modulos\inscripcion\ProgramasController@destroy')->name('unheval.ins.delete');
+		Route::get('editar/{id}','modulos\inscripcion\ProgramasController@edit')->name('unheval.ins.edit');
+		Route::put('update/{id}','modulos\inscripcion\ProgramasController@update')->name('unheval.ins.update');		
 	});
-        //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');
-        
+        Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');       
 }); */
 //Inscripciones-UNHEVAL
 Route::resource('unheval', 'modulos\inscripcion\UnhevalController');
 Route::get('maar/{id}', 'modulos\inscripcion\UnhevalController@maestria')->name('maestria');
 Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name('provincia');
 Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
-
 //Inscripciones-UNHEVAL
-Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
+//Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
+//Calendario
+    Route::group(['prefix' => 'calendario'],function(){
+        Route::get('{tipo}','modulos\academico\AcademicoController@index')->name('academico.calendario.index');
+        Route::get('{tipo}/data','modulos\academico\AcademicoController@cal_date')->name('academico.calendario.data');
+        Route::post('{tipo}/new','modulos\academico\AcademicoController@cal_new')->name('academico.calendario.new');
+        Route::post('{tipo}/del','modulos\academico\AcademicoController@cal_del')->name('academico.calendario.del');
+        Route::post('{tipo}/act','modulos\academico\AcademicoController@cal_act')->name('academico.calendario.act');
+        Route::get('{tipo}/tabla','modulos\academico\AcademicoController@cal_tabla')->name('academico.calendario.tabla');
+    });
+// carga lectiva
+    Route::group(['prefix' => 'carga'],function(){
+        Route::get('/{plan}/{ciclo}/{anio}','modulos\CargaController@index')->name('academico.carga.index');
+        Route::get('/{plan}/{ciclo}/{anio}/data','modulos\CargaController@cal_tabla')->name('academico.carga.tabla');
 
-//Calendario Asuntos
-
-Route::group(['prefix' => 'academico'],function(){
-	Route::group(['prefix' => 'general'],function(){
-		Route::get('calendario','modulos\academico\AcademicoController@index')->name('academico.cal_gen.index');
-		Route::get('calendario/data','modulos\academico\AcademicoController@cal_date')->name('academico.cal_gen.data');
-		Route::post('calendario/new','modulos\academico\AcademicoController@cal_new')->name('academico.cal_gen.new');
-		Route::post('calendario/del','modulos\academico\AcademicoController@cal_del')->name('academico.cal_gen.del');
-		Route::post('calendario/act','modulos\academico\AcaddemicoController@cal_act')->name('academico.cal_gen.act');
-		Route::get('tabla','modulos\academico\AcademicoController@cal_tabla')->name('academico.cal_gen.tabla');
-						
-	});
-	});
-Route::group(['prefix' => 'academico'],function(){
-	Route::group(['prefix' => 'calendarioEsc'],function(){
-		Route::get('Calendary','modulos\academico\AcademicoEscuelaController@index')->name('academico.cal_escuela.index');
-				
-	});
-	});
+    });
