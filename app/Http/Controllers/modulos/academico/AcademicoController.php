@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\modulos\academico;
 
+use App\Calendario;
+use App\Dependencia;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\CalPregraGen;
@@ -14,22 +17,36 @@ class AcademicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($tipo, Request $request)
     {
-          return view('modulos.academico.calendario.asuntos');
+        Auth::user()->dependencia_id_depende;
+          return view('modulos.academico.calendario.asuntos', ['tipo'=>$tipo,'dependencia'=>Dependencia::find(Auth::user()->dependencia_id_depende)->dependencia]);
     }
 
-    public function cal_date(){
-        return CalPregraGen::get();
+    public function cal_date($tipo, Request $request){
+        $where=null;
+        switch ($tipo){
+            case 'academico':{$calendario=Calendario::where('es_general','=',1);}break;
+            case 'escuela':{$calendario=Calendario::where('es_general','=',1)->orWhere('escuela_id','=',Auth::user()->dependencia_id_depende);}break;
+        }
+        return $calendario->get();
     }
 
-    public function cal_tabla(){
-        return datatables()->of(CalPregraGen::get())->toJson();
+    public function cal_tabla($tipo, Request $request){
+        $where=null;
+        switch ($tipo){
+            case 'academico':{$where =[['es_general','=',1]];}break;
+            case 'escuela':{$where =[['es_general','=',0],['escuela_id','=',Auth::user()->dependencia_id_depende]];}break;
+        }
+        $calendario=Calendario::where($where);
+
+        return datatables()->of($calendario->get())->toJson();
     }
 
-    public function cal_new(Request $request){
-        
-        $proyecto=new CalPregraGen;
+    public function cal_new($tipo, Request $request){
+        $is_general=null;
+
+        $proyecto=new Calendario;
         $proyecto->title=$request->get('title');
         $proyecto->descripcion=$request->get('descripcion');
         $proyecto->color=$request->get('color');
@@ -37,18 +54,27 @@ class AcademicoController extends Controller
         $proyecto->responsable=$request->get('responsable');
         $proyecto->start=Carbon::createFromFormat('d/m/Y H:i',$request->get('start'));
         $proyecto->end=Carbon::createFromFormat('d/m/Y H:i',$request->get('end'));
+
+        switch ($tipo){
+            case 'academico':{$proyecto->es_general=1;}break;
+            case 'escuela':{
+                $proyecto->es_general=0;
+                $proyecto->escuela_id=Auth::user()->dependencia_id_depende;
+            }break;
+            default: {return ['error en la operacion'];}break;
+        }
         $proyecto->save();
         //return $request;
     }
 
-    public function cal_del(Request $request){
+    public function cal_del($tipo, Request $request){
         $id=$request->get('id');
-        CalPregraGen::destroy($id);
+        Calendario::destroy($id);
     }
 
     public function cal_act(Request $request, $id){
         $id=$request->get('id');
-        CalPregraGen::find($id);
+        $proyecto=Calendario::find($id);
         $proyecto->title=$request->get('title');
         $proyecto->descripcion=$request->get('descripcion');
         $proyecto->color=$request->get('color');

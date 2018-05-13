@@ -120,25 +120,18 @@ Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name
 Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
 //Inscripciones-UNHEVAL
 //Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
-//Calendario Asuntos
-Route::group(['prefix' => 'academico'],function(){
-	Route::group(['prefix' => 'general'],function(){
-		Route::get('calendario','modulos\academico\AcademicoController@index')->name('academico.cal_gen.index');
-		Route::get('calendario/data','modulos\academico\AcademicoController@cal_date')->name('academico.cal_gen.data');
-		Route::post('calendario/new','modulos\academico\AcademicoController@cal_new')->name('academico.cal_gen.new');
-		Route::post('calendario/del','modulos\academico\AcademicoController@cal_del')->name('academico.cal_gen.del');
-		Route::post('calendario/act','modulos\academico\AcademicoController@cal_act')->name('academico.cal_gen.act');
-		Route::get('tabla','modulos\academico\AcademicoController@cal_tabla')->name('academico.cal_gen.tabla');			
-	});
-	});
-Route::group(['prefix' => 'academico'],function(){
-	Route::group(['prefix' => 'escuela'],function(){
-		Route::get('calesc','modulos\academico\AcademicoEscuelaController@index')->name('academico.cal_escuela.index');
-		Route::get('calesc/data','modulos\academico\AcademicoEscuelaController@cal_date')->name('academico.cal_escuela.data');
-		Route::post('calesc/new','modulos\academico\AcademicoEscuelaController@cal_new')->name('academico.cal_escuela.new');
-		Route::post('calesc/del','modulos\academico\AcademicoEscuelaController@cal_del')->name('academico.cal_escuela.del');
-		Route::get('calesc/act','modulos\academico\AcademicoEscuelaController@cal_act')->name('academico.cal_escuela.act');
-		Route::get('tabla','modulos\academico\AcademicoEscuelaController@cal_tabla')->name('academico.cal_escuela.tabla');
-				
-	});
-	});
+//Calendario
+    Route::group(['prefix' => 'calendario'],function(){
+        Route::get('{tipo}','modulos\academico\AcademicoController@index')->name('academico.calendario.index');
+        Route::get('{tipo}/data','modulos\academico\AcademicoController@cal_date')->name('academico.calendario.data');
+        Route::post('{tipo}/new','modulos\academico\AcademicoController@cal_new')->name('academico.calendario.new');
+        Route::post('{tipo}/del','modulos\academico\AcademicoController@cal_del')->name('academico.calendario.del');
+        Route::post('{tipo}/act','modulos\academico\AcademicoController@cal_act')->name('academico.calendario.act');
+        Route::get('{tipo}/tabla','modulos\academico\AcademicoController@cal_tabla')->name('academico.calendario.tabla');
+    });
+// carga lectiva
+    Route::group(['prefix' => 'carga'],function(){
+        Route::get('/{plan}/{ciclo}/{anio}','modulos\CargaController@index')->name('academico.carga.index');
+        Route::get('/{plan}/{ciclo}/{anio}/data','modulos\CargaController@cal_tabla')->name('academico.carga.tabla');
+
+    });

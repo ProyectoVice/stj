@@ -25,6 +25,7 @@ class CreateDependenciasTable extends Migration
             $table->integer('es_posgrado')->nullable();
             $table->integer('es_direccion')->nullable();
             $table->integer('es_oficina')->nullable();
+            $table->integer('es_dep_ac')->nullable();
             $table->integer('dependencia_id')->nullable();
             $table->timestamps();
         });

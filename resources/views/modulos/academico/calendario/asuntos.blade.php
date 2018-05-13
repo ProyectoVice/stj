@@ -10,15 +10,18 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-calendar"></i>
 	<li class="active">Calendario Académico</li>
-	
+  @if($tipo=='academico')
 	<li class="">General Pre Grado</li>
+  @elseif($tipo=='escuela')
+    <li class="">Pre Grado</li>
+    @endif
 </ul>
 @endsection
 
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
-      <h3> Ciclo Regular </h3>
+      <h3> Ciclo Regular {{$dependencia}}</h3>
       {{ csrf_field() }}
     </div>
     <div class="col-sm-6 hidden-xs">
@@ -142,7 +145,7 @@ $(document).ready(function(){
     var myTable=$('#dynamic-table').DataTable( {
       "processing": true,
       "serverSide": true,
-      "ajax": '{!! route('academico.cal_gen.tabla')!!}',
+      "ajax": '{!! route('academico.calendario.tabla',[$tipo])!!}',
       "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
       "order": [[ 1, "asc" ]],
       "columns" : [
@@ -155,58 +158,62 @@ $(document).ready(function(){
         } );
   
   //Calendario Asuntos
-  $('#calendar').fullCalendar({
-    header: {
-      left: 'prevYear,prev, title, next,nextYear',
-      center: '',
-      right: 'month,agendaWeek,agendaDay,listWeek'
-    },
-  
-  //Click en un día sin evento
-  dayClick: function(date, jsEvent, view) {
-    var diaCapturado=date.format('DD/MM/YYYY HH:mm');
-    var diaCapturado2=date.add(23, 'hours').add(59, 'minutes').format('DD/MM/YYYY HH:mm');
-    $('#dateStar-new').val(diaCapturado);
-    $('#dateEnd-new').val(diaCapturado2);
-    $('#txtTitulo-new').val('');
-    $('#txtdescripcion-new').val('');
-    $('#txtResponsable').val('');
-    $('#titleModal').html("Nueva Actividad/evento");
-    //Botones
-    $('#btn-eliminar').hide();
-    $('#btn-actualizar').hide();
-    $('#btn-guardar').show();
-    //alert('Current view: ' + date.format('YYYY-MM-DD HH:mm:ss'));
-    $('#CalenderModalNew').modal();          
-    },
-         
-  events: '{!! route('academico.cal_gen.data') !!}',
-  //Click en un evento
-  eventClick: function(date, jsEvent, view) {
-  //alert(date.title);
-    $('#dateStar-new').val(date.start.format('DD/MM/YYYY HH:mm'));
-      if(date.end==null){
-        var dateEnd=date.start.add(11, 'hours').format('DD/MM/YYYY HH:mm');
-      }else{
-        var dateEnd=date.end.format('DD/MM/YYYY HH:mm');  
-          }
-          $('#id-cal').val(date.id);
-          $('#dateEnd-new').val(dateEnd);
-          $('#txtTitulo-new').val(date.title);
-          $('#txtColor-new').val(date.color);
-          $('#txtTextColor-new').val(date.textColor);
-          $('#txtdescripcion-new').val(date.descripcion);
-          $('#txtResponsable').val(date.responsable);
-          
-          $('#titleModal').html("Actualizar Evento");
-          //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
+  $('#calendar').fullCalendar(
+      {
+      events: '{!! route('academico.calendario.data',[$tipo]) !!}',
+        header: {
+          left: 'prevYear,prev, title, next,nextYear',
+          center: '',
+          right: 'month,agendaWeek,agendaDay,listWeek'
+        },
+        //Click en un día sin evento
+        dayClick: function(date, jsEvent, view) {
+        var diaCapturado=date.format('DD/MM/YYYY HH:mm');
+        var diaCapturado2=date.add(23, 'hours').add(59, 'minutes').format('DD/MM/YYYY HH:mm');
+        $('#dateStar-new').val(diaCapturado);
+        $('#dateEnd-new').val(diaCapturado2);
+        $('#txtTitulo-new').val('');
+        $('#txtdescripcion-new').val('');
+        $('#txtResponsable').val('');
+        $('#titleModal').html("Nueva Actividad/evento");
+        //Botones
+        $('#btn-eliminar').hide();
+        $('#btn-actualizar').hide();
+        $('#btn-guardar').show();
+        //alert('Current view: ' + date.format('YYYY-MM-DD HH:mm:ss'));
+        $('#CalenderModalNew').modal();
+        },
+        //Click en un evento
+        eventClick: function(date, jsEvent, view) {
+        console.log(date);
+          $('#dateStar-new').val(date.start.format('DD/MM/YYYY HH:mm'));
+            if(date.end==null){
+              var dateEnd=date.start.add(11, 'hours').format('DD/MM/YYYY HH:mm');
+            }else{
+              var dateEnd=date.end.format('DD/MM/YYYY HH:mm');
+            }
+            $('#id-cal').val(date.id);
+            $('#dateEnd-new').val(dateEnd);
+            $('#txtTitulo-new').val(date.title);
+            $('#txtColor-new').val(date.color);
+            $('#txtTextColor-new').val(date.textColor);
+            $('#txtdescripcion-new').val(date.descripcion);
+            $('#txtResponsable').val(date.responsable);
 
-          //Botones
-          $('#btn-guardar').hide();
-          $('#btn-eliminar').show();
-          $('#btn-actualizar').show();
-          $('#CalenderModalNew').modal();
-       },
+            $('#titleModal').html("Actualizar Evento");
+            //alert('Current view: ' + date.format('YYYY-MM-DD hh:mm:ss'));
+
+            //Botones
+            $('#btn-guardar').hide();
+            if(date.es_general=={{($tipo=='escuela'?0:1)}}) {
+                $('#btn-eliminar').show();
+                $('#btn-actualizar').show();
+            }else {
+                $('#btn-eliminar').hide();
+                $('#btn-actualizar').hide();
+            }
+            $('#CalenderModalNew').modal();
+        },
       });
     
 //Agregar un evento
@@ -218,7 +225,7 @@ $('#btn-guardar').click(function(){
     return 0;
       }
     $.ajax({ 
-      url: '{{ route('academico.cal_gen.new') }}',
+      url: '{{ route('academico.calendario.new',[$tipo]) }}',
       type: 'POST',
       data: NuevoEvento,
        success: function (data) {
@@ -237,7 +244,7 @@ $('#btn-eliminar').click(function(){
 //capturamos los datos
   recolectarDatos();
     $.ajax({ 
-      url: '{{ route('academico.cal_gen.del') }}',
+      url: '{{ route('academico.calendario.del',[$tipo]) }}',
       type: 'POST',
       data: NuevoEvento,
         success: function (data) {
@@ -259,7 +266,7 @@ $('#btn-actualizar').click(function(){
 //capturamos los datos
   recolectarDatos();
     $.ajax({ 
-      url: '{{ route('academico.cal_gen.act') }}',
+      url: '{{ route('academico.calendario.act',[$tipo]) }}',
       type: 'POST',
       data: NuevoEvento,
         success: function (data) {

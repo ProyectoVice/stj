@@ -13,7 +13,7 @@ class CreateCalPregraEscsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cal_pregra_escs', function (Blueprint $table) {
+        Schema::create('calendarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('descripcion',600);
@@ -22,8 +22,9 @@ class CreateCalPregraEscsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('responsable');
-            $table->integer('escuela_id')->unsigned();
-            $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
+            $table->integer('escuela_id')->unsigned()->nullable();
+            $table->integer('es_general')->unsigned();
+            //$table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateCalPregraEscsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cal_pregra_escs');
+        Schema::dropIfExists('calendarios');
     }
 }
