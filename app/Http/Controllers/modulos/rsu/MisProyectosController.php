@@ -14,6 +14,8 @@ use App\RsuEvidencias;
 use App\RsuCalendario;
 use Carbon\Carbon;
 use Auth;
+use App\User;
+use Input;
 
 use Softon\SweetAlert\Facades\SWAL;  
 use DB;
@@ -39,9 +41,12 @@ class MisProyectosController extends Controller
     }
     public function datatables()
     {
-        $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
-                              ->join('rsu_responsabilidads AS r','r.id','=','p.rsu_responsabilidad_id')
-                              ->select('rsu_proyectos.*','r.rsu_responsabilidad AS rp')->get();
+        // $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
+        //                       ->join('rsu_responsabilidads AS r','r.id','=','p.rsu_responsabilidad_id')
+        //                       ->select('rsu_proyectos.*','r.rsu_responsabilidad AS rp')->get();
+         $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
+                              ->where('p.user_id','=',Auth::user()->id)
+                              ->select('rsu_proyectos.*')->get();
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($proyecto)->toJson();
     }
@@ -51,13 +56,52 @@ class MisProyectosController extends Controller
         $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
-               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad')->get();
+               ->select(DB::raw('CONCAT(users.nombres,", ",users.apellido_paterno," ",users.apellido_materno) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad', 'rsu_participantes.id AS id')->get();
          
          
          //return $equipo;
 
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($equipo)->toJson();
+    }
+
+    public function equipo_users(Request $request,$id)
+    {
+
+        $term = $request->get('term');
+        $results = array();
+        $queries = DB::table('users')
+         ->where('nombres', 'LIKE', '%'.$term.'%')
+         ->orWhere('apellido_paterno', 'LIKE', '%'.$term.'%')
+         ->orWhere('apellido_materno', 'LIKE', '%'.$term.'%')
+         ->orWhere('dni', 'LIKE', '%'.$term.'%')
+         ->take(5)->get();
+    
+       foreach ($queries as $query)
+       {
+         $buscarIntegrante=RsuParticipante::where("user_id",$query->id)
+             ->where("rsu_proyecto_id",$id)->first();
+         if($buscarIntegrante){
+            continue;
+         }
+         $results[] = [ 'id' => $query->id, 'value' => $query->dni.' - '.$query->nombres.' '.$query->apellido_paterno.' '.$query->apellido_materno ];
+       }
+         return response()->json($results);
+    
+   }
+    public function equipo_users_new(Request $request)
+    {
+        $equipo=new RsuParticipante;
+        $equipo->rsu_proyecto_id=$request->get('id_proyecto');
+        $equipo->user_id=$request->get('id_boton');
+        $equipo->rsu_responsabilidad_id='2';
+        $equipo->save();
+        return "Exito";
+    }
+    public function equipo_users_d($id)
+    {
+      //Filtros
+       RsuParticipante::destroy($id);
     }
     /**
      * Show the form for creating a new resource.

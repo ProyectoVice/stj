@@ -6,49 +6,51 @@
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
 	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
   <style type="text/css">
-#search {
-    
-    margin-top: 9px;
-    width: 250px;
-}
 
-.search {
-    padding: 5px 0;
-    width: 230px;
-    height: 30px;
-    position: relative;
-    left: 10px;
-    float: left;
-    line-height: 22px;
-}
+	.search {
+	    padding: 5px;
+	    width: 230px;
+	    height: 40px;
+	    position: relative;
+	    left: -70px;
+	    border-radius: 60%;
+	}
 
-    .search input {
+    .search #input_nuevo {
         position: absolute;
-        width: 0px;
-        float: Left;
-        margin-left: 210px;
+        width: 100px;
+        margin-right: 0px;
+
         -webkit-transition: all 0.7s ease-in-out;
         -moz-transition: all 0.7s ease-in-out;
         -o-transition: all 0.7s ease-in-out;
         transition: all 0.7s ease-in-out;
+
         height: 30px;
         line-height: 18px;
         padding: 0 2px 0 2px;
         border-radius:1px;
     }
 
-        .search:hover input, .search input:focus {
-            width: 200px;
-            margin-left: 0px;
-        }
+    
 
-.btn {
-    height: 30px;
-    position: absolute;
-    right: 0;
-    top: 5px;
-    border-radius:1px;
-}
+	#btn_mas {
+	    height: 30px;
+	    position: absolute;
+	    left: 100px;
+	    top: 5px;
+	    -webkit-transition: all 0.7s ease-in-out;
+        -moz-transition: all 0.7s ease-in-out;
+        -o-transition: all 0.7s ease-in-out;
+        transition: all 0.7s ease-in-out;
+	}
+
+	.search:hover #input_nuevo,  #input_nuevo:focus {
+        width: 400px;
+    }
+    .search:hover #btn_mas, #input_nuevo:focus + #btn_mas{
+        left: 400px;
+    }
 
 
   </style>
@@ -211,10 +213,9 @@
 					<div class="table-header">
            				<div id="custom-search-input">
 			                <div class="container">
-							
 						        <div class="search">
-									<input type="text" class="form-control input-sm" maxlength="100" placeholder="Nuevo" />
-									 <button type="submit" class="btn btn-primary btn-sm"><i class="icon fa fa-plus"></i></button>
+									<input type="text" class="form-control input-sm" id="input_nuevo" name="input_nuevo" placeholder="DNI - Nombres y Apellidos" onKeypress="if (event.keyCode == 13) event.returnValue = false;" dentro del form />
+									 <a href="#" id="btn_mas" class="btn btn-success btn-sm"><i class="icon fa fa-plus"></i></a>
 								</div>
 							</div>
 					
@@ -303,31 +304,8 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-$( function() {
-    var names = [ "87654346 - Jörn Zaefferer", "2134656443 - Scott González", "11111111 - John Resig", "48315690 - Saul escandón", "22435442 - Jonatan" ];
- 
-    var accentMap = {
-      "á": "a",
-      "ö": "o"
-    };
-    var normalize = function( term ) {
-      var ret = "";
-      for ( var i = 0; i < term.length; i++ ) {
-        ret += accentMap[ term.charAt(i) ] || term.charAt(i);
-      }
-      return ret;
-    };
- 
-    $( "#developer" ).autocomplete({
-      source: function( request, response ) {
-        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-        response( $.grep( names, function( value ) {
-          value = value.label || value.value || value;
-          return matcher.test( value ) || matcher.test( normalize( value ) );
-        }) );
-      }
-    });
-  } );
+
+
 //Enviar datos al servidor
 	$('form').on('submit', function() {
 		//stj_editor_enviar('Nombre_px_enviar_a_servidor','#ID_del_div_con_la_clase_<stj-editor-basic>');
@@ -424,8 +402,6 @@ jQuery(function($) {
 				        	function(data,type,row){
 				        		
 				        		if(data.id_responsabilidad=='1' || data.id_responsabilidad=='2'){
-				        			
-				        			
 				        			return "{!!\App\Docente::find('2')->escuela->escuela!!}";
 
 				        		}else if(data.id_responsabilidad=='3'){
@@ -434,18 +410,105 @@ jQuery(function($) {
 				        			return "No definido";
 				        		}
 		            		 	return  data.id_user;
-				        		
 				        	}
 				        },
 				        {data:"tipo"},
 				        {data:null,bSortable: false, render: 
-				        	function ( data, type, row ) {
-				        	return "Hola Mundo";
+				        		function ( data, type, row ) {
+				        			var mas = "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a>";
+				        			if(data.id_responsabilidad=='1'){
+				        				var eliminar="</div>";
+				        			}else{
+				        				var eliminar="<a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        			}
+				        			var acciones=mas+eliminar;
+				        			return acciones;
                 			}
                 		}
 			        ],
-			    })
-})
+			    });
+
+		//Autocompletar en imput 
+		$( "#input_nuevo" ).autocomplete({
+		  source: "{!!route('rsu.mp.users',$proyecto->id)!!}",
+		  minLength: 2,
+		  select: function(event, ui) {
+		  	$('#btn_mas').data('id', ui.item.id);
+		  }
+		});
+		//Guardar nnuevo
+		$('#btn_mas').on('click', function() {
+			if($('#input_nuevo').val()==''){
+				alert('llene el campo de texto');
+				return;
+			}
+		    $.ajax({ 
+		    		url: '{{ route('rsu.mp.users_new') }}',
+		    		type: 'POST',
+		    		data: {
+		          id_boton:$('#btn_mas').data('id'),
+		          id_proyecto: {!!$proyecto->id!!} ,
+		          _token:'{!! csrf_token() !!}',
+		        },
+		    		success: function (data) {
+		    			$('#input_nuevo').val("");
+		          	myTable.ajax.reload();
+		    		},
+			    		error: function(error){
+			    				alert('el valor ingresado no es válido');
+		    				   console.log('El error: '+error);
+		    		}
+		    	})
+		  });
+		//Eliminar integrante
+
+				$(document).on('click', '.stj-acciones-delete', function(event) {
+					
+        			var button = $(this);
+		         var id = button.data('id');
+		            //button.prop("disabled",true);
+		            //----------------
+		            swal({
+						  title: '¿Está seguro que desea eliminar?',
+						  text: 'El registo se perderá permanentemente',
+						  type: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#3085d6',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: 'Si, Eliminar',
+						  cancelButtonText: 'No, cancelar',
+						  confirmButtonClass: 'btn btn-success',
+						  cancelButtonClass: 'btn btn-danger',
+						  buttonsStyling: false,
+						  reverseButtons: true
+						}).then((result) => {
+							if(result.value){
+								 	$.ajax({ 
+					               url: '/rsu/mis_proyectos/users_d/'+id,
+					               type: 'GET',
+					               data: {_token: '{{csrf_token()}}' },
+					               success: function (data) {
+					                   myTable.ajax.reload();
+					                   swal(
+										      '¡Eliminado!',
+										      'Tu registro se ha eliminado',
+										      'success'
+										    )
+					               },
+					               complete: function (data) {
+					                   button.prop('disabled', false);
+					                   $('#modal_admin').hide();
+					               },
+					                	error: function(error){
+				                   var r = error.responseJSON.message;
+				                   swal("Error",r, "error");
+			                   }
+						         });
+							} 
+						})
+        		});
+		})
+
 </script>
 
 @endsection
