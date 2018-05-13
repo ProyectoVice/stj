@@ -19,9 +19,8 @@ class CreateInscripcionHorariosTable extends Migration
             $table->time('hora_inicial');
             $table->time('hora_final');
             $table->integer('dias');
-            $table->integer('estado_recibo')->default(0);
-            $table->integer('inscripcion_curso_disponible_id')->unsigned();
-                        
+            $table->integer('estado_horario')->default(1);
+            $table->integer('inscripcion_curso_disponible_id')->unsigned();                        
             $table->foreign('inscripcion_curso_disponible_id')->references('id')->on('inscripcion_curso_disponibles')->onDelete('cascade');
             $table->timestamps();
         });

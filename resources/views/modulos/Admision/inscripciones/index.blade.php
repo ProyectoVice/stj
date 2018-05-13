@@ -26,7 +26,7 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
-						<th class="center">ID</th>
+						<th class="center">Id</th>
 						<th class="center">Nombres</th>
 						<th class="center" class="hidden-480">Apellidos</th>
 						<th class="center" class="hidden-480">Modalidad</th>
@@ -49,7 +49,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h3 class="smaller lighter blue no-margin">Registrar Inscripción</h3>
 			</div>
-			{!! Form::open(['route' => 'rsu.mp.store', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
+			{!! Form::open(['route' => 'adminsion.ins.validar', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
 			<div class="modal-body tab-pane" align="center">
 			
 					{{ csrf_field() }}
@@ -57,7 +57,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">DNI</label>
 							<div class="col-sm-7">
-							<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required">
+							<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{{ old('dni') }}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -74,8 +74,8 @@
 						</div>	
 					</div>
 			</div>
-			<div class="modal-footer">
-				<button class="btn btn-success btn-sm btn-round submit">
+			<div class="modal-footer">				
+				<button class="btn btn-success btn-sm btn-round submit" name="enviando" id="enviando">					
 					<i class="ace-icon fa fa-check"> Registrar</i>
 				</button>
 			</div>

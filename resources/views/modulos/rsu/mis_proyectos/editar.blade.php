@@ -5,6 +5,7 @@
 @section('estilos')
 	{!!Html::style('plantilla/css/dropzone.min.css')!!}
 	{!!Html::style('/plantilla/css/colorbox.min.css')!!}
+
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -163,7 +164,7 @@
 				<div >
 					<div class="table-header">
       				<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-								Equipo {{\App\RsuProyecto::find('1')->id}} &nbsp;&nbsp;&nbsp;
+								Equipo &nbsp;&nbsp;&nbsp;
 					</div>
 					<div class="table-responsive">
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -343,6 +344,7 @@ jQuery(function($) {
 				        {data:"dni"},
 				        {data:"nombres"},
 				        {data:"escuela"},
+
 				        {data:"tipo"},
 				        {data:null,bSortable: false, render: 
 					        	function ( data, type, row ) {
@@ -350,6 +352,7 @@ jQuery(function($) {
 	                			}
                 		}
 			        ],
+
 			    } );
 })
 </script>
