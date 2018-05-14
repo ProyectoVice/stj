@@ -79,7 +79,15 @@ class UsersTableSeeder extends Seeder
                 'apellido_materno' => 'Simon',
                 'email' => 'cepreval@gmail.com',
                 'password' => bcrypt('00000005'),
-        ]);  
+        ]);
+        DB::table('users')->insert([
+            'dni' => '00000006',
+            'nombres' => 'Juanito',
+            'apellido_paterno' => 'Martel',
+            'apellido_materno' => 'Lopez',
+            'email' => 'juanito@gmail.com',
+            'password' => bcrypt('00000006'),
+        ]);
         //===================================================
         //RolesUsuario Generales
             //Administrador General

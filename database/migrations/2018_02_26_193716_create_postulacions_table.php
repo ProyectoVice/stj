@@ -15,14 +15,13 @@ class CreatePostulacionsTable extends Migration
     {
         Schema::create('postulacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('anio');
-            $table->float('nota');
+            $table->float('nota')->unsigned()->nullable();
             $table->integer('users_id')->unsigned();
             $table->integer('proceso_seleccion_id')->unsigned();
             $table->integer('escuela_sede_id')->unsigned();
             $table->integer('postulacion_preparacion_id')->nullable();
             $table->integer('postulacion_tipo')->nullable();//1 regular 2 libre
-            $table->integer('postulacion_situacion_id');
+            $table->integer('postulacion_situacion_id')->nullable();
             $table->integer('maestria_id')->nullable();
             $table->integer('doctorado_id')->nullable();
             $table->integer('segunda_especialidad_id')->nullable();

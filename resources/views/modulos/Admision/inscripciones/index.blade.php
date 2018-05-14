@@ -79,6 +79,7 @@
 					<i class="ace-icon fa fa-check"> Registrar</i>
 				</button>
 			</div>
+			<input type="hidden" name="tipo" value="{{$tipo}}">
 			{!!Form::close()!!}
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -86,7 +87,6 @@
 
 {{-- fin modal --}}
 @endsection
-@section('script')
 @section('script')
 		<!-- page specific plugin scripts -->
 		{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
@@ -108,21 +108,21 @@
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
-			        "ajax": '{!!route('adminsion.ins.datos')!!}',
+			        "ajax": '{!!route('adminsion.ins.datos')!!}?tipo={{$tipo}}',
 			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                  	"order": [[ 0, "desc" ]],
 			        "columns" : [
 				        {data:"id"},
-				        {data:"nota"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
-				        {data:"anio"},
+				        {data:"nombres"},
+				        {data:"apellidos"},
+				        {data:"nombres"},
+				        {data:"nombres"},
+				        {data:"nombres"},
+				        {data:"nombres"},
+				        {data:"nombres"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Cronograma de actividades'><i class='fa fa-calendar'></i></a><a href='#' class='stj-acciones' title='Descargar'><i class='fa fa-download'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+                                return decodeEntities(data);
                 			}
                 		}
 			        ],

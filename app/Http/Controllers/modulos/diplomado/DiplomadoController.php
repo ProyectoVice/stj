@@ -26,30 +26,26 @@ class DiplomadoController extends Controller
      */
     public function index(Request $request)
     {
-        $programa=ProgramaNcgt::pluck('descripcion', 'id');
-        return view('modulos.inscripcion_unheval.diplomado.index', ['programa'=>$programa,'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
+        $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
+        $programa=ProgramaNcgt::where('programa_id', '=', $tipo[$request->tipo])->pluck('descripcion', 'id');
+        return view('modulos.inscripcion_unheval.diplomado.index', ['programa'=>$programa,
+            'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
     public function datatables(Request $request)
     {
-        $tipo='';
-        if ($request->tipo=='diplomado')
-            $tipo = 11;
-        if ($request->tipo=='procapt')
-            $tipo = 9;
-        if ($request->tipo=='promaster')
-            $tipo = 10;
-      $permiso = false;
+        $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
+        $permiso = false;
         if(Auth::user()->hasRoles(['PersonalAdmision'])) {
-            if (Auth::user()->hasRoles(['Administrador Diplomados'])&&$tipo==11)
+            if (Auth::user()->hasRoles(['Administrador Diplomados'])&&$tipo[$request->tipo]==11)
                 $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador PROCATP'])&&$tipo==9)
+            if (Auth::user()->hasRoles(['Administrador PROCATP'])&&$tipo[$request->tipo]==9)
                 $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador PROMASTER'])&&$tipo==10)
+            if (Auth::user()->hasRoles(['Administrador PROMASTER'])&&$tipo[$request->tipo]==10)
                 $permiso=true;
         }
         if (!$permiso)
-            $tipo='';
+            $tipo[$request->tipo]='';
 
         $inscripcion=InscripcionNcgt::select('inscripcion_ncgts.id AS id','users.nombres', 'users.email', 'users.cel',
             'programa_ncgts.descripcion',
@@ -60,7 +56,7 @@ class DiplomadoController extends Controller
          )
             ->join('users','users.id','=','inscripcion_ncgts.user_id')
             ->join('programa_ncgts','programa_ncgts.id','=','inscripcion_ncgts.programa_ncgt_id')
-            ->where('programa_ncgts.programa_id','=', $tipo);
+            ->where('programa_ncgts.programa_id','=', $tipo[$request->tipo]);
         
         return DataTables::of($inscripcion->get())
             ->addColumn('total_pago', function ($obj){
@@ -77,12 +73,17 @@ class DiplomadoController extends Controller
             ->addColumn('accion', function ($obj){
                 $tipo=[11=>'diplomado',9=>'procapt',10=>'promaster'];
                 return htmlentities(sprintf("<div class='center action-buttons'>
-                    <a href='#nuevo2' class='stj-acciones enviarId1 descuentos %s' title='Asignar descuento' data-id='%s' data-interno='%s' data-total='%s'><i class='fa fa-plus'></i></a>
+                    <a href='/diplomado/inscripciones/mostrar/%s?tipo=%s' class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a>
+                    <a href='#nuevo2' class='stj-acciones enviarId1 descuentos %s' title='Asignar descuento' data-toggle='modal' data-id='%s' data-interno='%s' data-total='%s'><i class='fa fa-plus'></i></a>
                     <a href='#nuevo1' class='stj-acciones enviarId' title='Registrar pago modulo' data-toggle='modal'data-id='%s'><i class='fa fa-check-square-o'></i></a>
                     <a href='/diplomado/inscripciones/editar/%s?tipo=%s' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>
                     <a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='%s'><i class='fa fa-trash'></i></a>
                     </div>",
-                    ($obj->programa_id==9||$obj->programa_id==10)?'hide':'',$obj->id,$obj->es_interno,$obj->es_pago_total,$obj->id,$obj->id,$tipo[$obj->programa_id],$obj->id));
+                    $obj->id,$tipo[$obj->programa_id],
+                    ($obj->programa_id==9||$obj->programa_id==10)?'hide':'',$obj->id,$obj->es_interno,$obj->es_pago_total,
+                    $obj->id,
+                    $obj->id,$tipo[$obj->programa_id],
+                    $obj->id));
             })
             ->removeColumn('costo_modulo')
             ->removeColumn('es_pago_total')
@@ -179,9 +180,10 @@ class DiplomadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        $inscripcion=InscripcionNcgt::find($id);
+        return view('modulos.inscripcion_unheval.diplomado.detalle', ['inscripcion'=> $inscripcion,'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
     /**
@@ -192,8 +194,10 @@ class DiplomadoController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $inscripcion=InscripcionNcgt::join('users','users.id','=','inscripcion_ncgts.user_id')
-                    ->select('users.id AS id', 'users.dni','users.nombres', 'users.apellido_paterno','users.apellido_materno', 'users.f_nac', 'users.email', 'users.distrito_nac', 'users.domicilio', 'users.n_domicilio', 'users.cel')->find($id);
+        $inscripcion=InscripcionNcgt::select('users.id AS id', 'users.dni','users.nombres', 'users.apellido_paterno',
+                'users.apellido_materno', 'users.f_nac', 'users.email', 'users.distrito_nac',
+                'users.domicilio', 'users.n_domicilio', 'users.cel')
+                ->join('users','users.id','=','inscripcion_ncgts.user_id')->find($id);
         $departamentos=Departamento::pluck('departamento','id');
         $provincias=Provincia::pluck('provincia','id');
         $distritos=Distrito::pluck('distrito','id');
@@ -222,6 +226,10 @@ class DiplomadoController extends Controller
         $myInscrito->domicilio=$request->get('domicilio');
         $myInscrito->n_domicilio=$request->get('n_domicilio');
         $myInscrito->cel=$request->get('cel');
+        /*if($request->estado=='suspendido'){
+            $myInscrito->estado='0';
+            $myInscrito->save();
+        }*/
         $myInscrito->save();
 
 

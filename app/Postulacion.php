@@ -8,7 +8,9 @@ class Postulacion extends Model
 {
     protected $table='postulacions';
     protected $fillable=[
-    'anio', 'nota', 'users_id', 'proceso_seleccion_id', 'escuela_sede_id', 'postulacion_preparacion_id', 'postulacion_tipo', 'postulacion_situacion_id', 'maestria_id', 'doctorado_id', 'segunda_especialidad_id', 'estudios_complementario_id', 'grado_bachiller_id', 'grado_magister_id', 'grado_doctor_id'
+    'nota', 'users_id', 'proceso_seleccion_id', 'escuela_sede_id', 'postulacion_preparacion_id', 'postulacion_tipo',
+        'postulacion_situacion_id', 'maestria_id', 'doctorado_id', 'segunda_especialidad_id', 'estudios_complementario_id',
+        'grado_bachiller_id', 'grado_magister_id', 'grado_doctor_id'
     ];
 
     public function user() {

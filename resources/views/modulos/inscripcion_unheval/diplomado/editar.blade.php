@@ -92,6 +92,17 @@
 					<input type="text" placeholder="Escribir aquí" name="cel" class="form-control" required="required" value="{!! $inscripcion->cel !!}">
 				</div>
 			</div>
+			<div class="row form-group center">
+				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Seleccionar estado</label>
+				<div class="col-sm-4">
+					<div class="clearfix">
+						<select name="estado" class="col-xs-12 col-sm-9">
+							<option value="activo" selected>Activo</option>
+							<option value="suspendido">Suspendido</option>
+						</select>
+					</div>
+				</div>
+			</div>
 		</div>									
 
 

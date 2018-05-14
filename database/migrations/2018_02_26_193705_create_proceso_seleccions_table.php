@@ -20,7 +20,7 @@ class CreateProcesoSeleccionsTable extends Migration
             $table->integer('etapa')->nullable();
             $table->integer('postulacion_ciclo_id')->nullable();
             $table->integer('programa_id');
-            $table->integer('postulacion_modalidad_id');
+            $table->integer('postulacion_modalidad_id')->nullable();
             $table->integer('descuento')->nullable();
             $table->timestamps();
         });

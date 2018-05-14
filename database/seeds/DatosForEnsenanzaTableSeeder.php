@@ -49,9 +49,9 @@ class DatosForEnsenanzaTableSeeder extends Seeder
                 ['nombre' => 'Laboratorio',],
                 ['nombre' => 'Biblioteca',],
                 ['nombre' => 'Centro de Computo',],
-                ['nombre' => 'Auditorio',],                
+                ['nombre' => 'Auditorio',]
             ]);
-        //plan de estudios
+        /*//plan de estudios
         $plan = new \App\PlanEstudio();
         $plan->resolucion='unheval';
         $plan->archivo='g';
@@ -67,7 +67,6 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $plan->estado='1';
         $plan->escuela_id='30';
         $plan->save();
-
         //cursos
         $curso = new \App\Curso();
         $curso->codigo='001';
@@ -98,7 +97,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
                 $docente->dep_academico_id='1';
                 $docente->h_lectivas='20';
                 $docente->h_n_lectivas='20';
-                $docente->save();
+                $docente->save();*/
 
     }
 }

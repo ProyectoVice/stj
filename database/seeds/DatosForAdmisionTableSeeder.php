@@ -23,7 +23,8 @@ class DatosForAdmisionTableSeeder extends Seeder
                 ['programa' => 'Educacióna Distancia y Formación Continua',],
                 ['programa' => 'PROCAPT',],
                 ['programa' => 'PROMASTER',],
-                ['programa' => 'Diplomado',]                
+                ['programa' => 'Diplomado',],
+                ['programa' => 'CEPREVAL',]
             ]);
 
          // Postulacion modalidades
@@ -69,5 +70,26 @@ class DatosForAdmisionTableSeeder extends Seeder
                 ['postulacion_preparacion' => 'Tutor particular',],
                 ['postulacion_preparacion' => 'Autoestudio',]
             ]);
+
+        //proceso de seleccion
+        DB::table('proceso_seleccions')->insert([
+            ['descripcion' => 'Seleccion general', 'anio' => '2018', 'etapa' => 1, 'postulacion_ciclo_id' => null,
+                'programa_id' => 1,  'postulacion_modalidad_id' => 1,  'descuento' => null,],
+            ['descripcion' => 'CEPREVAL', 'anio' => '2018', 'etapa' => null, 'postulacion_ciclo_id' => 1,
+                'programa_id' => 1,  'postulacion_modalidad_id' => 3,  'descuento' => null,],
+            ['descripcion' => 'Seleccion general de maestria', 'anio' => '2018', 'etapa' => 1, 'postulacion_ciclo_id' => null,
+                'programa_id' => 2,  'postulacion_modalidad_id' => null,  'descuento' => null,],
+            ['descripcion' => 'Seleccion general de doctorado', 'anio' => '2018', 'etapa' => 1, 'postulacion_ciclo_id' => null,
+                'programa_id' => 3,  'postulacion_modalidad_id' => null,  'descuento' => null,]
+        ]);
+        //postulacion
+        DB::table('postulacions')->insert([
+            ['users_id' => 7, 'proceso_seleccion_id' => 1, 'escuela_sede_id' => 1, 'postulacion_preparacion_id' => 2,
+                'postulacion_tipo' => 1,  'postulacion_situacion_id' => null,  'maestria_id' => null, 'doctorado_id' => null, 'segunda_especialidad_id' => null,
+                'estudios_complementario_id' => null, 'grado_bachiller_id' => null, 'grado_magister_id' => null, 'grado_doctor_id' => null,],
+            ['users_id' => 9, 'proceso_seleccion_id' => 2, 'escuela_sede_id' => 5, 'postulacion_preparacion_id' => 1,
+                'postulacion_tipo' => 1,  'postulacion_situacion_id' => null,  'maestria_id' => null, 'doctorado_id' => null, 'segunda_especialidad_id' => null,
+                'estudios_complementario_id' => null, 'grado_bachiller_id' => null, 'grado_magister_id' => null, 'grado_doctor_id' => null,]
+        ]);
     }
 }

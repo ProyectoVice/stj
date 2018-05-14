@@ -54,7 +54,7 @@ class RolesTableSeeder extends Seeder
                 'descripcion' => 'Administrador Escuela de Posgrado',
         ]);
          DB::table('rols')->insert([
-                'rol' => 'AdministradorSegundaEEdu',
+                'rol' => 'Administrador_Segunda_E',
                 'descripcion' => 'Administrador Segunda Especialidad Educacion',
         ]);
          DB::table('rols')->insert([

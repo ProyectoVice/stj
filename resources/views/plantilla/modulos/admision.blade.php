@@ -10,7 +10,7 @@
 	<ul class="submenu">
 		@if(Auth::user()->hasRoles(['Administrador Admision']))
 		<li class="">
-			<a href="{{ route('adminsion.ins.index') }}">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'pregrado']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción General y Modalidades
 			</a>
@@ -19,7 +19,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador CEPREVAL']))						
 		<li class="">						
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'CEPREVAL']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción CEPREVAL
 			</a>
@@ -28,16 +28,16 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador Posgrado']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'posgrado']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Posgrado
 			</a>
 				<b class="arrow"></b>
 		</li>		
 		@endif
-		@if(Auth::user()->hasRoles(['AdministradorSegundaEEdu']))
+		@if(Auth::user()->hasRoles(['Administrador_Segunda_E']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'segunda_especialidad']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Segunda Especialidad Educación
 			</a>
@@ -55,7 +55,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['AdministradorEstudiosCompEdu']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'estudios_complementarios']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Estudios Complementarios Educación
 			</a>
@@ -64,7 +64,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador idiomas']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'idiomas']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Idiomas
 			</a>
@@ -73,7 +73,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador Estudios a Distancia']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'estudios_distancia']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Estudios a Distancia y Complementarios
 			</a>

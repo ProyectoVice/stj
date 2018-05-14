@@ -52,14 +52,14 @@ Route::group(['prefix' => 'adminsion'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
 		Route::get('/','modulos\admision\AdmisionController@index')->name('adminsion.ins.index');
 		Route::get('create/{dni}', 'modulos\admision\AdmisionController@create')->name('adminsion.ins.create');
-		Route::get('listaescuela/{id}', 'modulos\admision\AdmisionController@listaescuela')->name('adminsion.ins.lista');
+		//Route::get('listaescuela/{id}', 'modulos\admision\AdmisionController@listaescuela')->name('adminsion.ins.lista');
 		Route::post('store', 'modulos\admision\AdmisionController@store')->name('adminsion.ins.store');
 		Route::post('validar', 'modulos\admision\AdmisionController@validar')->name('adminsion.ins.validar');		
 		Route::get('datos','modulos\admision\AdmisionController@datatables')->name('adminsion.ins.datos');
-		//Route::get('lineas/{id}', 'modulos\admision\AdmisionController@lineas')->name('Adminsion.ins.lineas');
 		Route::delete('delete/{id}','modulos\admision\AdmisionController@destroy')->name('adminsion.ins.delete');
 		Route::get('editar/{id}','modulos\admision\AdmisionController@edit')->name('adminsion.ins.edit');
-		Route::put('update/{id}','modulos\admision\AdmisionController@update')->name('adminsion.ins.update');		
+		Route::put('update/{id}','modulos\admision\AdmisionController@update')->name('adminsion.ins.update');
+        Route::get('mostrar/{id}','modulos\admision\AdmisionController@show')->name('adminsion.ins.show');
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 }); 
@@ -75,7 +75,8 @@ Route::group(['prefix' => 'diplomado'],function(){
         Route::get('datos','modulos\diplomado\DiplomadoController@datatables')->name('diplomado.ins.datos');
 		Route::delete('delete/{id}','modulos\diplomado\DiplomadoController@destroy')->name('diplomado.ins.delete');
 		Route::get('editar/{id}','modulos\diplomado\DiplomadoController@edit')->name('diplomado.ins.edit');
-		Route::put('update/{id}','modulos\diplomado\DiplomadoController@update')->name('diplomado.ins.update');			
+		Route::put('update/{id}','modulos\diplomado\DiplomadoController@update')->name('diplomado.ins.update');
+        Route::get('mostrar/{id}','modulos\diplomado\DiplomadoController@show')->name('diplomado.ins.show');
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 });

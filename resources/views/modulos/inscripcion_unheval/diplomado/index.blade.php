@@ -194,14 +194,15 @@
         			console.log($id);
         		}
                 $('#dynamic-table').on('click','.descuentos', function (e) {
-					e.preventDefault();
+                    e.preventDefault();
                     var button = $(this);
                     var id = button.data('id');
                     $("#id_inscrito").val(id);
                     $("#decuento_interno").prop('checked', (button.data('interno')==1));
                     $("#decuento_total").prop('checked', (button.data('total')==1));
-                    $("#nuevo2").modal()
+
                 });
+
 				var myTable=$('#dynamic-table').DataTable( {
 			        "processing": true,
 			        "serverSide": true,
@@ -250,6 +251,11 @@
 					]
 				} );
                 //////envio el Id de la inscripcion
+                $(document).on('click', '.enviarId', function(event) {
+                    var button = $(this);
+                    var id = button.data('id');
+                    $("#id_inscrito").val(id);
+                });
                 $(document).on('click', '.enviarId1', function(event) {
                     var button = $(this);
                     var id = button.data('id');
