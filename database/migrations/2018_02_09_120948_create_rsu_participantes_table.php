@@ -14,11 +14,11 @@ class CreateRsuParticipantesTable extends Migration
     public function up()
     {
         Schema::create('rsu_participantes', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('rsu_proyecto_id')->unsigned();
             $table->integer('rsu_responsabilidad_id')->unsigned();
 
-            $table->primary(['user_id','rsu_proyecto_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('rsu_proyecto_id')->references('id')->on('rsu_proyectos')->onDelete('cascade');
             $table->foreign('rsu_responsabilidad_id')->references('id')->on('rsu_responsabilidads')

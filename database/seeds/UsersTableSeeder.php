@@ -92,8 +92,8 @@ class UsersTableSeeder extends Seeder
         //RolesUsuario Generales
             //Administrador General
         DB::table('rol_users')->insert([
-                'user_id' => '1',
-                'rol_id' => '2',
+            'user_id' => '1',
+            'rol_id' => '2',
         ]);
             //Docente
         DB::table('rol_users')->insert([
@@ -115,7 +115,15 @@ class UsersTableSeeder extends Seeder
                 'user_id' => '3',
                 'rol_id' => '4',
         ]);
-
+        DB::table('estudiantes')->insert([
+             'user_id'=>'3',
+             'cod_univ'=>'2012000012',
+             'escuela_id'=>'12',
+             'estado'=>'1',
+             'modalidad_ingreso'=>'17',
+             'f_ingreso'=>'2012-03-03',
+             'f_egreso'=>'2017-12-20',
+        ]);
         //Roles Saúl
             //all
         DB::table('rol_users')->insert([
