@@ -29,7 +29,7 @@
 				<li class="">
 					<a href="{{ route('academico.carga.index', ['null','null','null']) }}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Calendario Escuela
+						Carga Lectiva
 					</a>
 					<b class="arrow"></b>
 				</li>

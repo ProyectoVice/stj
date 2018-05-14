@@ -21,6 +21,10 @@ class CreatePlanEstudiosTable extends Migration
             $table->integer('estado');
             $table->integer('escuela_id')->unsigned()->nullable();
 
+
+
+            //$table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

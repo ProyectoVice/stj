@@ -51,6 +51,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
                 ['nombre' => 'Centro de Computo',],
                 ['nombre' => 'Auditorio',]
             ]);
+        
         //plan de estudios
         $plan = new \App\PlanEstudio();
         $plan->resolucion='unheval';

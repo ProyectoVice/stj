@@ -21,7 +21,10 @@ class CreateCursosTable extends Migration
             $table->string('creditos');
             $table->string('hteoria');
             $table->string('hpractica');
-            $table->integer('plan_estudio_id')->unsigned()->nullable;
+
+        
+            $table->integer('plan_estudio_id')->unsigned()->nullable();
+
             //$table->foreign('plan_estudio_id')->references('id')->on('plan_estudios')->onDelete('cascade');
             $table->timestamps();
         });
