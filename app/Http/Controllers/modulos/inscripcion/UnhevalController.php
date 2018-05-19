@@ -19,7 +19,6 @@ class UnhevalController extends Controller
      */
     public function index()
     {
-       
         $programa=Programa::get();  
         $departamentos=Departamento::pluck('departamento','id');
         $provincias=Provincia::pluck('provincia','id');

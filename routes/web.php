@@ -139,5 +139,6 @@ Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name(
     Route::group(['prefix' => 'carga'],function(){
         Route::get('/{plan}/{ciclo}/{anio}','modulos\CargaController@index')->name('academico.carga.index');
         Route::get('/{plan}/{ciclo}/{anio}/data','modulos\CargaController@cal_tabla')->name('academico.carga.tabla');
-
+//reporte carga
+    	Route::get('reporte','modulos\CargaController@index1')->name('academico.reportecarga.index1');
     });

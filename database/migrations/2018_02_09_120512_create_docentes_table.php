@@ -21,8 +21,8 @@ class CreateDocentesTable extends Migration
             $table->integer('docente_condicion_id')->unsigned();
             $table->integer('docente_dedicacion_id')->unsigned();
             $table->integer('dep_academico_id')->unsigned();
-            $table->string('h_lectivas');//sola para los contratados, los demas se jala de t-dedicacion
-            $table->string('h_n_lectivas');//sola para los contratados, los demas se jala de t-dedicacion
+            $table->string('h_lectivas')->nullable();//sola para los contratados, los demas se jala de t-dedicacion
+            $table->string('h_n_lectivas')->nullable();//sola para los contratados, los demas se jala de t-dedicacion
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('escuela_id')->references('id')->on('escuelas')->onDelete('cascade');
