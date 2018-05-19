@@ -6,17 +6,17 @@
 <ul class="breadcrumb">
   <i class="ace-icon fa fa-book"></i>
   <li class="active">Calendario Lectivo - Escuela</li>
-  <li class="">Calendario</li>
+  <li class="">Carga Lectiva</li>
 </ul>
 @endsection
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
-      <h3><u> Escuela</u>: {{$dependencia}}</h3><hr><br>
+      <h3><u> Dependencia </u>: {{$dependencia}}</h3><hr><br>
     </div>
     <div class="col-sm-12">
       <div class="row form-group">
-        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Plan de estudios</label>
+        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Plan de estudios</label>        
         <div class="col-sm-2">
           <div class="clearfix">
             {!!Form::select('planes',$planes ,$plan,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Plan de estudios'])!!}
@@ -33,22 +33,24 @@
           <div class="clearfix">
             {!!Form::select('anios',$anios,$anio,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Año academico'])!!}
           </div>
-        </div>
-        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">EAP</label>
+        </div>        
+        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">EP</label>
         <div class="col-sm-2">
           <div class="clearfix">
-            {!!Form::select('eap',[],null,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'EAP'])!!}
+            {!!Form::select('eap',[],null,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'EP'])!!}
           </div>
         </div>
       </div>
-    </div>
+    </div>  
+    <div class="col-sm-7 hidden-xs">
+      <h> Ver Carga por Docente </h><a href='{!! route('academico.reportecarga.index1')!!}', <button type="button" class="btn btn-primary btn-primary btn-sm">Ver</button> </a>
+    </div>     
     <div class="col-sm-7 hidden-xs">
       <div class="clearfix">
         <div class="pull-right tableTools-container"></div>
       </div>
       <div class="table-header">
-         <a href="#" class="stj-acciones stj-acciones-new" title="Nuevo" onclick="prepararModal()"><i class="fa fa-plus"></i></a>
-          Cursos &nbsp;&nbsp;&nbsp;
+         Cursos - Asignación Docente &nbsp;&nbsp;&nbsp;
       </div>
       <div class="table-responsive">
         <table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -70,7 +72,6 @@
     </div>
   </div>
   @endsection
-
 
 @section('script')
   {!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}

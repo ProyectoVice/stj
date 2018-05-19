@@ -30,6 +30,12 @@ class CargaController extends Controller
         }
         return view('modulos.academico.carga', ['dependencia'=>$dep_nombre, 'planes'=>$planes,'plan'=>$plan,'ciclo'=>$ciclo, 'anios'=>$anios, 'anio'=>$anio]);
     }
+    
+    public function index1()
+    {
+        return view ('modulos.academico.reportecarga');
+    }
+
     public function cal_tabla($plan, $ciclo, $anio, Request $request){
 
         $cursos=Curso::select('cursos.codigo', 'cursos.nombre', 'cursos.creditos', 'cursos.hteoria', 'cursos.hpractica', 'users.nombres as docente')

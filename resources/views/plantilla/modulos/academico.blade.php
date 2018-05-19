@@ -25,15 +25,15 @@
 			<b class="arrow"></b>
 		</li>
 		@endif
-			@if(Auth::user()->hasRoles(['DirEscuela']))
-				<li class="">
-					<a href="{{ route('academico.carga.index', ['null','null','null']) }}">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Carga Lectiva
-					</a>
-					<b class="arrow"></b>
-				</li>
-			@endif
+		@if(Auth::user()->hasRoles(['DirEscuela']))
+			<li class="">
+				<a href="{{ route('academico.carga.index', ['null','null','null']) }}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					Carga Lectiva
+				</a>
+				<b class="arrow"></b>
+			</li>
+		@endif
 	</ul>
 </li>
 @endif
