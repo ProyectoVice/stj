@@ -39,7 +39,7 @@
 													<p><label><i class="ace-icon fa fa-hand-o-right"></i> Roles: <br></label>
 														<div class="hr dotted"></div>
 															@foreach($usuario->roles as $r)
-															<i class="ace-icon fa fa-check-square-o"></i><span >{{$r->rol}}<br></span>
+															<i class="ace-icon fa fa-check-square-o"></i><span >{{$r->descripcion}}<br></span>
 															@endforeach
 													</p>
 												</div>

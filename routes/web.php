@@ -55,8 +55,8 @@ Route::group(['prefix' => 'rsu'],function(){
 Route::group(['prefix' => 'adminsion'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
 		Route::get('/','modulos\admision\AdmisionController@index')->name('adminsion.ins.index');
-		Route::get('create/{dni}', 'modulos\admision\AdmisionController@create')->name('adminsion.ins.create');
-		//Route::get('listaescuela/{id}', 'modulos\admision\AdmisionController@listaescuela')->name('adminsion.ins.lista');
+		Route::post('create', 'modulos\admision\AdmisionController@create')->name('adminsion.ins.create');
+		Route::get('listaescuela/{id}', 'modulos\admision\AdmisionController@listaescuela')->name('adminsion.ins.lista');
 		Route::post('store', 'modulos\admision\AdmisionController@store')->name('adminsion.ins.store');
 		Route::post('validar', 'modulos\admision\AdmisionController@validar')->name('adminsion.ins.validar');		
 		Route::get('datos','modulos\admision\AdmisionController@datatables')->name('adminsion.ins.datos');
@@ -125,7 +125,7 @@ Route::get('maar/{id}', 'modulos\inscripcion\UnhevalController@maestria')->name(
 Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name('provincia');
 Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
 //Inscripciones-UNHEVAL
-//Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
+Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
 //Calendario
     Route::group(['prefix' => 'calendario'],function(){
         Route::get('{tipo}','modulos\academico\AcademicoController@index')->name('academico.calendario.index');

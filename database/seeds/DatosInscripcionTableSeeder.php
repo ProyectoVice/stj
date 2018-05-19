@@ -67,8 +67,8 @@ class DatosInscripcionTableSeeder extends Seeder
             ]);
         //tarifarios
         DB::table('tarifarios')->insert([
-                ['descripcion' => 'Carrera Profesional de Medicina Humana -Nacional', 'monto'=>'350', 'es_modalidades'=>'1', 'es_modalidad_publico'=>'1',],
-                ['descripcion' => 'Carrera Profesional de Medicina Humana -Particular', 'monto'=>'400', 'es_modalidades'=>'1', 'es_modalidad_particular'=>'1',],
+                ['descripcion' => 'Carrera Profesional de Medicina Humana, Ciencias Administrativas, Ingenieria Civil, Ciencias Contables -Nacional', 'monto'=>'350', 'es_modalidades'=>'1', 'es_modalidad_publico'=>'1',],
+                ['descripcion' => 'Carrera Profesional de Medicina Humana, Ciencias Administrativas, Ingenieria Civil, Ciencias Contables -Particular', 'monto'=>'400', 'es_modalidades'=>'1', 'es_modalidad_particular'=>'1',],
                 ['descripcion' => 'Otras Carreras Profesionales - Nacional', 'monto'=>'280', 'es_modalidades'=>'1', 'es_modalidad_publico'=>'1',],
                 ['descripcion' => 'Otras Carreras Profesionales - Particular', 'monto'=>'330', 'es_modalidades'=>'1', 'es_modalidad_particular'=>'1',],
                 ['descripcion' => 'Postulantes libres', 'monto'=>'100', 'es_modalidades'=>'0', 'es_libre'=>'1',],
@@ -116,57 +116,151 @@ class DatosInscripcionTableSeeder extends Seeder
 
         //pagos
         DB::table('pagos')->insert([
-                ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Juan', 'dni_cliente'=> '12345678', 'detalle'=> 'Seleccion General Medicina Humana-Nacional', 'importe'=> '350', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1234566', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Maria', 'dni_cliente'=> '12345666', 'detalle'=> 'CEPREVAL Medicina Humana-Nacional', 'importe'=> '600', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111111', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '1',],
-                ['num_comprobante' => '2222222', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '250', 'estado_recibo'=> '1',],
-                ['num_comprobante' => '3333333', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-diploma', 'importe'=> '20', 'estado_recibo'=> '1',],
-                ['num_comprobante' => '4444444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678', 'detalle'=> 'PROCAPT-matricula', 'importe'=> '500', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '5555555', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678', 'detalle'=> 'PROCAPT-modulo', 'importe'=> '700', 'estado_recibo'=> '0',],
-                ///
-                ['num_comprobante' => '1111222', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Juanito', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111333', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Karol', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-matricula', 'importe'=> '100', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111555', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Jesus', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111666', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-modulo', 'importe'=> '250', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111777', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-modulo', 'importe'=> '300', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '1111888', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Rafael', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-todos los modulo', 'importe'=> '650', 'estado_recibo'=> '0',],
-                ['num_comprobante' => '2222333', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Juanito', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
-            //
-            ['num_comprobante' => '2222444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Pedro', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
-            ['num_comprobante' => '2222555', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Karol', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Tics-matricula', 'importe'=> '100', 'estado_recibo'=> '0',],
-            ['num_comprobante' => '2222666', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Jesus', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
-            ['num_comprobante' => '2222777', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '250', 'estado_recibo'=> '0',],
-            ['num_comprobante' => '2222888', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
-            ['num_comprobante' => '2222999', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Rafael', 'dni_cliente'=> '12345678', 'detalle'=> 'Diplomado en Gestion por Procesos-todos los modulo', 'importe'=> '650', 'estado_recibo'=> '0',]
+            ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Juan', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Seleccion General Medicina Humana-Nacional', 'importe'=> '350', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1234566', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Maria', 'dni_cliente'=> '12345666',
+            'detalle'=> 'CEPREVAL Medicina Humana-Nacional', 'importe'=> '600', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111111', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '2222222', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '250', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '3333333', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'pedro', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-diploma', 'importe'=> '20', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '4444444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678',
+            'detalle'=> 'PROCAPT-matricula', 'importe'=> '500', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '5555555', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'marta', 'dni_cliente'=> '12345678',
+            'detalle'=> 'PROCAPT-modulo', 'importe'=> '700', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111222', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Juanito', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111333', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Pedro', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Karol', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Tics-matricula', 'importe'=> '100', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '1111555', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Jesus', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111666', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Tics-modulo', 'importe'=> '250', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111777', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Tics-modulo', 'importe'=> '300', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '1111888', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Rafael', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-todos los modulo', 'importe'=> '650', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222333', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Juanito', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Pedro', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-matricula', 'importe'=> '150', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222555', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Karol', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Tics-matricula', 'importe'=> '100', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222666', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Jesus', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222777', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '250', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222888', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luis', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-modulo', 'importe'=> '200', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '2222999', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Rafael', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Diplomado en Gestion por Procesos-todos los modulo', 'importe'=> '650', 'estado_recibo'=> '0',],
+            ['num_comprobante' => '3333111', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Pedro', 'dni_cliente'=> '12345678',
+            'detalle'=> 'Seleccion General Otras Carreras Profesionales - Nacional', 'importe'=> '280', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '3333222', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luciana', 'dni_cliente'=> '12345678',
+            'detalle'=> 'CEPREVAL Otras Carrera Profesional -Nacional', 'importe'=> '500', 'estado_recibo'=> '1',],
+            ['num_comprobante' => '3333444', 'fecha_comprobante' => '2018-05-14', 'nombre_cliente'=> 'Luciana', 'dni_cliente'=> '12345678',
+                'detalle'=> 'PROMASTER-matricula', 'importe'=> '500', 'estado_recibo'=> '1',]
         ]);
 
         //programa_ncgt
         DB::table('programa_ncgts')->insert([
-                ['programa_id' => '11', 'descripcion' => 'Diplomado en Gestion por Procesos', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '100', 'numero_modulo'=> '3',  'costo_matricula'=> '150', 'costo_modulo'=> '250', 'costo_diploma'=> '20', 'descuento_interno' => '50', 'descuento_modulo_total'=> '100', 'dependencia_id'=> '27',],
-                ['programa_id' => '11', 'descripcion' => 'Diplomado en Tics', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '150', 'numero_modulo'=> '4',  'costo_matricula'=> '100', 'costo_modulo'=> '300', 'costo_diploma'=> '30', 'descuento_interno' => '50', 'descuento_modulo_total'=> '100', 'dependencia_id'=> '27',],
-                ['programa_id' => '9', 'descripcion' => 'PROCAPT Ingenieria de Sistemas', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null, 'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> '100', 'dependencia_id'=> '45',],
-                ['programa_id' => '10', 'descripcion' => 'PROMASTER Ingenieria de Sistemas mencion TICs', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null, 'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '900', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> '100', 'dependencia_id'=> '46',]
+            //Diplomados
+            ['programa_id' => '11', 'descripcion' => 'Diplomado en Gestion por Procesos', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '100',
+            'numero_modulo'=> '3',  'costo_matricula'=> '150', 'costo_modulo'=> '250', 'costo_diploma'=> '20', 'descuento_interno' => '50', 'descuento_modulo_total'=> '100', 'dependencia_id'=> 42,],
+            ['programa_id' => '11', 'descripcion' => 'Diplomado en Tics', 'fecha_inicio'=> '2018-04-20', 'fecha_fin'=> '2018-06-20', 'horas'=> '150',
+            'numero_modulo'=> '4',  'costo_matricula'=> '100', 'costo_modulo'=> '300', 'costo_diploma'=> '30', 'descuento_interno' => '50', 'descuento_modulo_total'=> '100', 'dependencia_id'=> 42,],
+            //Programas de PROCAPT
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT INGENIERIA DE SISTEMAS', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+            'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 42,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT INGENIERIA AGRONOMICA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+            'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 16,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT INGENIERIA AGROINDUSTRIAL', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+            'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 17,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT MEDICINA HUMANA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+            'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 19,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT ODONTOLOGIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 20,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT PSICOLOGIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 21,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT ENFERMERIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 22,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT OBSTETRICIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 23,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT CIENCIAS ADMINISTRATIVAS', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 24,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT TURISMO Y HOTELERIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 25,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT CIENCIAS CONTABLES Y FINANCIERAS', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 26,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT ECONOMIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 27,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT SOCIOLOGIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 28,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT CIENCIAS DE LA COMUNICACION SOCIAL', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 29,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT EDUCACION INICIAL', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 30,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT EDUCACION PRIMARIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 31,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT EDUCACION FISICA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 32,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT FILOSOFIA, PSICOLOGIA Y CIENCIAS SOCIALES', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 33,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT LENGUA Y LITERATURA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 34,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT CIENCIAS HISTORICO SOCIALES Y GEOGRAFICAS', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 35,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT MATEMATICA Y FISICA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 36,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT BIOLOGIA, QUIMICA Y CIENCIA DEL AMBIENTE', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 37,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT DERECHO Y CIENCIAS POLITICAS', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 38,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT INGENIERIA CIVIL', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 39,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT ARQUITECTURA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 40,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT INGENIERIA INDUSTRIAL', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 41,],
+            ['programa_id' => '9', 'descripcion' => 'PROCAPT MEDICINA VETERINARIA', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+                'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '700', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 43,],
+            //PROMASTER
+            ['programa_id' => '10', 'descripcion' => 'PROMASTER Ingenieria de Sistemas mencion TICs', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
+            'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '900', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 46,]
         ]);
         //modulo_ncgts
         DB::table('modulo_ncgts')->insert([
-                ['nombre' => 'Gestion por procesos', 'descripcion' => 'Presenta la diferencia entre el enfoque funcional y el enfoque de procesos', 'docente'=>'Juan Perez Martel', 'programa_ncgt_id'=>'1',],
-                ['nombre' => 'Estadistica aplicada a los procesos', 'descripcion' => 'El curso proporciona las bases estadísticas para poder representar y manipular las variables cuantitativas de los procesos', 'docente'=>'Maria Palacios Roldan', 'programa_ncgt_id'=>'1',],
-                ['nombre' => 'Modelamiento de procesos', 'descripcion' => ' presenta diferentes metodologías que permiten modelar los procesos de la organización con el fin de entender y gestionar el comportamiento', 'docente'=>'Mario Riquelme', 'programa_ncgt_id'=>'1',]
+            ['nombre' => 'Gestion por procesos', 'descripcion' => 'Presenta la diferencia entre el enfoque funcional y el enfoque de procesos',
+                'docente'=>'Juan Perez Martel', 'programa_ncgt_id'=>'1',],
+            ['nombre' => 'Estadistica aplicada a los procesos', 'descripcion' => 'El curso proporciona las bases estadísticas para poder representar y manipular las variables cuantitativas de los procesos',
+               'docente'=>'Maria Palacios Roldan', 'programa_ncgt_id'=>'1',],
+            ['nombre' => 'Modelamiento de procesos', 'descripcion' => ' presenta diferentes metodologías que permiten modelar los procesos de la organización con el fin de entender y gestionar el comportamiento',
+                'docente'=>'Mario Riquelme', 'programa_ncgt_id'=>'1',]
                 
         ]);
          //inscripcion_ncgts
         DB::table('inscripcion_ncgts')->insert([
-                ['user_id' => '3', 'programa_ncgt_id' => '1',],
-                ['user_id' => '3', 'programa_ncgt_id' => '3',]
+                ['user_id' => '3', 'programa_ncgt_id' => 1,],
+                ['user_id' => '3', 'programa_ncgt_id' => 2,],
+                ['user_id' => '6', 'programa_ncgt_id' => 3,],
+                ['user_id' => '7', 'programa_ncgt_id' => 30,]
                 
         ]);
 
         //control pago
         DB::table('control_pagos')->insert([
-                ['inscripcion_ncgt_id' => '1', 'pago_id' => '3', 'tipo'=> '1',],//tipo 1 = matricula
-                ['inscripcion_ncgt_id' => '1', 'pago_id' => '4', 'tipo'=> '2',],//tipo 2 = modulo
-                ['inscripcion_ncgt_id' => '1', 'pago_id' => '5', 'tipo'=> '3',]//tipo 3 = diploma            
+                ['inscripcion_ncgt_id' => '1', 'postulacion_id' => null, 'pago_id' => '3', 'tipo'=> '1',],//tipo 1 = matricula
+                ['inscripcion_ncgt_id' => '1', 'postulacion_id' => null,'pago_id' => '4', 'tipo'=> '2',],//tipo 2 = modulo
+                ['inscripcion_ncgt_id' => '1', 'postulacion_id' => null,'pago_id' => '5', 'tipo'=> '3',],//tipo 3 = diploma
+                ['inscripcion_ncgt_id' => '2', 'postulacion_id' => null,'pago_id' => '10', 'tipo'=> '1',],//matricula TICs
+                ['inscripcion_ncgt_id' => '3', 'postulacion_id' => null, 'pago_id' => '6', 'tipo'=> '1',],//inscripcions procapt
+                ['inscripcion_ncgt_id' => '4', 'postulacion_id' => null, 'pago_id' => '24', 'tipo'=> '1',],//inscripcions promaster
+                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 1,'pago_id' => 22, 'tipo'=> '1',],
+                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 2,'pago_id' => 23, 'tipo'=> '1',]
         ]);
 
         //inscripcion_modulo

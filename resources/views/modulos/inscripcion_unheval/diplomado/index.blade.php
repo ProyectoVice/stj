@@ -178,15 +178,15 @@
 		{!!Html::script('/plantilla/js/buttons.print.min.js')!!}
 		{!!Html::script('/plantilla/js/buttons.colVis.min.js')!!}
 		{!!Html::script('/plantilla/js/dataTables.select.min.js')!!}
-		{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
-		{!!Html::script('/sweetalert/core.js')!!}
-		
-		<script type="text/javascript">
-            function decodeEntities(encodedString) {
-                var textArea = document.createElement('textarea');
-                textArea.innerHTML = encodedString;
-                return textArea.value;
-            }
+			{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
+			{!!Html::script('/sweetalert/core.js')!!}
+
+            <script type="text/javascript">
+                function decodeEntities(encodedString) {
+                    var textArea = document.createElement('textarea');
+                    textArea.innerHTML = encodedString;
+                    return textArea.value;
+                }
 
 			//Datatables
 			jQuery(function($) {

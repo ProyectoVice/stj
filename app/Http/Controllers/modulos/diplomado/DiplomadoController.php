@@ -48,8 +48,8 @@ class DiplomadoController extends Controller
             $tipo[$request->tipo]='';
 
         $inscripcion=InscripcionNcgt::select('inscripcion_ncgts.id AS id','users.nombres', 'users.email', 'users.cel',
-            'programa_ncgts.descripcion',
-            'programa_ncgts.numero_modulo', 'programa_ncgts.costo_modulo', 'es_pago_total', 'descuento_interno', 'descuento_modulo_total', 'programa_ncgts.programa_id',
+            'programa_ncgts.descripcion', 'programa_ncgts.numero_modulo', 'programa_ncgts.costo_modulo', 'es_pago_total',
+            'descuento_interno', 'descuento_modulo_total', 'programa_ncgts.programa_id',
             DB::raw('IFNULL((SELECT Sum(p.importe) FROM control_pagos AS cp INNER JOIN pagos AS p ON cp.pago_id = p.id WHERE cp.inscripcion_ncgt_id = inscripcion_ncgts.id AND cp.tipo = 2),0) as pagado'),
             'inscripcion_ncgts.es_interno',
             DB::raw('CONCAT( users.apellido_paterno," ",users.apellido_materno) AS apellidos')
@@ -182,8 +182,12 @@ class DiplomadoController extends Controller
      */
     public function show($id, Request $request)
     {
+       $control=ControlPago::select('pagos.detalle','pagos.importe', 'control_pagos.tipo')
+                    ->join('inscripcion_ncgts','inscripcion_ncgts.id','=','control_pagos.inscripcion_ncgt_id')
+                    ->join('pagos', 'control_pagos.pago_id', '=','pagos.id')
+                    ->where('inscripcion_ncgts.id', '=',$id )->get();
         $inscripcion=InscripcionNcgt::find($id);
-        return view('modulos.inscripcion_unheval.diplomado.detalle', ['inscripcion'=> $inscripcion,'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
+        return view('modulos.inscripcion_unheval.diplomado.detalle', ['control'=> $control, 'inscripcion'=> $inscripcion,'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
     /**
@@ -248,25 +252,31 @@ class DiplomadoController extends Controller
         InscripcionNcgt::destroy($id);
     }
     public function validar(Request $request)
-    {        
+    {
+
         $programa=ProgramaNcgt::where('id','=',$request->descripcion)->first();
         //return $inscripcionp->programa_ncgt->costo_modulo_interno;
 
         $pagos=Pago::where('num_comprobante','=',$request->n_comprobante)
                     ->where('fecha_comprobante','=',$request->f_comprobante)->first();
-        if ($pagos!='') {
-           if ( $pagos->estado_recibo=="0"){
-                if($pagos->importe==$programa->costo_matricula){
-                    return $this->create($request->descripcion, $request->dni, $request->n_comprobante,$request->f_comprobante, $request->tipo);
-                }else{
-                    return redirect()->route('diplomado.ins.index',['tipo'=>$request->tipo])->with('rojo','El importe de pago del recibo no coincide con el costtro de matricula');
+        $usuario=User::where('dni','=',$request->dni)->get();
+
+        /*if($usuario!=''and $request->tipo=='procapt'||$request->tipo=='promaster') {
+
+        }*/
+            if ($pagos != '') {
+                if ($pagos->estado_recibo == "0") {
+                    if ($pagos->importe == $programa->costo_matricula) {
+                        return $this->create($request->descripcion, $request->dni, $request->n_comprobante, $request->f_comprobante, $request->tipo);
+                    } else {
+                        return redirect()->route('diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', 'El importe de pago del recibo no coincide con el costtro de matricula');
+                    }
+                } else {
+                    return redirect()->route('diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', 'El recibo ingresado ya ha sido usado');
                 }
-            }else{
-                return redirect()->route('diplomado.ins.index',['tipo'=>$request->tipo])->with('rojo','El recibo ingresado ya ha sido usado');
-           }
-        }else{            
-            return redirect()->route('diplomado.ins.index',['tipo'=>$request->tipo])->with('rojo','Recibo no valido');
-        }  
+            } else {
+                return redirect()->route('diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', 'Recibo no valido');
+            }
     }
 
     public function validar_pago(Request $request)

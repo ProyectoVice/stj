@@ -50,7 +50,7 @@
 						                  <div class="wizard-navigation">
 							                 <ul>
     	                            <li><a href="#about" data-toggle="tab">Inscripcion</a></li>
-    	                            <li><a href="#account" data-toggle="tab">Llenar datos</a></li>
+    	                            <li class="active"><a href="#account" data-toggle="tab">Llenar datos</a></li>
     	                            <li><a href="#address" data-toggle="tab">Confirmar Inscripcion</a></li>
 	                             </ul>
 						                  </div>
@@ -58,7 +58,7 @@
                             <div class="tab-pane" id="about">
                               <div class="row">
                                   <h4 class="info-text"> Inscripciones</h4>                               
-                                  <div class="form-group" col-sm-10 col-sm-offset-1">
+                                  <div class="form-group col-sm-10 col-sm-offset-1">
                                       <div class="form-group col-md-6">
                                         <label>DNI <small>(requiredo)</small></label>
                                         <input name="dni" type="text" class="form-control" placeholder="">
@@ -74,7 +74,7 @@
                                   </div>                                 
                               </div>
                             </div>
-                            <div class="tab-pane" id="account">
+                            <div class="tab-pane active" id="account">
                               <div class="row form-group">
                                   <div class="col-sm-12">
                                     <h4 class="info-text"> Inscripciones</h4>
