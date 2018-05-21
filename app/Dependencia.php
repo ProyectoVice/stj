@@ -13,4 +13,13 @@ class Dependencia extends Model
     public function programa_ncgts() {
       return $this->hasMany(ProgramaNcgt::class);
     }
+
+    public static  function getDependenciasHijosId($id){
+        $dependencias=Dependencia::select('id')->where('dependencia_id', '=', $id)->get();
+        $deps=[];
+        foreach($dependencias as $dependencia){
+            $deps[]=$dependencia->id;
+        }
+        return$deps;
+    }
 }
