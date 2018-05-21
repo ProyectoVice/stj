@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             ['dni' => '00000001', 'nombres' => 'Administrador ', 'apellido_paterno' => 'APaterno', 'apellido_materno' => 'Amaterno',
             'email' => '00000001@hotmail.com', 'password' => bcrypt('00000001'), 'dependencia_id_depende' => null,],//1
-            ['dni' => '00000002', 'nombres' => 'Docente ', 'apellido_paterno' => 'APaterno2', 'apellido_materno' => 'Amaterno2',
+            ['dni' => '00000002', 'nombres' => 'Docente BD', 'apellido_paterno' => 'APaterno2', 'apellido_materno' => 'Amaterno2',
             'email' => '00000002@hotmail.com', 'password' => bcrypt('00000002'), 'dependencia_id_depende' => null,],//2
             ['dni' => '00000003', 'nombres' => 'Estudiante', 'apellido_paterno' => 'APaterno3', 'apellido_materno' => 'Amaterno3',
             'email' => '00000003@hotmail.com','password' => bcrypt('00000003'), 'dependencia_id_depende' => null,],//3
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('docentes')->insert([
-            [ 'user_id'=>'2', 'escuela_id'=>'10', 'docente_categoria_id'=>'1', 'docente_condicion_id'=>'1', 'docente_dedicacion_id'=>'1',
+            [ 'user_id'=>'2', 'escuela_id'=>'30', 'docente_categoria_id'=>'1', 'docente_condicion_id'=>'1', 'docente_dedicacion_id'=>'1',
                 'dep_academico_id'=>'1', 'h_lectivas'=>'12','h_n_lectivas'=>'12',]
         ]);
         DB::table('estudiantes')->insert([

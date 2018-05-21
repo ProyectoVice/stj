@@ -137,8 +137,8 @@ Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
     });
 // carga lectiva
     Route::group(['prefix' => 'carga'],function(){
-        Route::get('/{plan}/{ciclo}/{anio}','modulos\CargaController@index')->name('academico.carga.index');
-        Route::get('/{plan}/{ciclo}/{anio}/data','modulos\CargaController@cal_tabla')->name('academico.carga.tabla');
+        Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
+        Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');
 //reporte carga
     	Route::get('reporte','modulos\CargaController@index1')->name('academico.reportecarga.index1');
     });

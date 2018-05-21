@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Docente extends Model
@@ -46,5 +47,29 @@ class Docente extends Model
     public function carga_lectivas() 
     {
       return $this->hasMany(CargaLectiva::class);
+    }
+    public static function getDocentesByDependencia($eap)
+    {
+        $departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $eap . ') as direccion')[0];
+
+        if ($departamento->direccion == $eap)
+            $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dependencias.dependencia')
+                ->join('users', 'users.id', '=', 'docentes.user_id')
+                ->join('dependencias', 'dependencias.id', '=', 'docentes.escuela_id')
+                ->where('dependencias.id', '=', $eap);
+        else {
+            $deps = Dependencia::getDependenciasHijosId($departamento->direccion);
+            $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dependencias.dependencia')
+                ->join('users', 'users.id', '=', 'docentes.user_id')
+                ->join('dependencias', 'dependencias.id', '=', 'docentes.escuela_id')
+                ->whereIn('dependencias.id', $deps);
+        }
+        //dd($departamento);
+        $docentes=[];
+        /* FIN DE MOVER ESTA FRACCION DE CODIGO A LA TABLA DEPENDENCIA*/
+        foreach($doc_query->get() as $d){
+            $docentes[$d->dependencia][$d->id]=$d->nombres;
+        }
+        return $docentes;
     }
 }

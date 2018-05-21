@@ -27,7 +27,7 @@
 		@endif
 		@if(Auth::user()->hasRoles(['DirEscuela']))
 			<li class="">
-				<a href="{{ route('academico.carga.index', ['null','null','null']) }}">
+				<a href="{{ route('academico.carga.index', ['null','null','null','null']) }}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					Carga Lectiva
 				</a>
