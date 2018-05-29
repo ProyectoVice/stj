@@ -46,7 +46,7 @@ class CargaController extends Controller
 
         $cursos=[];
         foreach ($cursos_query as $dato){
-            if ($semestre!='null'&&$dato->ciclo%2==$semestre%2)
+            if (is_numeric($semestre)&&$dato->ciclo%2==$semestre%2)
             $cursos[$dato->id]=$dato;
         }
         foreach ($carga as $dato){

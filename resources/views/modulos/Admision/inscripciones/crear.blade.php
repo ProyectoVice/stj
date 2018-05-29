@@ -101,7 +101,7 @@
 					<input type="text" placeholder="Escribir aquí" name="tipo_sangre" class="form-control" required="required" value="{!! isset($usuario) ? $usuario->tipo_sangre : ''!!}">
 				</div>
 			</div>
-			@if($proceso==35)
+
 			<div class="row form-group">
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Sede</label>
 				<div class="col-sm-4">
@@ -116,15 +116,8 @@
 					</div>
 				</div>
 			</div>
-			@endif
-			<div class="row form-group">
-				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Escuela</label>
-				<div class="col-sm-4">
-					<div class="clearfix">
-						{!!Form::select('escuelasede',$escuelasede,null,['required','id'=>'escuelasede', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Escuela'])!!}
-					</div>
-				</div>
-			</div>
+
+
 			<div class="row form-group">
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Colegio 5to</label>
 				<div class="col-sm-4">

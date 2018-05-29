@@ -45,7 +45,8 @@ class RolesTableSeeder extends Seeder
             [ 'rol' => 'Encargado de PROMASTER', 'descripcion' => 'Encargado de PROMASTER',],//29
             ['rol' => 'UsuarioAsuntos', 'descripcion' => 'Asuntos Académicos: Realiza la Programación',],//30
             [ 'rol' => 'ViceAcademico', 'descripcion' => 'Vicerrector Académico: Visualisa la programación',],//31
-            [ 'rol' => 'DirEscuela', 'descripcion' => 'Director de Escuela: Gestiona la Escuela Profesional',]//32
+            [ 'rol' => 'DirEscuela', 'descripcion' => 'Director de Escuela: Gestiona la Escuela Profesional',],//32
+            [ 'rol' => 'Otros', 'descripcion' => 'Usuarios que no se encuentran registrados en la Universidad',]//33
         ]);
     }
 }

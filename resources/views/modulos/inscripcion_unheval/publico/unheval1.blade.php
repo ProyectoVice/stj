@@ -28,9 +28,9 @@
   						              <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-pencil "></span> <br>ESTUDIOS  <br>COMPLEMENTARIOS<br></a>
        					            <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-globe"></span> <br>IDIOMAS <br>&nbsp;</a>
                             <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-cloud"></span> <br>ESTUDIOS <br>DISTANCIA</a>
-                            <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROCATP <br>&nbsp;</a>                       
-                            <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROMASTER <br>&nbsp;</a>
-                            <a href="{{route('unheval1.create')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-book"></span> <br>DIPLOMADOS <br>&nbsp;</a>                    
+                            <a href="{{route('publico.diplomado.ins.index', 'procapt')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROCATP <br>&nbsp;</a>
+                            <a href="{{route('publico.diplomado.ins.index', 'promaster')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROMASTER <br>&nbsp;</a>
+                            <a href="{{route('publico.diplomado.ins.index', 'diplomado')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-book"></span> <br>DIPLOMADOS <br>&nbsp;</a>
                           </div>
                        </div>                  
                   </div>

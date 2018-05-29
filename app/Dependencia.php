@@ -8,7 +8,8 @@ class Dependencia extends Model
 {
    protected $table = 'dependencias';
    protected $fillable = [
-   	'dependencia', 'usuario_id_representante', 'anexo', 'cargo', 'organiza_diplomado', 'es_facultad', 'es_escuela', 'es_posgrado', 'es_direccion', 'es_oficina', 'dependencia_id'
+   	'dependencia', 'usuario_id_representante', 'anexo', 'cargo', 'organiza_diplomado', 'es_facultad', 'es_escuela', 'es_posgrado',
+       'es_direccion', 'es_oficina', 'es_dep_ac', 'es_centro_generador','dependencia_id'
     ];
     public function programa_ncgts() {
       return $this->hasMany(ProgramaNcgt::class);

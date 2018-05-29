@@ -81,6 +81,7 @@ Route::group(['prefix' => 'diplomado'],function(){
 		Route::get('editar/{id}','modulos\diplomado\DiplomadoController@edit')->name('diplomado.ins.edit');
 		Route::put('update/{id}','modulos\diplomado\DiplomadoController@update')->name('diplomado.ins.update');
         Route::get('mostrar/{id}','modulos\diplomado\DiplomadoController@show')->name('diplomado.ins.show');
+
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 });
@@ -95,6 +96,7 @@ Route::group(['prefix' => 'usuario'],function(){
 		Route::get('editar/{id}','Auth\UsersController@edit')->name('usuario.nue.edit');
 		Route::put('update/{id}','Auth\UsersController@update')->name('usuario.nue.update');
 		Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
+        Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
 
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
@@ -124,10 +126,22 @@ Route::resource('unheval', 'modulos\inscripcion\UnhevalController');
 Route::get('maar/{id}', 'modulos\inscripcion\UnhevalController@maestria')->name('maestria');
 Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name('provincia');
 Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
+
+
 //Inscripciones-UNHEVAL
-Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
+Route::group(['prefix' => 'unheval1'],function() {
+    Route::resource('/', 'modulos\inscripcion\publico\PublicoController');
+    Route::group(['prefix' => 'inscripciones'],function() {
+        Route::get('/{tipo}',           'modulos\inscripcion\publico\DiplomadoController@index')->name('publico.diplomado.ins.index');
+        Route::post('/{tipo}/create',   'modulos\inscripcion\publico\DiplomadoController@create')->name('publico.diplomado.ins.create');
+        Route::post('/{tipo}/validar',  'modulos\inscripcion\publico\DiplomadoController@validar')->name('publico.diplomado.ins.validar');
+
+    });
+});
+
+
 //Calendario
-    Route::group(['prefix' => 'calendario'],function(){
+Route::group(['prefix' => 'calendario'],function(){
         Route::get('{tipo}','modulos\academico\AcademicoController@index')->name('academico.calendario.index');
         Route::get('{tipo}/data','modulos\academico\AcademicoController@cal_date')->name('academico.calendario.data');
         Route::post('{tipo}/new','modulos\academico\AcademicoController@cal_new')->name('academico.calendario.new');

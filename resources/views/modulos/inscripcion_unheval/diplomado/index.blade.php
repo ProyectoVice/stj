@@ -18,7 +18,7 @@
 	</div>
 		<div class="table-header">
       		<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
-			inscripciones &nbsp;&nbsp;&nbsp;
+			Inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
 		<div class="table-responsive">
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
@@ -57,12 +57,6 @@
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Programa</label>
 							<div class="col-sm-7">
 							  {!!Form::select('descripcion',$programa,null,['required','id'=>'descripcion', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Programa'])!!}
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">DNI</label>
-							<div class="col-sm-7">
-							<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{{ old('dni') }}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -178,8 +172,8 @@
 		{!!Html::script('/plantilla/js/buttons.print.min.js')!!}
 		{!!Html::script('/plantilla/js/buttons.colVis.min.js')!!}
 		{!!Html::script('/plantilla/js/dataTables.select.min.js')!!}
-			{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
-			{!!Html::script('/sweetalert/core.js')!!}
+		{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
+		{!!Html::script('/sweetalert/core.js')!!}
 
             <script type="text/javascript">
                 function decodeEntities(encodedString) {

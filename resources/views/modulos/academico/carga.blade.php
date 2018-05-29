@@ -202,7 +202,7 @@
               return 0;
           }*/
           $.ajax({
-              url: '{{ route('academico.carga.store',[$plan,$ciclo,$anio,$semestre]) }}',
+              url: '{{ route('academico.carga.store',[$plan,($ciclo==null)?'null':$ciclo,$anio,$semestre]) }}',
               type: 'POST',
               data: datos_carga_lectiva,
               success: function (data) {
