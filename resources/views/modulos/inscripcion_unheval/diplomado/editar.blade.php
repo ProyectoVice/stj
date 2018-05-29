@@ -29,27 +29,27 @@
 			<div class="row form-group">				
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">DNI</label>
 				<div class="col-sm-4 col-sm-offset-0">
-					<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{!! $inscripcion->dni !!}">
+					<input type="text" placeholder="Escribir aquí" name="dni" class="form-control" disabled value="{!! $inscripcion->dni !!}">
 				</div>
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Nombre</label>
 				<div class="col-sm-4">				
-					<input type="text" placeholder="Escribir aquí" name="nombres" class="form-control" required="required" value="{{ $inscripcion->nombres }}">
+					<input type="text" placeholder="Escribir aquí" name="nombres" class="form-control" disabled value="{{ $inscripcion->nombres }}">
 				</div>
 			</div>
 			<div class="row form-group">
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Apellido Paterno</label>
 				<div class="col-sm-4 col-sm-offset-0">
-					<input type="text" placeholder="Escribir aquí" name="apellido_paterno" class="form-control" required="required" value="{{ $inscripcion->apellido_paterno }}">
+					<input type="text" placeholder="Escribir aquí" name="apellido_paterno" class="form-control" disabled value="{{ $inscripcion->apellido_paterno }}">
 				</div>
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Apellido Materno</label>
 				<div class="col-sm-4">
-					<input type="text" placeholder="Escribir aquí" name="apellido_materno" class="form-control" required="required" value="{{ $inscripcion->apellido_materno }}">
+					<input type="text" placeholder="Escribir aquí" name="apellido_materno" class="form-control" disabled value="{{ $inscripcion->apellido_materno }}">
 				</div>
 			</div>
 			<div class="row form-group">
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Fecha de nacimiento</label>
 				<div class="col-sm-4 col-sm-offset-0">
-					<input type="date" placeholder="Escribir aquí" name="f_nac" class="form-control" required="required" value="{{ $inscripcion->f_nac }}">
+					<input type="date" placeholder="Escribir aquí" name="f_nac" class="form-control" disabled value="{{ $inscripcion->f_nac }}">
 				</div>			
 				<label class="col-sm-2 control-label no-padding-right" for="form-field-1">Correo Electrónico</label>
 				<div class="col-sm-4">
@@ -97,8 +97,8 @@
 				<div class="col-sm-4">
 					<div class="clearfix">
 						<select name="estado" class="col-xs-12 col-sm-9">
-							<option value="activo" selected>Activo</option>
-							<option value="suspendido">Suspendido</option>
+							<option value="1" selected>Activo</option>
+							<option value="0">Suspendido</option>
 						</select>
 					</div>
 				</div>

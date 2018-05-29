@@ -142,7 +142,7 @@
           plan=($(this).val()=='')  ?'null':$(this).val();
           ciclo=($('[name=ciclo]').val()=='')  ?'null':$('[name=ciclo]').val();
           anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
-          semestre=($('[name=semesre]').val()=='')  ?'null':$('[name=semestre]').val();
+          semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
           ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
           ruta =ruta.replace(/%p/g, plan);
           ruta =ruta.replace(/%c/g, ciclo);
@@ -155,7 +155,7 @@
           plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
           ciclo=($(this).val()=='')  ?'null':$(this).val();
           anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
-          semestre=($('[name=semesre]').val()=='')  ?'null':$('[name=semestre]').val();
+          semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
           ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
           ruta =ruta.replace(/%p/g, plan);
           ruta =ruta.replace(/%c/g, ciclo);
@@ -168,7 +168,7 @@
           plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
           ciclo=($('[name=ciclo]').val()=='')  ?'null':$('[name=ciclo]').val();
           anio=($(this).val()=='')  ?'null':$(this).val();
-          semestre=($('[name=semesre]').val()=='')  ?'null':$('[name=semestre]').val();
+          semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
           ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
           ruta =ruta.replace(/%p/g, plan);
           ruta =ruta.replace(/%c/g, ciclo);
@@ -202,7 +202,7 @@
               return 0;
           }*/
           $.ajax({
-              url: '{{ route('academico.carga.store',[$plan,$ciclo,$anio,$semestre]) }}',
+              url: '{{ route('academico.carga.store',[$plan,($ciclo==null)?'null':$ciclo,$anio,$semestre]) }}',
               type: 'POST',
               data: datos_carga_lectiva,
               success: function (data) {

@@ -148,10 +148,10 @@ class DatosForAdmisionTableSeeder extends Seeder
         ]);
         //postulacion
         DB::table('postulacions')->insert([
-            ['users_id' => 7, 'proceso_seleccion_id' => 1, 'sede_id' => 1, 'escuela_id' => 1, 'postulacion_preparacion_id' => 2,
+            ['users_id' => 21, 'proceso_seleccion_id' => 1, 'sede_id' => 1, 'escuela_id' => 1, 'postulacion_preparacion_id' => 2,
                 'postulacion_tipo' => 1,  'postulacion_situacion_id' => null,  'maestria_id' => null, 'doctorado_id' => null, 'segunda_especialidad_id' => null,
                 'estudios_complementario_id' => null, 'grado_bachiller_id' => null, 'grado_magister_id' => null, 'grado_doctor_id' => null,],
-            ['users_id' => 9, 'proceso_seleccion_id' => 17, 'sede_id' => 1, 'escuela_id' => 2, 'postulacion_preparacion_id' => 1,
+            ['users_id' => 22, 'proceso_seleccion_id' => 17, 'sede_id' => 1, 'escuela_id' => 2, 'postulacion_preparacion_id' => 1,
                 'postulacion_tipo' => 1,  'postulacion_situacion_id' => null,  'maestria_id' => null, 'doctorado_id' => null, 'segunda_especialidad_id' => null,
                 'estudios_complementario_id' => null, 'grado_bachiller_id' => null, 'grado_magister_id' => null, 'grado_doctor_id' => null,],
             ['users_id' => 9, 'proceso_seleccion_id' => 26, 'sede_id' => 1, 'escuela_id' => null, 'postulacion_preparacion_id' => null,

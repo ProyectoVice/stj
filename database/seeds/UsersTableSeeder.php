@@ -29,7 +29,36 @@ class UsersTableSeeder extends Seeder
             ['dni' => '00000005', 'nombres' => 'Luciana', 'apellido_paterno' => 'Ramos', 'apellido_materno' => 'Simon',
             'email' => 'cepreval@gmail.com', 'password' => bcrypt('00000005'), 'dependencia_id_depende' => null,],//8
             ['dni' => '00000006', 'nombres' => 'Juanito', 'apellido_paterno' => 'Martel', 'apellido_materno' => 'Lopez',
-            'email' => 'juanito@gmail.com', 'password' => bcrypt('00000006'), 'dependencia_id_depende' => null,]//9
+            'email' => 'juanito@gmail.com', 'password' => bcrypt('00000006'), 'dependencia_id_depende' => null,],//9
+            //usuario de los pagos (otros)
+            ['dni' => 12345678, 'nombres' => 'Juan', 'apellido_paterno' => 'Perales', 'apellido_materno' => 'Loarte',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],//10
+            ['dni' => 22222222, 'nombres' => 'Maria', 'apellido_paterno' => 'Gutierrez', 'apellido_materno' => 'Ramirez',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 33333333, 'nombres' => 'Pedro', 'apellido_paterno' => 'Lino', 'apellido_materno' => 'Salvador',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 44444444, 'nombres' => 'Marta', 'apellido_paterno' => 'Sanchez', 'apellido_materno' => 'Rodriguez',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 55555555, 'nombres' => 'Juanito', 'apellido_paterno' => 'Jimenez', 'apellido_materno' => 'Torres',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 66666666, 'nombres' => 'Emanuel', 'apellido_paterno' => 'Lopez', 'apellido_materno' => 'Florez',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 77777777, 'nombres' => 'Karol', 'apellido_paterno' => 'Llanos', 'apellido_materno' => 'Quispe',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 88888888, 'nombres' => 'Jesus', 'apellido_paterno' => 'Espinoza', 'apellido_materno' => 'Muñoz',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 99999999, 'nombres' => 'Luis', 'apellido_paterno' => 'Lino', 'apellido_materno' => 'Simón',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 11112222, 'nombres' => 'Rafael', 'apellido_paterno' => 'Torres', 'apellido_materno' => 'Garcia',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 11113333, 'nombres' => 'Pedro', 'apellido_paterno' => 'Ramirez', 'apellido_materno' => 'Flores',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 11114444, 'nombres' => 'Lenin', 'apellido_paterno' => 'Espinoza', 'apellido_materno' => 'Martel',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 11115555, 'nombres' => 'Luciana', 'apellido_paterno' => 'Fernandez', 'apellido_materno' => 'Daza',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            ['dni' => 11116666, 'nombres' => 'Liz', 'apellido_paterno' => 'Carlos', 'apellido_materno' => 'Malpartida',
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,]
          ]);
         //===================================================
         //RolesUsuario Generales
@@ -60,7 +89,23 @@ class UsersTableSeeder extends Seeder
             ['user_id' => '7', 'rol_id' => '8',],
             //roles del usuario 8
             ['user_id' => '8', 'rol_id' => '7',],
-            ['user_id' => '8','rol_id' => '9',]
+            ['user_id' => '8','rol_id' => '9',],
+            //roles de los usurios 10 al 23
+            ['user_id' => '10','rol_id' => '33',],
+            ['user_id' => '11','rol_id' => '33',],
+            ['user_id' => '12','rol_id' => '33',],
+            ['user_id' => '13','rol_id' => '33',],
+            ['user_id' => '14','rol_id' => '33',],
+            ['user_id' => '15','rol_id' => '33',],
+            ['user_id' => '16','rol_id' => '33',],
+            ['user_id' => '17','rol_id' => '33',],
+            ['user_id' => '18','rol_id' => '33',],
+            ['user_id' => '19','rol_id' => '33',],
+            ['user_id' => '20','rol_id' => '33',],
+            ['user_id' => '21','rol_id' => '33',],
+            ['user_id' => '22','rol_id' => '33',],
+            ['user_id' => '23','rol_id' => '33',]
+
         ]);
 
         DB::table('docentes')->insert([

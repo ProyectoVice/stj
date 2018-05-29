@@ -17,9 +17,8 @@ class CreatePagosTable extends Migration
             $table->increments('id');
             $table->integer('num_comprobante')->unsigned()->unique();
             $table->date('fecha_comprobante');
-            $table->string('nombre_cliente');
-            $table->integer('dni_cliente');
-            $table->string('detalle');
+            $table->integer('user_id');
+            $table->integer('tarifario_id');
             $table->integer('importe');
             $table->integer('estado_recibo')->default(0);
             $table->timestamps();

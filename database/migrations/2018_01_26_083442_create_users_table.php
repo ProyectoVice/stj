@@ -19,9 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
             $table->date('f_nac')->nullable();
-            $table->string('email',30)->unique();
+            $table->string('email',30)->unique()->nullable();
             $table->string('dni',8)->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('foto')->default('user.png');
             //Domicilio
             $table->integer('distrito_nac')->default('887')->unsigned();

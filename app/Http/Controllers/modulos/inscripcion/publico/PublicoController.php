@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\modulos\inscripcion;
+namespace App\Http\Controllers\modulos\inscripcion\publico;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ Use Distrito;
 Use User;
 Use Caja;
 
-class ProgramasController extends Controller
+class PublicoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class ProgramasController extends Controller
      */
     public function index()
     {
-         return view('modulos.inscripcion_unheval.unheval1');   
+         return view('modulos.inscripcion_unheval.publico.unheval1');
     }
 
     /**
@@ -29,16 +29,7 @@ class ProgramasController extends Controller
      */
     public function create()
     {
-        /*$departamentos=Departamento::pluck('departamento','id');
-        $provincias=Provincia::pluck('provincia','id');
-        $distritos=Distrito::pluck('distrito','id');
 
-        $usuario=User::where("dni",$dni)->first();
-        if($usuario!=""){
-            return view('modulos.Admision.inscripciones.crear',compact('departamentos','provincias','distritos','usuario'));
-        }
-        $dni=$dni;
-        return view('modulos.Admision.inscripciones.crear',compact('departamentos','provincias','distritos',"dni"));*/
         return view('modulos.inscripcion_unheval.unheval2');
     }
 

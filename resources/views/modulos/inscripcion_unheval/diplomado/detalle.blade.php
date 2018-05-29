@@ -49,7 +49,7 @@
                                 @foreach($control as $id=>$c)
                                 <tr>
                                     <td>{{$id+1}}</td>
-                                    <td>{{$c->detalle}}</td>
+                                    <td>{{$c->descripcion}}</td>
                                     <td>{{$c->importe}}</td>
                                     @if($c->tipo=='1')
                                     <td>Matricula</td>
