@@ -26,7 +26,7 @@ $(document).ready(function(){
     // Code for the Validator
     var $validator = $('.wizard-card form').validate({
 		  rules: {
-		    n_comprobante: {
+		    /*n_comprobante: {
 		      required: true,
 		      minlength: 3
 		    },
@@ -49,7 +49,7 @@ $(document).ready(function(){
              dni: {
               required: true,
               minlength: 8
-            },
+            },*/
         }
 	});
 

@@ -17,6 +17,6 @@ class ProgramaNcgt extends Model
       return $this->hasMany(ModuloNcgt::class);
     }
   	public function dependencia() {
-      return $this->belongsto(Dependencia::class);
+      return $this->belongsto(Dependencia::class, 'dependencia_id','id');
   	}
 }

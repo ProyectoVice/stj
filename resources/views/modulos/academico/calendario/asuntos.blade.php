@@ -17,14 +17,17 @@
     @endif
 </ul>
 @endsection
-
 @section('contenido')
   <div class="row">
-    <div class="col-sm-12">
-      <h3> Ciclo Regular {{$dependencia}}</h3>
-      {{ csrf_field() }}
-    </div>
-    <div class="col-sm-6 hidden-xs">
+    <div class="col-sm-8">
+      @if($tipo=='academico')
+      <h3> Ciclo Regular Pregrado</h3><button class="btn btn-primary">Guardar</button>
+      @elseif($tipo=='escuela')
+      <h3> Ciclo Regular {{$dependencia}}</h3><button class="btn btn-primary">Guardar</button>
+        @endif
+      {{ csrf_field() }}      
+    </div>   
+        <div class="col-sm-6 hidden-xs">
       <div class="clearfix">
         <div class="pull-right tableTools-container"></div>
       </div>

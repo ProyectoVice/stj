@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\modulos\diplomado;
+namespace App\Http\Controllers\modulos\inscripcion\publico;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,78 +31,14 @@ class DiplomadoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index($tipo, Request $request)
     {
-        $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
-        $programa=ProgramaNcgt::where('programa_id', '=', $tipo[$request->tipo])->pluck('descripcion', 'id');
-        return view('modulos.inscripcion_unheval.diplomado.index', [
-            'programas'=>$programa,
-            'programa'=>$request->programa,
+        $tipos=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
+        $programa=ProgramaNcgt::where('programa_id', '=', $tipos[$tipo])->pluck('descripcion', 'id');
+        return view('modulos.inscripcion_unheval.publico.diplomado.validar', ['programa'=>$programa,
             'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
-    public function datatables(Request $request)
-    {
-        $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
-        $permiso = false;
-        if(Auth::user()->hasRoles(['PersonalAdmision'])) {
-            if (Auth::user()->hasRoles(['Administrador Diplomados'])&&$tipo[$request->tipo]==11)
-                $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador PROCATP'])&&$tipo[$request->tipo]==9)
-                $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador PROMASTER'])&&$tipo[$request->tipo]==10)
-                $permiso=true;
-        }
-        if (!$permiso)
-            $tipo[$request->tipo]='';
-
-        $inscripcion= (new \App\InscripcionNcgt)->select('inscripcion_ncgts.id AS id','users.nombres', 'users.email', 'users.cel',
-            'programa_ncgts.descripcion', 'programa_ncgts.numero_modulo', 'programa_ncgts.costo_modulo', 'es_pago_total',
-            'descuento_interno', 'descuento_modulo_total', 'programa_ncgts.programa_id',
-            DB::raw('IFNULL((SELECT Sum(p.importe) FROM control_pagos AS cp INNER JOIN pagos AS p ON cp.pago_id = p.id WHERE cp.inscripcion_ncgt_id = inscripcion_ncgts.id AND cp.tipo = 2),0) as pagado'),
-            'inscripcion_ncgts.es_interno',
-            DB::raw('CONCAT( users.apellido_paterno," ",users.apellido_materno) AS apellidos'))
-            ->join('users','users.id','=','inscripcion_ncgts.user_id')
-            ->join('programa_ncgts','programa_ncgts.id','=','inscripcion_ncgts.programa_ncgt_id')
-            ->where('programa_ncgts.programa_id','=', $tipo[$request->tipo]);
-        if ($request->programa!='null')
-            $inscripcion->where('programa_ncgts.id','=', $request->programa);
-        
-        return DataTables::of($inscripcion->get())
-            ->addColumn('total_pago', function ($obj){
-                $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj->es_interno*$obj->descuento_interno*$obj->numero_modulo;
-                return $total.' / '.$obj->pagado;
-            })
-            ->editColumn('es_interno', function ($obj){
-                return ($obj->es_interno==1)?"Interno":($obj->programa_id==9)?"Interno":"Externo";
-            })
-            ->addColumn('cancelacion', function ($obj){
-                $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj->es_interno*$obj->descuento_interno*$obj->numero_modulo;
-                return $total - $obj->pagado;
-            })
-            ->addColumn('accion', function ($obj){
-                $tipo=[11=>'diplomado',9=>'procapt',10=>'promaster'];
-                return htmlentities(sprintf("<div class='center action-buttons'>
-                    <a href='/diplomado/inscripciones/mostrar/%s?tipo=%s' class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a>
-                    <a href='#nuevo2' class='stj-acciones enviarId1 descuentos %s' title='Asignar descuento' data-toggle='modal' data-id='%s' data-interno='%s' data-total='%s'><i class='fa fa-plus'></i></a>
-                    <a href='#nuevo1' class='stj-acciones enviarId' title='Registrar pago modulo' data-toggle='modal'data-id='%s'><i class='fa fa-check-square-o'></i></a>
-                    <a href='/diplomado/inscripciones/editar/%s?tipo=%s' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>
-                    <a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='%s'><i class='fa fa-trash'></i></a>
-                    </div>",
-                    $obj->id,$tipo[$obj->programa_id],
-                    ($obj->programa_id==9||$obj->programa_id==10)?'hide':'',$obj->id,$obj->es_interno,$obj->es_pago_total,
-                    $obj->id,
-                    $obj->id,$tipo[$obj->programa_id],
-                    $obj->id));
-            })
-            ->removeColumn('costo_modulo')
-            ->removeColumn('es_pago_total')
-            ->removeColumn('descuento_interno')
-            ->removeColumn('descuento_modulo_total')
-            ->removeColumn('pagado')
-            ->removeColumn('programa_id')
-            ->make(true);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -119,15 +55,17 @@ class DiplomadoController extends Controller
         $usuario=User::where('users.id','=',$pagos->user_id)->get();
         //return $usuario;
         if(count($usuario)==1){
-            return view('modulos.inscripcion_unheval.diplomado.crear',
-                ['departamentos'=>$departamentos,
+            return view('modulos.inscripcion_unheval.publico.diplomado.registrar',
+                [
+                    'departamentos'=>$departamentos,
                     'provincias'=> $provincias,
                     'distritos'=> $distritos,
                     'usuario'=> $usuario[0],
                     'descripcion'=> $descripcion,
                     'n_comprobante'=> $n_comprobante,
                     'f_comprobante'=> $f_comprobante,
-                    'tipo'=>$tipo]);
+                    'tipo'=>$tipo
+                ]);
         }
     }
 
@@ -219,12 +157,8 @@ class DiplomadoController extends Controller
         $provincias=Provincia::pluck('provincia','id');
         $distritos=Distrito::pluck('distrito','id');
 
-        return view('modulos.inscripcion_unheval.diplomado.editar',
-            ['departamentos'=>$departamentos,
-                'provincias'=> $provincias,
-                'distritos'=> $distritos,
-                'inscripcion'=> $inscripcion,
-                'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
+        return view('modulos.inscripcion_unheval.diplomado.editar', ['departamentos'=>$departamentos,'provincias'=> $provincias,
+            'distritos'=> $distritos, 'inscripcion'=> $inscripcion, 'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
     /**
@@ -266,36 +200,13 @@ class DiplomadoController extends Controller
         $myInscripcion= InscripcionNcgt::find($id);        
         InscripcionNcgt::destroy($id);
     }
-    public static function validar_(Request $request)
-    {
-        $pagos = Pago::where('num_comprobante', '=', $request->n_comprobante)
-            ->where('fecha_comprobante', '=', $request->f_comprobante)->first();
-        $programa = ProgramaNcgt::where('id', '=', $request->descripcion)->first();
-        $mensaje = '';
-        $error = false;
-        if ($pagos != '') {
-            if ($pagos->estado_recibo == 0) {
-                if ($pagos->importe != $programa->costo_matricula) {
-                    $mensaje = 'El importe de pago del recibo no coincide con el costtro de matricula';
-                    $error = true;
-                }
-            } else {
-                $mensaje = 'El recibo ingresado ya ha sido usado';
-                $error = true;
-            }
-        } else {
-            $mensaje = 'Recibo no valido';
-            $error = true;
-        }
-        return ['error'=>$error,'mensaje'=>$mensaje];
-    }
     public function validar(Request $request)
     {
-        $dato=DiplomadoController::validar_($request);
-            if($dato['error'])
-                return redirect()->route('publico.diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', $dato['mensaje']);
-            else
-                return $this->create($request->descripcion, $request->n_comprobante, $request->f_comprobante, $request->tipo);
+        $dato=\App\Http\Controllers\modulos\diplomado\DiplomadoController::validar_($request);
+        if($dato['error'])
+            return redirect()->route('publico.diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', $dato['mensaje']);
+        else
+            return $this->create($request->descripcion, $request->n_comprobante, $request->f_comprobante, $request->tipo);
     }
 
     public function validar_pago(Request $request)

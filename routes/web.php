@@ -74,8 +74,8 @@ Route::group(['prefix' => 'rsu'],function(){
 Route::group(['prefix' => 'adminsion'],function(){
 	Route::group(['prefix' => 'inscripciones'],function(){
 		Route::get('/','modulos\admision\AdmisionController@index')->name('adminsion.ins.index');
-		Route::get('create/{dni}', 'modulos\admision\AdmisionController@create')->name('adminsion.ins.create');
-		//Route::get('listaescuela/{id}', 'modulos\admision\AdmisionController@listaescuela')->name('adminsion.ins.lista');
+		Route::post('create', 'modulos\admision\AdmisionController@create')->name('adminsion.ins.create');
+		Route::get('listaescuela/{id}', 'modulos\admision\AdmisionController@listaescuela')->name('adminsion.ins.lista');
 		Route::post('store', 'modulos\admision\AdmisionController@store')->name('adminsion.ins.store');
 		Route::post('validar', 'modulos\admision\AdmisionController@validar')->name('adminsion.ins.validar');		
 		Route::get('datos','modulos\admision\AdmisionController@datatables')->name('adminsion.ins.datos');
@@ -100,6 +100,7 @@ Route::group(['prefix' => 'diplomado'],function(){
 		Route::get('editar/{id}','modulos\diplomado\DiplomadoController@edit')->name('diplomado.ins.edit');
 		Route::put('update/{id}','modulos\diplomado\DiplomadoController@update')->name('diplomado.ins.update');
         Route::get('mostrar/{id}','modulos\diplomado\DiplomadoController@show')->name('diplomado.ins.show');
+
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
 });
@@ -114,6 +115,7 @@ Route::group(['prefix' => 'usuario'],function(){
 		Route::get('editar/{id}','Auth\UsersController@edit')->name('usuario.nue.edit');
 		Route::put('update/{id}','Auth\UsersController@update')->name('usuario.nue.update');
 		Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
+        Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
 
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        
@@ -143,10 +145,22 @@ Route::resource('unheval', 'modulos\inscripcion\UnhevalController');
 Route::get('maar/{id}', 'modulos\inscripcion\UnhevalController@maestria')->name('maestria');
 Route::get('prov/{id}', 'modulos\inscripcion\UnhevalController@provincia')->name('provincia');
 Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name('distrito');
+
+
 //Inscripciones-UNHEVAL
-//Route::resource('unheval1', 'modulos\inscripcion\ProgramasController');
+Route::group(['prefix' => 'unheval1'],function() {
+    Route::resource('/', 'modulos\inscripcion\publico\PublicoController');
+    Route::group(['prefix' => 'inscripciones'],function() {
+        Route::get('/{tipo}',           'modulos\inscripcion\publico\DiplomadoController@index')->name('publico.diplomado.ins.index');
+        Route::post('/{tipo}/create',   'modulos\inscripcion\publico\DiplomadoController@create')->name('publico.diplomado.ins.create');
+        Route::post('/{tipo}/validar',  'modulos\inscripcion\publico\DiplomadoController@validar')->name('publico.diplomado.ins.validar');
+
+    });
+});
+
+
 //Calendario
-    Route::group(['prefix' => 'calendario'],function(){
+Route::group(['prefix' => 'calendario'],function(){
         Route::get('{tipo}','modulos\academico\AcademicoController@index')->name('academico.calendario.index');
         Route::get('{tipo}/data','modulos\academico\AcademicoController@cal_date')->name('academico.calendario.data');
         Route::post('{tipo}/new','modulos\academico\AcademicoController@cal_new')->name('academico.calendario.new');
@@ -156,7 +170,9 @@ Route::get('dist/{id}', 'modulos\inscripcion\UnhevalController@distrito')->name(
     });
 // carga lectiva
     Route::group(['prefix' => 'carga'],function(){
-        Route::get('/{plan}/{ciclo}/{anio}','modulos\CargaController@index')->name('academico.carga.index');
-        Route::get('/{plan}/{ciclo}/{anio}/data','modulos\CargaController@cal_tabla')->name('academico.carga.tabla');
-
+        Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
+        Route::get('/micargalectiva/{anio}/{semestre}','modulos\CargaController@micargaLectiva')->name('academico.mi.carga.index');
+        Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');
+//reporte carga
+    	Route::get('reporte','modulos\CargaController@index1')->name('academico.reportecarga.index1');
     });

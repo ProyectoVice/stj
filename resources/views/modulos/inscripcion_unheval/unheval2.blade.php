@@ -47,25 +47,25 @@
                         	   <small>This information will let us know more about you.</small>
                         	</h3>
                     	</div>
-						                  <div class="wizard-navigation">
-							                 <ul>
-    	                            <li><a href="#about" data-toggle="tab">Inscripcion</a></li>
-    	                            <li><a href="#account" data-toggle="tab">Llenar datos</a></li>
-    	                            <li><a href="#address" data-toggle="tab">Confirmar Inscripcion</a></li>
-	                             </ul>
-						                  </div>
+                        <div class="wizard-navigation">
+                            <ul>
+                                <li><a href="#about" data-toggle="tab">Inscripcion</a></li>
+                                <li class="active"><a href="#account" data-toggle="tab">Llenar datos</a></li>
+                                <li><a href="#address" data-toggle="tab">Confirmar Inscripcion</a></li>
+                            </ul>
+                        </div>
                         <div class="tab-content">
                             <div class="tab-pane" id="about">
                               <div class="row">
                                   <h4 class="info-text"> Inscripciones</h4>                               
-                                  <div class="form-group" col-sm-10 col-sm-offset-1">
+                                  <div class="form-group col-sm-10 col-sm-offset-1">
                                       <div class="form-group col-md-6">
-                                        <label>DNI <small>(requiredo)</small></label>
-                                        <input name="dni" type="text" class="form-control" placeholder="">
+                                            <label>DNI <small>(requiredo)</small></label>
+                                            <input name="dni" type="text" class="form-control" placeholder="">
                                       </div>
                                       <div class="form-group col-md-6">
-                                        <label>N de comprobante <small>(requiredo)</small></label>
-                                        <input name="n_comprobante" type="text" class="form-control" placeholder="">
+                                            <label>N de comprobante <small>(requiredo)</small></label>
+                                            <input name="n_comprobante" type="text" class="form-control" placeholder="">
                                       </div>
                                       <div class="form-group col-md-6">
                                         <label>Fecha del comprobante <small>(requiredo)</small></label>
@@ -74,7 +74,7 @@
                                   </div>                                 
                               </div>
                             </div>
-                            <div class="tab-pane" id="account">
+                            <div class="tab-pane active" id="account">
                               <div class="row form-group">
                                   <div class="col-sm-12">
                                     <h4 class="info-text"> Inscripciones</h4>
@@ -152,7 +152,7 @@
                                           </div>
                                     </div>
                                 </div>
-                              </div>               
+                              </div>
                             <div class="tab-pane" id="address">
                                 <div class="row">
                                     <div class="col-sm-12">

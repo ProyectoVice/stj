@@ -17,10 +17,14 @@ class CreateProcesoSeleccionsTable extends Migration
             $table->increments('id');
             $table->string('descripcion');
             $table->integer('anio');
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
+            $table->integer('estado')->default(1);
             $table->integer('etapa')->nullable();
             $table->integer('postulacion_ciclo_id')->nullable();
             $table->integer('programa_id');
             $table->integer('postulacion_modalidad_id')->nullable();
+            $table->integer('sede_desentralizada_pre')->nullable();
             $table->integer('descuento')->nullable();
             $table->timestamps();
         });

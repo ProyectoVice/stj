@@ -15,6 +15,7 @@ class CreateTarifariosTable extends Migration
     {
         Schema::create('tarifarios', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('depencencia_id');//centro generador
             $table->string('descripcion');
             $table->float('monto')->nullable();
             $table->integer('es_modalidades')->nullable();

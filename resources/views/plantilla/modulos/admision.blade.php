@@ -28,32 +28,50 @@
 		@endif
 		@if(Auth::user()->hasRoles(['Administrador Posgrado']))
 		<li class="">
-			<a href="{{ route('adminsion.ins.index', ['tipo'=>'posgrado']) }}">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'posgrado_maestria']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
-					Inscripción Posgrado
+					Inscripción Posgrado Maestria
 			</a>
 				<b class="arrow"></b>
 		</li>		
 		@endif
-		@if(Auth::user()->hasRoles(['Administrador_Segunda_E']))
+		@if(Auth::user()->hasRoles(['Administrador Posgrado']))
 		<li class="">
-			<a href="{{ route('adminsion.ins.index', ['tipo'=>'segunda_especialidad']) }}">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'posgrado_doctorado']) }}">
+				<i class="menu-icon fa fa-caret-right"></i>
+						Inscripción Posgrado Doctorado
+			</a>
+				<b class="arrow"></b>
+		</li>
+		@endif
+		@if(Auth::user()->hasRoles(['Administrador Posgrado']))
+				<li class="">
+					<a href="{{ route('adminsion.ins.index', ['tipo'=>'posgrado_posdoctorado']) }}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Inscripción Posgrado Posdoctorado
+					</a>
+					<b class="arrow"></b>
+				</li>
+		@endif
+		@if(Auth::user()->hasRoles(['Administrador_Segunda_E_Educacion']))
+		<li class="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'segunda_especialidad_educacion']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Segunda Especialidad Educación
 			</a>
 				<b class="arrow"></b>
 		</li>
 		@endif
-		@if(Auth::user()->hasRoles(['AdministradorSegundaEEnf']))
+		@if(Auth::user()->hasRoles(['Administrador_Segunda_E_Enfermeria']))
 		<li class="">
-			<a href="">
+			<a href="{{ route('adminsion.ins.index', ['tipo'=>'segunda_especialidad_enfermeria']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>
 					Inscripción Segunda Especialidad Enfermeria
 			</a>
 				<b class="arrow"></b>
 		</li>
 		@endif
-		@if(Auth::user()->hasRoles(['AdministradorEstudiosCompEdu']))
+		@if(Auth::user()->hasRoles(['Administrador_Estudios_C_Educacion']))
 		<li class="">
 			<a href="{{ route('adminsion.ins.index', ['tipo'=>'estudios_complementarios']) }}">
 				<i class="menu-icon fa fa-caret-right"></i>

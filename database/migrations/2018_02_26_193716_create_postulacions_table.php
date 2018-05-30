@@ -18,7 +18,8 @@ class CreatePostulacionsTable extends Migration
             $table->float('nota')->unsigned()->nullable();
             $table->integer('users_id')->unsigned();
             $table->integer('proceso_seleccion_id')->unsigned();
-            $table->integer('escuela_sede_id')->unsigned();
+            $table->integer('sede_id')->unsigned()->nullable();
+            $table->integer('escuela_id')->unsigned()->nullable();
             $table->integer('postulacion_preparacion_id')->nullable();
             $table->integer('postulacion_tipo')->nullable();//1 regular 2 libre
             $table->integer('postulacion_situacion_id')->nullable();
@@ -32,10 +33,9 @@ class CreatePostulacionsTable extends Migration
 
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('proceso_seleccion_id')->references('id')->on('proceso_seleccions')->onDelete('cascade');
-
+            $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

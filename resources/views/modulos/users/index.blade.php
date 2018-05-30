@@ -94,7 +94,7 @@
 				        {data:"cel"},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='/usuario/nuevo/mostrar/"+data.id+"' class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/usuario/nuevo/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='/usuario/nuevo/mostrar/"+data.id+"'class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a><a href='#nuevo1' class='stj-acciones enviarId' title='Registrar' data-toggle='modal'data-id='"+data.id+"'><i class='fa fa-plus'></i></a><a href='/usuario/nuevo/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],

@@ -15,10 +15,10 @@ class CreateCargaLectivasTable extends Migration
     {
         Schema::create('carga_lectivas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('semestre');
+            $table->string('semestre')->nullable();
             $table->string('estado')->default('1');
             $table->integer('anio');
-            $table->string('elaborar_clase');
+            $table->string('elaborar_clase')->nullable();
             $table->integer('curso_id')->unsigned();
             $table->integer('docente_id')->unsigned();
             
