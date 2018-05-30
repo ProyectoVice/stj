@@ -30,7 +30,6 @@ class PublicoController extends Controller
     public function create()
     {
 
-        return view('modulos.inscripcion_unheval.unheval2');
     }
 
     /**
