@@ -12,122 +12,24 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-
-                ['dni' => '00000001',
-                'nombres' => 'Administrador ',
-                'apellido_paterno' => 'APaterno',
-                'apellido_materno' => 'Amaterno',
-                'email' => '00000001@hotmail.com',
-                'password' => bcrypt('00000001'),
-                ],
-                [
-                'dni' => '00000002',
-                'nombres' => 'Docente ',
-                'apellido_paterno' => 'APaterno2',
-                'apellido_materno' => 'Amaterno2',
-                'email' => '00000002@hotmail.com',
-                'password' => bcrypt('00000002'),
-                ],
-                [
-                'dni' => '00000003',
-                'nombres' => 'Estudiante',
-                'apellido_paterno' => 'APaterno3',
-                'apellido_materno' => 'Amaterno3',
-                'email' => '00000003@hotmail.com',
-                'password' => bcrypt('00000003'),
-                ],
-                [
-                'dni' => '48315690',
-                'nombres' => 'Saúl',
-                'apellido_paterno' => 'Escandón',
-                'apellido_materno' => 'Munguía',
-                'email' => 'aescandonmunguia@hotmail.com',
-                'password' => bcrypt('12345678'),
-                ],
-                
-         ]);     
-        //Usuario Teddy
-        DB::table('users')->insert([
-                'dni' => '44485816',
-                'nombres' => 'Teddy',
-                'apellido_paterno' => 'Tafur',
-                'apellido_materno' => 'Guerra',
-                'email' => 'ttafurg@gmail.com',
-                'password' => bcrypt('pichoncito'),
-                'dependencia_id_depende' => 30,
-        ]); 
-        //Usuario Jhonattan 
-        DB::table('users')->insert([
-                'dni' => '46181970',
-                'nombres' => 'Jhonattan',
-                'apellido_paterno' => 'Carlos',
-                'apellido_materno' => 'Simon',
-                'email' => 'yotacs14@gmail.com',
-                'password' => bcrypt('freedon'),
-        ]); 
-        DB::table('users')->insert([
-                'dni' => '00000004',
-                'nombres' => 'Pepe',
-                'apellido_paterno' => 'Ramos',
-                'apellido_materno' => 'Simon',
-                'email' => 'pepe@gmail.com',
-                'password' => bcrypt('00000004'),
-        ]);
-        DB::table('users')->insert([
-                'dni' => '00000005',
-                'nombres' => 'cepre',
-                'apellido_paterno' => 'Ramos',
-                'apellido_materno' => 'Simon',
-                'email' => 'cepreval@gmail.com',
-                'password' => bcrypt('00000005'),
-        ]);
-        DB::table('users')->insert([
-            'dni' => '00000006',
-            'nombres' => 'Juanito',
-            'apellido_paterno' => 'Martel',
-            'apellido_materno' => 'Lopez',
-            'email' => 'juanito@gmail.com',
-            'password' => bcrypt('00000006'),
-        ]);
-
-        //Otros usuarios saúl
-         DB::table('users')->insert([
-                [//id = 10
-                'dni' => '00000010',
-                'nombres' => 'DRSU-F',
-                'apellido_paterno' => 'APaterno',
-                'apellido_materno' => 'Amaterno',
-                'email' => '00000010@hotmail.com',
-                'password' => bcrypt('00000010'),
-                ],
-                [//id = 11
-                'dni' => '00000011',
-                'nombres' => 'DRSU',
-                'apellido_paterno' => 'APaterno',
-                'apellido_materno' => 'Amaterno',
-                'email' => '00000011@hotmail.com',
-                'password' => bcrypt('00000011'),
-                ]
-        ]);
-/*
             ['dni' => '00000001', 'nombres' => 'Administrador ', 'apellido_paterno' => 'APaterno', 'apellido_materno' => 'Amaterno',
-            'email' => '00000001@hotmail.com', 'password' => bcrypt('00000001'), 'dependencia_id_depende' => null,],//1
+                'email' => '00000001@hotmail.com', 'password' => bcrypt('00000001'), 'dependencia_id_depende' => null,],//1
             ['dni' => '00000002', 'nombres' => 'Docente BD', 'apellido_paterno' => 'APaterno2', 'apellido_materno' => 'Amaterno2',
-            'email' => '00000002@hotmail.com', 'password' => bcrypt('00000002'), 'dependencia_id_depende' => null,],//2
+                'email' => '00000002@hotmail.com', 'password' => bcrypt('00000002'), 'dependencia_id_depende' => null,],//2
             ['dni' => '00000003', 'nombres' => 'Estudiante', 'apellido_paterno' => 'APaterno3', 'apellido_materno' => 'Amaterno3',
-            'email' => '00000003@hotmail.com','password' => bcrypt('00000003'), 'dependencia_id_depende' => null,],//3
+                'email' => '00000003@hotmail.com','password' => bcrypt('00000003'), 'dependencia_id_depende' => null,],//3
             ['dni' => '48315690', 'nombres' => 'Saúl', 'apellido_paterno' => 'Escandón', 'apellido_materno' => 'Munguía',
-            'email' => 'aescandonmunguia@hotmail.com', 'password' => bcrypt('12345678'), 'dependencia_id_depende' => null,],//4 Usuarios Saúl
+                'email' => 'aescandonmunguia@hotmail.com', 'password' => bcrypt('12345678'), 'dependencia_id_depende' => null,],//4 Usuarios Saúl
             [ 'dni' => '44485816', 'nombres' => 'Teddy', 'apellido_paterno' => 'Tafur', 'apellido_materno' => 'Guerra',
-            'email' => 'ttafurg@gmail.com', 'password' => bcrypt('pichoncito'), 'dependencia_id_depende' => 30,],//5 Usuario Teddy
+                'email' => 'ttafurg@gmail.com', 'password' => bcrypt('pichoncito'), 'dependencia_id_depende' => 30,],//5 Usuario Teddy
             ['dni' => '46181970', 'nombres' => 'Jhonattan', 'apellido_paterno' => 'Carlos', 'apellido_materno' => 'Simon',
-            'email' => 'yotacs14@gmail.com', 'password' => bcrypt('yota'), 'dependencia_id_depende' => null,],//6 Usuario Jhonattan
+                'email' => 'yotacs14@gmail.com', 'password' => bcrypt('yota'), 'dependencia_id_depende' => null,],//6 Usuario Jhonattan
             ['dni' => '00000004', 'nombres' => 'Pepe', 'apellido_paterno' => 'Ramos', 'apellido_materno' => 'Simon',
-            'email' => 'pepe@gmail.com', 'password' => bcrypt('00000004'),'dependencia_id_depende' => null,],//
+                'email' => 'pepe@gmail.com', 'password' => bcrypt('00000004'),'dependencia_id_depende' => null,],//
             ['dni' => '00000005', 'nombres' => 'Luciana', 'apellido_paterno' => 'Ramos', 'apellido_materno' => 'Simon',
-            'email' => 'cepreval@gmail.com', 'password' => bcrypt('00000005'), 'dependencia_id_depende' => null,],//8
+                'email' => 'cepreval@gmail.com', 'password' => bcrypt('00000005'), 'dependencia_id_depende' => null,],//8
             ['dni' => '00000006', 'nombres' => 'Juanito', 'apellido_paterno' => 'Martel', 'apellido_materno' => 'Lopez',
-            'email' => 'juanito@gmail.com', 'password' => bcrypt('00000006'), 'dependencia_id_depende' => null,],//9
+                'email' => 'juanito@gmail.com', 'password' => bcrypt('00000006'), 'dependencia_id_depende' => null,],//9
             //usuario de los pagos (otros)
             ['dni' => 12345678, 'nombres' => 'Juan', 'apellido_paterno' => 'Perales', 'apellido_materno' => 'Loarte',
                 'email' => null, 'password' => null, 'dependencia_id_depende' => null,],//10
@@ -156,9 +58,28 @@ class UsersTableSeeder extends Seeder
             ['dni' => 11115555, 'nombres' => 'Luciana', 'apellido_paterno' => 'Fernandez', 'apellido_materno' => 'Daza',
                 'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
             ['dni' => 11116666, 'nombres' => 'Liz', 'apellido_paterno' => 'Carlos', 'apellido_materno' => 'Malpartida',
-                'email' => null, 'password' => null, 'dependencia_id_depende' => null,]
-         ]);
-*/
+                'email' => null, 'password' => null, 'dependencia_id_depende' => null,],
+            [//id = 24----Otros usuarios Saul
+                'dni' => '00000010',
+                'nombres' => 'DRSU-F',
+                'apellido_paterno' => 'APaterno',
+                'apellido_materno' => 'Amaterno',
+                'email' => '00000010@hotmail.com',
+                'password' => bcrypt('00000010'),
+                'dependencia_id_depende' => null,
+             ],
+            [//id = 25
+                'dni' => '00000011',
+                'nombres' => 'DRSU',
+                'apellido_paterno' => 'APaterno',
+                'apellido_materno' => 'Amaterno',
+                'email' => '00000011@hotmail.com',
+                'password' => bcrypt('00000011'),
+                'dependencia_id_depende' => null,
+            ]
+         ]);     
+
+
         //===================================================
         //RolesUsuario Generales
 
@@ -169,7 +90,6 @@ class UsersTableSeeder extends Seeder
             //Roles Saúl
             ['user_id' => '4', 'rol_id' => '2',],
             ['user_id' => '4', 'rol_id' => '3',],
-            ['user_id' => '4', 'rol_id' => '4',],
             ['user_id' => '4', 'rol_id' => '5',],
             ['user_id' => '4', 'rol_id' => '6',],
             //roles Tedy
@@ -210,22 +130,22 @@ class UsersTableSeeder extends Seeder
         //DRSU-F
         DB::table('rol_users')->insert([
             [
-              'user_id' => '10',
+              'user_id' => '24',
               'rol_id' => '3',
             ],
             [
-              'user_id' => '10',
+              'user_id' => '24',
               'rol_id' => '6',
             ]
         ]);
         //DRSU
         DB::table('rol_users')->insert([
             [
-              'user_id' => '11',
+              'user_id' => '25',
               'rol_id' => '3',
             ],
             [
-              'user_id' => '11',
+              'user_id' => '25',
               'rol_id' => '5',
             ]
         ]);
@@ -259,11 +179,7 @@ class UsersTableSeeder extends Seeder
              'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
         ]);
-            //Estudiante
-        DB::table('rol_users')->insert([
-                'user_id' => '3',
-                'rol_id' => '4',
-        ]);
+
         DB::table('estudiantes')->insert([
              'user_id'=>'3',
              'cod_univ'=>'2012000012',
@@ -273,15 +189,7 @@ class UsersTableSeeder extends Seeder
              'f_ingreso'=>'2012-03-03',
              'f_egreso'=>'2017-12-20',
         ]);
-        //Roles Saúl
-            //all
-        DB::table('rol_users')->insert([
-                ['user_id' => '4', 'rol_id' => '2',],
-                ['user_id' => '4', 'rol_id' => '3',],
-                //['user_id' => '4', 'rol_id' => '4',],
-                ['user_id' => '4', 'rol_id' => '5',],
-                ['user_id' => '4', 'rol_id' => '6',]
-        ]);
+
 
         DB::table('docentes')->insert([
              'user_id'=>'4',
@@ -303,7 +211,5 @@ class UsersTableSeeder extends Seeder
                 //'user_id' => '6',
                 //'rol_id' => '6',
         //]);
-
-        ]);
     }
 }
