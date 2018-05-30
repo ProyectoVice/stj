@@ -2,7 +2,8 @@
 @section('titulo','Diplomado - Inscripciones')
 @section('activacion')
 @endsection
-@section('estilos')  
+@section('estilos')
+	{!!Html::style('plantilla/css/buttons.dataTables.min.css')!!}
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
@@ -21,6 +22,12 @@
 			Inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
 		<div class="table-responsive">
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Programa</label>
+					<div class="col-sm-7">{!!Form::select('programa',$programas,null,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}</div>
+				</div>
+			</div>
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
@@ -56,7 +63,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Programa</label>
 							<div class="col-sm-7">
-							  {!!Form::select('descripcion',$programa,null,['required','id'=>'descripcion', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Programa'])!!}
+							  {!!Form::select('descripcion',$programas,null,['required','id'=>'descripcion', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Programa'])!!}
 							</div>
 						</div>
 						<div class="form-group">
@@ -167,13 +174,11 @@
 		{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
 		{!!Html::script('/plantilla/js/jquery.dataTables.bootstrap.min.js')!!}
 		{!!Html::script('/plantilla/js/dataTables.buttons.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.flash.min.js')!!}
+		{!!Html::script('/plantilla/js/jszip.min.js')!!}
+		{!!Html::script('/plantilla/js/pdfmake.min.js')!!}
+		{!!Html::script('/plantilla/js/vfs_fonts.js')!!}
 		{!!Html::script('/plantilla/js/buttons.html5.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.print.min.js')!!}
-		{!!Html::script('/plantilla/js/buttons.colVis.min.js')!!}
-		{!!Html::script('/plantilla/js/dataTables.select.min.js')!!}
-		{!!Html::script('/sweetalert/sweetalert2.all.js')!!}
-		{!!Html::script('/sweetalert/core.js')!!}
+
 
             <script type="text/javascript">
                 function decodeEntities(encodedString) {
@@ -196,54 +201,50 @@
                     $("#decuento_total").prop('checked', (button.data('total')==1));
 
                 });
-
-				var myTable=$('#dynamic-table').DataTable( {
-			        "processing": true,
-			        "serverSide": true,
-			        "ajax": '{!!route('diplomado.ins.datos')!!}?tipo={{$tipo}}',
-			        "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
-                 	"order": [[ 0, "asc" ]],
-			        "columns" : [
-				        {data:"id"},
-				        {data:"nombres"},
-				        {data:"apellidos"},
-				        {data:"email"},
-				        {data:"cel"},
-				        {data:"descripcion"},
-				        {data:"numero_modulo"},
-				        {data:"total_pago"},
+				document.tableconfig = {
+                    "processing": true,
+                    "serverSide": true,
+                    "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
+                    "order": [[ 0, "asc" ]],
+                    "columns" : [
+                        {data:"id"},
+                        {data:"nombres"},
+                        {data:"apellidos"},
+                        {data:"email"},
+                        {data:"cel"},
+                        {data:"descripcion"},
+                        {data:"numero_modulo"},
+                        {data:"total_pago"},
                         {data:"es_interno"},
-				        {data:"cancelacion"},
-				        {data:'accion',bSortable: false, render:
-				        	function ( data, type, row ) {
-				        	return decodeEntities(data);
-                			}
-                		}
-			        ],
-			    } )
-			    $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
+                        {data:"cancelacion"},
+                        {data:'accion',bSortable: false, render:
+                                function ( data, type, row ) {
+                                    return decodeEntities(data);
+                                }
+                        }
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ]
+                };
+				function cargar(a) {
+                    ajax = '{!!route('diplomado.ins.datos')!!}?tipo={{$tipo}}&programa='+(($('[name="programa"]').val()!='')?$('[name="programa"]').val():'null');
+                    if (a==0){document.myTable.ajax.url( ajax ).load();}
+                    else {
+                        document.tableconfig.ajax = ajax;
+                        document.myTable = $('#dynamic-table').DataTable(document.tableconfig);
+                    }
+                }
+                cargar(1);
+				$('[name="programa"]').change(function (e) {
+				    e.preventDefault();
+				    cargar(0);
+                });
 
-				new $.fn.dataTable.Buttons( myTable, {
-					buttons: [
-					  {
-						"extend": "copy",
-						"text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>Copiar al Portapapeles</span>",
-						"className": "btn btn-white btn-primary btn-bold"
-					  },
-					  {
-						"extend": "csv",
-						"text": "<i class='fa fa-download bigger-110 green' title='descargar'></i> <span class='hidden'>Exportar a CSV</span>",
-						"className": "btn btn-white btn-primary btn-bold"
-					  },
-					  {
-						"extend": "print",
-						"text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Imprimir</span>",
-						"className": "btn btn-white btn-primary btn-bold",
-						autoPrint: false,
-						message: 'Reporte'
-					  }
-					]
-				} );
                 //////envio el Id de la inscripcion
                 $(document).on('click', '.enviarId', function(event) {
                     var button = $(this);

@@ -28,6 +28,7 @@ class CreateDependenciasTable extends Migration
             $table->integer('es_dep_ac')->nullable();
             $table->integer('es_centro_generador')->nullable();
             $table->integer('dependencia_id')->nullable();
+            $table->integer('departamento_dependencia_id')->nullable();
             $table->timestamps();
         });
     }
