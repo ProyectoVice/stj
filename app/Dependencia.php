@@ -23,4 +23,12 @@ class Dependencia extends Model
         }
         return$deps;
     }
+    public static  function getDependenciasHijosIdForDepartamento($id){
+        $dependencias=Dependencia::select('id')->where('departamento_dependencia_id', '=', $id)->get();
+        $deps=[];
+        foreach($dependencias as $dependencia){
+            $deps[]=$dependencia->id;
+        }
+        return$deps;
+    }
 }

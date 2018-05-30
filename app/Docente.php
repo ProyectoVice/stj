@@ -58,7 +58,7 @@ class Docente extends Model
                 ->join('dependencias', 'dependencias.id', '=', 'docentes.escuela_id')
                 ->where('dependencias.id', '=', $eap);
         else {
-            $deps = Dependencia::getDependenciasHijosId($departamento->direccion);
+            $deps = Dependencia::getDependenciasHijosIdForDepartamento($departamento->direccion);
             $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dependencias.dependencia')
                 ->join('users', 'users.id', '=', 'docentes.user_id')
                 ->join('dependencias', 'dependencias.id', '=', 'docentes.escuela_id')

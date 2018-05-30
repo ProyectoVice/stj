@@ -41,7 +41,6 @@ class CargaController extends Controller
             ->select('carga_lectivas.id', 'carga_lectivas.docente_id', 'carga_lectivas.curso_id', 'users.nombres', 'users.apellido_paterno', 'users.apellido_materno')
             ->join('carga_lectivas', 'cursos.id', '=', 'carga_lectivas.curso_id')
             ->join('users', 'users.id', '=', 'carga_lectivas.docente_id')
-            ->where('anio', '=', $anio)
             ->where('anio', '=', $anio)->get();
 
         $cursos=[];
@@ -74,6 +73,35 @@ class CargaController extends Controller
             'cursos'=>$cursos,
             'docentes'=>$docentes,
             'docente'=>null
+            ]
+        );
+    }
+
+    public function micargaLectiva( $anio, $semestre)
+    {
+        $carga = DB::table('cursos')
+            ->select('cursos.id', 'cursos.codigo', 'cursos.nombre', 'cursos.creditos',
+                'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo', 'carga_lectivas.id', 'carga_lectivas.docente_id', 'carga_lectivas.curso_id', 'users.nombres as docente_nombre', 'users.apellido_paterno', 'users.apellido_materno')
+            ->join('carga_lectivas', 'cursos.id', '=', 'carga_lectivas.curso_id')
+            ->join('users', 'users.id', '=', 'carga_lectivas.docente_id')
+            ->where('anio', '=', $anio)
+            ->where('carga_lectivas.semestre', '=', $semestre)
+            ->where('docente_id', '=', Auth::user()->id)->get();
+        $cursos=[];
+        foreach ($carga as $dato){
+            $cursos[$dato->id]=$dato;
+        }
+        for ($i=Carbon::now()->year;$i>2004;$i--)
+        {
+            $anios[$i]=$i;
+        }
+        return view('modulos.academico.micarga',
+            [
+                'anios'=>$anios,
+                'anio'=>$anio,
+                'semestre'=>$semestre,
+                'cursos'=>$cursos,
+                'docente'=>null
             ]
         );
     }

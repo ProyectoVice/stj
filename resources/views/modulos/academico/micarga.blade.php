@@ -12,22 +12,10 @@
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
-      <h3><u> Dependencia </u>: {{$dependencia}}</h3><hr><br>
+      <h3><u> Dependencia </u>: xxxxxx xxxxxx xxxxxxx</h3><hr><br>
     </div>
     <div class="col-sm-12">
       <div class="row form-group">
-        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Plan de estudios</label>        
-        <div class="col-sm-2">
-          <div class="clearfix">
-            {!!Form::select('planes',$planes ,$plan,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
-          </div>
-        </div>
-        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Ciclo</label>
-        <div class="col-sm-2">
-          <div class="clearfix">
-            {!!Form::select('ciclo',[1=>'I',2=>'II',3=>'III'] ,$ciclo,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
-          </div>
-        </div>
         <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Año</label>
         <div class="col-sm-2">
           <div class="clearfix">
@@ -93,41 +81,6 @@
     </div>
   </div>
 
-  <div id="asignar_docente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="titleModal"></h4>
-              </div>
-              <div class="modal-body">
-                  <div id="testmodal" style="padding: 5px 20px;">
-                      <form id="antoform" class="form-horizontal calender" role="form">
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Curso</label>
-                              <div class="col-sm-9">
-                                  <p>Curso</p>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Docente</label>
-                              <div class="col-sm-9">
-                                  {{Form::select('docente',$docentes,$docente,['required', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Docente'])}}
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  {{Form::hidden('curso',null)}}
-                  {{Form::hidden('id_carga',null)}}
-                  {{Form::hidden('anio',$anio)}}
-                  <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-success antosubmit" id="btn_guardar">Guardar</button>
-              </div>
-          </div>
-      </div>
-  </div>
 @endsection
 
 @section('script')
@@ -137,54 +90,20 @@
   <script>
   $(document).ready(function () {
 
-      $('[name=planes]').change(function (e) {
-          e.preventDefault();
-          plan=($(this).val()=='')  ?'null':$(this).val();
-          ciclo=($('[name=ciclo]').val()=='')  ?'null':$('[name=ciclo]').val();
-          anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
-          semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
-          ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
-          ruta =ruta.replace(/%p/g, plan);
-          ruta =ruta.replace(/%c/g, ciclo);
-          ruta =ruta.replace(/%a/g, anio);
-          ruta =ruta.replace(/%s/g, semestre);
-          window.location = ruta;
-      });
-      $('[name=ciclo]').change(function (e) {
-          e.preventDefault();
-          plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
-          ciclo=($(this).val()=='')  ?'null':$(this).val();
-          anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
-          semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
-          ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
-          ruta =ruta.replace(/%p/g, plan);
-          ruta =ruta.replace(/%c/g, ciclo);
-          ruta =ruta.replace(/%a/g, anio);
-          ruta =ruta.replace(/%s/g, semestre);
-          window.location = ruta;
-      });
       $('[name=anios]').change(function (e) {
           e.preventDefault();
-          plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
-          ciclo=($('[name=ciclo]').val()=='')  ?'null':$('[name=ciclo]').val();
           anio=($(this).val()=='')  ?'null':$(this).val();
           semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
-          ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
-          ruta =ruta.replace(/%p/g, plan);
-          ruta =ruta.replace(/%c/g, ciclo);
+          ruta = '{{route('academico.mi.carga.index', ['%a','%s'])}}';
           ruta =ruta.replace(/%a/g, anio);
           ruta =ruta.replace(/%s/g, semestre);
           window.location = ruta;
       });
       $('[name=semestre]').change(function (e) {
           e.preventDefault();
-          plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
-          ciclo=($('[name=ciclo]').val()=='')  ?'null':$('[name=ciclo]').val();
           anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
           semestre=($(this).val()=='')  ?'null':$(this).val();
-          ruta = '{{route('academico.carga.index', ['%p','%c','%a','%s'])}}';
-          ruta =ruta.replace(/%p/g, plan);
-          ruta =ruta.replace(/%c/g, ciclo);
+          ruta = '{{route('academico.mi.carga.index', ['%a','%s'])}}';
           ruta =ruta.replace(/%a/g, anio);
           ruta =ruta.replace(/%s/g, semestre);
           window.location = ruta;
@@ -209,7 +128,7 @@
               return 0;
           }*/
           $.ajax({
-              url: '{{ route('academico.carga.store',[$plan,($ciclo==null)?'null':$ciclo,$anio,$semestre]) }}',
+              url: '{{ route('academico.carga.store',['null','null',$anio,$semestre]) }}',
               type: 'POST',
               data: datos_carga_lectiva,
               success: function (data) {

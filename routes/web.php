@@ -152,6 +152,7 @@ Route::group(['prefix' => 'calendario'],function(){
 // carga lectiva
     Route::group(['prefix' => 'carga'],function(){
         Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
+        Route::get('/micargalectiva/{anio}/{semestre}','modulos\CargaController@micargaLectiva')->name('academico.mi.carga.index');
         Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');
 //reporte carga
     	Route::get('reporte','modulos\CargaController@index1')->name('academico.reportecarga.index1');

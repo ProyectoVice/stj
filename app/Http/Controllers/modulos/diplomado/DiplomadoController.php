@@ -35,7 +35,9 @@ class DiplomadoController extends Controller
     {
         $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
         $programa=ProgramaNcgt::where('programa_id', '=', $tipo[$request->tipo])->pluck('descripcion', 'id');
-        return view('modulos.inscripcion_unheval.diplomado.index', ['programa'=>$programa,
+        return view('modulos.inscripcion_unheval.diplomado.index', [
+            'programas'=>$programa,
+            'programa'=>$request->programa,
             'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
@@ -54,16 +56,17 @@ class DiplomadoController extends Controller
         if (!$permiso)
             $tipo[$request->tipo]='';
 
-        $inscripcion=InscripcionNcgt::select('inscripcion_ncgts.id AS id','users.nombres', 'users.email', 'users.cel',
+        $inscripcion= (new \App\InscripcionNcgt)->select('inscripcion_ncgts.id AS id','users.nombres', 'users.email', 'users.cel',
             'programa_ncgts.descripcion', 'programa_ncgts.numero_modulo', 'programa_ncgts.costo_modulo', 'es_pago_total',
             'descuento_interno', 'descuento_modulo_total', 'programa_ncgts.programa_id',
             DB::raw('IFNULL((SELECT Sum(p.importe) FROM control_pagos AS cp INNER JOIN pagos AS p ON cp.pago_id = p.id WHERE cp.inscripcion_ncgt_id = inscripcion_ncgts.id AND cp.tipo = 2),0) as pagado'),
             'inscripcion_ncgts.es_interno',
-            DB::raw('CONCAT( users.apellido_paterno," ",users.apellido_materno) AS apellidos')
-         )
+            DB::raw('CONCAT( users.apellido_paterno," ",users.apellido_materno) AS apellidos'))
             ->join('users','users.id','=','inscripcion_ncgts.user_id')
             ->join('programa_ncgts','programa_ncgts.id','=','inscripcion_ncgts.programa_ncgt_id')
             ->where('programa_ncgts.programa_id','=', $tipo[$request->tipo]);
+        if ($request->programa!='null')
+            $inscripcion->where('programa_ncgts.id','=', $request->programa);
         
         return DataTables::of($inscripcion->get())
             ->addColumn('total_pago', function ($obj){
