@@ -43,7 +43,7 @@
 		</div>
 </div>	
 
-{{-- modal --}}
+{{-- modal nuevo --}}
 <div id="nuevo" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -67,6 +67,10 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
+{{-- fin modal --}}
+
+{{-- modal comentario--}}
+<div id="comentarios_modal" class="modal fade" tabindex="-1"></div>
 {{-- fin modal --}}
 <div id="verArchivos" class="modal fade" tabindex="-1"></div>
 @endsection
@@ -122,7 +126,7 @@
                 		},
 				        {data:null,bSortable: false, render: 
 				        	function ( data, type, row ) {
-				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' data-id='"+data.id+"' class='stj-acciones stj-acciones-verArchivos' title='Subir/Descargar Archivos'><i class='fa fa-folder'></i></a><a href='#' class='stj-acciones'><i class='fa fa-users'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        	return "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a><a href='#' data-id='"+data.id+"' class='stj-acciones stj-acciones-verArchivos' title='Subir/Descargar Archivos'><i class='fa fa-folder'></i></a><a href='/rsu/mis_proyectos/editar/"+data.id+"' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a><a href='#' class='stj-acciones stj-acciones-comen' title='comentarios y evaluación' data-id='"+data.id+"'><i class='fa fa-comment'></i></a><a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
                 			}
                 		}
 			        ],
@@ -213,6 +217,26 @@
 				        	swal("Error",r, "error");
 			           }
 					});
+		      });
+
+        	  $(document).on('click', '.stj-acciones-comen', function(event) {
+		         var id = $(this).data('id');
+		         	$.ajax({ 
+					            url: '/rsu/mis_proyectos/show-msj/',
+					            type: 'POST',
+					            data: {_token: '{{csrf_token()}}', proyecto_id:id },
+					            success: function (data) {
+					            	//console.log(data);
+					               $('#comentarios_modal').html(data);
+		         					$('#comentarios_modal').modal();
+					            },
+					              
+					             error: function(error){
+				                var r = error.responseJSON.message;
+				                console.log(r);
+			                   }
+						});
+		        
 		      });
 				
 				

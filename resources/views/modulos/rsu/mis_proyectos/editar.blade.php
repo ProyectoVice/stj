@@ -94,7 +94,8 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Lineamientos</label>
-				<div class="col-sm-9 agregar">
+				<div class="col-sm-9"><div class="agregar"></div>
+					{!!Form::text('otros_lineamientos', null, ['class'=> 'col-xs-10 col-sm-10', 'placeholder'=>'más lineamietos (Opcional)'])!!}
 				</div>
 			</div>
 
@@ -211,22 +212,26 @@
 			<div class="col-xs-12" >
 				<div >
 					<div class="table-header">
+						@if($miResponsabilidad[0]=='1')
            				<div id="custom-search-input">
 			                <div class="container">
 						        <div class="search">
-									<input type="text" class="form-control input-sm" id="input_nuevo" name="input_nuevo" placeholder="DNI - Nombres y Apellidos" onKeypress="if (event.keyCode == 13) event.returnValue = false;" dentro del form />
+									<input type="text" class="form-control input-sm" id="input_nuevo" name="input_nuevo" placeholder="DNI - Apellidos y Nombres" onKeypress="if (event.keyCode == 13) event.returnValue = false;" dentro del form />
 									 <a href="#" id="btn_mas" class="btn btn-success btn-sm"><i class="icon fa fa-plus"></i></a>
 								</div>
 							</div>
 					
 			            </div>
+			            @else
+			            <label>Equipo</label>
+			            @endif
 					</div>
 					<div class="table-responsive">
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th class="center" id="lll">DNI</th>
-									<th class="center">Nombres y Apellidos</th>
+									<th class="center">Apellidos y Nombres</th>
 									<th class="center" class="hidden-480">Escuela</th>
 									<th class="center" class="hidden-480">Tipo</th>
 									<th class="center" class="hidden-480">Acciones</th>
@@ -399,19 +404,24 @@ jQuery(function($) {
 			        "columns" : [
 				        {data:"dni"},
 				        {data:"nombres"},
-				         {data:"dni"},
+				         {data:"escuela"},
 				        
 				        {data:"tipo"},
 				        {data:null,bSortable: false, render: 
 				        		function ( data, type, row ) {
-				        			var mas = "<div class='center action-buttons'><a href='/rsu/mis_proyectos/ver/"+data.id+"' class='stj-acciones' title='Ver detalles'><i class='fa fa-eye'></i></a>";
-				        			if(data.id_responsabilidad=='1'){
-				        				var eliminar="</div>";
-				        			}else{
-				        				var eliminar="<a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+				        			var mas = "<div class='center action-buttons'><a href='#' class='stj-acciones' title='Ver detalles está desactivado temporalmente'  onclick='return false'><i class='fa fa-eye'></i></a>";
+
+				        			if({!!$miResponsabilidad[0]!!}!='1'){
+				        				return mas+"</div>";
 				        			}
-				        			var acciones=mas+eliminar;
-				        			return acciones;
+					        			if(data.id_responsabilidad=='1'){
+					        				var eliminar="</div>";
+					        			}else{
+					        				var eliminar="<a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='"+data.id+"'><i class='fa fa-trash'></i></a></div>";
+					        			}
+					        			var acciones=mas+eliminar;
+				        				return acciones;
+				        		   
                 			}
                 		}
 			        ],
@@ -431,6 +441,7 @@ jQuery(function($) {
 				alert('llene el campo de texto');
 				return;
 			}
+			
 		    $.ajax({ 
 		    		url: '{{ route('rsu.mp.users_new') }}',
 		    		type: 'POST',
@@ -472,27 +483,27 @@ jQuery(function($) {
 						  reverseButtons: true
 						}).then((result) => {
 							if(result.value){
-								 	$.ajax({ 
-					               url: '/rsu/mis_proyectos/users_d/'+id,
-					               type: 'GET',
-					               data: {_token: '{{csrf_token()}}' },
-					               success: function (data) {
-					                   myTable.ajax.reload();
-					                   swal(
+								$.ajax({ 
+					             url: '/rsu/mis_proyectos/users_d/'+id,
+					             type: 'GET',
+					             data: {_token: '{{csrf_token()}}' },
+					             success: function (data) {
+					                 myTable.ajax.reload();
+					                 swal(
 										      '¡Eliminado!',
 										      'Tu registro se ha eliminado',
 										      'success'
-										    )
-					               },
-					               complete: function (data) {
-					                   button.prop('disabled', false);
-					                   $('#modal_admin').hide();
-					               },
-					                	error: function(error){
-				                   var r = error.responseJSON.message;
-				                   swal("Error",r, "error");
-			                   }
-						         });
+										  )
+					             },
+					             complete: function (data) {
+					                 button.prop('disabled', false);
+					                 $('#modal_admin').hide();
+					             },
+					              error: function(error){
+				                 var r = error.responseJSON.message;
+				                 swal("Error",r, "error");
+			                 }
+						      });
 							} 
 						})
         		});

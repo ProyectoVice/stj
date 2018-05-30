@@ -15,8 +15,10 @@ use App\RsuCalendario;
 use App\Docente;
 use App\Estudiante;
 use Carbon\Carbon;
+use App\RsuComentario;
 use Auth;
 use App\User;
+use App\RolUser;
 use Input;
 
 use Softon\SweetAlert\Facades\SWAL;  
@@ -55,22 +57,24 @@ class MisProyectosController extends Controller
 
     public function equipo_show($id)
     {
-      // $equipo=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
-      //          ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
-      //          ->where('rsu_participantes.rsu_proyecto_id',$id)
-      //          ->select(DB::raw('CONCAT(users.nombres,", ",users.apellido_paterno," ",users.apellido_materno) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad', 'rsu_participantes.id AS id')->get();
-
        $docentes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('docentes AS doc','doc.user_id','=','users.id')
                ->join('escuelas','escuelas.id','=','doc.escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
+               ->join('rol_users AS ru','users.id','=','ru.user_id')
+               ->where('ru.rol_id','3')
+               ->where('ru.estado','1')
                ->where('rsu_participantes.rsu_responsabilidad_id','<>',3)
                ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela', 'rsu_participantes.id AS id')->get();
+
         $estudiantes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('estudiantes AS doc','doc.user_id','=','users.id')
                ->join('escuelas','escuelas.id','=','doc.escuela_id')
+               // ->join('rol_users AS ru','users.id','=','ru.user_id')
+               // ->where('ru.rol_id','4')
+               // ->where('ru.estado','1')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
                ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela','rsu_participantes.id AS id')->get();
@@ -80,34 +84,43 @@ class MisProyectosController extends Controller
         foreach ($docentes as $d) {
             $equipo[]=$d;
         }
+        //return $equipo;
         foreach ($estudiantes as $e) {
             $equipo[]=$e;
         }
-
+        //return $equipo;
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($equipo)->toJson();
     }
-    
+
     public function equipo_users(Request $request,$id)
     {
 
         $term = $request->get('term');
-        $results = array();
-        $queries = DB::table('users')
-         ->where('nombres', 'LIKE', '%'.$term.'%')
-         ->orWhere('apellido_paterno', 'LIKE', '%'.$term.'%')
-         ->orWhere('apellido_materno', 'LIKE', '%'.$term.'%')
-         ->orWhere('dni', 'LIKE', '%'.$term.'%')
+        //Los que ya pertenecen a este proyecto
+         $query_00=RsuParticipante::where("rsu_proyecto_id",$id)->pluck('user_id');
+
+        //Docentes y alumnos
+        $query_01=DB::table('users AS u')->join('rol_users AS ru','u.id','=','ru.user_id')
+        //El whereIn método verifica que el valor de una columna dada se encuentre dentro de la matriz dada:
+        ->whereIn('ru.rol_id', [4, 3])
+        ->where('ru.estado','1')
+        //El whereNotIn método verifica que el valor de la columna dada no está contenido en la matriz dada:
+        //En este caso usaremos el %query_00
+        ->whereNotIn('u.id', $query_00)
+        ->where(DB::raw('CONCAT(u.dni," ",u.apellido_paterno," ",u.apellido_materno," ", u.nombres)'),'LIKE','%'.$term.'%')
+        ->select(DB::raw('CONCAT(u.dni," ",u.apellido_paterno," ",u.apellido_materno," ", u.nombres) AS datos'),
+            //'ru.rol_id AS rol','ru.estado',
+            'u.id AS id')
          ->take(5)->get();
-    
-       foreach ($queries as $query)
-       {
-         $buscarIntegrante=RsuParticipante::where("user_id",$query->id)
-             ->where("rsu_proyecto_id",$id)->first();
-         if($buscarIntegrante){
-            continue;
+         if($query_01->isEmpty()){
+            return 0;
          }
-         $results[] = [ 'id' => $query->id, 'value' => $query->dni.' - '.$query->nombres.' '.$query->apellido_paterno.' '.$query->apellido_materno ];
+       
+       foreach ($query_01 as $q)
+       {
+         
+         $results[] = [ 'id' => $q->id, 'value' => $q->datos];
        }
          return response()->json($results);
     
@@ -117,9 +130,15 @@ class MisProyectosController extends Controller
         $equipo=new RsuParticipante;
         $equipo->rsu_proyecto_id=$request->get('id_proyecto');
         $equipo->user_id=$request->get('id_boton');
-        $equipo->rsu_responsabilidad_id='2';
+        //Elegimos el rol, 3= docente
+        $usuario=RolUser::where('user_id',$request->get('id_boton'))->where('rol_id','3')->where('estado','1')->first();
+        if($usuario){
+         $equipo->rsu_responsabilidad_id='2';
+        }else{
+         $equipo->rsu_responsabilidad_id='3';
+        }
+        
         $equipo->save();
-        return "Exito";
     }
     public function equipo_users_d($id)
     {
@@ -132,12 +151,7 @@ class MisProyectosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -194,10 +208,10 @@ class MisProyectosController extends Controller
          //Que el ID exista
 
          //Solo los miembros pueden editar
-         $consulta=RsuParticipante::where('rsu_proyecto_id',$id)
-                                 ->where('user_id',Auth::user()->id)->get();
-         //return $consulta;
-         if($consulta->isEmpty()){
+         $miResponsabilidad=RsuParticipante::where('rsu_proyecto_id',$id)
+                                 ->where('user_id',Auth::user()->id)->pluck('rsu_responsabilidad_id');
+         //return $miResponsabilidad;
+         if($miResponsabilidad->isEmpty()){
            return redirect()->route('rsu.mp.index')->with('rojo','Ud. no tiene permiso para editar este proyecto');
          }
         $satisfacciones=array(
@@ -209,7 +223,8 @@ class MisProyectosController extends Controller
         $RsuEjes=RsuEje::get();
         $proyecto=RsuProyecto::find($id);
         $evidencias=RsuEvidencias::where('rsu_proyecto_id',$id)->get();
-        return view('modulos.rsu.mis_proyectos.editar',compact('proyecto','satisfacciones', 'RsuEjes'));
+
+        return view('modulos.rsu.mis_proyectos.editar',compact('proyecto','satisfacciones', 'RsuEjes','miResponsabilidad'));
     }
 
     /**
@@ -265,6 +280,7 @@ class MisProyectosController extends Controller
         $myProyect->logros=$request->get('logros');
         $myProyect->dificultades=$request->get('dificultades');
         $myProyect->satisfaccion=$request->get('satisfaccion');
+        $participantes->mas_lineamientos=$request->get('mas_lineamientos');
         $myProyect->save();
         //Guardamos el ID del proyecto registrado
         $ultimoID=$myProyect->id;
@@ -382,6 +398,11 @@ class MisProyectosController extends Controller
 
     public function ver_detalle($id){
         $proyecto = RsuProyecto::find($id);
+        $consulta=RsuParticipante::where('user_id',Auth::user()->id)
+                  ->where('rsu_proyecto_id',$proyecto->id)->first();
+         if(!$consulta){
+            return back()->with('rojo','Ud. no tiene permisos de acceso');
+         }
         return view('modulos.rsu.mis_proyectos.ver_detalles',compact('proyecto'));
     }
 
@@ -411,9 +432,16 @@ class MisProyectosController extends Controller
 
     }
 
+    public function show_msj(Request $request){
+     $id=$request->get('proyecto_id');
+      $comentarios = RsuComentario::where('proyecto_id',$id)->get();
+      return view('modulos.rsu.mis_proyectos.comentarios',compact('comentarios','id'));
+        
+    }
     //Calendario Fin
     //Word
     public function download($id){
+        return back()->with('azul','No disponible para esta versión');
         //return $id;
        // Creating the new document...
 $phpWord = new \PhpOffice\PhpWord\PhpWord();

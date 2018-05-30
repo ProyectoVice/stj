@@ -43,7 +43,8 @@ class UsersTableSeeder extends Seeder
                 'apellido_materno' => 'Munguía',
                 'email' => 'aescandonmunguia@hotmail.com',
                 'password' => bcrypt('12345678'),
-                ]
+                ],
+                
          ]);     
         //Usuario Teddy
         DB::table('users')->insert([
@@ -88,6 +89,26 @@ class UsersTableSeeder extends Seeder
             'email' => 'juanito@gmail.com',
             'password' => bcrypt('00000006'),
         ]);
+
+        //Otros usuarios saúl
+         DB::table('users')->insert([
+                [//id = 10
+                'dni' => '00000010',
+                'nombres' => 'DRSU-F',
+                'apellido_paterno' => 'APaterno',
+                'apellido_materno' => 'Amaterno',
+                'email' => '00000010@hotmail.com',
+                'password' => bcrypt('00000010'),
+                ],
+                [//id = 11
+                'dni' => '00000011',
+                'nombres' => 'DRSU',
+                'apellido_paterno' => 'APaterno',
+                'apellido_materno' => 'Amaterno',
+                'email' => '00000011@hotmail.com',
+                'password' => bcrypt('00000011'),
+                ]
+        ]);
         //===================================================
         //RolesUsuario Generales
             //Administrador General
@@ -101,14 +122,57 @@ class UsersTableSeeder extends Seeder
             'rol_id' => '3',
         ]);
 
+        //DRSU-F
+        DB::table('rol_users')->insert([
+            [
+              'user_id' => '10',
+              'rol_id' => '3',
+            ],
+            [
+              'user_id' => '10',
+              'rol_id' => '6',
+            ]
+        ]);
+        //DRSU
+        DB::table('rol_users')->insert([
+            [
+              'user_id' => '11',
+              'rol_id' => '3',
+            ],
+            [
+              'user_id' => '11',
+              'rol_id' => '5',
+            ]
+        ]);
+
         DB::table('docentes')->insert([
+            [//usuario Docente por defecto
              'user_id'=>'2',
              'escuela_id'=>'10',
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
-             'dep_academico_id'=>'1',
+             'dep_academico_id'=>'10',
              'h_lectivas'=>'12','h_n_lectivas'=>'12',
+            ],
+            [//Docente DRSU-F
+             'user_id'=>'10',
+             'escuela_id'=>'10',
+             'docente_categoria_id'=>'1',
+             'docente_condicion_id'=>'1',
+             'docente_dedicacion_id'=>'1',
+             'dep_academico_id'=>'10',
+             'h_lectivas'=>'12','h_n_lectivas'=>'12',
+            ],
+            [//Docente DRSU
+             'user_id'=>'11',
+             'escuela_id'=>'7',
+             'docente_categoria_id'=>'1',
+             'docente_condicion_id'=>'1',
+             'docente_dedicacion_id'=>'1',
+             'dep_academico_id'=>'7',
+             'h_lectivas'=>'12','h_n_lectivas'=>'12',
+            ],
         ]);
             //Estudiante
         DB::table('rol_users')->insert([
@@ -129,10 +193,21 @@ class UsersTableSeeder extends Seeder
         DB::table('rol_users')->insert([
                 ['user_id' => '4', 'rol_id' => '2',],
                 ['user_id' => '4', 'rol_id' => '3',],
-                ['user_id' => '4', 'rol_id' => '4',],
+                //['user_id' => '4', 'rol_id' => '4',],
                 ['user_id' => '4', 'rol_id' => '5',],
                 ['user_id' => '4', 'rol_id' => '6',]
         ]);
+
+        DB::table('docentes')->insert([
+             'user_id'=>'4',
+             'escuela_id'=>'15',
+             'docente_categoria_id'=>'1',
+             'docente_condicion_id'=>'1',
+             'docente_dedicacion_id'=>'1',
+             'dep_academico_id'=>'1',
+             'h_lectivas'=>'12','h_n_lectivas'=>'12',
+        ]);
+
             //DRSU
         //DB::table('rol_users')->insert([
                 //'user_id' => '5',

@@ -17,6 +17,7 @@ class CreateRolUsersTable extends Migration
             //$table->increments('id');
             $table->integer('rol_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('estado',1)->default('1');
             $table->primary(['rol_id','user_id']);
             
 
