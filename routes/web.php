@@ -14,12 +14,18 @@ Route::get('/', function () {
     //return view('plantilla.usuario');
 	return view('ingreso');
 });
+
+Route::get('reniec', function () {
+    //return view('plantilla.usuario');
+	return view('reniec');
+});
 // Authentication Routes...
 Route::post('login', 'Auth\LoginController@login');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 //RSU
 Route::group(['prefix' => 'rsu'],function(){
+	//Mis proyectos
 	Route::group(['prefix' => 'mis_proyectos'],function(){
 		Route::get('/','modulos\rsu\MisProyectosController@index')->name('rsu.mp.index');
 		Route::post('store', 'modulos\rsu\MisProyectosController@store')->name('rsu.mp.store');
@@ -44,6 +50,19 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::get('users/{id}','modulos\rsu\MisProyectosController@equipo_users')->name('rsu.mp.users');
 		Route::post('users_n','modulos\rsu\MisProyectosController@equipo_users_new')->name('rsu.mp.users_new');
 		Route::get('users_d/{id}','modulos\rsu\MisProyectosController@equipo_users_d')->name('rsu.mp.users_d');
+		Route::post('show-msj','modulos\rsu\MisProyectosController@show_msj')->name('rsu.mp.show-msj');
+
+	});
+	//Proyectos Facultad
+	Route::group(['prefix' => 'proyectos_facultad'],function(){
+		Route::get('/','modulos\rsu\ProyectosFacultadController@index')->name('rsu.pf.index');
+		Route::get('datos','modulos\rsu\ProyectosFacultadController@datatables')->name('rsu.pf.datos');
+		Route::get('ver/{id}','modulos\rsu\ProyectosFacultadController@ver_detalle')->name('rsu.pf.ver');
+		Route::get('calendario/{id}','modulos\rsu\ProyectosFacultadController@cal_index')->name('rsu.pf.cal');
+		Route::get('ver-file/{id}','modulos\rsu\ProyectosFacultadController@ver_archivos')->name('rsu.pf.ver-file');
+		Route::post('e-msj','modulos\rsu\ProyectosFacultadController@e_msj')->name('rsu.pf.e-msj');
+		Route::post('show-msj','modulos\rsu\ProyectosFacultadController@show_msj')->name('rsu.pf.show-msj');
+		Route::post('estado','modulos\rsu\ProyectosFacultadController@estado')->name('rsu.pf.estado');
 
 	});
 });

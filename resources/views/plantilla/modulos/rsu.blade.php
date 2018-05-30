@@ -20,7 +20,7 @@
 								@endif
 								@if(Auth::user()->hasRoles(['DRSU-F']))
 								<li class="">
-									<a href="">
+									<a href="{{ route('rsu.pf.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Proyectos Facultad
 									</a>

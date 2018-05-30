@@ -40,6 +40,7 @@ class CreateRsuProyectosTable extends Migration
             //2 => color: verde, etapa: aprobación
             //3 => color: naranja, etapa: pendiente, con observaciones
             //4 => color: sin color, etapa: culminado, con observaciones
+            $table->string('mas_lineamientos')->nullable();
 
             $table->foreign('rsu_nivel_id')->references('id')->on('rsu_nivels')->onDelete('cascade');
             $table->timestamps();
