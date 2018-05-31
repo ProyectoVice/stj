@@ -9,7 +9,7 @@ class CargaLectiva extends Model
     //
     protected $table='carga_lectivas';
     protected $fillable=[
-    'semestre','estado','elaborar_clase','curso_id','docente_id'
+    'semestre','estado','curso_id','docente_id'
     ];
     //recibe la llave foranea de curso
     public function curso() 

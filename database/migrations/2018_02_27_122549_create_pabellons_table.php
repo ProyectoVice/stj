@@ -15,10 +15,10 @@ class CreatePabellonsTable extends Migration
     {
         Schema::create('pabellons', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Pabellón');
-            $table->string('Dirección');
-            $table->string('Descripción');
-            $table->string('Referencia');
+            $table->string('pabellon');
+            $table->string('descripcion')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('referencia')->nullable();
             $table->timestamps();
         });
     }

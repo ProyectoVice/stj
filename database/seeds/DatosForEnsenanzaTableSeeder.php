@@ -864,6 +864,125 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $curso->plan_estudio_id=1;
         $curso->save();
 
+        //carga lectiva 1 del curso 1 Ortografía y sintaxis básica docente Abelardo
+        $carga = new \App\CargaLectiva();
+        $carga->semestre='I';
+        $carga->anio=2018;
+        $carga->curso_id=1;
+        $carga->docente_id=26;
+        $carga->save();
+
+        //carga lectiva 2 del curso 2 Ortografía y sintaxis básica docente Raul Jorge
+        $carga = new \App\CargaLectiva();
+        $carga->semestre='I';
+        $carga->anio=2018;
+        $carga->curso_id=2;
+        $carga->docente_id=27;
+        $carga->save();
+
+        //carga lectiva 3 del curso 3 Ortografía y sintaxis básica docente Fidel
+        $carga = new \App\CargaLectiva();
+        $carga->semestre='I';
+        $carga->anio=2018;
+        $carga->curso_id=3;
+        $carga->docente_id=28;
+        $carga->save();
+
+        //pabellones de la UNHEVAL
+        //pabellon 1 de educación
+        $pabellon = new \App\Pabellon();
+        $pabellon->pabellon='1';
+        $pabellon->descripcion='Pabellon de Educación';
+        $pabellon->save();
+
+        //pabellon 2 de enfermeria
+        $pabellon = new \App\Pabellon();
+        $pabellon->pabellon='2';
+        $pabellon->descripcion='Pabellon de Enfermería';
+        $pabellon->save();
+
+        //ambientes de la UNHEVAL
+        //ambiente 1 aula de Facultad de Educación
+        $ambiente = new \App\Ambiente();
+        $ambiente->ambiente='Aula 504';
+        $ambiente->descripcion='Aula de clases de 5to año';
+        $ambiente->capacidad=40;
+        $ambiente->dependencia_id=11;
+        $ambiente->tipo_ambiente_id=1;
+        $ambiente->pabellon_id=1;
+        $ambiente->es_aula=1;
+        $ambiente->save();
+
+        //ambiente 2 aula de Facultad de Educación
+        $ambiente = new \App\Ambiente();
+        $ambiente->ambiente='Aula 304';
+        $ambiente->descripcion='Aula de clases de 2do año';
+        $ambiente->capacidad=40;
+        $ambiente->dependencia_id=11;
+        $ambiente->tipo_ambiente_id=1;
+        $ambiente->pabellon_id=1;
+        $ambiente->es_aula=1;
+        $ambiente->save();
+
+        //ambiente 3 laboratorio de Facultad de Educación
+        $ambiente = new \App\Ambiente();
+        $ambiente->ambiente='Laboratorio de Lengua';
+        $ambiente->descripcion='Laborartorio de canto y percución';
+        $ambiente->capacidad=20;
+        $ambiente->dependencia_id=11;
+        $ambiente->tipo_ambiente_id=3;
+        $ambiente->pabellon_id=1;
+        $ambiente->es_laboratorio=1;
+        $ambiente->save();
+
+        //ambiente 4 taller de Facultad de Educación
+        $ambiente = new \App\Ambiente();
+        $ambiente->ambiente='Taller de Musica';
+        $ambiente->descripcion='Se realiza practicas con instrumentos musicales';
+        $ambiente->capacidad=20;
+        $ambiente->dependencia_id=11;
+        $ambiente->tipo_ambiente_id=2;
+        $ambiente->pabellon_id=1;
+        $ambiente->es_taller=1;
+        $ambiente->save();
+
+        //horario 1 de la carga lectiva 1
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-05-28';
+        $horario->carga_lectiva_id=1;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 2 de la carga lectiva 1
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-05-31';
+        $horario->carga_lectiva_id=1;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 3 de la carga lectiva 2
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-05-28';
+        $horario->carga_lectiva_id=2;
+        $horario->ambiente_id=2;
+        $horario->save();
+
+        //horario 4 de la carga lectiva 2
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-05-31';
+        $horario->carga_lectiva_id=2;
+        $horario->ambiente_id=2;
+        $horario->save();
+
+
 
 
     }

@@ -9,31 +9,12 @@ class Pabellon extends Model
     //
     protected $table='pabellons';
     protected $fillable=[
-    'Pabellón','Dirección','Descripción','Referencia'
+    'pabellon','descripcion','direccion','referencia'
     ];
-      //hereda la llave foranea de pabellón a talleres, aulas, laboratorios, centros de computo, auditorios y bibliotecas
-      public function tallers()
+      //hereda la llave foranea de pabellón a ambiente
+      public function ambientes()
     {
-       return $this->hasMany(Taller::class);
+       return $this->hasMany(Ambiente::class);
   	}
-  	  public function aulas()
-    {
-       return $this->hasMany(Aula::class);
-  	}
-  	  public function laboratorios()
-    {
-       return $this->hasMany(Laboratorio::class);
-  	}
-  	  public function centro_de_computos()
-    {
-       return $this->hasMany(CentroDeComputo::class);
-  	}
-  	  public function auditorios()
-    {
-       return $this->hasMany(Auditorio::class);
-  	}
-  	  	  public function bibliotecas()
-    {
-       return $this->hasMany(Biblioteca::class);
-  	}
+
 }
