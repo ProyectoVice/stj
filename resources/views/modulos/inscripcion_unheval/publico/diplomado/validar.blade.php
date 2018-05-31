@@ -25,11 +25,12 @@
             <div class="card wizard-card" data-color="azzure" id="wizardProfile">
             {!! Form::open(['url' => route('publico.diplomado.ins.validar', $tipo), 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
                     <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
-                    <div class="wizard-header">
+
+                <div class="wizard-header">
                         <h3>
                             <b>INSCRIPCION</b> UNHEVAL <br>
                         </h3>
-                    </div>
+                </div>
                     <div class="wizard-navigation">
                         <ul class="nav nav-pills">
                             <li style="width: 33.3333%;" class="active"><a href="#about" data-toggle="tab" aria-expanded="true">Inscripcion</a></li>
@@ -90,6 +91,8 @@
 </body>
 {!!Html::script('/plantilla/js/jquery.bootstrap.wizard.js')!!}
 {!!Html::script('/plantilla/js/gsdk-bootstrap-wizard.js')!!}
+{!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
+{!!Html::script('/plantilla/js/jquery.dataTables.bootstrap.min.js')!!}
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/  -->
 {!!Html::script('/plantilla/js/jquery.validate.min.js')!!}
 </html>

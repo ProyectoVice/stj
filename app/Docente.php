@@ -10,16 +10,17 @@ class Docente extends Model
     protected $table='docentes';
     protected $primaryKey='user_id';
     protected $fillable=[
-    'escuela_id','docente_categoria_id','docente_condicion_id','docente_dedicacion_id','dep_academico_id','h_lectivas','h_n_lectivas',
+    'dependencia_escuela_id','docente_categoria_id','docente_condicion_id','docente_dedicacion_id','dependencia_academico_id',
+        'h_lectivas','h_n_lectivas', 'profesion', 'grado_magister','grado_doctor', 'fecha_ingreso','fecha_nombramiento'
     ];
 
     public function user() 
     {
       return $this->belongsto(User::class,'user_id','id');
   	}
-  	public function escuela() 
+  	public function dependencia_escuela()
     {
-      return $this->belongsto(Escuela::class,'escuela_id','id');
+      return $this->belongsto(Dependencia::class,'dependencia_escuela_id','id');
   	}
   	public function categoria() 
     {
@@ -34,9 +35,9 @@ class Docente extends Model
       return $this->belongsto(DocenteDedicacion::class,'docente_dedicacion_id','id');
   	}
     //recibe la llave de departamento academico
-    public function dep_academico() 
+    public function dependencia_academico()
     {
-      return $this->belongsto(DepAcademico::class,'dep_academico_id','id');
+      return $this->belongsto(Dependencia::class,'dependencia_academico_id','id');
     }
     //hereda su llave a Carga no lectiva
     public function carga_no_lectivas() 

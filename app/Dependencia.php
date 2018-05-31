@@ -14,6 +14,9 @@ class Dependencia extends Model
     public function programa_ncgts() {
       return $this->hasMany(ProgramaNcgt::class);
     }
+    public function ambientes() {
+        return $this->hasMany(Ambiente::class);
+    }
 
     public static  function getDependenciasHijosId($id){
         $dependencias=Dependencia::select('id')->where('dependencia_id', '=', $id)->get();

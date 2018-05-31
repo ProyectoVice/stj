@@ -10,7 +10,9 @@ class Curso extends Model
     protected $table='cursos';
     protected $primaryKey = 'codigo';
     protected $fillable=[
-    'codigo','nombre','ciclo','creditos','hteoria','hpractica','plan_estudio_id'
+    'codigo','nombre','ciclo','creditos','hteoria','hpractica', 'es_general',
+        'es_especifico', 'es_especialidad', 'es_electivo','comp_investigacion', 'comp_ciudadania',
+        'comp_responsabilidad_soc', 'comp_experiencia_pre_prof','plan_estudio_id'
     ];
     //recibe la llave foranea de plan de estudios
     public function plan_estudio() 

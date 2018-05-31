@@ -70,14 +70,16 @@ class DiplomadoController extends Controller
         
         return DataTables::of($inscripcion->get())
             ->addColumn('total_pago', function ($obj){
-                $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj->es_interno*$obj->descuento_interno*$obj->numero_modulo;
+                $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj
+                        ->es_interno*$obj->descuento_interno*$obj->numero_modulo;
                 return $total.' / '.$obj->pagado;
             })
             ->editColumn('es_interno', function ($obj){
                 return ($obj->es_interno==1)?"Interno":($obj->programa_id==9)?"Interno":"Externo";
             })
             ->addColumn('cancelacion', function ($obj){
-                $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj->es_interno*$obj->descuento_interno*$obj->numero_modulo;
+                $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj
+                        ->es_interno*$obj->descuento_interno*$obj->numero_modulo;
                 return $total - $obj->pagado;
             })
             ->addColumn('accion', function ($obj){
@@ -276,7 +278,7 @@ class DiplomadoController extends Controller
         if ($pagos != '') {
             if ($pagos->estado_recibo == 0) {
                 if ($pagos->importe != $programa->costo_matricula) {
-                    $mensaje = 'El importe de pago del recibo no coincide con el costtro de matricula';
+                    $mensaje = 'El importe de pago del recibo no coincide con el costo de matricula';
                     $error = true;
                 }
             } else {
@@ -293,7 +295,7 @@ class DiplomadoController extends Controller
     {
         $dato=DiplomadoController::validar_($request);
             if($dato['error'])
-                return redirect()->route('publico.diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', $dato['mensaje']);
+                return redirect()->route('diplomado.ins.index', ['tipo' => $request->tipo])->with('rojo', $dato['mensaje']);
             else
                 return $this->create($request->descripcion, $request->n_comprobante, $request->f_comprobante, $request->tipo);
     }

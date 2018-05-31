@@ -25,7 +25,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Programa</label>
-					<div class="col-sm-7">{!!Form::select('programa',$programas,null,['class'=>'col-xs-9 col-sm-6', 'placeholder' => 'Seleccione...'])!!}</div>
+					<div class="col-sm-3">{!!Form::select('programa',$programas,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
 				</div>
 			</div>
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
