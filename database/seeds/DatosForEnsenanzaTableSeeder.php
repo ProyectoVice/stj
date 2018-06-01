@@ -69,6 +69,14 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $plan->escuela_id=30;
         $plan->save();
 
+        $plan = new \App\PlanEstudio();
+        $plan->resolucion='N xxx Consejo Universitario';
+        $plan->archivo='g';
+        $plan->anio='2000';
+        $plan->estado='1';
+        $plan->escuela_id=31;
+        $plan->save();
+
         //cursos Inicial ciclo 1
         $curso = new \App\Curso();
         $curso->codigo='1101';
