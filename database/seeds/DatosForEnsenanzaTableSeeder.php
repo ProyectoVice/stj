@@ -990,6 +990,98 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario->ambiente_id=2;
         $horario->save();
 
+        //actividades de silabos
+        //Actividades 1  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 1';
+        $actividad->semana=1;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 2  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 2';
+        $actividad->semana=1;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 3  del horario 2 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 3';
+        $actividad->semana=1;
+        $actividad->horario_id=2;
+        $actividad->save();
+
+        //Actividades 4  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 4';
+        $actividad->semana=2;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 5  del horario 2 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 5';
+        $actividad->semana=2;
+        $actividad->horario_id=2;
+        $actividad->save();
+
+        //Actividades 6  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 6';
+        $actividad->semana=3;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 7  del horario 2 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 7';
+        $actividad->semana=3;
+        $actividad->horario_id=2;
+        $actividad->save();
+
+        //Actividades 8  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 8';
+        $actividad->semana=4;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 9  del horario 2 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 9';
+        $actividad->semana=4;
+        $actividad->horario_id=2;
+        $actividad->save();
+
+        //Actividades 10  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 10';
+        $actividad->semana=5;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 11  del horario 2 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 11';
+        $actividad->semana=5;
+        $actividad->horario_id=2;
+        $actividad->save();
+
+        //Actividades 12  del horario 1 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 12';
+        $actividad->semana=6;
+        $actividad->horario_id=1;
+        $actividad->save();
+
+        //Actividades 13  del horario 2 que pertenece a la carga lectiva 1
+        $actividad = new \App\ActividadSilabo();
+        $actividad->actividad='Actividad 13';
+        $actividad->semana=6;
+        $actividad->horario_id=2;
+        $actividad->save();
+
 
 
 
