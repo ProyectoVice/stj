@@ -22,7 +22,7 @@
 								<li class="">
 									<a href="{{ route('rsu.pf.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
-										Proyectos Facultad
+										Proyectos Escuela
 									</a>
 									<b class="arrow"></b>
 								</li>
@@ -34,13 +34,13 @@
 									</a>
 									<b class="arrow"></b>
 								</li>
-								<li class="">
+								{{-- <li class="">
 									<a href="">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Invitaciones
 									</a>
 									<b class="arrow"></b>
-								</li>
+								</li> --}}
 								<li class="">
 									<a href="#">
 										<i class="menu-icon fa fa-caret-right"></i>

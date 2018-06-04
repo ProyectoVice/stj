@@ -451,6 +451,7 @@ jQuery(function($) {
 		          _token:'{!! csrf_token() !!}',
 		        },
 		    		success: function (data) {
+		    			console.log(data);
 		    			$('#input_nuevo').val("");
 		          	myTable.ajax.reload();
 		    		},

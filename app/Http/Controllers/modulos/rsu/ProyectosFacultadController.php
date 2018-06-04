@@ -1,5 +1,5 @@
 <?php
-
+//En realidad es proyectos Escuela, pero me dió flojera cambiar el nombre a tdos los archivos; Si se cambio en las vistas.
 namespace App\Http\Controllers\modulos\rsu;
 
 use Illuminate\Http\Request;
@@ -39,16 +39,16 @@ class ProyectosFacultadController extends Controller
 
     public function index()
     {
-      $escuela=Docente::find(Auth::user()->id)->escuela;
+      $escuela=Docente::find(Auth::user()->id)->dependencia_escuela;
       return view('modulos.rsu.proyectos_facultad.index',compact('escuela'));
     }
     public function datatables()
     {
-        $escuela=Docente::find(Auth::user()->id)->escuela->id;
+        $escuela=Docente::find(Auth::user()->id)->dependencia_escuela->id;
         $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                           // ->join('users AS u','u.id','=','p.user_id')
                            ->join('docentes AS d','d.user_id','=','p.user_id')
-                           ->join('escuelas AS e','e.id','=','d.escuela_id')
+                           ->join('dependencias  AS e','e.id','=','d.dependencia_escuela_id')
                            ->where('e.id','=',$escuela)
                            ->select('rsu_proyectos.*')->get();
         return datatables()->of($proyecto)->toJson();
@@ -56,11 +56,12 @@ class ProyectosFacultadController extends Controller
     
     public function verificar_escuela($id)
     {
-      $MiEscuela=Docente::find(Auth::user()->id)->escuela->id;
+      $MiEscuela=Docente::find(Auth::user()->id)->dependencia_escuela;
       $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                           // ->join('users AS u','u.id','=','p.user_id')
                            ->join('docentes AS d','d.user_id','=','p.user_id')
-                           ->join('escuelas AS e','e.id','=','d.escuela_id')
+                           //->join('escuelas AS e','e.id','=','d.escuela_id')
+                           ->join('dependencias  AS e','e.id','=','d.dependencia_escuela_id')
                            ->where('e.id','=',$MiEscuela)
                            ->where('rsu_proyectos.id','=',$id)
                            ->select('rsu_proyectos.*')->first();

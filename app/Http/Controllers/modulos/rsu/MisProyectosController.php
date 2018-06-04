@@ -45,10 +45,7 @@ class MisProyectosController extends Controller
     }
     public function datatables()
     {
-        // $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
-        //                       ->join('rsu_responsabilidads AS r','r.id','=','p.rsu_responsabilidad_id')
-        //                       ->select('rsu_proyectos.*','r.rsu_responsabilidad AS rp')->get();
-         $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
+        $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                               ->where('p.user_id','=',Auth::user()->id)
                               ->select('rsu_proyectos.*')->get();
         //return Datatables::of($proyecto)->make(true);
@@ -60,24 +57,22 @@ class MisProyectosController extends Controller
        $docentes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('docentes AS doc','doc.user_id','=','users.id')
-               ->join('escuelas','escuelas.id','=','doc.escuela_id')
+               ->join('dependencias  AS e','e.id','=','doc.dependencia_escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->join('rol_users AS ru','users.id','=','ru.user_id')
                ->where('ru.rol_id','3')
                ->where('ru.estado','1')
                ->where('rsu_participantes.rsu_responsabilidad_id','<>',3)
-               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela', 'rsu_participantes.id AS id')->get();
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','e.dependencia AS escuela', 'rsu_participantes.id AS id')->get();
 
         $estudiantes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('estudiantes AS doc','doc.user_id','=','users.id')
-               ->join('escuelas','escuelas.id','=','doc.escuela_id')
-               // ->join('rol_users AS ru','users.id','=','ru.user_id')
-               // ->where('ru.rol_id','4')
-               // ->where('ru.estado','1')
+               //->join('escuelas','escuelas.id','=','doc.escuela_id')
+               ->join('dependencias  AS e','e.id','=','doc.dependencia_escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
-               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela','rsu_participantes.id AS id')->get();
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','e.dependencia AS escuela', 'rsu_participantes.id AS id')->get();
 
         $equipo=array();
         //Fusionamos los controladores
@@ -127,6 +122,11 @@ class MisProyectosController extends Controller
    }
     public function equipo_users_new(Request $request)
     {
+        $query=RsuParticipante::where('rsu_proyecto_id',$request->get('id_proyecto'))->where('user_id',$request->get('id_boton'))->first();
+
+        if ($query) {
+            return false;
+        }
         $equipo=new RsuParticipante;
         $equipo->rsu_proyecto_id=$request->get('id_proyecto');
         $equipo->user_id=$request->get('id_boton');

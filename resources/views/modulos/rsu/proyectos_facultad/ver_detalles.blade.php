@@ -10,7 +10,7 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Responsabilidad Social Universitaria</li>
-	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos de Facultad</a></li>
+	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos Escuela</a></li>
 	<li>{{$escuela->escuela}}</li>
 	<li class="">ver detalles</li>
 </ul>

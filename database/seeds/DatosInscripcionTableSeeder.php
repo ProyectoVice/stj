@@ -11,7 +11,7 @@ class DatosInscripcionTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        /*
         //dependencias
         DB::table('dependencias')->insert([
 
@@ -134,7 +134,7 @@ class DatosInscripcionTableSeeder extends Seeder
             ['depencencia_id' =>64, 'descripcion' => 'PROMASTER-modulo', 'monto'=>'900', 'es_modalidades'=>'0','es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,]
 
             ]);
-
+*/
         //pagos
         DB::table('pagos')->insert([
             ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-05-21','user_id'=> 10,'tarifario_id'=> 1, 'importe'=> '350', 'estado_recibo'=> 0,],
