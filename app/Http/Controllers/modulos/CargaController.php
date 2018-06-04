@@ -5,6 +5,7 @@ namespace App\Http\Controllers\modulos;
 use App\CargaLectiva;
 use App\Curso;
 use App\Dependencia;
+use App\Horario;
 use App\Http\Middleware\rol\Docente;
 use App\PlanEstudio;
 use Auth;
@@ -26,15 +27,15 @@ class CargaController extends Controller
         $dep = Auth::user()->dependencia_id_depende;
         $departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $dep . ') as dep_ac')[0];
         $dep_nombre = (new \App\Dependencia)->find($departamento->dep_ac)->dependencia;
-        $planes = PlanEstudio::getForSelect($dep);
+        $planes = PlanEstudio::getForSelectForDepartamento($departamento->dep_ac);
         $plan = ($plan == 'null') ? null : $plan;
         $ciclo = ($ciclo == 'null') ? null : $ciclo;
         $anios = [];
         $where=[['plan_estudio_id', '=', $plan]];
         if ($ciclo>0)
             $where[]=['ciclo', '=', $ciclo];
-        $cursos_query = (new \App\Curso)->select('cursos.id', 'cursos.codigo', 'cursos.nombre', 'cursos.creditos',
-            'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo')
+        $cursos_query = DB::table('cursos')->select('cursos.id', 'cursos.codigo', 'cursos.nombre', 'cursos.creditos',
+            'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo', DB::raw('null as docente_nombre'))
             ->where($where)
             ->get();
         $carga = DB::table('cursos')
@@ -66,6 +67,7 @@ class CargaController extends Controller
             'dependencia'=>$dep_nombre,
             'planes'=>$planes,
             'plan'=>$plan,
+            'ciclos'=>[1=>'I',2=>'II',3=>'III',4=>'IV',5=>'V',6=>'VI',7=>'VII',8=>'VIII',9=>'IX',10=>'X'],
             'ciclo'=>$ciclo,
             'anios'=>$anios,
             'anio'=>$anio,
@@ -74,6 +76,13 @@ class CargaController extends Controller
             'docentes'=>$docentes,
             'docente'=>null
             ]
+        );
+    }
+    public function horario($id_carga){
+        $horarios = Horario::where('carga_lectiva_id','=',$id_carga)->get();
+
+        return view('modulos.academico.carga_horario',
+            ['horarios'=>$horarios]
         );
     }
 

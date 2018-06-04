@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             ['dni' => '48315690', 'nombres' => 'Saúl', 'apellido_paterno' => 'Escandón', 'apellido_materno' => 'Munguía',
                 'email' => 'aescandonmunguia@hotmail.com', 'password' => bcrypt('12345678'), 'dependencia_id_depende' => null,],//4 Usuarios Saúl
             [ 'dni' => '44485816', 'nombres' => 'Teddy', 'apellido_paterno' => 'Tafur', 'apellido_materno' => 'Guerra',
-                'email' => 'ttafurg@gmail.com', 'password' => bcrypt('pichoncito'), 'dependencia_id_depende' => 30,],//5 Usuario Teddy
+                'email' => 'ttafurg@gmail.com', 'password' => bcrypt('12345'), 'dependencia_id_depende' => 30,],//5 Usuario Teddy
             ['dni' => '46181970', 'nombres' => 'Jhonattan', 'apellido_paterno' => 'Carlos', 'apellido_materno' => 'Simon',
                 'email' => 'yotacs14@gmail.com', 'password' => bcrypt('yota'), 'dependencia_id_depende' => null,],//6 Usuario Jhonattan
             ['dni' => '00000004', 'nombres' => 'Pepe', 'apellido_paterno' => 'Ramos', 'apellido_materno' => 'Simon',

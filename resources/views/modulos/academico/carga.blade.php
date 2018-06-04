@@ -22,12 +22,6 @@
             {!!Form::select('planes',$planes ,$plan,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
           </div>
         </div>
-        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Ciclo</label>
-        <div class="col-sm-2">
-          <div class="clearfix">
-            {!!Form::select('ciclo',[1=>'I',2=>'II',3=>'III'] ,$ciclo,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
-          </div>
-        </div>
         <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Año</label>
         <div class="col-sm-2">
           <div class="clearfix">
@@ -40,12 +34,18 @@
             {!!Form::select('semestre',[1=>'Primero',2=>"Segundo"],$semestre,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
           </div>
         </div>
+        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Ciclo</label>
+        <div class="col-sm-2">
+          <div class="clearfix">
+              {!!Form::select('ciclo',$ciclos ,$ciclo,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
+          </div>
+        </div>
       </div>
     </div>  
     <div class="col-sm-7 hidden-xs">
       <h> Ver Carga por Docente </h><a href='{!! route('academico.reportecarga.index1')!!}', <button type="button" class="btn btn-primary btn-primary btn-sm">Ver</button> </a>
     </div>     
-    <div class="col-sm-7 hidden-xs">
+    <div class="col-sm-12 hidden-xs">
       <div class="clearfix">
         <div class="pull-right tableTools-container"></div>
       </div>
@@ -57,10 +57,11 @@
           <thead>
             <tr>
                 <th class="center">Cod</th>
+                <th class="center">Ciclo</th>
                 <th class="center">Curso</th>
                 <th class="center">Creditos</th>
-                <th class="center">Horas teoricas</th>
-                <th class="center">Horas practicas</th>
+                <th class="center">Horas<br>teoricas</th>
+                <th class="center">Horas<br>practicas</th>
                 <th class="center">Docente</th>
                 <th class="center"></th>
             </tr>
@@ -68,7 +69,8 @@
             <tbody>
             @foreach($cursos as $id=>$curso)
             <tr>
-                <td>{{$id}}</td>
+                <td>{{$curso->codigo}}</td>
+                <td>{{$ciclos[$curso->ciclo]}}</td>
                 <td>{{$curso->nombre}}</td>
                 <td>{{$curso->creditos}}</td>
                 <td>{{$curso->hteoria}}</td>
@@ -78,7 +80,8 @@
                     @if(!isset($curso->idcarga))
                         <a href="#asignar_docente" class="stj-acciones enviarId" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}"><i class="fa fa-plus"></i></a>
                     @else
-                        <a href="#asignar_docente" class="stj-acciones editar" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}"><i class="fa fa-pencil"></i></a
+                        <a href="#asignar_docente" class="stj-acciones editar" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}"><i class="fa fa-pencil"></i></a>
+                        <a href="{{route('academico.carga.horario.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="horario"><i class="fa fa-calendar"></i></a>
                     @endif
 
                 </td>
@@ -98,7 +101,39 @@
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="titleModal"></h4>
+                  <h4 class="modal-title" id="titleModal">Seleccionar Docente</h4>
+              </div>
+              <div class="modal-body">
+                  <div id="testmodal" style="padding: 5px 20px;">
+                      <table>
+                          <thead>
+                          <tr>
+                              <th class="center">Dias</th>
+                              <th class="center">Ciclo</th>
+                              <th class="center">Curso</th>
+                              <th class="center">Creditos</th>
+                          </tr>
+                          </thead>
+                      </table>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  {{Form::hidden('curso',null)}}
+                  {{Form::hidden('id_carga',null)}}
+                  {{Form::hidden('anio',$anio)}}
+                  <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-success antosubmit" id="btn_guardar">Guardar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div id="horario_curso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title" id="titleModal">Horario</h4>
               </div>
               <div class="modal-body">
                   <div id="testmodal" style="padding: 5px 20px;">
