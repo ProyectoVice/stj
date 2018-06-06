@@ -155,7 +155,7 @@ $variable="";
 									</a>
 								</li>
 								<li>
-									<a href="{{url('manual/directivo.pdf')}}" target="_black">
+									<a href="{{url('manual/manual-rsu.pdf')}}" target="_black">
 										<i class="ace-icon fa fa-exclamation"></i>
 										Ayuda
 									</a>
