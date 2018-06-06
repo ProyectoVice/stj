@@ -10,8 +10,7 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Responsabilidad Social Universitaria</li>
-	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos Escuela</a></li>
-	<li>{{$escuela->dependencia}}</li>
+	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos UNHEVAL</a></li>
 	<li class="">ver detalles</li>
 </ul>
 @endsection
@@ -122,13 +121,12 @@
 			<div class="hr dotted"></div><br><br><br>
 			<div class="form-group" align="center">
 				
-            <a href="{!!route('rsu.pf.cal',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-calendar">
-						<i class="ace-icon fa fa-calendar"> Actividades</i>
+            <a href="{!!route('rsu.pu.cal',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-calendar">
+					<i class="ace-icon fa fa-calendar"> Actividades</i>
 				</a>
 				<a href="{!!route('rsu.pdf.vd',$proyecto->id)!!}" target="_blank" class="btn btn-info btn-round submit" id="btn-download">
 						<i class="ace-icon fa fa-download"> Descargar</i>
-				</a>	
-								
+				</a>		
 			</div>	
 			<div>
 				<div class="btn-toolbar" data-role="editor-toolbar"

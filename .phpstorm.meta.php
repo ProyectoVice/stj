@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-05-31 14:37:32.
+    * Generated on 2018-06-05 11:47:42.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -40,6 +40,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,
@@ -176,6 +178,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,
@@ -312,6 +316,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,
@@ -448,6 +454,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,
@@ -584,6 +592,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,
@@ -720,6 +730,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,
@@ -856,6 +868,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'softon.sweetalert' => \Softon\SweetAlert\SweetAlert::class,
+        'dompdf' => \Dompdf\Dompdf::class,
+        'dompdf.wrapper' => \Barryvdh\DomPDF\PDF::class,
         'datatables' => \Yajra\DataTables\DataTables::class,
         'datatables.request' => \Yajra\DataTables\Utilities\Request::class,
         'datatables.config' => \Yajra\DataTables\Utilities\Config::class,

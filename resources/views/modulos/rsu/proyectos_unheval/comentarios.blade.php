@@ -27,7 +27,7 @@
 					@endforeach
 				
 			</div>
-			{!! Form::open(['route' => 'rsu.pf.e-msj', 'method' => 'POST', 'class'=>'form-horizontal form-label-left']) !!}
+			{!! Form::open(['route' => 'rsu.pu.e-msj', 'method' => 'POST', 'class'=>'form-horizontal form-label-left']) !!}
 			<div class="modal-body" align="center">
 			
 			{{ csrf_field() }}

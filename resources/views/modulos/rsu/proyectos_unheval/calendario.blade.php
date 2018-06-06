@@ -10,15 +10,15 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Responsabilidad Social Universitaria</li>
-	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos Escuela</a></li>
-  <li>{{$escuela->dependencia}}</li>
+	<li class="active">Responsabilidad Social Universitaria</li>
+  <li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos UNHEVAL</a></li>
 	<li class="">Calendario</li>
 </ul>
 @endsection
 @section('contenido')
 	<div class="row">
 		<div class="col-sm-12">
-			<h3><u> Proyecto</u>: {{ $proyecto->titulo }}</h3><hr><br>
+			<h3><u> Proyecto</u>: {{ $proyecto->titulo }}</h3><label> {{ $escuela->dependencia}}</label><hr><br>
 			{{ csrf_field() }}
 		</div>
 		<div class="col-sm-7 hidden-xs">
@@ -46,7 +46,6 @@
 		</div>
 	</div>
 	<p>
-	
 	</p>
 
 	<!-- calendar modal -->
@@ -170,15 +169,7 @@ $(document).ready(function(){
 
        },
       });
-  	
-
-
-
-
 });
-
-
-
 
 </script>
 
