@@ -68,10 +68,10 @@ $(document).ready(function(){
                 select_from = $(h_from).find('select');
                 select_to = $(h_to).find('select');
                 $.each(inputs_from,function(i, v){
-                    inputs_to[i].value = v.value;
+                    $(h_to).find("[name="+v.name+"]").val(v.value);
                 });
                 $.each(select_from,function(i, v){
-                    select_to[i].value = v.value;
+                    $(h_to).find("[name="+v.name+"]").val(v.value);
                 })
             }
         	var $valid = $('.wizard-card form').valid();

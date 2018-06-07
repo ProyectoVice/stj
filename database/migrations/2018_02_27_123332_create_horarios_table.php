@@ -17,7 +17,7 @@ class CreateHorariosTable extends Migration
             $table->increments('id');
             $table->time('hora_inicio');
             $table->time('hora_fin');
-            $table->date('dia_inicio');
+            $table->integer('dia');//1 lunes, 2 martes ... 7 domingo
             $table->integer('estado_horario')->default(1);
             $table->integer('carga_lectiva_id')->unsigned()->nullable();
             $table->integer('curso_ncgt_disponible_id')->unsigned()->nullable();

@@ -12,14 +12,26 @@
 @endsection
 @section('contenido')
   <div class="row">
-    </div>     
+      <div class="col-sm-12">
+          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Curso:</label>
+      </div>
+      <div class="col-sm-12">
+          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Docente:</label>
+      </div>
+      <div class="col-sm-12">
+          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Ciclo:</label>
+      </div>
+      <div class="col-sm-12">
+          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Anio:</label>
+      </div>
+  </div>
     <div class="col-sm-12 hidden-xs">
       <div class="clearfix">
         <div class="pull-right tableTools-container"></div>
       </div>
       <div class="table-header">
           <a href="#" class="stj-acciones stj-acciones-new" title="Nuevo" onclick="prepararModal()"><i class="fa fa-plus"></i></a>
-         Horario de Curso &nbsp;&nbsp;&nbsp;
+         Nuevo Horario de Curso &nbsp;&nbsp;&nbsp;
       </div>
       <div class="table-responsive">
         <table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -27,7 +39,7 @@
             <tr>
                 <th class="center">Dia</th>
                 <th class="center">Hora Inicio</th>
-                <th class="center">HOra fin</th>
+                <th class="center">Hora fin</th>
                 <th class="center">Ambiente</th>
                 <th class="center"></th>
             </tr>
@@ -64,10 +76,29 @@
                                   <p>Curso</p>
                               </div>
                           </div>
+
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Docente</label>
+                              <label class="col-sm-3 control-label">Día</label>
                               <div class="col-sm-9">
-                                  {{Form::select('docente',[],null,['required', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Docente'])}}
+                                  {{Form::select('dias',$dias,null,['required', 'id'=>'dias','class'=>'col-xs-12 col-sm-9','placeholder' => 'Día'])}}
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Hora de Inicio</label>
+                              <div class="col-sm-9">
+                                  <input type="time" placeholder="09:00" name="hora_inicio" class="col-xs-12 col-sm-9" value="">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Hora Fin</label>
+                              <div class="col-sm-9">
+                                  <input type="time" placeholder="11:00" name="hora_fin" class="col-xs-12 col-sm-9" value="">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Ambiente</label>
+                              <div class="col-sm-9">
+                                  {{Form::select('ambiente',$ambiente,null,['required', 'id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
                               </div>
                           </div>
                       </form>

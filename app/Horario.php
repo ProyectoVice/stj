@@ -9,7 +9,7 @@ class Horario extends Model
     //
     protected $table='horarios';
     protected $fillable=[
-    'hora_inicio','hora_fin','dia_inicio','estado_horario','carga_lectiva_id','curso_ncgt_disponible_id','ambiente_id'
+    'hora_inicio','hora_fin','dia','estado_horario','carga_lectiva_id','curso_ncgt_disponible_id','ambiente_id'
     ];
     //recibe las llaves foraneas de escuela, carga lectiva, aula, taller, laboratorio, biblioteca, centro de computo, auditorio
     public function ambiente()
