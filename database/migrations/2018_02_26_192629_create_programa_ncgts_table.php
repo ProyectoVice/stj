@@ -17,9 +17,14 @@ class CreateProgramaNcgtsTable extends Migration
             $table->increments('id');
             $table->integer('programa_id');
             $table->string('descripcion');
+            $table->integer('anio')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->integer('horas')->nullable();
+            $table->string('grupo')->nullable();
+            $table->integer('nivel')->nullable();//1 basico 2 intermedio 3 avanzado
+            $table->integer('idioma_tipo')->nullable();//1 pregrado 2 posgrado
+            $table->integer('tipo_horario')->default(1);//1 normal 2 intensivo
             $table->integer('numero_modulo')->nullable();
             $table->integer('costo_matricula')->nullable();
             $table->integer('costo_modulo')->nullable();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\modulos;
 
+use App\Ambiente;
 use App\CargaLectiva;
 use App\Curso;
 use App\Dependencia;
@@ -80,9 +81,13 @@ class CargaController extends Controller
     }
     public function horario($id_carga){
         $horarios = Horario::where('carga_lectiva_id','=',$id_carga)->get();
+        $ambiente=Ambiente::pluck('ambiente','id');
 
         return view('modulos.academico.carga_horario',
-            ['horarios'=>$horarios]
+            ['horarios'=>$horarios,
+             'dias'=>[1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo'],
+             'ambiente'=>$ambiente
+            ]
         );
     }
 

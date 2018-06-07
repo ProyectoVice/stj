@@ -11,7 +11,7 @@ class DatosInscripcionTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
+
         //dependencias
         DB::table('dependencias')->insert([
 
@@ -83,7 +83,9 @@ class DatosInscripcionTableSeeder extends Seeder
             ['dependencia' => 'CEPREVAL', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>null, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],//61
             ['dependencia' => 'Escuela de Posgrado', 'organiza_diplomado'=>1,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>1, 'es_direccion'=>null, 'es_oficina'=>null, 'dependencia_id'=> null, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],
             ['dependencia' => 'PROCAPT', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null,'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],
-            ['dependencia' => 'PROMASTER', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 44, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,]
+            ['dependencia' => 'PROMASTER', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 44, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],
+            ['dependencia' => 'Jefatura de Centro de idiomas', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],//65
+            ['dependencia' => 'DIRECCIÓN DE EDUCACIÓN A DISTANCIA Y FORMACIÓN CONTINUA', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>1, 'es_oficina'=>null, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,]//65
             ]);
         //tarifarios
         DB::table('tarifarios')->insert([
@@ -131,50 +133,73 @@ class DatosInscripcionTableSeeder extends Seeder
             ['depencencia_id' =>63, 'descripcion' => 'PROCAPT-matricula', 'monto'=>'500', 'es_modalidades'=>'0','es_maestria'=>null,'es_doctorado'=>null,'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null, 'es_procapt'=>'1',],
             ['depencencia_id' =>63, 'descripcion' => 'PROCAPT-modulo', 'monto'=>'700', 'es_modalidades'=>'0','es_maestria'=>null,'es_doctorado'=>null,'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null, 'es_procapt'=>'1',],
             ['depencencia_id' =>64, 'descripcion' => 'PROMASTER-matricula', 'monto'=>'500', 'es_modalidades'=>'0','es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
-            ['depencencia_id' =>64, 'descripcion' => 'PROMASTER-modulo', 'monto'=>'900', 'es_modalidades'=>'0','es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,]
-
+            ['depencencia_id' =>64, 'descripcion' => 'PROMASTER-modulo', 'monto'=>'900', 'es_modalidades'=>'0','es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            //tarifario de ingles
+            //id 46
+            ['depencencia_id' =>65, 'descripcion' => 'Ingles-matricula', 'monto'=>'25', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>65, 'descripcion' => 'Ingles basico-pensión', 'monto'=>'70', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>65, 'descripcion' => 'Ingles intermedio-pensión', 'monto'=>'80', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>65, 'descripcion' => 'Ingles avanzado-pensión', 'monto'=>'80', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticcos-matricula', 'monto'=>'30', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticos-pensión básico e intermedio-normal', 'monto'=>'90', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticos-pensión básico e intermedio-intensivo', 'monto'=>'180', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticos-pensión avanzado-normal', 'monto'=>'100', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
+            ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticos-pensión avanzado-intensivo', 'monto'=>'200', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,]
             ]);
-*/
         //pagos
         DB::table('pagos')->insert([
-            ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-05-21','user_id'=> 10,'tarifario_id'=> 1, 'importe'=> '350', 'estado_recibo'=> 0,],
-            ['num_comprobante' => '1234566', 'fecha_comprobante' => '2018-05-21','user_id'=> 11,'tarifario_id'=> 21, 'importe'=> '600', 'estado_recibo'=> 0,],
+            ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-06-03','user_id'=> 10,'tarifario_id'=> 1, 'importe'=> '350', 'estado_recibo'=> 0,],
+            ['num_comprobante' => '1234566', 'fecha_comprobante' => '2018-06-03','user_id'=> 11,'tarifario_id'=> 21, 'importe'=> '600', 'estado_recibo'=> 0,],
 
-            ['num_comprobante' => '1111111', 'fecha_comprobante' => '2018-05-21','user_id'=> 12,'tarifario_id'=> 35, 'importe'=> '150', 'estado_recibo'=> 1,],
-            ['num_comprobante' => '2222222', 'fecha_comprobante' => '2018-05-21','user_id'=> 12,'tarifario_id'=> 36, 'importe'=> '250', 'estado_recibo'=> 1,],
-            ['num_comprobante' => '3333333', 'fecha_comprobante' => '2018-05-21','user_id'=> 12,'tarifario_id'=> 37, 'importe'=> '20', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '1111111', 'fecha_comprobante' => '2018-06-03','user_id'=> 12,'tarifario_id'=> 35, 'importe'=> '150', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '2222222', 'fecha_comprobante' => '2018-06-03','user_id'=> 12,'tarifario_id'=> 36, 'importe'=> '250', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '3333333', 'fecha_comprobante' => '2018-06-03','user_id'=> 12,'tarifario_id'=> 37, 'importe'=> '20', 'estado_recibo'=> 1,],
 
-            ['num_comprobante' => '4444444', 'fecha_comprobante' => '2018-05-21','user_id'=> 13,'tarifario_id'=> 42, 'importe'=> '500', 'estado_recibo'=> 1,],
-            ['num_comprobante' => '5555555', 'fecha_comprobante' => '2018-05-21','user_id'=> 13,'tarifario_id'=> 43, 'importe'=> '700', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '4444444', 'fecha_comprobante' => '2018-06-03','user_id'=> 13,'tarifario_id'=> 42, 'importe'=> '500', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '5555555', 'fecha_comprobante' => '2018-06-03','user_id'=> 13,'tarifario_id'=> 43, 'importe'=> '700', 'estado_recibo'=> 1,],
 
-            ['num_comprobante' => '1111222', 'fecha_comprobante' => '2018-05-21','user_id'=> 14,'tarifario_id'=> 35, 'importe'=> '150', 'estado_recibo'=> 0,],
+            ['num_comprobante' => '1111222', 'fecha_comprobante' => '2018-06-03','user_id'=> 14,'tarifario_id'=> 35, 'importe'=> '150', 'estado_recibo'=> 0,],
 
-            ['num_comprobante' => '1111333', 'fecha_comprobante' => '2018-05-21','user_id'=> 15,'tarifario_id'=> 35, 'importe'=> '150', 'estado_recibo'=> 0,],
+            ['num_comprobante' => '1111333', 'fecha_comprobante' => '2018-06-03','user_id'=> 15,'tarifario_id'=> 35, 'importe'=> '150', 'estado_recibo'=> 0,],
 
-            ['num_comprobante' => '1111444', 'fecha_comprobante' => '2018-05-21','user_id'=> 16,'tarifario_id'=> 39, 'importe'=> '100', 'estado_recibo'=> 1,],//10
-            ['num_comprobante' => '2222555', 'fecha_comprobante' => '2018-05-21','user_id'=> 16,'tarifario_id'=> 40, 'importe'=> 250, 'estado_recibo'=> 1,],//11
+            ['num_comprobante' => '1111444', 'fecha_comprobante' => '2018-06-03','user_id'=> 16,'tarifario_id'=> 39, 'importe'=> '100', 'estado_recibo'=> 1,],//10
+            ['num_comprobante' => '2222555', 'fecha_comprobante' => '2018-06-03','user_id'=> 16,'tarifario_id'=> 40, 'importe'=> 250, 'estado_recibo'=> 1,],//11
 
-            ['num_comprobante' => '3333555', 'fecha_comprobante' => '2018-05-21','user_id'=> 17,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '1111555', 'fecha_comprobante' => '2018-05-21','user_id'=> 17,'tarifario_id'=> 36, 'importe'=> '200', 'estado_recibo'=> 1,],
-            ['num_comprobante' => '2222666', 'fecha_comprobante' => '2018-05-21','user_id'=> 17,'tarifario_id'=> 36, 'importe'=> '200', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '3333555', 'fecha_comprobante' => '2018-06-03','user_id'=> 17,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '1111555', 'fecha_comprobante' => '2018-06-03','user_id'=> 17,'tarifario_id'=> 36, 'importe'=> '200', 'estado_recibo'=> 1,],
+            ['num_comprobante' => '2222666', 'fecha_comprobante' => '2018-06-03','user_id'=> 17,'tarifario_id'=> 36, 'importe'=> '200', 'estado_recibo'=> 1,],
 
-            ['num_comprobante' => '3333666', 'fecha_comprobante' => '2018-05-21','user_id'=> 18,'tarifario_id'=> 39, 'importe'=> 100, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '1111666', 'fecha_comprobante' => '2018-05-21','user_id'=> 18,'tarifario_id'=> 40, 'importe'=> 300, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '1111777', 'fecha_comprobante' => '2018-05-21','user_id'=> 18,'tarifario_id'=> 40, 'importe'=> 300, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '3333666', 'fecha_comprobante' => '2018-06-03','user_id'=> 18,'tarifario_id'=> 39, 'importe'=> 100, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '1111666', 'fecha_comprobante' => '2018-06-03','user_id'=> 18,'tarifario_id'=> 40, 'importe'=> 300, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '1111777', 'fecha_comprobante' => '2018-06-03','user_id'=> 18,'tarifario_id'=> 40, 'importe'=> 300, 'estado_recibo'=> 1,],
 
-            ['num_comprobante' => '2222777', 'fecha_comprobante' => '2018-05-21','user_id'=> 18,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '3333777', 'fecha_comprobante' => '2018-05-21','user_id'=> 18,'tarifario_id'=> 36, 'importe'=> 250, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '2222888', 'fecha_comprobante' => '2018-05-21','user_id'=> 18,'tarifario_id'=> 36, 'importe'=> 250, 'estado_recibo'=> 1,],//20
+            ['num_comprobante' => '2222777', 'fecha_comprobante' => '2018-06-03','user_id'=> 18,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '3333777', 'fecha_comprobante' => '2018-06-03','user_id'=> 18,'tarifario_id'=> 36, 'importe'=> 250, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '2222888', 'fecha_comprobante' => '2018-06-03','user_id'=> 18,'tarifario_id'=> 36, 'importe'=> 250, 'estado_recibo'=> 1,],//20
 
-            ['num_comprobante' => '1111888', 'fecha_comprobante' => '2018-05-21','user_id'=> 19,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '2222999', 'fecha_comprobante' => '2018-05-21','user_id'=> 19,'tarifario_id'=> 38, 'importe'=> 650, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '1111888', 'fecha_comprobante' => '2018-06-03','user_id'=> 19,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '2222999', 'fecha_comprobante' => '2018-06-03','user_id'=> 19,'tarifario_id'=> 38, 'importe'=> 650, 'estado_recibo'=> 1,],
 
-            ['num_comprobante' => '2222444', 'fecha_comprobante' => '2018-05-21','user_id'=> 20,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 0,],
+            ['num_comprobante' => '2222444', 'fecha_comprobante' => '2018-06-03','user_id'=> 20,'tarifario_id'=> 35, 'importe'=> 150, 'estado_recibo'=> 0,],
 
-            ['num_comprobante' => '3333111', 'fecha_comprobante' => '2018-05-21','user_id'=> 21,'tarifario_id'=> 3, 'importe'=> 280, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '3333222', 'fecha_comprobante' => '2018-05-21','user_id'=> 22,'tarifario_id'=> 24, 'importe'=> 500, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '3333444', 'fecha_comprobante' => '2018-05-21','user_id'=> 23,'tarifario_id'=> 44, 'importe'=> 500, 'estado_recibo'=> 1,],
-            ['num_comprobante' => '5555444', 'fecha_comprobante' => '2018-05-21','user_id'=> 9,'tarifario_id'=> 33, 'importe'=> 250, 'estado_recibo'=> 1,]//27
+            ['num_comprobante' => '3333111', 'fecha_comprobante' => '2018-06-03','user_id'=> 21,'tarifario_id'=> 3, 'importe'=> 280, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '3333222', 'fecha_comprobante' => '2018-06-03','user_id'=> 22,'tarifario_id'=> 24, 'importe'=> 500, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '3333444', 'fecha_comprobante' => '2018-06-03','user_id'=> 23,'tarifario_id'=> 44, 'importe'=> 500, 'estado_recibo'=> 1,],
+            ['num_comprobante' => '5555444', 'fecha_comprobante' => '2018-06-03','user_id'=> 9,'tarifario_id'=> 33, 'importe'=> 250, 'estado_recibo'=> 1,],//27
+            //pago para inscripcion ingles
+            ['num_comprobante' => '5555666', 'fecha_comprobante' => '2018-06-03','user_id'=> 3,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 1,],//28
+            ['num_comprobante' => '5555777', 'fecha_comprobante' => '2018-06-03','user_id'=> 10,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 1,],//29
+            ['num_comprobante' => '5555888', 'fecha_comprobante' => '2018-06-03','user_id'=> 10,'tarifario_id'=> 47, 'importe'=> 55, 'estado_recibo'=> 1,],//30
+            ['num_comprobante' => '5555999', 'fecha_comprobante' => '2018-06-03','user_id'=> 11,'tarifario_id'=> 50, 'importe'=> 30, 'estado_recibo'=> 1,],//31
+            ['num_comprobante' => '6666111', 'fecha_comprobante' => '2018-06-03','user_id'=> 11,'tarifario_id'=> 51, 'importe'=> 75, 'estado_recibo'=> 1,],//32
+            ['num_comprobante' => '6666222', 'fecha_comprobante' => '2018-06-03','user_id'=> 12,'tarifario_id'=> 50, 'importe'=> 30, 'estado_recibo'=> 0,],//33
+            ['num_comprobante' => '6666333', 'fecha_comprobante' => '2018-06-03','user_id'=> 26,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 1,],//34
+            ['num_comprobante' => '6666444', 'fecha_comprobante' => '2018-06-03','user_id'=> 26,'tarifario_id'=> 47, 'importe'=> 55, 'estado_recibo'=> 1,],//35
+            ['num_comprobante' => '6666555', 'fecha_comprobante' => '2018-06-03','user_id'=> 27,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 1,],//36
+            ['num_comprobante' => '6666777', 'fecha_comprobante' => '2018-06-03','user_id'=> 13,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 0,],//37
+            ['num_comprobante' => '6666888', 'fecha_comprobante' => '2018-06-03','user_id'=> 22,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 0,],//38
+            ['num_comprobante' => '6666999', 'fecha_comprobante' => '2018-06-03','user_id'=> 20,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 0,],//39
+            ['num_comprobante' => '7777111', 'fecha_comprobante' => '2018-06-03','user_id'=> 32,'tarifario_id'=> 46, 'importe'=> 25, 'estado_recibo'=> 0,]//40
         ]);
 
         //programa_ncgt
@@ -243,33 +268,371 @@ class DatosInscripcionTableSeeder extends Seeder
             ['programa_id' => '10', 'descripcion' => 'PROMASTER Ingenieria de Sistemas mencion TICs', 'fecha_inicio'=> null, 'fecha_fin'=> null, 'horas'=> null,
             'numero_modulo'=> '3', 'costo_matricula'=> '500', 'costo_modulo'=> '900', 'costo_diploma'=> null, 'descuento_interno' => null, 'descuento_modulo_total'=> null, 'dependencia_id'=> 46,]
         ]);
-        //modulo_ncgts
-        DB::table('modulo_ncgts')->insert([
-            ['nombre' => 'Gestion por procesos', 'descripcion' => 'Presenta la diferencia entre el enfoque funcional y el enfoque de procesos',
-                'docente'=>'Juan Perez Martel', 'programa_ncgt_id'=>'1',],
-            ['nombre' => 'Estadistica aplicada a los procesos', 'descripcion' => 'El curso proporciona las bases estadísticas para poder representar y manipular las variables cuantitativas de los procesos',
-               'docente'=>'Maria Palacios Roldan', 'programa_ncgt_id'=>'1',],
-            ['nombre' => 'Modelamiento de procesos', 'descripcion' => ' presenta diferentes metodologías que permiten modelar los procesos de la organización con el fin de entender y gestionar el comportamiento',
-                'docente'=>'Mario Riquelme', 'programa_ncgt_id'=>'1',]
+        //programas de centro de idiomas y estudios informaticos
+        DB::table('programa_ncgts')->insert([
+            [//programas de centro de idiomas 31
+            'programa_id' => 7,
+            'descripcion' => 'Ingles basico 2018-1 Grupo 1',
+            'anio' =>2018,
+            'fecha_inicio'=> '2018-06-01',
+            'grupo'=>'1',
+            'nivel'=>1,
+            'idioma_tipo'=>1,
+            'numero_modulo'=> 12,
+            'costo_matricula'=> 25,
+            'costo_modulo'=> 70,
+            'descuento_interno' => 15,
+            'dependencia_id'=> 65,
+            ],
+            [//programas de centro de idiomas 32
+            'programa_id' => 7,
+            'descripcion' => 'Ingles basico 2018-1 Grupo 2',
+            'anio' =>2018,
+            'fecha_inicio'=> '2018-07-01',
+            'grupo'=>'2',
+            'nivel'=>1,
+            'idioma_tipo'=>1,
+            'numero_modulo'=> 12,
+            'costo_matricula'=> 25,
+            'costo_modulo'=> 70,
+            'descuento_interno' => 15,
+            'dependencia_id'=> 65,
+            ],
+            [//programas de centro de idiomas 33
+            'programa_id' => 7,
+            'descripcion' => 'Ingles Intermedio 2018 Grupo 1',
+            'anio' =>2018,
+            'fecha_inicio'=> '2018-06-01',
+            'grupo'=>'1',
+            'nivel'=>2,
+            'idioma_tipo'=>1,
+            'numero_modulo'=> 12,
+            'costo_matricula'=> 25,
+            'costo_modulo'=> 70,
+            'descuento_interno' => 15,
+            'dependencia_id'=> 65,
+            ],
+            [//programas de estudios informaticos 34
+            'programa_id' => 8,
+            'descripcion' => 'Experto en Ofimatica',
+            'anio' =>2018,
+            'fecha_inicio'=> '2018-06-01',
+            'grupo'=>'1',
+            'nivel'=>1,
+            'idioma_tipo'=>null,
+            'numero_modulo'=> 4,
+            'costo_matricula'=> 30,
+            'costo_modulo'=> 90,
+            'descuento_interno' => 15,
+            'dependencia_id'=> 66,
+            ],
+            [//programas de estudios informaticos 35
+            'programa_id' => 8,
+            'descripcion' => 'Experto en Diseño grafico',
+            'anio' =>2018,
+            'fecha_inicio'=> '2018-06-01',
+            'grupo'=>'1 ',
+            'nivel'=>2,
+            'idioma_tipo'=>null,
+            'numero_modulo'=> 4,
+            'costo_matricula'=> 30,
+            'costo_modulo'=> 90,
+            'descuento_interno' => 15,
+            'dependencia_id'=> 66,
+            ]
+        ]);
+        //docentes_otros
+        DB::table('docente_otros')->insert([
+            ['user_id' => 34, 'fecha_ingreso' => '2018-01-01', 'horas' => 20,],//docente de ingles
+            ['user_id' => 35, 'fecha_ingreso' => '2018-01-01', 'horas' => 20,],//docente de ingles
+            ['user_id' => 36, 'fecha_ingreso' => '2018-01-01', 'horas' => 20,],//docente de estudios informaticos
+            ['user_id' => 37, 'fecha_ingreso' => '2018-01-01', 'horas' => 20,]//docente de estudios informaticos
+
+        ]);
+
+        //inscripcion_curso
+        DB::table('curso_ncgts')->insert([
+            //cursos de ingles
+            ['nombre' => 'Basico 1', 'descripcion' => null,],//1
+            ['nombre' => 'Basico 2', 'descripcion' => null,],
+            ['nombre' => 'Basico 3', 'descripcion' => null,],
+            ['nombre' => 'Basico 4', 'descripcion' => null,],
+            ['nombre' => 'Basico 5', 'descripcion' => null,],
+            ['nombre' => 'Basico 6', 'descripcion' => null,],
+            ['nombre' => 'Basico 7', 'descripcion' => null,],
+            ['nombre' => 'Basico 8', 'descripcion' => null,],
+            ['nombre' => 'Basico 9', 'descripcion' => null,],
+            ['nombre' => 'Basico 10', 'descripcion' => null,],
+            ['nombre' => 'Basico 11', 'descripcion' => null,],
+            ['nombre' => 'Basico 12', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 1', 'descripcion' => null,],//13
+            ['nombre' => 'Intermedio 2', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 3', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 4', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 5', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 6', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 7', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 8', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 9', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 10', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 11', 'descripcion' => null,],
+            ['nombre' => 'Intermedio 12', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 1', 'descripcion' => null,],//25
+            ['nombre' => 'Avanzado 2', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 3', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 4', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 5', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 6', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 7', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 8', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 9', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 10', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 11', 'descripcion' => null,],
+            ['nombre' => 'Avanzado 12', 'descripcion' => null,],
+            //cursos de estudios informaticos
+            ['nombre' => 'TIC´S', 'descripcion' => null,],//37
+            ['nombre' => 'Word', 'descripcion' => null,],
+            ['nombre' => 'Excel', 'descripcion' => null,],
+            ['nombre' => 'Power Point', 'descripcion' => null,],
+            ['nombre' => 'Corel Draw', 'descripcion' => null,],//41
+            ['nombre' => 'Adobe Photoshop', 'descripcion' => null,],
+            ['nombre' => 'Adobe  Indesing', 'descripcion' => null,],
+            ['nombre' => 'Adobe Muse', 'descripcion' => null,],
+            ['nombre' => 'Excel Profesional', 'descripcion' => null,],
+            ['nombre' => 'Excel y Visual Basic', 'descripcion' => null,],
+            ['nombre' => 'Acces', 'descripcion' => null,],
+            ['nombre' => 'MS Project', 'descripcion' => null,],
+            ['nombre' => 'HTML y CSS', 'descripcion' => null,],
+            ['nombre' => 'Bootstrap', 'descripcion' => null,],
+            ['nombre' => 'Adobe Animate', 'descripcion' => null,],//51
+            ['nombre' => 'Java Script Y Jquery', 'descripcion' => null,],
+            ['nombre' => 'Sony Vegas', 'descripcion' => null,],
+            ['nombre' => 'Adobe Premier', 'descripcion' => null,],
+            ['nombre' => 'Adobe After Effects', 'descripcion' => null,],
+            ['nombre' => 'Taller Multimedia', 'descripcion' => null,],
+            ['nombre' => 'Ensamblajes de Pc´s', 'descripcion' => null,],
+            ['nombre' => 'Mantenimiento de Pc´s', 'descripcion' => null,],
+            ['nombre' => 'Software de Utilitarios', 'descripcion' => null,],
+            ['nombre' => 'Diagnóstico y Reparación de Pc´s', 'descripcion' => null,],
+            ['nombre' => 'AUTOCAD Básico', 'descripcion' => null,],
+            ['nombre' => 'AUTOCAD Intermedio', 'descripcion' => null,],//61
+            ['nombre' => 'AUTOCAD Avanzado', 'descripcion' => null,],
+            ['nombre' => '3D STUDIO MAX', 'descripcion' => null,],
+            ['nombre' => 'Fundamentos de Programación', 'descripcion' => null,],
+            ['nombre' => 'Aplicaciones de Escritorio', 'descripcion' => null,],
+            ['nombre' => 'Aplicaciones Web', 'descripcion' => null,],
+            ['nombre' => 'Gestión de Base de Datos con MYSQL', 'descripcion' => null,],
+            ['nombre' => 'SCRATCH Básico', 'descripcion' => null,],
+            ['nombre' => 'SCRATCH Avanzado', 'descripcion' => null,],
+            ['nombre' => 'KODU GAME LAB Básico', 'descripcion' => null,],
+            ['nombre' => 'KODU GAME LAB Avanzado', 'descripcion' => null,],//71
+            ['nombre' => 'Programación Mblock', 'descripcion' => null,],
+            ['nombre' => 'Sensortes de ARDUINO', 'descripcion' => null,],
+            ['nombre' => 'Robótica con ARDUINO', 'descripcion' => null,],
+            ['nombre' => 'Proyecto Robot con ARDUINO', 'descripcion' => null,],
+            ['nombre' => 'Fundamentos de Programación con PHP', 'descripcion' => null,],
+            ['nombre' => 'Gestión de Base de Datos con MYSQL', 'descripcion' => null,],
+            ['nombre' => 'Sistema Web con PHP y MYSQL', 'descripcion' => null,],
+            ['nombre' => 'Proyecto de Sistema Web', 'descripcion' => null,],
+            ['nombre' => 'Cinema 4D Básico', 'descripcion' => null,],
+            ['nombre' => 'Cinema 4D Avanzado', 'descripcion' => null,],//81
+            ['nombre' => '3D Studio Max Básico', 'descripcion' => null,],
+            ['nombre' => '3D Studio Max Avanzado', 'descripcion' => null,],
+            ['nombre' => 'Conectividad y Cableado Estructurado', 'descripcion' => null,],
+            ['nombre' => 'Redes Inalambricas y Antenas', 'descripcion' => null,],
+            ['nombre' => 'Instalación y Virtalización de Servidores', 'descripcion' => null,],
+            ['nombre' => 'Administración de Red', 'descripcion' => null,],
+            ['nombre' => 'ARCHICAD Básico', 'descripcion' => null,],
+            ['nombre' => 'ARCHICAD Intermedio', 'descripcion' => null,],
+            ['nombre' => 'ARCHICAD Avanzado', 'descripcion' => null,],
+            ['nombre' => 'Integración con 3D Stuio Max', 'descripcion' => null,],//91
+            ['nombre' => 'App Inventor', 'descripcion' => null,],
+            ['nombre' => 'Android Básico', 'descripcion' => null,],
+            ['nombre' => 'Android Avanzado', 'descripcion' => null,],
+            ['nombre' => 'Proyecto Aplicación Móvil', 'descripcion' => null,],
+            ['nombre' => 'Unreal Development kit Básico', 'descripcion' => null,],
+            ['nombre' => 'Unreal Development kit Avanzado', 'descripcion' => null,],
+            ['nombre' => 'Unity Básico', 'descripcion' => null,],
+            ['nombre' => 'Unity Avanzado', 'descripcion' => null,],
+            //curso de los diplomados
+            ['nombre' => 'Gestion por procesos',//100
+                'descripcion' => 'Presenta la diferencia entre el enfoque funcional y el enfoque de procesos',],
+            ['nombre' => 'Estadistica aplicada a los procesos',//101
+                'descripcion' => 'El curso proporciona las bases estadísticas para poder representar y manipular las variables cuantitativas de los procesos',],
+            ['nombre' => 'Modelamiento de procesos',//102
+                'descripcion' => 'Presenta diferentes metodologías que permiten modelar los procesos de la organización con el fin de entender y gestionar el comportamiento',],
+
+        ]);
+
+        //cursos disponibles de los diplomados, idiomas y estudios informaticos
+        DB::table('curso_ncgt_disponibles')->insert([
+            //cursos de diplomado
+            [//1
+                'curso_ncgt_id' => 100,
+                'ciclo'=>null,
+                'docente_otro_id'=>null,
+                'programa_ncgt_id'=>1,
+            ],
+            [//2
+                'curso_ncgt_id' => 101,
+                'ciclo'=>null,
+                'docente_otro_id'=>null,
+                'programa_ncgt_id'=>1,
+            ],
+            [//3
+                'curso_ncgt_id' => 102,
+                'ciclo'=>null,
+                'docente_otro_id'=>null,
+                'programa_ncgt_id'=>1,
+            ],
+            //cursos de ingles
+            [//4
+                'curso_ncgt_id' => 1,
+                'ciclo'=>1,
+                'docente_otro_id'=>1,
+                'programa_ncgt_id'=>31,
+            ],
+            [//5
+                'curso_ncgt_id' => 2,
+                'ciclo'=>2,
+                'docente_otro_id'=>1,
+                'programa_ncgt_id'=>31,
+            ],
+            [//6
+                'curso_ncgt_id' => 3,
+                'ciclo'=>3,
+                'docente_otro_id'=>1,
+                'programa_ncgt_id'=>31,
+            ],
+            [//7
+                'curso_ncgt_id' => 4,
+                'ciclo'=>4,
+                'docente_otro_id'=>1,
+                'programa_ncgt_id'=>31,
+            ],
+            [//8
+                'curso_ncgt_id' => 5,
+                'ciclo'=>5,
+                'docente_otro_id'=>1,
+                'programa_ncgt_id'=>31,
+            ],
+            [//9
+                'curso_ncgt_id' => 6,
+                'ciclo'=>6,
+                'docente_otro_id'=>1,
+                'programa_ncgt_id'=>31,
+            ],
+
+            [//10 ingles intermedio
+                'curso_ncgt_id' => 13,
+                'ciclo'=>1,
+                'docente_otro_id'=>2,
+                'programa_ncgt_id'=>33,
+            ],
+            [//11
+                'curso_ncgt_id' => 14,
+                'ciclo'=>2,
+                'docente_otro_id'=>2,
+                'programa_ncgt_id'=>33,
+            ],
+            [//12
+                'curso_ncgt_id' => 15,
+                'ciclo'=>3,
+                'docente_otro_id'=>2,
+                'programa_ncgt_id'=>33,
+            ],
+            [//13
+                'curso_ncgt_id' => 16,
+                'ciclo'=>4,
+                'docente_otro_id'=>2,
+                'programa_ncgt_id'=>33,
+            ],
+            [//14
+                'curso_ncgt_id' => 17,
+                'ciclo'=>5,
+                'docente_otro_id'=>2,
+                'programa_ncgt_id'=>33,
+            ],
+            [//15
+                'curso_ncgt_id' => 18,
+                'ciclo'=>6,
+                'docente_otro_id'=>2,
+                'programa_ncgt_id'=>33,
+            ],
+            //cursos de estudios informaticos
+            [//16 estudios informaticos de ofimatica
+                'curso_ncgt_id' => 37,
+                'ciclo'=>null,
+                'docente_otro_id'=>3,
+                'programa_ncgt_id'=>34,
+            ],
+            [//17
+                'curso_ncgt_id' => 38,
+                'ciclo'=>null,
+                'docente_otro_id'=>3,
+                'programa_ncgt_id'=>34,
+            ],
+            [//18
+                'curso_ncgt_id' => 39,
+                'ciclo'=>null,
+                'docente_otro_id'=>3,
+                'programa_ncgt_id'=>34,
+            ],
+            [//19
+                'curso_ncgt_id' => 40,
+                'ciclo'=>null,
+                'docente_otro_id'=>3,
+                'programa_ncgt_id'=>34,
+            ],
+            [//20 estudios informaticos de diseño grafico
+                'curso_ncgt_id' => 41,
+                'ciclo'=>null,
+                'docente_otro_id'=>4,
+                'programa_ncgt_id'=>35,
+            ],
+            [//21
+                'curso_ncgt_id' => 42,
+                'ciclo'=>null,
+                'docente_otro_id'=>4,
+                'programa_ncgt_id'=>35,
+            ],
+            [//18
+                'curso_ncgt_id' => 43,
+                'ciclo'=>null,
+                'docente_otro_id'=>4,
+                'programa_ncgt_id'=>35,
+            ],
+            [//19
+                'curso_ncgt_id' => 44,
+                'ciclo'=>null,
+                'docente_otro_id'=>4,
+                'programa_ncgt_id'=>35,
+            ]
                 
         ]);
-         //inscripcion_ncgts
+         //inscripcion_ncgtss
         DB::table('inscripcion_ncgts')->insert([
-                ['user_id' => 12, 'programa_ncgt_id' => 1,],//inscripcion de pedro a diplomado procesos
-                ['user_id' => 13, 'programa_ncgt_id' => 3,],
-                ['user_id' => 16, 'programa_ncgt_id' => 2,],
-                ['user_id' => 17, 'programa_ncgt_id' => 1,],
-                ['user_id' => 18, 'programa_ncgt_id' => 2,],
-                ['user_id' => 18, 'programa_ncgt_id' => 1,],
-                ['user_id' => 19, 'programa_ncgt_id' => 1,],
-                ['user_id' => 23, 'programa_ncgt_id' => 30,]
+                ['user_id' => 12, 'programa_ncgt_id' => 1,'es_interno'=>1,],//inscripcion de pedro a diplomado procesos
+                ['user_id' => 13, 'programa_ncgt_id' => 3,'es_interno'=>1,],
+                ['user_id' => 16, 'programa_ncgt_id' => 2,'es_interno'=>null,],
+                ['user_id' => 17, 'programa_ncgt_id' => 1,'es_interno'=>null,],
+                ['user_id' => 18, 'programa_ncgt_id' => 2,'es_interno'=>null,],
+                ['user_id' => 18, 'programa_ncgt_id' => 1,'es_interno'=>null,],
+                ['user_id' => 19, 'programa_ncgt_id' => 1,'es_interno'=>null,],
+                ['user_id' => 23, 'programa_ncgt_id' => 30,'es_interno'=>null,],
+            //inscripcion idiomas y estudios informaticos
+                ['user_id' => 3, 'programa_ncgt_id' => 31,'es_interno'=>1,],//9
+                ['user_id' => 10, 'programa_ncgt_id' => 31,'es_interno'=>1,],
+                ['user_id' => 11, 'programa_ncgt_id' => 34,'es_interno'=>1,],
+                ['user_id' => 26, 'programa_ncgt_id' => 31,'es_interno'=>1,],
+                ['user_id' => 27, 'programa_ncgt_id' => 31,'es_interno'=>1,]
         ]);
 
         //control pago
         DB::table('control_pagos')->insert([
-                ['inscripcion_ncgt_id' => 1, 'postulacion_id' => null,'pago_id' => '3','tipo'=> '1',],//tipo 1 = matricula
-                ['inscripcion_ncgt_id' => 1, 'postulacion_id' => null,'pago_id' => '4','tipo'=> '2',],//tipo 2 = modulo
-                ['inscripcion_ncgt_id' => 1, 'postulacion_id' => null,'pago_id' => '5','tipo'=> '3',],//tipo 3 = diploma
+                ['inscripcion_ncgt_id' => 1, 'postulacion_id' => null,'pago_id' => '3','tipo'=> 1,],//tipo 1 = matricula
+                ['inscripcion_ncgt_id' => 1, 'postulacion_id' => null,'pago_id' => '4','tipo'=> 2,],//tipo 2 = modulo
+                ['inscripcion_ncgt_id' => 1, 'postulacion_id' => null,'pago_id' => '5','tipo'=> 3,],//tipo 3 = diploma
 
                 ['inscripcion_ncgt_id' => 2, 'postulacion_id' => null,'pago_id' => 6,'tipo'=> 1,],//inscripcions procapt
                 ['inscripcion_ncgt_id' => 2, 'postulacion_id' => null,'pago_id' => 7,'tipo'=> 2,],//modulo PROCATP
@@ -294,13 +657,23 @@ class DatosInscripcionTableSeeder extends Seeder
                 
                 ['inscripcion_ncgt_id' => 8, 'postulacion_id' => null,'pago_id' => 26,'tipo'=> 1,],//inscripcions promaster
 
-                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 1,'pago_id' => 24,'tipo'=> 1,],
-                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 2,'pago_id' => 25,'tipo'=> 1,],
-                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 3,'pago_id' => 27,'tipo'=> 1,]
+                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 1,'pago_id' => 24,'tipo'=> 1,],//inscripcion pregrado general
+                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 2,'pago_id' => 25,'tipo'=> 1,],//inscripcon CEPREVAL
+                ['inscripcion_ncgt_id' => null, 'postulacion_id' => 3,'pago_id' => 27,'tipo'=> 1,],
+                //control de idiomas
+                ['inscripcion_ncgt_id' => 9, 'postulacion_id' => null,'pago_id' => 28,'tipo'=> 1,],
+                ['inscripcion_ncgt_id' => 10, 'postulacion_id' => null,'pago_id' => 29,'tipo'=> 1,],
+                ['inscripcion_ncgt_id' => 11, 'postulacion_id' => null,'pago_id' => 31,'tipo'=> 1,],
+                ['inscripcion_ncgt_id' => 12, 'postulacion_id' => null,'pago_id' => 34,'tipo'=> 1,],
+                ['inscripcion_ncgt_id' => 13, 'postulacion_id' => null,'pago_id' => 36,'tipo'=> 1,],
+
+                ['inscripcion_ncgt_id' => 10, 'postulacion_id' => null,'pago_id' => 30,'tipo'=> 2,],
+                ['inscripcion_ncgt_id' => 11, 'postulacion_id' => null,'pago_id' => 32,'tipo'=> 2,],
+                ['inscripcion_ncgt_id' => 12, 'postulacion_id' => null,'pago_id' => 35,'tipo'=> 2,]
         ]);
 
         //inscripcion_modulo
-        DB::table('inscripcion_modulos')->insert([
+       /* DB::table('inscripcion_modulos')->insert([
                 ['inscripcion_modulo' => 'OFIMÁTICA',],
                 ['inscripcion_modulo' => 'DISEÑO GRÁFICO',],
                 ['inscripcion_modulo' => 'OFIMÁTICA AVANZADO',],
@@ -316,93 +689,9 @@ class DatosInscripcionTableSeeder extends Seeder
                 ['inscripcion_modulo' => 'ADMINISTRACIÓN DE REDES',],
                 ['inscripcion_modulo' => 'DISEÑO ARQUITECTONICO',],
                 ['inscripcion_modulo' => 'DESARROLLO DE APLICACIONES MÓVILES',],
-                ['inscripcion_modulo' => 'DESARROLLO DE VIDEOJUEGOS',],                                   
-                ['inscripcion_modulo' => 'NO APLICA',]                
-            ]);
-        //inscripcion_curso
-        DB::table('inscripcion_cursos')->insert([
-                ['inscripcion_curso' => 'TIC´S', 'inscripcion_modulo_id' => '1',],
-                ['inscripcion_curso' => 'Word', 'inscripcion_modulo_id' => '1',],
-                ['inscripcion_curso' => 'Excel', 'inscripcion_modulo_id' => '1',],
-                ['inscripcion_curso' => 'Power Point', 'inscripcion_modulo_id' => '1',],
-                ['inscripcion_curso' => 'Corel Draw', 'inscripcion_modulo_id' => '2',],
-                ['inscripcion_curso' => 'Adobe Photoshop', 'inscripcion_modulo_id' => '2',],
-                ['inscripcion_curso' => 'Adobe  Indesing', 'inscripcion_modulo_id' => '2',],
-                ['inscripcion_curso' => 'Adobe Muse', 'inscripcion_modulo_id' => '2',],
-                ['inscripcion_curso' => 'Excel Profesional', 'inscripcion_modulo_id' => '3',],
-                ['inscripcion_curso' => 'Excel y Visual Basic', 'inscripcion_modulo_id' => '3',],
-                ['inscripcion_curso' => 'Acces', 'inscripcion_modulo_id' => '3',],
-                ['inscripcion_curso' => 'MS Project', 'inscripcion_modulo_id' => '3',],
-                ['inscripcion_curso' => 'HTML y CSS', 'inscripcion_modulo_id' => '4',],
-                ['inscripcion_curso' => 'Bootstrap', 'inscripcion_modulo_id' => '4',],
-                ['inscripcion_curso' => 'Adobe Animate', 'inscripcion_modulo_id' => '4',],
-                ['inscripcion_curso' => 'Java Script Y Jquery', 'inscripcion_modulo_id' => '4',],
-                ['inscripcion_curso' => 'Sony Vegas', 'inscripcion_modulo_id' => '5',],
-                ['inscripcion_curso' => 'Adobe Premier', 'inscripcion_modulo_id' => '5',],
-                ['inscripcion_curso' => 'Adobe After Effects', 'inscripcion_modulo_id' => '5',],
-                ['inscripcion_curso' => 'Taller Multimedia', 'inscripcion_modulo_id' => '5',],
-                ['inscripcion_curso' => 'Ensamblajes de Pc´s', 'inscripcion_modulo_id' => '6',],
-                ['inscripcion_curso' => 'Mantenimiento de Pc´s', 'inscripcion_modulo_id' => '6',],
-                ['inscripcion_curso' => 'Software de Utilitarios', 'inscripcion_modulo_id' => '6',],
-                ['inscripcion_curso' => 'Diagnóstico y Reparación de Pc´s', 'inscripcion_modulo_id' => '6',],
-                ['inscripcion_curso' => 'AUTOCAD Básico', 'inscripcion_modulo_id' => '7',],
-                ['inscripcion_curso' => 'AUTOCAD Intermedio', 'inscripcion_modulo_id' => '7',],
-                ['inscripcion_curso' => 'AUTOCAD Avanzado', 'inscripcion_modulo_id' => '7',],
-                ['inscripcion_curso' => '3D STUDIO MAX', 'inscripcion_modulo_id' => '7',],
-                ['inscripcion_curso' => 'Fundamentos de Programación', 'inscripcion_modulo_id' => '8',],
-                ['inscripcion_curso' => 'Aplicaciones de Escritorio', 'inscripcion_modulo_id' => '8',],
-                ['inscripcion_curso' => 'Aplicaciones Web', 'inscripcion_modulo_id' => '8',],
-                ['inscripcion_curso' => 'Gestión de Base de Datos con MYSQL', 'inscripcion_modulo_id' => '8',],
-                ['inscripcion_curso' => 'SCRATCH Básico', 'inscripcion_modulo_id' => '9',],
-                ['inscripcion_curso' => 'SCRATCH Avanzado', 'inscripcion_modulo_id' => '9',],
-                ['inscripcion_curso' => 'KODU GAME LAB Básico', 'inscripcion_modulo_id' => '9',],
-                ['inscripcion_curso' => 'KODU GAME LAB Avanzado', 'inscripcion_modulo_id' => '9',],
-                ['inscripcion_curso' => 'Programación Mblock', 'inscripcion_modulo_id' => '10',],
-                ['inscripcion_curso' => 'Sensortes de ARDUINO', 'inscripcion_modulo_id' => '10',],
-                ['inscripcion_curso' => 'Robótica con ARDUINO', 'inscripcion_modulo_id' => '10',],
-                ['inscripcion_curso' => 'Proyecto Robot con ARDUINO', 'inscripcion_modulo_id' => '10',],
-                ['inscripcion_curso' => 'Fundamentos de Programación con PHP', 'inscripcion_modulo_id' => '11',],
-                ['inscripcion_curso' => 'Gestión de Base de Datos con MYSQL', 'inscripcion_modulo_id' => '11',],
-                ['inscripcion_curso' => 'Sistema Web con PHP y MYSQL', 'inscripcion_modulo_id' => '11',],
-                ['inscripcion_curso' => 'Proyecto de Sistema Web', 'inscripcion_modulo_id' => '11',],
-                ['inscripcion_curso' => 'Cinema 4D Básico', 'inscripcion_modulo_id' => '12',],
-                ['inscripcion_curso' => 'Cinema 4D Avanzado', 'inscripcion_modulo_id' => '12',],
-                ['inscripcion_curso' => '3D Studio Max Básico', 'inscripcion_modulo_id' => '12',],
-                ['inscripcion_curso' => '3D Studio Max Avanzado', 'inscripcion_modulo_id' => '12',],
-                ['inscripcion_curso' => 'Conectividad y Cableado Estructurado', 'inscripcion_modulo_id' => '13',],
-                ['inscripcion_curso' => 'Redes Inalambricas y Antenas', 'inscripcion_modulo_id' => '13',],
-                ['inscripcion_curso' => 'Instalación y Virtalización de Servidores', 'inscripcion_modulo_id' => '13',],
-                ['inscripcion_curso' => 'Administración de Red', 'inscripcion_modulo_id' => '13',],
-                ['inscripcion_curso' => 'ARCHICAD Básico', 'inscripcion_modulo_id' => '14',],
-                ['inscripcion_curso' => 'ARCHICAD Intermedio', 'inscripcion_modulo_id' => '14',],
-                ['inscripcion_curso' => 'ARCHICAD Avanzado', 'inscripcion_modulo_id' => '14',],
-                ['inscripcion_curso' => 'Integración con 3D Stuio Max', 'inscripcion_modulo_id' => '14',],
-                ['inscripcion_curso' => 'App Inventor', 'inscripcion_modulo_id' => '15',],
-                ['inscripcion_curso' => 'Android Básico', 'inscripcion_modulo_id' => '15',],
-                ['inscripcion_curso' => 'Android Avanzado', 'inscripcion_modulo_id' => '15',],
-                ['inscripcion_curso' => 'Proyecto Aplicación Móvil', 'inscripcion_modulo_id' => '15',],
-                ['inscripcion_curso' => 'Unreal Development kit Básico', 'inscripcion_modulo_id' => '16',],
-                ['inscripcion_curso' => 'Unreal Development kit Avanzado', 'inscripcion_modulo_id' => '16',],
-                ['inscripcion_curso' => 'Unity Básico', 'inscripcion_modulo_id' => '16',],
-                ['inscripcion_curso' => 'Unity Avanzado', 'inscripcion_modulo_id' => '16',],
-                ['inscripcion_curso' => 'Ingles', 'inscripcion_modulo_id' => '17',],
-                ['inscripcion_curso' => 'Quechua', 'inscripcion_modulo_id' => '17',],
-                ['inscripcion_curso' => 'Portugues', 'inscripcion_modulo_id' => '17',],
-                ['inscripcion_curso' => 'Italiano', 'inscripcion_modulo_id' => '17',],
-                ['inscripcion_curso' => 'Frances', 'inscripcion_modulo_id' => '17',]               
-            ]);
-        //docentes_otros
+                ['inscripcion_modulo' => 'DESARROLLO DE VIDEOJUEGOS',]
+            ]);*/
 
-      /*  DB::table('docentes_otros')->insert([
-                ['user_id' => '1', 'fecha_ingreso' => '12/12/2010', 'carga' => '20',],                
-                ['user_id' => '2', 'fecha_ingreso' => '12/12/2009', 'carga' => '30',]             
-            ]);
-        //inscripcion turno
-        DB::table('inscripcion_curso_disponibles')->insert([
-                
-                ['ciclo' => '1', 'grupo' => '1', 'inscripcion_curso_id' => '1', 'user_id' => '4', 'inscripcion_nivel_id'=> '1', 'idioma_tipo_id'=> '1',],                               
-                ['ciclo' => '2', 'grupo' => '2', 'inscripcion_curso_id' => '1', 'user_id' => '5', 'inscripcion_nivel_id'=> '1', 'idioma_tipo_id'=> '1',]                
-            ]);*/     
-                    
+
     }
 }

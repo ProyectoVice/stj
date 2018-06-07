@@ -10,6 +10,9 @@ class InscripcionNcgt extends Model
    	protected $fillable = [
    		'user_id', 'programa_ncgt_id', 'es_interno', 'es_pago_total', 'cancelacion'
     ];
+
+   public static $contador;
+
    public function user() {
       return $this->belongsto(User::class,'user_id','id');
   	}

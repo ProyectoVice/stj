@@ -20,7 +20,8 @@
             <div class="wizard-container">
 
                 <div class="card wizard-card" data-color="azzure" id="wizardProfile">
-                    <form action="" method="">
+                {!! Form::open(['url' => route('publico.diplomado.ins.store', $tipo), 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
+                {{ csrf_field() }}
                         <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
                         <div class="wizard-header">
                             <h3>
@@ -77,11 +78,11 @@
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Fecha de Nacimiento <small>(requiredo)</small></label>
-                                            <input name="f_nac" type="date" class="form-control" value="{{ isset($usuario) ? $usuario->f_nac : ''}}" placeholder="01/01/1990">
+                                            <input name="f_nac" type="date" class="form-control" required value="{{ isset($usuario) ? $usuario->f_nac : ''}}" placeholder="01/01/1990">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Email <small>(requiredo)</small></label>
-                                            <input name="email" type="email" class="form-control" value="{!! isset($usuario) ? $usuario->email : ''!!}" placeholder="aaaaa@gmail.com">
+                                            <input name="email" type="email" class="form-control" required value="{!! isset($usuario) ? $usuario->email : ''!!}" placeholder="aaaaa@gmail.com">
                                         </div>
                                     </div>
 
@@ -98,21 +99,21 @@
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Distrito de Nacimiento</label><br>
-                                            {!!Form::select('distrito_nac',$distritos,null,['id'=>'distrito_nac', 'class'=>'form-control','placeholder' => 'Distrito'])!!}
+                                            {!!Form::select('distrito_nac',$distritos,null,['required','id'=>'distrito_nac', 'class'=>'form-control','placeholder' => 'Distrito'])!!}
                                         </div>
                                         <div class="col-sm-5">
                                             <label>N celular <small>(requiredo)</small></label>
-                                            <input name="cel" type="text" class="form-control" value="{!! isset($usuario) ? $usuario->cel : ''!!}">
+                                            <input name="cel" type="text" class="form-control" required value="{!! isset($usuario) ? $usuario->cel : ''!!}">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Domicilio <small>(requiredo)</small></label>
-                                            <input name="domicilio" type="text" class="form-control" value="{!! isset($usuario) ? $usuario->domicilio : ''!!}">
+                                            <input name="domicilio" type="text" class="form-control" required value="{!! isset($usuario) ? $usuario->domicilio : ''!!}">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>N Domicilio <small>(requiredo)</small></label>
-                                            <input name="n_domicilio" type="text" class="form-control" value="{!! isset($usuario) ? $usuario->n_domicilio : ''!!}">
+                                            <input name="n_domicilio" type="text" class="form-control" required value="{!! isset($usuario) ? $usuario->n_domicilio : ''!!}">
                                         </div>
                                     </div>
                                 </div>
@@ -125,62 +126,62 @@
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>DNI <small>(requiredo)</small></label>
-                                            <input name="dni" type="text" disabled class="form-control" value="{!! isset($usuario) ? $usuario->dni : ''!!}">
+                                            <input name="dni" type="text" readonly class="form-control" value="">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Nombres <small>(requiredo)</small></label>
-                                            <input name="nombres" type="text" disabled class="form-control" value="{{ isset($usuario) ? $usuario->nombres : ''}}">
+                                            <input name="nombres" type="text" readonly class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Apellido Paterno <small>(requiredo)</small></label>
-                                            <input name="apellido_paterno" type="text" disabled class="form-control" value="{{ isset($usuario) ? $usuario->apellido_paterno : ''}}">
+                                            <input name="apellido_paterno" type="text" readonly class="form-control" value="">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Apellido Materno <small>(requiredo)</small></label>
-                                            <input name="apellido_materno" type="text" disabled class="form-control" value="{{ isset($usuario) ? $usuario->apellido_materno : ''}}">
+                                            <input name="apellido_materno" type="text" readonly class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Fecha de Nacimiento <small>(requiredo)</small></label>
-                                            <input name="f_nac" type="date"  class="form-control" disabled value="">
+                                            <input name="f_nac" type="date"  class="form-control" readonly value="">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Email <small>(requiredo)</small></label>
-                                            <input name="email" type="email"  class="form-control" disabled value="">
+                                            <input name="email" type="email"  class="form-control" readonly value="">
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Departamento de Nacimiento</label><br>
-                                            {!!Form::select('departamento',$departamentos,null,['disabled','id'=>'departamento_nac', 'class'=>'form-control','placeholder' => 'Departamento'])!!}
+                                            {!!Form::select('departamento',$departamentos,null,['readonly','id'=>'departamento_nac', 'class'=>'form-control','placeholder' => 'Departamento'])!!}
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Provincia de Nacimiento</label><br>
-                                            {!!Form::select('provincia',$provincias,null,['disabled','id'=>'provincia_nac', 'class'=>'form-control','placeholder' => 'Provincia'])!!}
+                                            {!!Form::select('provincia',$provincias,null,['readonly','id'=>'provincia_nac', 'class'=>'form-control','placeholder' => 'Provincia'])!!}
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Distrito de Nacimiento</label><br>
-                                            {!!Form::select('distrito_nac',$distritos,null,['disabled','id'=>'distrito_nac', 'class'=>'form-control','placeholder' => 'Distrito'])!!}
+                                            {!!Form::select('distrito_nac',$distritos,null,['readonly','id'=>'distrito_nac', 'class'=>'form-control','placeholder' => 'Distrito'])!!}
                                         </div>
                                         <div class="col-sm-5">
                                             <label>N celular <small>(requiredo)</small></label>
-                                            <input name="cel" type="text" class="form-control" disabled value="">
+                                            <input name="cel" type="text" class="form-control" readonly value="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Domicilio <small>(requiredo)</small></label>
-                                            <input name="domicilio" type="text" class="form-control" disabled value="">
+                                            <input name="domicilio" type="text" class="form-control" readonly value="">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>N Domicilio <small>(requiredo)</small></label>
-                                            <input name="n_domicilio" type="text" class="form-control" disabled value="">
+                                            <input name="n_domicilio" type="text" class="form-control" readonly value="">
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +190,7 @@
                         <div class="wizard-footer height-wizard">
                             <div class="pull-right">
                                 <input type='button' class='btn btn-next btn-fill btn-info btn-wd btn-sm' name='next' value='Next' />
-                                <input type='button' class='btn btn-finish btn-fill btn-info btn-wd btn-sm' name='finish' value='Finish' />
+                                <input type='submit' class='btn btn-finish btn-fill btn-info btn-wd btn-sm' name='finish' value='Finish' />
                             </div>
                             <div class="pull-left">
                                 <input type='button' class='btn btn-previous btn-fill btn-default btn-wd btn-sm' name='previous' value='Previous' />

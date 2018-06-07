@@ -33,7 +33,7 @@ class DiplomadoController extends Controller
 
     public function index(Request $request)
     {
-        $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
+        $tipo=['Idiomas'=>7, 'Estudios_informaticos'=>8,'Diplomado'=>11,'PROCAPT'=>9,'PROMASTER'=>10];
         $programa=ProgramaNcgt::where('programa_id', '=', $tipo[$request->tipo])->pluck('descripcion', 'id');
         return view('modulos.inscripcion_unheval.diplomado.index', [
             'programas'=>$programa,
@@ -43,12 +43,16 @@ class DiplomadoController extends Controller
 
     public function datatables(Request $request)
     {
-        $tipo=['diplomado'=>11,'procapt'=>9,'promaster'=>10];
+        $tipo=['Idiomas'=>7, 'Estudios_informaticos'=>8,'Diplomado'=>11,'PROCAPT'=>9,'PROMASTER'=>10];
         $permiso = false;
-        if(Auth::user()->hasRoles(['PersonalAdmision'])) {
+        if(Auth::user()->hasRoles(['Personal_Admision'])) {
+            if (Auth::user()->hasRoles(['Administrador_Idiomas'])&&$tipo[$request->tipo]==7)
+                $permiso=true;
+            if (Auth::user()->hasRoles(['Administrador_Estudios_Informaticos'])&&$tipo[$request->tipo]==8)
+                $permiso=true;
             if (Auth::user()->hasRoles(['Administrador Diplomados'])&&$tipo[$request->tipo]==11)
                 $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador PROCATP'])&&$tipo[$request->tipo]==9)
+            if (Auth::user()->hasRoles(['Administrador PROCAPT'])&&$tipo[$request->tipo]==9)
                 $permiso=true;
             if (Auth::user()->hasRoles(['Administrador PROMASTER'])&&$tipo[$request->tipo]==10)
                 $permiso=true;
@@ -67,8 +71,14 @@ class DiplomadoController extends Controller
             ->where('programa_ncgts.programa_id','=', $tipo[$request->tipo]);
         if ($request->programa!='null')
             $inscripcion->where('programa_ncgts.id','=', $request->programa);
-        
+        \App\InscripcionNcgt::$contador=1;
         return DataTables::of($inscripcion->get())
+
+           ->addColumn('numero', function ($obj){
+               return \App\InscripcionNcgt::$contador++;
+           })
+
+            ///
             ->addColumn('total_pago', function ($obj){
                 $total=$obj->numero_modulo*$obj->costo_modulo-$obj->es_pago_total*$obj->descuento_modulo_total-$obj
                         ->es_interno*$obj->descuento_interno*$obj->numero_modulo;
@@ -83,12 +93,12 @@ class DiplomadoController extends Controller
                 return $total - $obj->pagado;
             })
             ->addColumn('accion', function ($obj){
-                $tipo=[11=>'diplomado',9=>'procapt',10=>'promaster'];
+                $tipo=[7=>'Idiomas', 8=>'Estudios_informaticos',11=>'Diplomado',9=>'PROCAPT',10=>'PROMASTER'];
                 return htmlentities(sprintf("<div class='center action-buttons'>
                     <a href='/diplomado/inscripciones/mostrar/%s?tipo=%s' class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a>
                     <a href='#nuevo2' class='stj-acciones enviarId1 descuentos %s' title='Asignar descuento' data-toggle='modal' data-id='%s' data-interno='%s' data-total='%s'><i class='fa fa-plus'></i></a>
                     <a href='#nuevo1' class='stj-acciones enviarId' title='Registrar pago modulo' data-toggle='modal'data-id='%s'><i class='fa fa-check-square-o'></i></a>
-                    <a href='/diplomado/inscripciones/editar/%s?tipo=%s' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>
+                    <a href='/diplomado/inscripciones/editar/%s?tipo=%s'    class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>
                     <a href='#' class='stj-acciones stj-acciones-delete' title='Eliminar' data-id='%s'><i class='fa fa-trash'></i></a>
                     </div>",
                     $obj->id,$tipo[$obj->programa_id],
@@ -141,14 +151,14 @@ class DiplomadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $usuario=User::Where("dni",'=',$request->dni)->first();
+
         //consultando el registro de la tabla pago
         $pagos=Pago::where('num_comprobante','=',$request->n_comprobante)
                     ->where('fecha_comprobante','=',$request->f_comprobante)->first();
        
-        //creo un nuevo registro de la tabla Inscripcion
-            if($usuario->f_nac==""and $usuario->email==""){
+
+            if($usuario->f_nac==null and $usuario->email==null){
 
             $usuario->f_nac=$request->get('f_nac');
             $usuario->email=$request->get('email');
@@ -157,10 +167,19 @@ class DiplomadoController extends Controller
             $usuario->n_domicilio=$request->get('n_domicilio');
             $usuario->cel=$request->get('cel');
             $usuario->save();
+            //creamos una nueva inscripcion
             $inscripcionp=new InscripcionNcgt;
             $inscripcionp->programa_ncgt_id=$request->get('descripcion');
             $inscripcionp->user_id=$usuario->id;
-            $inscripcionp->save();
+
+                if($usuario->hasRoles(['Estudiante','Docente'])){
+                    $inscripcionp->es_interno=1;
+                    $inscripcionp->save();
+                }else{
+                    $inscripcionp->es_interno=0;
+                    $inscripcionp->save();
+                }
+
             //registrando en la tabla control de pago
             $control=new ControlPago;
             $control->inscripcion_ncgt_id=$inscripcionp->id;
@@ -174,7 +193,14 @@ class DiplomadoController extends Controller
             $inscripcionp=new InscripcionNcgt;
             $inscripcionp->programa_ncgt_id=$request->get('descripcion');
             $inscripcionp->user_id=$usuario->id;
-            $inscripcionp->save();
+                if($usuario->hasRoles(['Estudiante','Docente'])){
+                $inscripcionp->es_interno=1;
+                $inscripcionp->save();
+                }else{
+                $inscripcionp->es_interno=0;
+                $inscripcionp->save();
+                }
+
             //registrando en la tabla control de pago
             $control=new ControlPago;
             $control->inscripcion_ncgt_id=$inscripcionp->id;
@@ -196,7 +222,7 @@ class DiplomadoController extends Controller
      */
     public function show($id, Request $request)
     {
-       $control=ControlPago::select('tarifarios.descripcion','pagos.importe', 'control_pagos.tipo')
+       $control=ControlPago::select('tarifarios.descripcion','pagos.num_comprobante','pagos.fecha_comprobante','pagos.importe', 'control_pagos.tipo')
                     ->join('inscripcion_ncgts','inscripcion_ncgts.id','=','control_pagos.inscripcion_ncgt_id')
                     ->join('pagos', 'control_pagos.pago_id', '=','pagos.id')
                     ->join('tarifarios', 'tarifarios.id', '=','pagos.tarifario_id')

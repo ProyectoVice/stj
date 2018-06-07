@@ -16,9 +16,6 @@ class Pago extends Model
     public function postulacions() {
       return $this->hasMany(Postulacion::class);
   	}
-  	public function inscripcion_alumnos() {
-      return $this->hasMany(InscripcionAlumno::class);
-  	}  
   	public function control_pagos() {
       return $this->hasMany(controlPago::class);
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModuloNcgtsTable extends Migration
+class CreateCursoNcgtDisponiblesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateModuloNcgtsTable extends Migration
      */
     public function up()
     {
-        Schema::create('modulo_ncgts', function (Blueprint $table) {
+        Schema::create('curso_ncgt_disponibles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->string('docente');
+            $table->integer('curso_ncgt_id')->unsigned();
+            $table->integer('ciclo')->nullable();//1 ...12
+            $table->integer('docente_otro_id')->unsigned()->nullable();
             $table->integer('programa_ncgt_id')->unsigned();
             $table->foreign('programa_ncgt_id')->references('id')->on('programa_ncgts')->onDelete('cascade');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateModuloNcgtsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modulo_ncgts');
+        Schema::dropIfExists('curso_ncgt_disponibles');
     }
 }

@@ -1,5 +1,5 @@
 @extends('plantilla.usuario')
-@section('titulo','Diplomado - Inscripciones')
+@section('titulo','UNHEVAL - Inscripciones')
 @section('activacion')
 @endsection
 @section('estilos')
@@ -8,8 +8,9 @@
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
-	<li class="active">Diplomados</li>
+	<li class="active">{{$tipo}}</li>
 	<li class="">Inscripciones</li>
+
 </ul>
 @endsection
 @section('contenido')
@@ -21,13 +22,14 @@
       		<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
 			Inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
-		<div class="table-responsive">
-			<div class="row">
-				<div class="form-group">
-					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Programa</label>
-					<div class="col-sm-3">{!!Form::select('programa',$programas,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
-				</div>
+		<div class="row">
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Programa</label>
+				<div class="col-sm-3">{!!Form::select('programa',$programas,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
 			</div>
+		</div>
+		<div class="table-responsive">
+
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
@@ -37,7 +39,7 @@
 						<th class="center" class="hidden-480">email</th>
 						<th class="center" class="hidden-480">N Celular</th>
 						<th class="center" class="hidden-480">Programa</th>
-						<th class="center" class="hidden-480">N Modulo</th>
+						<th class="center" class="hidden-480">N Cursos</th>
 						<th class="center" class="hidden-480">Total/<br>Pago</th>
 						<th class="center" class="hidden-480">Interno/<br>Externo</th>
 						<th class="center" class="hidden-480">Deuda</th>
@@ -54,7 +56,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 class="smaller lighter blue no-margin">Registrar Inscripción</h3>
+				<h3 class="smaller lighter blue no-margin">Validar Inscripción</h3>
 			</div>
 			{!! Form::open(['route' => 'diplomado.ins.validar', 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left']) !!}
 			<div class="modal-body tab-pane" align="center">
@@ -82,7 +84,7 @@
 			</div>
 			<div class="modal-footer">				
 				<button class="btn btn-success btn-sm btn-round submit" name="enviando" id="enviando">					
-					<i class="ace-icon fa fa-check"> Registrar</i>
+					<i class="ace-icon fa fa-check"> Validar</i>
 				</button>
 			</div>
 			<input type="hidden" name="tipo" value="{{$tipo}}">
@@ -207,7 +209,7 @@
                     "language":{"url":'{!! asset('/plantilla/js/latino.json') !!}'},
                     "order": [[ 0, "asc" ]],
                     "columns" : [
-                        {data:"id"},
+                        {data:"numero"},
                         {data:"nombres"},
                         {data:"apellidos"},
                         {data:"email"},

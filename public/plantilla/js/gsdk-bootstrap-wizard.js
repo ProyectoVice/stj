@@ -20,8 +20,8 @@ transparent = true;
 
 $(document).ready(function(){
 
-    /*  Activate the tooltips      */
-    $('[rel="tooltip"]').tooltip();
+    /*  Activate the tooltips
+    $('[rel="tooltip"]').tooltip();*/
 
     // Code for the Validator
     var $validator = $('.wizard-card form').validate({
@@ -60,6 +60,20 @@ $(document).ready(function(){
         'previousSelector': '.btn-previous',
 
         onNext: function(tab, navigation, index) {
+            if(index==3){
+                h_from=tab.find('a')[0].hash;
+                h_to=tab.next().find('a')[0].hash;
+                inputs_from = $(h_from).find('input');
+                inputs_to = $(h_to).find('input');
+                select_from = $(h_from).find('select');
+                select_to = $(h_to).find('select');
+                $.each(inputs_from,function(i, v){
+                    $(h_to).find("[name="+v.name+"]").val(v.value);
+                });
+                $.each(select_from,function(i, v){
+                    $(h_to).find("[name="+v.name+"]").val(v.value);
+                })
+            }
         	var $valid = $('.wizard-card form').valid();
         	if(!$valid) {
         		$validator.focusInvalid();
@@ -89,14 +103,7 @@ $(document).ready(function(){
        },
 
         onTabClick : function(tab, navigation, index){
-
-            var $valid = $('.wizard-card form').valid();
-
-            if(!$valid){
                 return false;
-            } else {
-                return true;
-            }
         },
 
         onTabShow: function(tab, navigation, index) {
@@ -141,7 +148,7 @@ $(document).ready(function(){
 
 
     // Prepare the preview for profile picture
-    $("#wizard-picture").change(function(){
+    /*$("#wizard-picture").change(function(){
         readURL(this);
     });
 
@@ -163,7 +170,7 @@ $(document).ready(function(){
         }
     });
 
-    $('.set-full-height').css('height', 'auto');
+    $('.set-full-height').css('height', 'auto');*/
 
 });
 

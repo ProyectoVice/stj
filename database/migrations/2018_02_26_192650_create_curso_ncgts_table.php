@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInscripcionModulosTable extends Migration
+class CreateCursoNcgtsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateInscripcionModulosTable extends Migration
      */
     public function up()
     {
-        Schema::create('inscripcion_modulos', function (Blueprint $table) {
+        Schema::create('curso_ncgts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('inscripcion_modulo');
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateInscripcionModulosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inscripcion_modulos');
+        Schema::dropIfExists('curso_ncgts');
     }
 }

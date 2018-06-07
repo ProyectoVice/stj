@@ -958,7 +958,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario = new \App\Horario();
         $horario->hora_inicio='09:00:00';
         $horario->hora_fin='11:00:00';
-        $horario->dia_inicio='2018-05-28';
+        $horario->dia=1;
         $horario->carga_lectiva_id=1;
         $horario->ambiente_id=1;
         $horario->save();
@@ -967,7 +967,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario = new \App\Horario();
         $horario->hora_inicio='09:00:00';
         $horario->hora_fin='11:00:00';
-        $horario->dia_inicio='2018-05-31';
+        $horario->dia=3;
         $horario->carga_lectiva_id=1;
         $horario->ambiente_id=1;
         $horario->save();
@@ -976,7 +976,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario = new \App\Horario();
         $horario->hora_inicio='09:00:00';
         $horario->hora_fin='11:00:00';
-        $horario->dia_inicio='2018-05-28';
+        $horario->dia=1;
         $horario->carga_lectiva_id=2;
         $horario->ambiente_id=2;
         $horario->save();
@@ -985,9 +985,45 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario = new \App\Horario();
         $horario->hora_inicio='09:00:00';
         $horario->hora_fin='11:00:00';
-        $horario->dia_inicio='2018-05-31';
+        $horario->dia=3;
         $horario->carga_lectiva_id=2;
         $horario->ambiente_id=2;
+        $horario->save();
+
+        //horario 5 de la curso de ingles basico 1
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia=1;
+        $horario->curso_ncgt_disponible_id=4;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 6 de curso de ingles basico 1
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia=3;
+        $horario->curso_ncgt_disponible_id=4;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 7 de la curso de ingles basico 2
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia=2;
+        $horario->curso_ncgt_disponible_id=5;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 8 de curso de ingles basico 2
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia=4;
+        $horario->curso_ncgt_disponible_id=5;
+        $horario->ambiente_id=1;
         $horario->save();
 
         //actividades de silabos
