@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -21,11 +22,15 @@ class User extends Authenticatable
     public function all_names($id){
         return User::where('id','=',$id)->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'))->first();
     }
+
+
+
     public function docente(){
         return $this->hasOne(Docente::class,'user_id','id');
         //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 
         //return $this->belongsToMany(NombreModeloRelacionarse::class,'Tabla_pivot');
     }
+
     public function est_civil(){
         return $this->belongsto(EstCivil::class,'est_civil_id','id');
     }
