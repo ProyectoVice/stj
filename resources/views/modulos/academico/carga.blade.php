@@ -43,7 +43,7 @@
       </div>
     </div>  
     <div class="col-sm-7 hidden-xs">
-      <h> Ver Carga por Docente </h><a href='{!! route('academico.reportecarga.index1')!!}', <button type="button" class="btn btn-primary btn-primary btn-sm">Ver</button> </a>
+      <h> Ver Carga por Docente </h><a href='{!! route('academico.reportecarga.index1')!!}'<button type="button" class="btn btn-primary btn-primary btn-sm">Ver</button> </a>
     </div>     
     <div class="col-sm-12 hidden-xs">
       <div class="clearfix">
@@ -101,39 +101,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="titleModal">Seleccionar Docente</h4>
-              </div>
-              <div class="modal-body">
-                  <div id="testmodal" style="padding: 5px 20px;">
-                      <table>
-                          <thead>
-                          <tr>
-                              <th class="center">Dias</th>
-                              <th class="center">Ciclo</th>
-                              <th class="center">Curso</th>
-                              <th class="center">Creditos</th>
-                          </tr>
-                          </thead>
-                      </table>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  {{Form::hidden('curso',null)}}
-                  {{Form::hidden('id_carga',null)}}
-                  {{Form::hidden('anio',$anio)}}
-                  <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-success antosubmit" id="btn_guardar">Guardar</button>
-              </div>
-          </div>
-      </div>
-  </div>
-
-  <div id="horario_curso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="titleModal">Horario</h4>
+                  <h4 class="modal-title" id="titleModal"></h4>
               </div>
               <div class="modal-body">
                   <div id="testmodal" style="padding: 5px 20px;">
