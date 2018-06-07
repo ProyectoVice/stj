@@ -10,8 +10,8 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Responsabilidad Social Universitaria</li>
-	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos de Facultad</a></li>
-	<li>{{$escuela->escuela}}</li>
+	<li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos Escuela</a></li>
+	<li>{{$escuela->dependencia}}</li>
 	<li class="">ver detalles</li>
 </ul>
 @endsection
@@ -77,6 +77,31 @@
 		
 		<div class="row">
 			<div class="col-xs-12" >
+				<hr>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="center" id="lll">DNI</th>
+							<th class="center">Apellidos y Nombres</th>
+							<th class="center" class="hidden-480">Escuela</th>
+							<th class="center" class="hidden-480">Tipo</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($equipo as $p)
+						<tr>
+							<td>{{$p->dni  }}</td>
+							<td>{{$p->nombres}}</td>
+							<td>{{$p->escuela}}</td>
+							<td>{{$p->tipo}}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12" >
 				<div ><hr>
 					<ul class="ace-thumbnails clearfix" >
 						@foreach($proyecto->evidencias as $e)
@@ -100,9 +125,9 @@
             <a href="{!!route('rsu.pf.cal',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-calendar">
 						<i class="ace-icon fa fa-calendar"> Actividades</i>
 				</a>
-				<a href="{!!route('rsu.mp.dw',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-download">
+				<a href="{!!route('rsu.pdf.vd',$proyecto->id)!!}" target="_blank" class="btn btn-info btn-round submit" id="btn-download">
 						<i class="ace-icon fa fa-download"> Descargar</i>
-				</a>
+				</a>	
 								
 			</div>	
 			<div>

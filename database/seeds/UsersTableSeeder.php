@@ -380,7 +380,7 @@ class UsersTableSeeder extends Seeder
         DB::table('estudiantes')->insert([
              'user_id'=>'3',
              'cod_univ'=>'2012000012',
-             'escuela_id'=>'12',
+             'dependencia_escuela_id'=>'42',
              'estado'=>'1',
              'modalidad_ingreso'=>'17',
              'f_ingreso'=>'2012-03-03',

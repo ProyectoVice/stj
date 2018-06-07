@@ -14,9 +14,10 @@ class CreateRsuLineamientoProyectosTable extends Migration
     public function up()
     {
         Schema::create('rsu_lineamiento_proyectos', function (Blueprint $table) {
+             $table->increments('id');
              $table->integer('rsu_lin_id')->unsigned();
              $table->integer('rsu_proy_id')->unsigned();
-             $table->primary(['rsu_lin_id','rsu_proy_id']);
+             //$table->primary(['rsu_lin_id','rsu_proy_id']);
 
              $table->foreign('rsu_lin_id')->references('id')->on('rsu_lineamientos')->onDelete('cascade');
              $table->foreign('rsu_proy_id')->references('id')->on('rsu_proyectos')->onDelete('cascade');

@@ -14,8 +14,8 @@
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Responsabilidad Social Universitaria</li>
-	<li class="">Proyectos de Facultad</li>
-	<li>{{$escuela->escuela}}</li>
+	<li class=""> Proyectos Escuela</li>
+	<li>{{$escuela->dependencia}}</li>
 </ul>
 @endsection
 @section('contenido')
@@ -26,7 +26,7 @@
 		<div class="pull-right tableTools-container"></div>
 	</div>
 		<div class="table-header">
-			Lista de Mis proyectos &nbsp;&nbsp;&nbsp;
+			Lista de Proyectos - Escuela&nbsp;&nbsp;&nbsp;
 		</div>
 
 		<div class="table-responsive">

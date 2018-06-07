@@ -68,7 +68,7 @@ $variable="";
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
 						
-						<li class="blue dropdown-modal">
+						{{-- <li class="blue dropdown-modal">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
 								<span class="badge badge-important">8</span>
@@ -135,7 +135,7 @@ $variable="";
 									</a>
 								</li>
 							</ul>
-						</li>					
+						</li> --}}					
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="{{URL::to('plantilla/images/avatars/avatar.png')}}"
@@ -155,7 +155,7 @@ $variable="";
 									</a>
 								</li>
 								<li>
-									<a href="{{url('manual/directivo.pdf')}}" target="_black">
+									<a href="{{url('manual/manual-rsu.pdf')}}" target="_black">
 										<i class="ace-icon fa fa-exclamation"></i>
 										Ayuda
 									</a>

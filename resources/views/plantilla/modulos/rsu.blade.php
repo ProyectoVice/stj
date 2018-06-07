@@ -11,7 +11,7 @@
 							<ul class="submenu">
 								@if(Auth::user()->hasRoles(['DRSU']))
 								<li class="">
-									<a href="">
+									<a href="{{ route('rsu.pu.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Proyectos UNHEVAL
 									</a>
@@ -22,7 +22,7 @@
 								<li class="">
 									<a href="{{ route('rsu.pf.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
-										Proyectos Facultad
+										Proyectos Escuela
 									</a>
 									<b class="arrow"></b>
 								</li>
@@ -34,15 +34,15 @@
 									</a>
 									<b class="arrow"></b>
 								</li>
-								<li class="">
+								{{-- <li class="">
 									<a href="">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Invitaciones
 									</a>
 									<b class="arrow"></b>
-								</li>
+								</li> --}}
 								<li class="">
-									<a href="#">
+									<a href="{{ route('rsu.pr.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Repositorio
 									</a>

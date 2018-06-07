@@ -11,7 +11,7 @@ class DatosInscripcionTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        /*
         //dependencias
         DB::table('dependencias')->insert([
 
@@ -146,7 +146,7 @@ class DatosInscripcionTableSeeder extends Seeder
             ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticos-pensión avanzado-normal', 'monto'=>'100', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,],
             ['depencencia_id' =>66, 'descripcion' => 'Estudios informaticos-pensión avanzado-intensivo', 'monto'=>'200', 'es_modalidades'=>null,'es_maestria'=>null,'es_doctorado'=>null, 'es_modalidad_publico'=>null,'es_modalidad_particular'=>null,'es_libre'=>null,'es_diplomado'=>null,'es_procapt'=>null,]
             ]);
-
+*/
         //pagos
         DB::table('pagos')->insert([
             ['num_comprobante' => '1234567', 'fecha_comprobante' => '2018-06-03','user_id'=> 10,'tarifario_id'=> 1, 'importe'=> '350', 'estado_recibo'=> 0,],

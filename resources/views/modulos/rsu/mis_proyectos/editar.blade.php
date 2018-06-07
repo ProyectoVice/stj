@@ -31,9 +31,6 @@
         padding: 0 2px 0 2px;
         border-radius:1px;
     }
-
-    
-
 	#btn_mas {
 	    height: 30px;
 	    position: absolute;
@@ -81,7 +78,7 @@
 				{!!Form::text('titulo', null, ['required', 'class'=> 'form-control', 'placeholder'=>'Escribir aquí'])!!}
 				</div>
 			</div>
-			<div class="form-group">
+			{{-- <div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Ejes</label>
 				<div class="col-sm-9">
 					@foreach($RsuEjes as $eje)
@@ -91,11 +88,11 @@
 							</label><br>
 					@endforeach
 				</div>
-			</div>
+			</div> --}}
 			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Lineamientos</label>
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Ejes y Lineas</label>
 				<div class="col-sm-9"><div class="agregar"></div>
-					{!!Form::text('otros_lineamientos', null, ['class'=> 'col-xs-10 col-sm-10', 'placeholder'=>'más lineamietos (Opcional)'])!!}
+					{!!Form::text('mas_lineamientos', null, ['class'=> 'col-xs-10 col-sm-10', 'placeholder'=>'Proyección, extensión, medio ambiente, otros...'])!!}
 				</div>
 			</div>
 
@@ -451,6 +448,7 @@ jQuery(function($) {
 		          _token:'{!! csrf_token() !!}',
 		        },
 		    		success: function (data) {
+		    			console.log(data);
 		    			$('#input_nuevo').val("");
 		          	myTable.ajax.reload();
 		    		},

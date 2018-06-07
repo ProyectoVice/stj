@@ -38,16 +38,13 @@
 
 					<label class="col-sm-6" align="right"><b>Porcentaje de avance: </b></label>	
 					<label class="col-sm-6">
-								@if($proyecto->porcentaje=='') - @else {{ $proyecto->porcentaje }} @endif
+								@if($proyecto->porcentaje=='') - @else {{ $proyecto->porcentaje }}% @endif
 					</label><br>	
 					
 					<label class="col-sm-6" align="right"><b>Doc. de Culminación: </b></label>
 					<label class="col-sm-6">
 							@if($proyecto->doc_culminacion=='') - @else {{ $proyecto->doc_culminacion }} @endif
-					</label><br>	
-
-					
-							
+					</label><br>				
 		</div>
 
 		<div class="col-sm-8">
@@ -73,7 +70,31 @@
 								@if($proyecto->dificultades=='') - @else {!! $proyecto->dificultades !!}@endif
 					</label>
 		</div>
-		
+		<div class="row">
+			<div class="col-xs-12" >
+				<hr>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="center" id="lll">DNI</th>
+							<th class="center">Apellidos y Nombres</th>
+							<th class="center" class="hidden-480">Escuela</th>
+							<th class="center" class="hidden-480">Tipo</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($equipo as $p)
+						<tr>
+							<td>{{$p->dni  }}</td>
+							<td>{{$p->nombres}}</td>
+							<td>{{$p->escuela}}</td>
+							<td>{{$p->tipo}}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-xs-12" >
 				<div ><hr>
@@ -99,7 +120,7 @@
             <a href="{!!route('rsu.mp.cal',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-calendar">
 						<i class="ace-icon fa fa-calendar"> Actividades</i>
 				</a>
-				<a href="{!!route('rsu.mp.dw',$proyecto->id)!!}" class="btn btn-info btn-round submit" id="btn-download">
+				<a href="{!!route('rsu.pdf.vd',$proyecto->id)!!}" target="_blank" class="btn btn-info btn-round submit" id="btn-download">
 						<i class="ace-icon fa fa-download"> Descargar</i>
 				</a>
 				<a href="{!! route('rsu.mp.edit', $proyecto->id) !!}" class="btn btn-info btn-round submit" id="btn-editar">

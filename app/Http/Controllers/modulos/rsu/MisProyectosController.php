@@ -45,39 +45,35 @@ class MisProyectosController extends Controller
     }
     public function datatables()
     {
-        // $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
-        //                       ->join('rsu_responsabilidads AS r','r.id','=','p.rsu_responsabilidad_id')
-        //                       ->select('rsu_proyectos.*','r.rsu_responsabilidad AS rp')->get();
-         $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
+        $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                               ->where('p.user_id','=',Auth::user()->id)
                               ->select('rsu_proyectos.*')->get();
-        //return Datatables::of($proyecto)->make(true);
         return datatables()->of($proyecto)->toJson();
     }
-
-    public function equipo_show($id)
-    {
+    // public function tipo_responsabilidad(){
+    //     $arrayName = array('Docente - Responsable','Docente - Integrante','Estudiante');
+    //     return $arrayName;
+    // }
+    public function equipo($id){
        $docentes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('docentes AS doc','doc.user_id','=','users.id')
-               ->join('escuelas','escuelas.id','=','doc.escuela_id')
+               ->join('dependencias  AS e','e.id','=','doc.dependencia_escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->join('rol_users AS ru','users.id','=','ru.user_id')
                ->where('ru.rol_id','3')
                ->where('ru.estado','1')
                ->where('rsu_participantes.rsu_responsabilidad_id','<>',3)
-               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela', 'rsu_participantes.id AS id')->get();
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','e.dependencia AS escuela', 'rsu_participantes.id AS id')->get();
 
         $estudiantes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('estudiantes AS doc','doc.user_id','=','users.id')
-               ->join('escuelas','escuelas.id','=','doc.escuela_id')
-               // ->join('rol_users AS ru','users.id','=','ru.user_id')
-               // ->where('ru.rol_id','4')
-               // ->where('ru.estado','1')
+               //->join('escuelas','escuelas.id','=','doc.escuela_id')
+               ->join('dependencias  AS e','e.id','=','doc.dependencia_escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
-               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','escuelas.escuela AS escuela','rsu_participantes.id AS id')->get();
+               ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','e.dependencia AS escuela', 'rsu_participantes.id AS id')->get();
 
         $equipo=array();
         //Fusionamos los controladores
@@ -88,7 +84,11 @@ class MisProyectosController extends Controller
         foreach ($estudiantes as $e) {
             $equipo[]=$e;
         }
-        //return $equipo;
+        return $equipo;
+    }
+    public function equipo_show($id)
+    {
+        $equipo=$this->equipo($id);
         //return Datatables::of($proyecto)->make(true);
         return datatables()->of($equipo)->toJson();
     }
@@ -127,6 +127,11 @@ class MisProyectosController extends Controller
    }
     public function equipo_users_new(Request $request)
     {
+        $query=RsuParticipante::where('rsu_proyecto_id',$request->get('id_proyecto'))->where('user_id',$request->get('id_boton'))->first();
+
+        if ($query) {
+            return false;
+        }
         $equipo=new RsuParticipante;
         $equipo->rsu_proyecto_id=$request->get('id_proyecto');
         $equipo->user_id=$request->get('id_boton');
@@ -280,14 +285,21 @@ class MisProyectosController extends Controller
         $myProyect->logros=$request->get('logros');
         $myProyect->dificultades=$request->get('dificultades');
         $myProyect->satisfaccion=$request->get('satisfaccion');
-        $participantes->mas_lineamientos=$request->get('mas_lineamientos');
+        $myProyect->mas_lineamientos=$request->get('mas_lineamientos');
         $myProyect->save();
         //Guardamos el ID del proyecto registrado
-        $ultimoID=$myProyect->id;
+//         $ultimoID=$myProyect->id;
 
-        //registramos todos los lineamientos que corresponden al proyecto
+// $array1 = array(1, 2,3,4);
+// $array2 = array(2,11,6);
+
+      //return array_diff($array1, $array2);
+        //Para eliminar
+        //return $paraEliminar=RsuLineamientoProyecto::where('rsu_proy_id',$id)->whereNotBetween('rsu_lin_id',[100,12])->get(); 
         //return $request->get('lineas');
-        if($request->get('lineas')){
+        $lineas=$request->get('lineas');
+        if($lineas){
+         return $paraEliminar=RsuLineamientoProyecto::where('rsu_proy_id',$id)->whereNotIn('rsu_lin_id',$lineas)->pluck('rsu_lin_id');
             foreach($request->get('lineas') as $linea){
                 $lineamientos=new RsuLineamientoProyecto;
                 $lineamientos->rsu_lin_id=$linea;
@@ -392,18 +404,19 @@ class MisProyectosController extends Controller
     public function cal_table($id){
         //return $id;
         $proyecto=RsuCalendario::where('rsu_proyecto_id',$id)->get();
-        //return Datatables::of($proyecto)->make(true);
         return datatables()->of($proyecto)->toJson();
     }
 
     public function ver_detalle($id){
+        //return Docente::find(4)->dependencia_escuela->dependencia;
         $proyecto = RsuProyecto::find($id);
         $consulta=RsuParticipante::where('user_id',Auth::user()->id)
                   ->where('rsu_proyecto_id',$proyecto->id)->first();
          if(!$consulta){
             return back()->with('rojo','Ud. no tiene permisos de acceso');
          }
-        return view('modulos.rsu.mis_proyectos.ver_detalles',compact('proyecto'));
+        $equipo=$this->equipo($id); //$tipo=$this->tipo_responsabilidad();
+        return view('modulos.rsu.mis_proyectos.ver_detalles',compact('proyecto','equipo'));
     }
 
     public function ver_archivos($id){

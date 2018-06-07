@@ -15,10 +15,6 @@ Route::get('/', function () {
 	return view('ingreso');
 });
 
-Route::get('reniec', function () {
-    //return view('plantilla.usuario');
-	return view('reniec');
-});
 // Authentication Routes...
 Route::post('login', 'Auth\LoginController@login');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
@@ -63,12 +59,26 @@ Route::group(['prefix' => 'rsu'],function(){
 		Route::post('e-msj','modulos\rsu\ProyectosFacultadController@e_msj')->name('rsu.pf.e-msj');
 		Route::post('show-msj','modulos\rsu\ProyectosFacultadController@show_msj')->name('rsu.pf.show-msj');
 		Route::post('estado','modulos\rsu\ProyectosFacultadController@estado')->name('rsu.pf.estado');
-
 	});
-});
-//Route::resource('rsu-misproyectos', 'modulos\rsu\MisProyectosController');
-//Route::get('rsu-datos', 'modulos\rsu\MisProyectosController@datatables')->name('datos'); 
-//Route::post('evidencias/{post}/imagen', 'modulos\rsu\MisProyectosController@evidencias')->name('evidencias');  
+	//Proyectos UNHEVAL
+	Route::group(['prefix' => 'proyectos_unheval'],function(){
+		Route::get('/','modulos\rsu\ProyectosUnhevalController@index')->name('rsu.pu.index');
+		Route::get('datos','modulos\rsu\ProyectosUnhevalController@datatables')->name('rsu.pu.datos');
+		Route::get('ver/{id}','modulos\rsu\ProyectosUnhevalController@ver_detalle')->name('rsu.pf.ver');
+		Route::get('calendario/{id}','modulos\rsu\ProyectosUnhevalController@cal_index')->name('rsu.pu.cal');
+		Route::get('ver-file/{id}','modulos\rsu\ProyectosUnhevalController@ver_archivos')->name('rsu.pu.ver-file');
+		Route::post('e-msj','modulos\rsu\ProyectosUnhevalController@e_msj')->name('rsu.pu.e-msj');
+		Route::post('show-msj','modulos\rsu\ProyectosUnhevalController@show_msj')->name('rsu.pu.show-msj');
+		Route::post('estado','modulos\rsu\ProyectosUnhevalController@estado')->name('rsu.pf.estado');
+	});
+	//Proyectos Repositorio
+	Route::group(['prefix' => 'repositorio'],function(){
+		Route::get('/','modulos\rsu\RepositorioController@index')->name('rsu.pr.index');
+		Route::get('datos','modulos\rsu\RepositorioController@datatables')->name('rsu.pr.datos');
+		Route::get('ver-file/{id}','modulos\rsu\RepositorioController@ver_archivos')->name('rsu.pr.ver-file');
+	});
+	Route::get('pdf/ver_detalles/{id}','modulos\rsu\PdfController@pdf')->name('rsu.pdf.vd');
+}); 
 //Fin RSU
 //Adminsión
 Route::group(['prefix' => 'adminsion'],function(){
