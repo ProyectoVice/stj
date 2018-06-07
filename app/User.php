@@ -26,7 +26,6 @@ class User extends Authenticatable
         //Nota: entonces si existe la relación de Muchos a Muchos, sintaxis: 
         //return $this->belongsToMany(NombreModeloRelacionarse::class,'Tabla_pivot');
     }
-
     public function est_civil(){
         return $this->belongsto(EstCivil::class,'est_civil_id','id');
     }
@@ -42,20 +41,16 @@ class User extends Authenticatable
 
     } 
     public function postulacions(){
-      return hasMany(Postulacion::class,'user_id','id');
+      return $this->hasMany(Postulacion::class,'user_id','id');
     }
-    public function colegio_users(){
-      return hasMany(ColegioUsers::class);
-    }
+
     public function inscripcion_ncgts(){
-      return hasMany(InscripcionNcgt::class, 'user_id','id');
+      return $this->hasMany(InscripcionNcgt::class, 'user_id','id');
     }    
     public function docente_otros(){
-      return hasMany(DocenteOtro::class,'user_id','id');
+        return $this->hasOne(Docente::class,'user_id','id');
     }
-    public function inscripcion_alumnos(){
-      return hasMany(InscripcionAlumno::class,'user_id','id');
-    }  
+
 
     public function roles(){
         return $this->belongsToMany(Rol::class,'rol_users');
@@ -90,7 +85,7 @@ class User extends Authenticatable
            case 'DRSU-F': 
                $avatar="<button class='btn btn-warning' title='".$rol->descripcion."'><i class='ace-icon fa fa-users'></i></button>";break;
             //roles Jhonattan 
-            case 'PersonalAdmision': 
+            case 'Personal_Admision':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-adjust'></i></button>";break;
             case 'Administrador Admision': 
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
@@ -98,44 +93,46 @@ class User extends Authenticatable
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador Posgrado': 
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'AdministradorSegundaEEdu': 
+            case 'Administrador_Segunda_E_Educacion':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'AdministradorSegundaEEnf': 
+            case 'Administrador_Segunda_E_Enfermeria':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'AdministradorEstudiosCompEdu': 
+            case 'Administrador_Estudios_C_Educacion':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Administrador idiomas': 
+            case 'Administrador_Idiomas':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Administrador Estudios a Distancia': 
+            case 'Administrador_Estudios_Informaticos':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Administrador Diplomados': 
+            case 'Administrador Diplomados':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Administrador PROCATP': 
+            case 'Administrador PROCAPT':
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
             case 'Administrador PROMASTER': 
                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Director de Admision': 
+            case 'Director_Admision':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Coordinador Cepre': 
+            case 'Coordinador_CEPREVAL':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'PosgradoAdmi': 
+            case 'Posgrado_Admi':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'ESegundaEsEdu': 
+            case 'Encargado_Segunda_E_Educacion':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'ESegundaEsEnf': 
+            case 'Encargado_Segunda_E_Enfermeria':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'EEstudiosComp': 
+            case 'Encargado_Estudios_Complementarios':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'DirectorCI': 
+            case 'Director_CI':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'DirectorEC': 
+            case 'Director_EC':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Encargado de Diplomados': 
+            case 'Encargado_Diplomados':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Encargado de PROCATP': 
+            case 'Encargado_PROCAPT':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
-            case 'Encargado de PROMASTER': 
+            case 'Encargado_PROMASTER':
                $avatar="<button class='btn btn-pink' title='".$rol->descripcion."'><i class='ace-icon fa fa-user'></i></button>";break;
+            case 'Docente_otros':
+                $avatar="<button class='btn btn-success' title='".$rol->descripcion."'><i class='ace-icon fa fa-lightbulb-o'></i></button>";break;
             //fin roles jhonattan
             //roles Teddy
             case 'UsuarioAsuntos': 

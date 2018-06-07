@@ -19,11 +19,9 @@ class CreateHorariosTable extends Migration
             $table->time('hora_fin');
             $table->date('dia_inicio');
             $table->integer('estado_horario')->default(1);
-            $table->integer('carga_lectiva_id')->unsigned();
+            $table->integer('carga_lectiva_id')->unsigned()->nullable();
+            $table->integer('curso_ncgt_disponible_id')->unsigned()->nullable();
             $table->integer('ambiente_id')->unsigned();
-
-            //$table->foreign('carga_lectiva_id')->references('id')->on('carga_lectivas')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

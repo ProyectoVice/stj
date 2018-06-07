@@ -154,6 +154,7 @@ Route::group(['prefix' => 'unheval1'],function() {
         Route::get('/{tipo}',           'modulos\inscripcion\publico\DiplomadoController@index')->name('publico.diplomado.ins.index');
         Route::post('/{tipo}/create',   'modulos\inscripcion\publico\DiplomadoController@create')->name('publico.diplomado.ins.create');
         Route::post('/{tipo}/validar',  'modulos\inscripcion\publico\DiplomadoController@validar')->name('publico.diplomado.ins.validar');
+        Route::post('/{tipo}/store',  'modulos\inscripcion\publico\DiplomadoController@store')->name('publico.diplomado.ins.store');
 
     });
 });

@@ -20,7 +20,8 @@
             <div class="wizard-container">
 
                 <div class="card wizard-card" data-color="azzure" id="wizardProfile">
-                    <form action="" method="">
+                {!! Form::open(['url' => route('publico.diplomado.ins.store', $tipo), 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
+                {{ csrf_field() }}
                         <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
                         <div class="wizard-header">
                             <h3>
@@ -125,21 +126,21 @@
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>DNI <small>(requiredo)</small></label>
-                                            <input name="dni" type="text" disabled class="form-control" value="{!! isset($usuario) ? $usuario->dni : ''!!}">
+                                            <input name="dni" type="text" disabled class="form-control" value="">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Nombres <small>(requiredo)</small></label>
-                                            <input name="nombres" type="text" disabled class="form-control" value="{{ isset($usuario) ? $usuario->nombres : ''}}">
+                                            <input name="nombres" type="text" disabled class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <label>Apellido Paterno <small>(requiredo)</small></label>
-                                            <input name="apellido_paterno" type="text" disabled class="form-control" value="{{ isset($usuario) ? $usuario->apellido_paterno : ''}}">
+                                            <input name="apellido_paterno" type="text" disabled class="form-control" value="">
                                         </div>
                                         <div class="col-sm-5">
                                             <label>Apellido Materno <small>(requiredo)</small></label>
-                                            <input name="apellido_materno" type="text" disabled class="form-control" value="{{ isset($usuario) ? $usuario->apellido_materno : ''}}">
+                                            <input name="apellido_materno" type="text" disabled class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -189,7 +190,7 @@
                         <div class="wizard-footer height-wizard">
                             <div class="pull-right">
                                 <input type='button' class='btn btn-next btn-fill btn-info btn-wd btn-sm' name='next' value='Next' />
-                                <input type='button' class='btn btn-finish btn-fill btn-info btn-wd btn-sm' name='finish' value='Finish' />
+                                <input type='submit' class='btn btn-finish btn-fill btn-info btn-wd btn-sm' name='finish' value='Finish' />
                             </div>
                             <div class="pull-left">
                                 <input type='button' class='btn btn-previous btn-fill btn-default btn-wd btn-sm' name='previous' value='Previous' />

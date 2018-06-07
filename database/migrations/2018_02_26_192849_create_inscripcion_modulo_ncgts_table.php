@@ -16,10 +16,10 @@ class CreateInscripcionModuloNcgtsTable extends Migration
         Schema::create('inscripcion_modulo_ncgts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('inscripcion_ncgt_id')->unsigned();
-            $table->integer('modulo_ncgt_id')->unsigned();
+            $table->integer('curso_ncgt_disponible_id')->unsigned();
             $table->float('nota');
             $table->foreign('inscripcion_ncgt_id')->references('id')->on('inscripcion_ncgts')->onDelete('cascade');
-            $table->foreign('modulo_ncgt_id')->references('id')->on('modulo_ncgts')->onDelete('cascade');
+            $table->foreign('curso_ncgt_disponible_id')->references('id')->on('curso_ncgt_disponibles')->onDelete('cascade');
             $table->timestamps();
         });
     }

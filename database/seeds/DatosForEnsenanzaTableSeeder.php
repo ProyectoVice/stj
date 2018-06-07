@@ -990,6 +990,42 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario->ambiente_id=2;
         $horario->save();
 
+        //horario 5 de la curso de ingles basico 1
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-01-01';
+        $horario->curso_ncgt_disponible_id=4;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 6 de curso de ingles basico 1
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-01-03';
+        $horario->curso_ncgt_disponible_id=4;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 7 de la curso de ingles basico 2
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-02-01';
+        $horario->curso_ncgt_disponible_id=5;
+        $horario->ambiente_id=1;
+        $horario->save();
+
+        //horario 8 de curso de ingles basico 2
+        $horario = new \App\Horario();
+        $horario->hora_inicio='09:00:00';
+        $horario->hora_fin='11:00:00';
+        $horario->dia_inicio='2018-02-03';
+        $horario->curso_ncgt_disponible_id=5;
+        $horario->ambiente_id=1;
+        $horario->save();
+
         //actividades de silabos
         //Actividades 1  del horario 1 que pertenece a la carga lectiva 1
         $actividad = new \App\ActividadSilabo();

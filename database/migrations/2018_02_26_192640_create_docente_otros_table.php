@@ -17,7 +17,7 @@ class CreateDocenteOtrosTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->primary('user_id');
             $table->date('fecha_ingreso');
-            $table->integer('carga');
+            $table->integer('horas');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

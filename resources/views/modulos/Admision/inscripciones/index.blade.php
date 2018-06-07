@@ -24,7 +24,7 @@
 		</div>
 		<div class="table-responsive">
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
-				@if($tipo=='pregrado'||$tipo=='CEPREVAL')
+				@if($tipo=='Pregrado'||$tipo=='CEPREVAL')
 					<thead>
 					<tr>
 						<th class="center">N</th>
@@ -38,7 +38,7 @@
 						<th class="center" class="hidden-480">Acciones</th>
 					</tr>
 					</thead>
-				@elseif($tipo=='posgrado_maestria'||$tipo=='posgrado_doctorado')
+				@elseif($tipo=='Posgrado_maestria'||$tipo=='Posgrado_doctorado')
 					<thead>
 					<tr>
 						<th class="center">N</th>

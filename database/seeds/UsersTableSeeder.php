@@ -147,7 +147,45 @@ class UsersTableSeeder extends Seeder
                 'email' => '00000033@hotmail.com',
                 'password' => bcrypt('00000033'),
                 'dependencia_id_depende' => 30,
+            ],
+            //Usuarios otros docente
+            [//id = 34 docentes de centro de idiomas
+            'dni' => '00000034',
+            'nombres' => 'Juan Marino',
+            'apellido_paterno' => 'Gutierrez',
+            'apellido_materno' => 'Peralta',
+            'email' => '00000034@hotmail.com',
+            'password' => bcrypt('00000034'),
+            'dependencia_id_depende' => 65,
+            ],
+            [//id = 35
+            'dni' => '00000035',
+            'nombres' => 'Luisa',
+            'apellido_paterno' => 'Gamarra',
+            'apellido_materno' => 'Torres',
+            'email' => '00000035@hotmail.com',
+            'password' => bcrypt('00000035'),
+            'dependencia_id_depende' => 65,
+            ],
+            [//id = 36 docentes de estudios informaticos
+            'dni' => '00000036',
+            'nombres' => 'Jorge',
+            'apellido_paterno' => 'Chaca',
+            'apellido_materno' => 'Carlos',
+            'email' => '00000036@hotmail.com',
+            'password' => bcrypt('00000036'),
+            'dependencia_id_depende' => 66,
+            ],
+            [//id = 37
+                'dni' => '00000037',
+                'nombres' => 'Manuel',
+                'apellido_paterno' => 'Silva',
+                'apellido_materno' => 'Lopez',
+                'email' => '00000037@hotmail.com',
+                'password' => bcrypt('00000037'),
+                'dependencia_id_depende' => 66,
             ]
+
          ]);     
 
         //===================================================
@@ -179,11 +217,13 @@ class UsersTableSeeder extends Seeder
             //roles del usuario 8
             ['user_id' => '8', 'rol_id' => '7',],
             ['user_id' => '8','rol_id' => '9',],
+            //roles del usuario 9
+            ['user_id' => 9, 'rol_id' => 35,],
             //roles de los usurios 10 al 23
-            ['user_id' => '10','rol_id' => '33',],
-            ['user_id' => '11','rol_id' => '33',],
-            ['user_id' => '12','rol_id' => '33',],
-            ['user_id' => '13','rol_id' => '33',],
+            ['user_id' => '10','rol_id' => 4,],
+            ['user_id' => '11','rol_id' => 4,],
+            ['user_id' => '12','rol_id' => 4,],
+            ['user_id' => '13','rol_id' => 4,],
             ['user_id' => '14','rol_id' => '33',],
             ['user_id' => '15','rol_id' => '33',],
             ['user_id' => '16','rol_id' => '33',],
@@ -193,7 +233,7 @@ class UsersTableSeeder extends Seeder
             ['user_id' => '20','rol_id' => '33',],
             ['user_id' => '21','rol_id' => '33',],
             ['user_id' => '22','rol_id' => '33',],
-            ['user_id' => '23','rol_id' => '33',],
+            ['user_id' => '23','rol_id' => 35,],
             //roles de los usurios 26 al 33
             ['user_id' => '26','rol_id' => '3',],
             ['user_id' => '27','rol_id' => '3',],
@@ -202,7 +242,12 @@ class UsersTableSeeder extends Seeder
             ['user_id' => '30','rol_id' => '3',],
             ['user_id' => '31','rol_id' => '3',],
             ['user_id' => '32','rol_id' => '3',],
-            ['user_id' => '33','rol_id' => '3',]
+            ['user_id' => '33','rol_id' => '3',],
+            //roles de los usurios 34 al 37
+            ['user_id' => 34,'rol_id' => 34,],
+            ['user_id' => 35,'rol_id' => 34,],
+            ['user_id' => 36,'rol_id' => 34,],
+            ['user_id' => 37,'rol_id' => 34,],
 
         ]);
 

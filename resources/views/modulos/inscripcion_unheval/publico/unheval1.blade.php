@@ -21,16 +21,16 @@
                         <div class="row">
                           <div class="col-xs-12 col-md-12 text-center">
                             <a href="https://pillcomozo.unheval.edu.pe/admision/inscripcion.aspx" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger  glyphicon-pencil"></span> <br>PREGRADO <br>&nbsp;</a> 
-  						              <a href="#" class="btn btn-xlarge" role="button"><span class="glyphicon bigger glyphicon-folder-open"></span> <br>POSGRADO<br>MAESTRIA</a>
+  						    <a href="#" class="btn btn-xlarge" role="button"><span class="glyphicon bigger glyphicon-folder-open"></span> <br>POSGRADO<br>MAESTRIA</a>
                             <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-grain"></span> <br>POSGRADO<br>DOCTORADO</a>  
-  						              <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-tower"></span> <br>POSGRADO<br>POSDOCTORADO</a>
+  						    <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-tower"></span> <br>POSGRADO<br>POSDOCTORADO</a>
                             <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-pencil"></span> <br>SEGUNDA<br>ESPECIALIDAD<br></a>
-  						              <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-pencil "></span> <br>ESTUDIOS  <br>COMPLEMENTARIOS<br></a>
-       					            <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-globe"></span> <br>IDIOMAS <br>&nbsp;</a>
-                            <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-cloud"></span> <br>ESTUDIOS <br>DISTANCIA</a>
-                            <a href="{{route('publico.diplomado.ins.index', 'procapt')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROCATP <br>&nbsp;</a>
-                            <a href="{{route('publico.diplomado.ins.index', 'promaster')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROMASTER <br>&nbsp;</a>
-                            <a href="{{route('publico.diplomado.ins.index', 'diplomado')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-book"></span> <br>DIPLOMADOS <br>&nbsp;</a>
+  						    <a href="#" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-pencil "></span> <br>ESTUDIOS  <br>COMPLEMENTARIOS<br></a>
+       					    <a href="{{route('publico.diplomado.ins.index', 'Idiomas')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-globe"></span> <br>IDIOMAS <br>&nbsp;</a>
+                            <a href="{{route('publico.diplomado.ins.index', 'Estudios_informaticos')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-cloud"></span> <br>ESTUDIOS <br>INFORMATICOS</a>
+                            <a href="{{route('publico.diplomado.ins.index', 'PROCAPT')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROCATP <br>&nbsp;</a>
+                            <a href="{{route('publico.diplomado.ins.index', 'PROMASTER')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-ok"></span> <br>PROMASTER <br>&nbsp;</a>
+                            <a href="{{route('publico.diplomado.ins.index', 'Diplomado')}}" class="btn btn-xlarge" role="button" target="_blank"><span class="glyphicon bigger glyphicon-book"></span> <br>DIPLOMADOS <br>&nbsp;</a>
                           </div>
                        </div>                  
                   </div>

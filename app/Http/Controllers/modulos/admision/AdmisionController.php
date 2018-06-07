@@ -35,9 +35,8 @@ class AdmisionController extends Controller
     }
     public function index(Request $request)
     {
-        $tipo=['pregrado'=>1,'CEPREVAL'=>12,'posgrado_maestria'=>2, 'posgrado_doctorado'=>3, 'posgrado_posdoctorado'=>4,
-            'segunda_especialidad_educacion'=>5, 'segunda_especialidad_enfermeria'=>13,'estudios_complementarios'=>6,
-            'idiomas'=>7, 'estudios_distancia'=>8];
+        $tipo=['Pregrado'=>1,'CEPREVAL'=>12,'Posgrado_maestria'=>2, 'Posgrado_doctorado'=>3, 'Posgrado_posdoctorado'=>4,
+            'Segunda_especialidad_educacion'=>5, 'Segunda_especialidad_enfermeria'=>13,'Estudios_complementarios'=>6];
         $proceso=(in_array($tipo[$request->tipo],[1,12]))?ProcesoSeleccion::getProgramaforSelect($tipo[$request->tipo]):ProcesoSeleccion::getProgramaforSelect1($tipo[$request->tipo]);
         return view('modulos.Admision.inscripciones.index', ['proceso'=>$proceso,'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
@@ -46,11 +45,10 @@ class AdmisionController extends Controller
     {
         /*$inscripcion=Postulacion::get();
         return datatables()->of($inscripcion)->toJson();*/
-        $tipo=['pregrado'=>1,'CEPREVAL'=>12,'posgrado_maestria'=>2, 'posgrado_doctorado'=>3, 'posgrado_posdoctorado'=>4,
-            'segunda_especialidad_educacion'=>5, 'segunda_especialidad_enfermeria'=>13,'estudios_complementarios'=>6,
-            'idiomas'=>7, 'estudios_distancia'=>8];
+        $tipo=['Pregrado'=>1,'CEPREVAL'=>12,'Posgrado_maestria'=>2, 'Posgrado_doctorado'=>3, 'Posgrado_posdoctorado'=>4,
+            'Segunda_especialidad_educacion'=>5, 'Segunda_especialidad_enfermeria'=>13,'Estudios_complementarios'=>6];
         $permiso = false;
-        if(Auth::user()->hasRoles(['PersonalAdmision'])) {
+        if(Auth::user()->hasRoles(['Personal_Admision'])) {
             if (Auth::user()->hasRoles(['Administrador Admision'])&&$tipo[$request->tipo]==1)
                 $permiso=true;
             if (Auth::user()->hasRoles(['Administrador CEPREVAL'])&&$tipo[$request->tipo]==12)
@@ -65,11 +63,7 @@ class AdmisionController extends Controller
                 $permiso=true;
             if (Auth::user()->hasRoles(['AdministradorSegundaEEnf'])&&$tipo[$request->tipo]==13)
                 $permiso=true;
-            if (Auth::user()->hasRoles(['AdministradorEstudiosCompEdu'])&&$tipo[$request->tipo]==6)
-                $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador idiomas'])&&$tipo[$request->tipo]==7)
-                $permiso=true;
-            if (Auth::user()->hasRoles(['Administrador Estudios a Distancia'])&&$tipo[$request->tipo]==8)
+            if (Auth::user()->hasRoles(['Administrador_Estudios_C_Educacion'])&&$tipo[$request->tipo]==6)
                 $permiso=true;
         }
         if (!$permiso)
@@ -93,8 +87,8 @@ class AdmisionController extends Controller
 
         return DataTables::of($inscripcion->get())
             ->addColumn('accion', function ($obj){
-                $tipo=[1=>'pregrado',12=>'CEPREVAL',2=>'posgrado_maestria', 3=>'posgrado_doctorado', 4=>'posgrado_posdoctorado',
-                    5=>'segunda_especialidad_educacion', 13=>'segunda_especialidad_enfermeria',6=>'estudios_complementarios',7=>'idiomas', 8=>'estudios_distancia'];
+                $tipo=[1=>'Pregrado',12=>'CEPREVAL',2=>'Posgrado_maestria', 3=>'Posgrado_doctorado', 4=>'Posgrado_posdoctorado',
+                    5=>'Segunda_especialidad_educacion', 13=>'Segunda_especialidad_enfermeria',6=>'Estudios_complementarios'];
                 return sprintf("<div class='center action-buttons'>
                     <a href='/adminsion/inscripciones/mostrar/%s?tipo=%s' class='stj-acciones' title='Ver más'><i class='fa fa-eye'></i></a>
                     <a href='/adminsion/inscripciones/editar/%s?tipo=%s' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>

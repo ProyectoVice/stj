@@ -19,7 +19,7 @@
         <div class="hr dotted"></div>
         <div>
             <div id="user-profile-1" class="user-profile row">
-                <div class="col-xs-12 col-sm-4 center">
+                <div class="col-xs-12 col-sm-5 center">
                     <div>
                         <span class="profile-picture">
                             <img id="avatar" alt="Alex's Avatar" src="{{URL::to('plantilla/images/avatars/profile-pic.jpg')}}" height="150px;" style="vertical-align: top;">
@@ -42,6 +42,8 @@
                                 <thead>
                                 <tr>
                                     <th class="center">N</th>
+                                    <th class="center">Número</th>
+                                    <th class="center">Fecha</th>
                                     <th class="center">Detalle</th>
                                     <th class="center">Importe</th>
                                     <th class="center">Tipo</th>
@@ -49,6 +51,8 @@
                                 @foreach($control as $id=>$c)
                                 <tr>
                                     <td>{{$id+1}}</td>
+                                    <td>{{$c->num_comprobante}}</td>
+                                    <td>{{$c->fecha_comprobante}}</td>
                                     <td>{{$c->descripcion}}</td>
                                     <td>{{$c->importe}}</td>
                                     @if($c->tipo=='1')
@@ -67,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-4">
+                <div class="col-xs-12 col-sm-3">
                     <div class="space-6"></div>
                     <div class="space-12"></div>
                     <label><b>&nbsp;&nbsp;Información del Usuario</b></label>

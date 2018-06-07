@@ -10,8 +10,8 @@ class InscripcionModuloNcgt extends Model
     protected $fillable=[
     'inscripcion_ncgt_id', 'modulo_ncgt_id', 'nota'
     ];
-    public function modulo_ncgt() {
-      return $this->belongsto(ModuloNcgt::class);
+    public function curso_ncgt() {
+      return $this->belongsto(CursoNcgt::class);
   	}
   	public function inscripcion_ncgt() {
       return $this->belongsto(inscripcionNcgt::class);
