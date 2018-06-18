@@ -9,12 +9,9 @@ class ProcesoSeleccion extends Model
 {
     protected $table='proceso_seleccions';
     protected $fillable=[
-        'descripcion', 'anio', 'etapa', 'postulacion_ciclo_id', 'programa_id', 'postulacion_modalidad_id', 'sede_desentralizada_pre', 'descuento'
+        'descripcion', 'anio', 'etapa', 'ciclo', 'programa_id', 'postulacion_modalidad_id',
+        'sede_desentralizada_pre', 'descuento'
     ];
-
-    public function postulacion_ciclo() {
-        return $this->belongsto(PostulacionCiclo::class);
-    }
     public function programa() {
         return $this->belongsto(Programa::class);
     }

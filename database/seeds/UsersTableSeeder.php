@@ -202,6 +202,7 @@ class UsersTableSeeder extends Seeder
             ['user_id' => '4', 'rol_id' => '6',],
             //roles Tedy
             ['user_id' => '5', 'rol_id' => '2',],
+            ['user_id' => '5', 'rol_id' => '3',],
             ['user_id' => '5', 'rol_id' => '30',],
             ['user_id' => '5', 'rol_id' => '31',],
             ['user_id' => '5', 'rol_id' => '32',],
@@ -374,6 +375,15 @@ class UsersTableSeeder extends Seeder
                 'docente_dedicacion_id'=>'1',
                 'dependencia_academico_id'=>54,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
+            ],
+            [//Docente con usuario 5
+            'user_id'=>5,
+            'dependencia_escuela_id'=>30,
+            'docente_categoria_id'=>'1',
+            'docente_condicion_id'=>'1',
+            'docente_dedicacion_id'=>'1',
+            'dependencia_academico_id'=>55,
+            'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ]
         ]);
 

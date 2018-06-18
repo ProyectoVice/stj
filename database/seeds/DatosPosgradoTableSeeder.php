@@ -22,42 +22,181 @@ class DatosPosgradoTableSeeder extends Seeder
                 ['maestria_area' => 'Medio Ambiente y Desarrollo Sostenible',],
                 ['maestria_area' => 'Derecho',]                
             ]);
-        // mestrias
-        DB::table('maestrias')->insert([
-                
-                ['maestria' => 'Maestría en Educación con mención en Gestión y Planeamiento Educativo', 'maestria_area_id' => '1',],
-                ['maestria' => 'Maestría en Educación con mención en Investigación y Docencia Superior', 'maestria_area_id' => '1',],
-                ['maestria' => 'Maestría en Educación con mención en Investigación e Innovación Pedagógica', 'maestria_area_id' => '1',],
-                ['maestria' => 'Maestría en Gerencia Pública', 'maestria_area_id' => '2',],
-                ['maestria' => 'Maestría en Gestión y Negocios con mención en Gestión de Proyectos', 'maestria_area_id' => '2',],
-                ['maestria' => 'Maestría en Gestión Empresarial', 'maestria_area_id' => '2',],
-                ['maestria' => 'Maestría en Salud Pública y Gestión Sanitaria', 'maestria_area_id' => '3',],
-                ['maestria' => 'Maestría en Administración y Gerencia en Salud', 'maestria_area_id' => '3',],
-                ['maestria' => 'Maestría en Psicología', 'maestria_area_id' => '3',],
-                ['maestria' => 'Maestría en Ciencias Veterinarias', 'maestria_area_id' => '3',],
-                ['maestria' => 'Maestría en Banca y Finanzas', 'maestria_area_id' => '4',],
-                ['maestria' => 'Maestría en Contabilidad con mención en Auditoría', 'maestria_area_id' => '4',],
-                ['maestria' => 'Maestría en Tributación y Política Fiscal', 'maestria_area_id' => '4',],
-                ['maestria' => 'Maestría en Comunicación para el Desarrollo', 'maestria_area_id' => '5',],
-                ['maestria' => 'Maestría en Sistema de Protección de los Derechos del Niño, Niña y Adolescente frente a la Violencia', 'maestria_area_id' => '5',],
-                ['maestria' => 'Maestría en Sociología con mención en Gerencia Social', 'maestria_area_id' => '5',],
-                ['maestria' => 'Maestría en Diseño y Construcción de Obras Viales', 'maestria_area_id' => '6',],
-                ['maestria' => 'Maestría en Ingeniería de Sistemas con mención en Tecnologías de la Información y Comunicación', 'maestria_area_id' => '6',],
-                ['maestria' => 'Maestría en Medio Ambiente y Desarrollo Sostenible con mención en Gestión Ambiental', 'maestria_area_id' => '7',],
-                ['maestria' => 'Maestría en Derecho con mención en Ciencias Penales', 'maestria_area_id' => '8',],               
-                ['maestria' => 'Maestría en Derecho con mención en Civil y Comercial', 'maestria_area_id' => '8',]                
-            ]);
-        // doctorado
-        DB::table('doctorados')->insert([
-                ['doctorado' => 'Doctorado en Ciencias de la Educación',],
-                ['doctorado' => 'Doctorado en Gestión Empresarial',],
-                ['doctorado' => 'Doctorado en Ciencias de la Salud',],
-                ['doctorado' => 'Doctorado en Derecho',],
-                ['doctorado' => 'Doctorado en Contabilidad',],
-                ['doctorado' => 'Doctorado en Ciencias Económicas y Sociales',],
-                ['doctorado' => 'Doctorado en Administración',],
-                ['doctorado' => 'Doctorado en Medicina Veterinaria',],                
-                ['doctorado' => 'Doctorado en Medio Ambiente y Desarrollo Sostenible',]                
-            ]);
+
+
+//Programa de Estudios Posgrado
+        //maestrias
+        //1
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Educación con mención en Gestión y Planeamiento Educativo';
+        $porgrama->maestria_area_id=1;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //2
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Educación con mención en Investigación y Docencia Superior';
+        $porgrama->maestria_area_id=1;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //3
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Educación con mención en Investigación e Innovación Pedagógica';
+        $porgrama->maestria_area_id=1;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //4
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Gerencia Pública';
+        $porgrama->maestria_area_id=2;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //5
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Gestión y Negocios con mención en Gestión de Proyectos';
+        $porgrama->maestria_area_id=2;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //6
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Gestión Empresarial';
+        $porgrama->maestria_area_id=2;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //7
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Salud Pública y Gestión Sanitaria';
+        $porgrama->maestria_area_id=3;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //8
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Administración y Gerencia en Salud';
+        $porgrama->maestria_area_id=3;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //9
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Psicología';
+        $porgrama->maestria_area_id=3;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //10
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Ciencias Veterinarias';
+        $porgrama->maestria_area_id=3;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //11
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Ciencias Veterinarias';
+        $porgrama->maestria_area_id=4;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //12
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Contabilidad con mención en Auditoría';
+        $porgrama->maestria_area_id=4;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //13
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Tributación y Política Fiscal';
+        $porgrama->maestria_area_id=4;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //14
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Comunicación para el Desarrollo';
+        $porgrama->maestria_area_id=5;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //15
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Sistema de Protección de los Derechos del Niño, Niña y Adolescente frente a la Violencia';
+        $porgrama->maestria_area_id=5;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //16
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Sociología con mención en Gerencia Social';
+        $porgrama->maestria_area_id=5;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //17
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Diseño y Construcción de Obras Viales';
+        $porgrama->maestria_area_id=6;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //18
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Ingeniería de Sistemas con mención en Tecnologías de la Información y Comunicación';
+        $porgrama->maestria_area_id=6;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //19
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Medio Ambiente y Desarrollo Sostenible con mención en Gestión Ambiental';
+        $porgrama->maestria_area_id=7;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //20
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Derecho con mención en Ciencias Penales';
+        $porgrama->maestria_area_id=8;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //21
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Maestría en Derecho con mención en Civil y Comercial';
+        $porgrama->maestria_area_id=8;
+        $porgrama->es_maestria=1;
+        $porgrama->save();
+        //doctorados
+        //22
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Ciencias de la Educación';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //23
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Gestión Empresarial';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //24
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Ciencias de la Salud';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //25
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Derecho';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //26
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Contabilidad';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //27
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Ciencias Económicas y Sociales';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //28
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Administración';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //29
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Medicina Veterinaria';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
+        //30
+        $porgrama = new \App\ProgramaEstudioPosgrado();
+        $porgrama->programa_estudio_posgrado='Doctorado en Medio Ambiente y Desarrollo Sostenible';
+        $porgrama->es_doctorado=1;
+        $porgrama->save();
     }
 }

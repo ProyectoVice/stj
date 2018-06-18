@@ -113,9 +113,15 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Docente</label>
+                              <label class="col-sm-3 control-label">Docente Departamento Academico</label>
                               <div class="col-sm-9">
                                   {{Form::select('docente',$docentes,$docente,['required', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Docente'])}}
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Docente Otros DEpartamentos Academicos</label>
+                              <div class="col-sm-9">
+                                  {{Form::select('docente_g',$docentes_g,$docente,['class'=>'col-xs-12 col-sm-9','placeholder' => 'Docente'])}}
                               </div>
                           </div>
                       </form>

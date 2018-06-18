@@ -73,4 +73,20 @@ class Docente extends Model
         }
         return $docentes;
     }
+    public static function getDocentes($eap)
+    {
+        $departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $eap . ') as direccion')[0];
+        $deps = Dependencia::getDependenciasHijosIdForDepartamento($departamento->direccion);
+        $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dep.dependencia')
+            ->join('users', 'users.id', '=', 'docentes.user_id')
+            ->join('dependencias', 'dependencias.id', '=', 'docentes.dependencia_escuela_id')
+            ->join('dependencias as dep', 'dep.id', '=', 'dependencias.departamento_dependencia_id')
+            ->whereNotIn('dependencias.id', $deps);
+        $docentes=[];
+        /* FIN DE MOVER ESTA FRACCION DE CODIGO A LA TABLA DEPENDENCIA*/
+        foreach($doc_query->get() as $d){
+            $docentes[$d->dependencia][$d->id]=$d->nombres;
+        }
+        return $docentes;
+    }
 }

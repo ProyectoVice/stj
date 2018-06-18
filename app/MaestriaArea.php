@@ -10,7 +10,7 @@ class MaestriaArea extends Model
     protected $fillable=[
     'maestria_area'
     ];
-    public function maestrias() {
-      return $this->hasMany(Maestria::class);
+    public function programa_estudio_posgrados() {
+      return $this->hasMany(ProgramaEstudioPosgrado::class);
   	}
 }

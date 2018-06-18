@@ -17,6 +17,9 @@ class Dependencia extends Model
     public function ambientes() {
         return $this->hasMany(Ambiente::class);
     }
+    public function programa_estudio_posgrados() {
+        return $this->hasMany(ProgramaEstudioPosgrado::class);
+    }
 
     public static  function getDependenciasHijosId($id){
         $dependencias=Dependencia::select('id')->where('dependencia_id', '=', $id)->get();

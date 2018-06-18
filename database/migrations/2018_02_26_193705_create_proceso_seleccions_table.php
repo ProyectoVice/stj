@@ -20,8 +20,8 @@ class CreateProcesoSeleccionsTable extends Migration
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->integer('estado')->default(1);
-            $table->integer('etapa')->nullable();
-            $table->integer('postulacion_ciclo_id')->nullable();
+            $table->integer('etapa')->nullable();//1=I 2=II
+            $table->integer('ciclo')->nullable();//1 =A 2=B 3=C
             $table->integer('programa_id');
             $table->integer('postulacion_modalidad_id')->nullable();
             $table->integer('sede_desentralizada_pre')->nullable();

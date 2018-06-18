@@ -30,4 +30,31 @@ class Ambiente extends Model
     {
         return $this->hasMany(Horario::class);
     }
+
+    public static function getAmbientesByFacultad($depende)
+    {
+        $dependencia = Dependencia::find( $depende);
+        $doc_query = \DB::table('ambientes')->select('ambientes.id', 'ambientes.ambiente', 'dependencias.dependencia')
+            ->join('dependencias', 'dependencias.id', '=', 'ambientes.dependencia_id')
+            ->where('dependencias.id', '=', $dependencia->dependencia_id);
+        $ambientes=[];
+        /* FIN DE MOVER ESTA FRACCION DE CODIGO A LA TABLA DEPENDENCIA*/
+        foreach($doc_query->get() as $d){
+            $ambientes[$d->dependencia][$d->id]=$d->ambiente;
+        }
+        return $ambientes;
+    }
+    public static function getAmbientesByFacultades($depende)
+    {
+        $dependencia = Dependencia::find( $depende);
+        $doc_query = \DB::table('ambientes')->select('ambientes.id', 'ambientes.ambiente', 'dependencias.dependencia')
+            ->join('dependencias', 'dependencias.id', '=', 'ambientes.dependencia_id')
+            ->where('dependencias.id', '<>', $dependencia->dependencia_id);
+        $ambientes=[];
+        /* FIN DE MOVER ESTA FRACCION DE CODIGO A LA TABLA DEPENDENCIA*/
+        foreach($doc_query->get() as $d){
+            $ambientes[$d->dependencia][$d->id]=$d->ambiente;
+        }
+        return $ambientes;
+    }
 }

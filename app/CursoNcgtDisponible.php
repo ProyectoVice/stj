@@ -14,7 +14,7 @@ class CursoNcgtDisponible extends Model
         return $this->belongsto(ProgramaNcgt::class);
     }
     public function curso_ncgt() {
-        return $this->belongsto(CursoNcgt::class);
+        return $this->belongsto(CursoNcgt::class, 'curso_ncgt_id','id');
     }
     public function inscripcion_modulo_ncgts() {
         return $this->hasMany(InscripcionModuloNcgt::class);

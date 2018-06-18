@@ -11,7 +11,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
      */
     public function run()
     {
-        //Actividades no lectivas
+//Actividades no lectivas
         $actividad = new \App\ActNoLectiva();
         $actividad->actividad='Investigación';
         $actividad->descripcion='Horas dedicadas a la semana al desarrollo de la Investigación';
@@ -42,7 +42,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $actividad->descripcion='Horas dedicadas a la semana al desarrollo de capacitaciones de fortalecimiento de capacidades';
         $actividad->save();
 
-        //ambientes
+//ambientes
         DB::table('tipo_ambientes')->insert([
                 ['nombre' => 'Aula',],
                 ['nombre' => 'Taller',],
@@ -52,7 +52,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
                 ['nombre' => 'Auditorio',]
             ]);
         
-        //plan de estudios
+//plan de estudios
         $plan = new \App\PlanEstudio();
         $plan->resolucion='N 450 Consejo Universitario';
         $plan->archivo='g';
@@ -76,7 +76,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $plan->estado='1';
         $plan->escuela_id=31;
         $plan->save();
-
+//cursos
         //cursos Inicial ciclo 1
         $curso = new \App\Curso();
         $curso->codigo='1101';
@@ -872,6 +872,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $curso->plan_estudio_id=1;
         $curso->save();
 
+//Carga Lectiva
         //carga lectiva 1 del curso 1 Ortografía y sintaxis básica docente Abelardo
         $carga = new \App\CargaLectiva();
         $carga->semestre='I';
@@ -896,7 +897,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $carga->docente_id=28;
         $carga->save();
 
-        //pabellones de la UNHEVAL
+//pabellones de la UNHEVAL
         //pabellon 1 de educación
         $pabellon = new \App\Pabellon();
         $pabellon->pabellon='1';
@@ -909,7 +910,14 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $pabellon->descripcion='Pabellon de Enfermería';
         $pabellon->save();
 
-        //ambientes de la UNHEVAL
+        //pabellon 3 de Ingenieria Industrial y de sistemas
+        $pabellon = new \App\Pabellon();
+        $pabellon->pabellon='4';
+        $pabellon->descripcion='Pabellon de Ingenieria Industrial y de Sistemas';
+        $pabellon->save();
+
+
+//ambientes de la UNHEVAL
         //ambiente 1 aula de Facultad de Educación
         $ambiente = new \App\Ambiente();
         $ambiente->ambiente='Aula 504';
@@ -954,6 +962,29 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $ambiente->es_taller=1;
         $ambiente->save();
 
+        //ambiente 5 taller de Facultad de Enfermeria
+        $ambiente = new \App\Ambiente();
+        $ambiente->ambiente='Aula 303';
+        $ambiente->descripcion='Aula de estudios';
+        $ambiente->capacidad=60;
+        $ambiente->dependencia_id=5;
+        $ambiente->tipo_ambiente_id=1;
+        $ambiente->pabellon_id=2;
+        $ambiente->es_aula=1;
+        $ambiente->save();
+
+        //ambiente 6 taller de Facultad de Enfermeria
+        $ambiente = new \App\Ambiente();
+        $ambiente->ambiente='Laboratorio de Clinico';
+        $ambiente->descripcion='AAAAAAAA';
+        $ambiente->capacidad=30;
+        $ambiente->dependencia_id=5;
+        $ambiente->tipo_ambiente_id=2;
+        $ambiente->pabellon_id=2;
+        $ambiente->es_laboratorio=1;
+        $ambiente->save();
+
+//horarios
         //horario 1 de la carga lectiva 1
         $horario = new \App\Horario();
         $horario->hora_inicio='09:00:00';
@@ -1026,7 +1057,7 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $horario->ambiente_id=1;
         $horario->save();
 
-        //actividades de silabos
+//actividades de silabos
         //Actividades 1  del horario 1 que pertenece a la carga lectiva 1
         $actividad = new \App\ActividadSilabo();
         $actividad->actividad='Actividad 1';

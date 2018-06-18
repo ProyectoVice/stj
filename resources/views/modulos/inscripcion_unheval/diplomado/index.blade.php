@@ -22,12 +22,13 @@
       		<a href="#nuevo" class="stj-acciones stj-acciones-new" title="Nuevo" data-toggle="modal"><i class="fa fa-plus"></i></a>
 			Inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
-		<div class="row">
-			<div class="form-group">
+			<div class=" row form-group">
 				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Programa</label>
 				<div class="col-sm-3">{!!Form::select('programa',$programas,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
+
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Curso</label>
+				<div class="col-sm-3">{!!Form::select('curso',$curso,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
 			</div>
-		</div>
 		<div class="table-responsive">
 
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover table-condensed">
@@ -242,9 +243,14 @@
                     }
                 }
                 cargar(1);
-				$('[name="programa"]').change(function (e) {
-				    e.preventDefault();
-				    cargar(0);
+                $('[name="curso"]').change(function (e) {
+                    e.preventDefault();
+                    cargar(0);
+                });
+                $('[name="programa"]').change(function (e) {
+                    ruta='{!! route('diplomado.ins.index', ['tipo'=>'Idiomas']) !!}&programa=%s';
+                    ruta=ruta.replace(/%s/g, this.value);
+					window.location = ruta;
                 });
 
                 //////envio el Id de la inscripcion

@@ -6,7 +6,7 @@
 <ul class="breadcrumb">
   <i class="ace-icon fa fa-book"></i>
   <li class="active">Calendario Lectivo - Escuela</li>
-    <li class="">Carga Lectiva</li>
+    <li class=""><a href="#"> Carga Lectiva</a></li>
     <li class="">Horario</li>
 </ul>
 @endsection
@@ -41,12 +41,19 @@
                 <th class="center">Hora Inicio</th>
                 <th class="center">Hora fin</th>
                 <th class="center">Ambiente</th>
-                <th class="center"></th>
+                <th class="center">Acciones</th>
             </tr>
           </thead>
             <tbody>
             @foreach($horarios as $id=>$horario)
             <tr>
+                <td>{{$dias[$horario->dia]}}</td>
+                <td>{{$horario->hora_inicio}}</td>
+                <td>{{$horario->hora_fin}}</td>
+                <td>{{$horario->ambiente->ambiente}}</td>
+                <td>
+                    <a href='#' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>
+                </td>
             </tr>
             @endforeach
             <tr>
@@ -63,13 +70,15 @@
   <div id="horario_curso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
+              <!-------->
+              {!! Form::open(['route' => ['academico.carga.horario.save', $id_carga], 'method' => 'POST','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
+              {{ csrf_field() }}
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <h4 class="modal-title" id="titleModal">Horario</h4>
               </div>
               <div class="modal-body">
                   <div id="testmodal" style="padding: 5px 20px;">
-                      <form id="antoform" class="form-horizontal calender" role="form">
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Curso</label>
                               <div class="col-sm-9">
@@ -80,7 +89,7 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Día</label>
                               <div class="col-sm-9">
-                                  {{Form::select('dias',$dias,null,['required', 'id'=>'dias','class'=>'col-xs-12 col-sm-9','placeholder' => 'Día'])}}
+                                  {{Form::select('dia',$dias,null,['required', 'id'=>'dias','class'=>'col-xs-12 col-sm-9','placeholder' => 'Día'])}}
                               </div>
                           </div>
                           <div class="form-group">
@@ -98,18 +107,25 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Ambiente</label>
                               <div class="col-sm-9">
-                                  {{Form::select('ambiente',$ambiente,null,['required', 'id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
+                                  {{Form::select('ambiente_id',$ambiente,null,['required', 'id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
                               </div>
                           </div>
-                      </form>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Ambiente Facultades</label>
+                              <div class="col-sm-9">
+                                  {{Form::select('ambiente_id_g',$ambiente_g,null,['id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
+                              </div>
+                          </div>
                   </div>
               </div>
               <div class="modal-footer">
                   {{Form::hidden('curso',null)}}
                   {{Form::hidden('id_carga',null)}}
                   <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-success antosubmit" id="btn_guardar">Guardar</button>
+                  <button type="submit" class="btn btn-success">Guardar</button>
               </div>
+              {!! Form::close() !!}
+              <!-------->
           </div>
       </div>
   </div>

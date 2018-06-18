@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\modulos\diplomado;
 
+use App\CursoNcgt;
+use App\CursoNcgtDisponible;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\InscripcionNcgt;
@@ -35,9 +37,11 @@ class DiplomadoController extends Controller
     {
         $tipo=['Idiomas'=>7, 'Estudios_informaticos'=>8,'Diplomado'=>11,'PROCAPT'=>9,'PROMASTER'=>10];
         $programa=ProgramaNcgt::where('programa_id', '=', $tipo[$request->tipo])->pluck('descripcion', 'id');
+        $curso= CursoNcgt::curso_ncgt_diponibles_por_programa($request->programa);
         return view('modulos.inscripcion_unheval.diplomado.index', [
             'programas'=>$programa,
             'programa'=>$request->programa,
+            'curso'=>$curso,
             'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
@@ -228,7 +232,10 @@ class DiplomadoController extends Controller
                     ->join('tarifarios', 'tarifarios.id', '=','pagos.tarifario_id')
                     ->where('inscripcion_ncgts.id', '=',$id )->get();
         $inscripcion=InscripcionNcgt::find($id);
-        return view('modulos.inscripcion_unheval.diplomado.detalle', ['control'=> $control, 'inscripcion'=> $inscripcion,'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
+        return view('modulos.inscripcion_unheval.diplomado.detalle',
+            ['control'=> $control,
+                'inscripcion'=> $inscripcion,
+                'tipo'=>(isset($request->tipo)?$request->tipo:'null')]);
     }
 
     /**
@@ -239,7 +246,8 @@ class DiplomadoController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $inscripcion=InscripcionNcgt::select('users.id AS id', 'inscripcion_ncgts.id As id1', 'users.dni','users.nombres', 'users.apellido_paterno',
+        $inscripcion=InscripcionNcgt::select('users.id AS id', 'inscripcion_ncgts.id As id1',
+                'users.dni','users.nombres', 'users.apellido_paterno',
                 'users.apellido_materno', 'users.f_nac', 'users.email', 'users.distrito_nac',
                 'users.domicilio', 'users.n_domicilio', 'users.cel')
                 ->join('users','users.id','=','inscripcion_ncgts.user_id')->find($id);

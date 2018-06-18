@@ -14,7 +14,7 @@ class Horario extends Model
     //recibe las llaves foraneas de escuela, carga lectiva, aula, taller, laboratorio, biblioteca, centro de computo, auditorio
     public function ambiente()
     {
-      return $this->belongsto(Ambiente::class);
+      return $this->belongsto(Ambiente::class, 'ambiente_id','id');
     }
     public function carga_lectiva() 
     {

@@ -63,11 +63,9 @@
                 <td>{{$curso->hpractica}}</td>
                 <td>{{$curso->docente_nombre}}</td>
                 <td>
-                    @if(!isset($curso->idcarga))
-                        <a href="#asignar_docente" class="stj-acciones enviarId" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}"><i class="fa fa-plus"></i></a>
-                    @else
-                        <a href="#asignar_docente" class="stj-acciones editar" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}"><i class="fa fa-pencil"></i></a
-                    @endif
+                        <a href="{{route('academico.mi.silabo.index',$curso->idcarga)}}" title="Asignar" data-toggle="modal"
+                           data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}">
+                            <i class="fa fa-pencil"></i></a>
 
                 </td>
             </tr>
@@ -77,7 +75,7 @@
       </div>
     </div>
     <div class="col-sm-5 col-xs-12">
-      <div id='calendar'></div>   
+      <div id='calendar'></div>
     </div>
   </div>
 

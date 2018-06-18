@@ -183,8 +183,12 @@ Route::group(['prefix' => 'calendario'],function(){
     Route::group(['prefix' => 'carga'],function(){
         Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
         Route::get('/horario/{id}','modulos\CargaController@horario')->name('academico.carga.horario.index');
+        Route::post('/horario/{id}','modulos\CargaController@saveHorario')->name('academico.carga.horario.save');
         Route::get('/micargalectiva/{anio}/{semestre}','modulos\CargaController@micargaLectiva')->name('academico.mi.carga.index');
+        Route::get('/silabo/{id}','modulos\CargaController@silabo')->name('academico.mi.silabo.index');//actividades silabos
         Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');
+
+
 //reporte carga
     	Route::get('reporte','modulos\CargaController@index1')->name('academico.reportecarga.index1');
     });

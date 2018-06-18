@@ -39,12 +39,16 @@
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane active" id="dj">
-
                                     <h4 class="info-text"> Terminos y Condiciones del servicio</h4>
-                                    <div class="form-group col-sm-10 col-sm-offset-1">
+                                    <div class="form-group col-sm-12 col-sm-offset-1">
                                        <p align="justify">La Universidad Nacional Hermilio Valdizán-UNHEVAL ofrece la inscripción en linea de diferetes programas,
                                            facilitando a usted su inscripción previo pago realizado; al dar click en el boton NEXT usted
                                            acepta los terminos y condiciones establecidos por la UNHEVAL.<br></p>
+                                       <!-- <ul>
+                                            <li>Los datos solicitados y rellenados por usted se almacenaran en la Base de Datos de la UNHEVAL</li>
+                                            <li>Es responsabilidad de usted la validez de los datos personales rellenados</li>
+                                            <li>Rellene cuidadosamente los datos solicitados, con el fin de evitarse inconvenientes</li>
+                                        </ul>-->
                                         <p>Los datos solicitados y rellenados por usted se almacenaran en la Base de Datos de la UNHEVAL</p>
                                         <p>Es responsabilidad de usted la validez de los datos personales rellenados</p>
                                         <p>Rellene cuidadosamente los datos solicitados, con el fin de evitarse inconvenientes</p>
