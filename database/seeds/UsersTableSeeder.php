@@ -184,7 +184,16 @@ class UsersTableSeeder extends Seeder
                 'email' => '00000037@hotmail.com',
                 'password' => bcrypt('00000037'),
                 'dependencia_id_depende' => 66,
-            ]
+            ],
+            [//id = 38
+            'dni' => '00000038',
+            'nombres' => 'Juan',
+            'apellido_paterno' => 'Bernardo',
+            'apellido_materno' => 'Loyola',
+            'email' => '00000038@hotmail.com',
+            'password' => bcrypt('00000038'),
+            'dependencia_id_depende' => 1,
+        ]
 
          ]);     
 
@@ -249,6 +258,12 @@ class UsersTableSeeder extends Seeder
             ['user_id' => 35,'rol_id' => 34,],
             ['user_id' => 36,'rol_id' => 34,],
             ['user_id' => 37,'rol_id' => 34,],
+            ['user_id' => 38,'rol_id' => 7,],
+            ['user_id' => 38,'rol_id' => 14,],
+            ['user_id' => 38,'rol_id' => 15,],
+            ['user_id' => 38,'rol_id' => 16,],
+            ['user_id' => 38,'rol_id' => 17,],
+            ['user_id' => 38,'rol_id' => 18,]
 
         ]);
 
