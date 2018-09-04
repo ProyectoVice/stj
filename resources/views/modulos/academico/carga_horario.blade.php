@@ -38,8 +38,7 @@
           <thead>
             <tr>
                 <th class="center">Dia</th>
-                <th class="center">Hora Inicio</th>
-                <th class="center">Hora fin</th>
+                <th class="center">Horario</th>
                 <th class="center">Ambiente</th>
                 <th class="center">Acciones</th>
             </tr>
@@ -48,11 +47,10 @@
             @foreach($horarios as $id=>$horario)
             <tr>
                 <td>{{$dias[$horario->dia]}}</td>
-                <td>{{$horario->hora_inicio}}</td>
-                <td>{{$horario->hora_fin}}</td>
+                <td>{{$horario->hora_inicio}} / {{$horario->hora_fin}}</td>
                 <td>{{$horario->ambiente->ambiente}}</td>
                 <td>
-                    <a href='#' class='stj-acciones' title='Editar'><i class='fa fa-edit'></i></a>
+                    <a href='#' class='stj-prg-acciones' title='Editar' data-id="{{$horario->id}}"><i class='fa fa-edit'></i></a>
                 </td>
             </tr>
             @endforeach
@@ -116,6 +114,12 @@
                                   {{Form::select('ambiente_id_g',$ambiente_g,null,['id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
                               </div>
                           </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Ambiente Facultades</label>
+                              <div class="col-sm-9">
+                                  {{Form::textarea('ambiente_id_g',null,['id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Acciones'])}}
+                              </div>
+                          </div>
                   </div>
               </div>
               <div class="modal-footer">
@@ -129,7 +133,9 @@
           </div>
       </div>
   </div>
-@endsection
+  <div id="acciones_horario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  </div>
+  @endsection
 
 @section('script')
   {!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
@@ -146,5 +152,17 @@
           $('#titleModal').html("Nueva Actividad/evento");
           $('#horario_curso').modal();
       }
+      $(".stj-prg-acciones").click(function(){
+          $('#acciones_horario').html('');
+          var horario = $(this).data("id");
+          $.ajax({
+              method: "GET",
+              url: "{{route('academico.carga.acciones.index',"%s")}}".replace(/%s/g, horario),
+          })
+              .done(function( msg ) {
+                  $('#acciones_horario').html(msg);
+                  $('#acciones_horario').modal();
+              });
+      })
   </script>
 @endsection
