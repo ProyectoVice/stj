@@ -310,7 +310,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 27
@@ -319,7 +319,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 28
@@ -328,7 +328,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 29
@@ -337,7 +337,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 30
@@ -346,7 +346,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 31
@@ -355,7 +355,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 32
@@ -364,7 +364,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 33
@@ -373,7 +373,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente con usuario 5
@@ -404,7 +404,7 @@ class UsersTableSeeder extends Seeder
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
-             'dependencia_academico_id'=>54,
+             'dependencia_academico_id'=>55,
              'h_lectivas'=>'12','h_n_lectivas'=>'12',
         ]);
 

@@ -82,6 +82,7 @@
                     @else
                         <a href="#asignar_docente" class="stj-acciones editar" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}"><i class="fa fa-pencil"></i></a>
                         <a href="{{route('academico.carga.horario.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="horario"><i class="fa fa-calendar"></i></a>
+                        <a href="{{route('academico.carga.acciones.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="horario"><i class="fa fa-calendar"></i></a>
                     @endif
 
                 </td>
