@@ -28,7 +28,7 @@ class RolesTableSeeder extends Seeder
             ['rol' => 'Administrador_Segunda_E_Enfermeria', 'descripcion' => 'Administrador Segunda Especialidad Enfermeria',],//12
             ['rol' => 'Administrador_Estudios_C_Educacion', 'descripcion' => 'Administrador Estudios Complementarios Educación',],//13
             ['rol' => 'Administrador_Idiomas', 'descripcion' => 'Administrador Centro de Idiomas',],//14
-            ['rol' => 'Administrador_Estudios_Informaticos', 'descripcion' => 'Administrador Estudios a Distancia',],//15
+            ['rol' => 'Administrador_Estudios_Informaticos', 'descripcion' => 'Administrador Estudios Informaticos',],//15
             ['rol' => 'Administrador Diplomados', 'descripcion' => 'Administrador Diplomados',],//16
             ['rol' => 'Administrador PROCAPT', 'descripcion' => 'Administrador PROCATP',],//17
             ['rol' => 'Administrador PROMASTER', 'descripcion' => 'Administrador PROMASTER',],//18

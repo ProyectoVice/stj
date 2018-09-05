@@ -23,10 +23,10 @@
 			Inscripciones &nbsp;&nbsp;&nbsp;
 		</div>
 			<div class=" row form-group">
-				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Programa</label>
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Programa:</label>
 				<div class="col-sm-3">{!!Form::select('programa',$programas,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
 
-				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Curso</label>
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1">Curso:</label>
 				<div class="col-sm-3">{!!Form::select('curso',$curso,null,['class'=>'col-xs-9 col-sm-12', 'placeholder' => 'Seleccione...'])!!}</div>
 			</div>
 		<div class="table-responsive">
@@ -148,11 +148,11 @@
 						<div class="checkbox" align="center">
 								<label>
 									<input type="checkbox" value="1" name="descuento" id="decuento_interno">
-									Descuento por modulo (Internos)
+									Descuento por curso (Internos)
 								</label>
 								<label>
 									<input type="checkbox" value="2" name="descuento1" id="decuento_total">
-									Descuento de modulo total (Externos)
+									Descuento de curso total (Externos)
 								</label>
 						</div>
 					</div>

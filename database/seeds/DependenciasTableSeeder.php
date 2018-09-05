@@ -82,7 +82,9 @@ class DependenciasTableSeeder extends Seeder
             ['dependencia' => 'CEPREVAL', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>null, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],//61
             ['dependencia' => 'Escuela de Posgrado', 'organiza_diplomado'=>1,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>1, 'es_direccion'=>null, 'es_oficina'=>null, 'dependencia_id'=> null, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],
             ['dependencia' => 'PROCAPT', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null,'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],
-            ['dependencia' => 'PROMASTER', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 44, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,]
+            ['dependencia' => 'PROMASTER', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 44, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],
+            ['dependencia' => 'Jefatura de Centro de idiomas', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>null, 'es_oficina'=>1, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,],//65
+            ['dependencia' => 'DIRECCIÓN DE EDUCACIÓN A DISTANCIA Y FORMACIÓN CONTINUA', 'organiza_diplomado'=>null,'es_facultad'=>null, 'es_escuela'=>null, 'es_posgrado'=>null, 'es_direccion'=>1, 'es_oficina'=>null, 'dependencia_id'=> 1, 'es_dep_ac'=>null,'es_centro_generador'=>1,'departamento_dependencia_id'=>null,]//66
             ]);
     }
 }
