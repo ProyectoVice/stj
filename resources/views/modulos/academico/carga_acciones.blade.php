@@ -30,24 +30,29 @@
                         <tr>
                             <th class="center" style="width: 67px">Semana</th>
                             <th class="center">Actividad</th>
-                            <th class="center" style="width: 67px">Acciones</th>
+                            <th class="center" style="width: 85px">Acciones</th>
                         </tr>
                       </thead>
                         <tbody>
+
                         @foreach($actividades as $actividad)
                             <tr>
                                 <td>{{Form::number('semana',$actividad->semana,['style'=>'width:50px', "min"=>"1", "max"=>"17"])}}</td>
-                                <td>{{Form::text('actividad',$actividad->actividad, ['style'=>'width:-webkit-fill-available'])}}</td>
+                                @if($es_lectiva=='1')
+                                    <td>{{Form::text('actividad',$actividad->actividad, ['style'=>'width:-webkit-fill-available'])}}</td>
+                                @else
+                                    <td>{{Form::select('actividad',$actividades_no_lectivas, $actividad->actividad, ['style'=>'width:-webkit-fill-available'])}}</td>
+                                @endif
                                 <td class="text-center">
-                                    <a href='#' class='stj-save-acciones' title='Editar'data-id="{{$actividad->id}}"><i class='fa fa-save'></i></a>
-                                    <a href='#' class='stj-delete-acciones' title='Editar'data-id="{{$actividad->id}}"><i class='fa fa-trash'></i></a>
+                                    <a href='#' class='stj-save-acciones stj-acciones' title='Editar'data-id="{{$actividad->id}}"><i class='fa fa-save'></i></a>
+                                    <a href='#' class='stj-delete-acciones stj-acciones' title='Editar'data-id="{{$actividad->id}}"><i class='fa fa-trash'></i></a>
                                 </td>
                             </tr>
                         @endforeach
                         <tr>
                             <td>{{Form::number('semana',null,['style'=>'width:50px', "min"=>"1", "max"=>"17"])}}</td>
                             <td>{{Form::text('actividad',null, ['style'=>'width:-webkit-fill-available'])}}</td>
-                            <td class="text-center center"><a href='#' class='stj-save-acciones' title='Editar' data-id="new"><i class='fa fa-plus'></i></a></td>
+                            <td class="text-center center"><a href='#' class='stj-save-acciones stj-acciones' title='Editar' data-id="new"><i class='fa fa-plus'></i></a></td>
                         </tr>
                         </tbody>
                     </table>

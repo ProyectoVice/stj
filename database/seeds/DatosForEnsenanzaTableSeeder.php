@@ -78,6 +78,16 @@ class DatosForEnsenanzaTableSeeder extends Seeder
         $plan->save();
 //cursos
         //cursos Inicial ciclo 1
+
+        $curso = new \App\Curso();
+        $curso->codigo='0000';
+        $curso->nombre='Carga no Lectiva';
+        $curso->ciclo=0;
+        $curso->creditos=0;
+        $curso->hteoria=0;
+        $curso->hpractica=0;
+        $curso->save();
+
         $curso = new \App\Curso();
         $curso->codigo='1101';
         $curso->nombre='Ortografía y sintaxis básica';
@@ -875,25 +885,25 @@ class DatosForEnsenanzaTableSeeder extends Seeder
 //Carga Lectiva
         //carga lectiva 1 del curso 1 Ortografía y sintaxis básica docente Abelardo
         $carga = new \App\CargaLectiva();
-        $carga->semestre='I';
+        $carga->semestre=1;
         $carga->anio=2018;
-        $carga->curso_id=1;
+        $carga->curso_id=2;
         $carga->docente_id=26;
         $carga->save();
 
         //carga lectiva 2 del curso 2 Ortografía y sintaxis básica docente Raul Jorge
         $carga = new \App\CargaLectiva();
-        $carga->semestre='I';
+        $carga->semestre=1;
         $carga->anio=2018;
-        $carga->curso_id=2;
+        $carga->curso_id=3;
         $carga->docente_id=27;
         $carga->save();
 
         //carga lectiva 3 del curso 3 Ortografía y sintaxis básica docente Fidel
         $carga = new \App\CargaLectiva();
-        $carga->semestre='I';
+        $carga->semestre=1;
         $carga->anio=2018;
-        $carga->curso_id=3;
+        $carga->curso_id=4;
         $carga->docente_id=28;
         $carga->save();
 

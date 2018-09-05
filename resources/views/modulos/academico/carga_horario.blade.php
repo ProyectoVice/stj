@@ -12,17 +12,21 @@
 @endsection
 @section('contenido')
   <div class="row">
+      @if(Route::currentRouteName()=='academico.carga.horario.index')
       <div class="col-sm-12">
-          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Curso:</label>
+          <label style="width: 75px; margin-left: 25px;">Curso:</label>{{$curso->nombre}}
+      </div>
+      @else
+          <label style="margin-left: 25px;">{{$curso->nombre}}</label>
+      @endif
+      <div class="col-sm-12">
+          <label style="width: 75px; margin-left: 25px;">Docente:</label>{{$docente->nombre}}
       </div>
       <div class="col-sm-12">
-          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Docente:</label>
+          <label style="width: 75px; margin-left: 25px;">Ciclo:</label>{{$carga_lectiva->semestre}}
       </div>
       <div class="col-sm-12">
-          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Ciclo:</label>
-      </div>
-      <div class="col-sm-12">
-          <label class="col-sm-2 control-label no-padding-right" for="form-field-1">Anio:</label>
+          <label style="width: 75px; margin-left: 25px;">Anio:</label>{{$carga_lectiva->anio}}
       </div>
   </div>
     <div class="col-sm-12 hidden-xs">
@@ -31,7 +35,7 @@
       </div>
       <div class="table-header">
           <a href="#" class="stj-acciones stj-acciones-new" title="Nuevo" onclick="prepararModal()"><i class="fa fa-plus"></i></a>
-         Nuevo Horario de Curso &nbsp;&nbsp;&nbsp;
+         Nuevo Horario de {{(Route::currentRouteName()=='academico.carga.horario.index')?'Curso':'Carga no Lectiva'}} &nbsp;&nbsp;&nbsp;
       </div>
       <div class="table-responsive">
         <table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -50,7 +54,13 @@
                 <td>{{$horario->hora_inicio}} / {{$horario->hora_fin}}</td>
                 <td>{{$horario->ambiente->ambiente}}</td>
                 <td>
-                    <a href='#' class='stj-prg-acciones' title='Editar' data-id="{{$horario->id}}"><i class='fa fa-edit'></i></a>
+                    <a href='#' class='stj-edit-acciones stj-acciones' title='Editar' data-id="{{$horario->id}}"
+                        data-dia="{{$horario->dia}}"
+                        data-hora_inicio="{{$horario->hora_inicio}}"
+                        data-hora_fin="{{$horario->hora_inicio}}"
+                        data-ambiente_id="{{$horario->ambiente_id}}"><i class='fa fa-edit'></i></a>
+                    <a href='#' class='stj-prg-acciones stj-acciones' title='Programar' data-id="{{$horario->id}}"><i class='fa fa-cog'></i></a>
+
                 </td>
             </tr>
             @endforeach
@@ -80,7 +90,7 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Curso</label>
                               <div class="col-sm-9">
-                                  <p>Curso</p>
+                                  <p>{{$curso->nombre}}</p>
                               </div>
                           </div>
 
@@ -108,23 +118,11 @@
                                   {{Form::select('ambiente_id',$ambiente,null,['required', 'id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Ambiente Facultades</label>
-                              <div class="col-sm-9">
-                                  {{Form::select('ambiente_id_g',$ambiente_g,null,['id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Ambiente'])}}
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Ambiente Facultades</label>
-                              <div class="col-sm-9">
-                                  {{Form::textarea('ambiente_id_g',null,['id'=>'ambiente','class'=>'col-xs-12 col-sm-9','placeholder' => 'Acciones'])}}
-                              </div>
-                          </div>
                   </div>
               </div>
               <div class="modal-footer">
-                  {{Form::hidden('curso',null)}}
-                  {{Form::hidden('id_carga',null)}}
+                  {{Form::hidden('curso',$curso->id)}}
+                  {{Form::hidden('id','new')}}
                   <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
                   <button type="submit" class="btn btn-success">Guardar</button>
               </div>
@@ -143,21 +141,39 @@
   {!!Html::script('/plantilla/js/dataTables.buttons.min.js')!!}
   <script>
       function prepararModal(){
-          //Botones
-          $('#btn-guardar').show();
-          $('#btn-eliminar').hide();
-          $('#txtTitulo-new').val('');
-          $('#txtdescripcion-new').val('');
-          $('#btn-actualizar').hide();
-          $('#titleModal').html("Nueva Actividad/evento");
+          $('#titleModal').html("Nuevo Horario");
+
+          event.preventDefault();
+          $('[name=id]').val('new');
+          $('[name=dia]').val(null);
+          $('[name=hora_inicio]').val(null);
+          $('[name=hora_fin]').val(null);
+          $('[name=ambiente_id]').val(null);
+          $('[name=ambiente_id_g]').val(null);
           $('#horario_curso').modal();
       }
+
+      $(".stj-edit-acciones").click(function (e) {
+          event.preventDefault();
+          $('[name=id]').val($(this).data('id'));
+          $('[name=dia]').val($(this).data('dia'));
+          $('[name=hora_inicio]').val($(this).data('hora_inicio'));
+          $('[name=hora_fin]').val($(this).data('hora_fin'));
+          $('[name=ambiente_id]').val($(this).data('ambiente_id'));
+          $('[name=ambiente_id_g]').val($(this).data('ambiente_id_g'));
+
+          $('#titleModal').html("Editar Horario");
+          $('#horario_curso').modal();
+      });
+
+
       $(".stj-prg-acciones").click(function(){
           $('#acciones_horario').html('');
           var horario = $(this).data("id");
           $.ajax({
               method: "GET",
               url: "{{route('academico.carga.acciones.index',"%s")}}".replace(/%s/g, horario),
+              data: {  es_lectiva: '{{(Route::currentRouteName()=='academico.carga.horario.index')?1:0}}' }
           })
               .done(function( msg ) {
                   $('#acciones_horario').html(msg);
