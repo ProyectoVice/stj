@@ -77,7 +77,7 @@
           }).done(function( msg ) {
               $.ajax({
                   method: "GET",
-                  url: "{{route('academico.carga.acciones.index',"%s")}}".replace(/%s/g, id_horario),
+                  url: "{{route('academico.carga.acciones.index',"%s")}}?es_lectiva={{$es_lectiva}}".replace(/%s/g, id_horario),
               })
                   .done(function( msg ) {
                       $('#acciones_horario').html(msg);
@@ -96,7 +96,7 @@
           }).done(function( msg ) {
               $.ajax({
                   method: "GET",
-                  url: "{{route('academico.carga.acciones.index',"%s")}}".replace(/%s/g, id_horario),
+                  url: "{{route('academico.carga.acciones.index',"%s")}}?es_lectiva={{$es_lectiva}}".replace(/%s/g, id_horario),
               })
                   .done(function( msg ) {
                       $('#acciones_horario').html(msg);
