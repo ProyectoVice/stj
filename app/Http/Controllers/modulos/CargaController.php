@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\modulos;
 
+use App\_clases\TablaPDFF;
 use App\ActividadSilabo;
 use App\ActNoLectiva;
 use App\Ambiente;
@@ -13,10 +14,12 @@ use App\Http\Middleware\rol\Docente;
 use App\PlanEstudio;
 use Auth;
 use Carbon\Carbon;
+use Codedge\Fpdf\Fpdf\Fpdf;
 use function Couchbase\defaultDecoder;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Response;
 
 class CargaController extends Controller
 {
@@ -105,6 +108,40 @@ class CargaController extends Controller
                 'docente'=>$docente
             ]
         );
+    }
+
+    public function imprimir($id_carga){
+
+        setlocale(LC_TIME, 'ES_PE');
+        setlocale(LC_TIME, 'es_PE.UTF-8');
+        $headers = ['Content-Type' => 'application/pdf'];
+
+        $dep = Auth::user()->dependencia_id_depende;
+        $carga_lectiva = CargaLectiva::find($id_carga);
+        $curso = Curso::find($carga_lectiva->curso_id);
+        $docente = Curso::find($carga_lectiva->docente_id);
+        $horarios = Horario::select('*')
+            ->Join('actividad_silabos', 'actividad_silabos.horario_id', '=', 'horarios.id')->where('carga_lectiva_id','=',$id_carga)
+            ->OrderBy('actividad_silabos.semana', 'ASC')
+            ->OrderBy('horarios.dia', 'ASC')
+            ->OrderBy('horarios.hora_inicio', 'ASC')
+
+            ->get();
+        $ambiente=Ambiente::getAmbientesByFacultades($dep);
+
+        //dd($horarios);
+        $pdf = new tablaPDFF('P','mm','A4');
+        $pdf->setHeader( $docente, $curso, $carga_lectiva );
+        $header = array("\nSEMANA\n", utf8_decode("\nDÍA\n"), "\nHORA\n", "\nACTIVIDAD\n");
+        $pdf->SetAutoPageBreak(false);
+        $pdf->AddPage();
+        $pdf->cargaLectivaCurso($header, $horarios, [1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo']);
+        /*$fpdf = new Fpdf();
+        $fpdf->AddPage();
+        $fpdf->SetFont('Courier', 'B', 18);
+        $fpdf->Cell(50, 25, 'Hello World!');*/
+
+        return Response::make($pdf->Output(),200,$headers);
     }
 
     public function saveHorario($id_carga, Request $request){

@@ -187,6 +187,7 @@ Route::group(['prefix' => 'calendario'],function(){
         Route::get('/acciones/{id}','modulos\CargaController@acciones')->name('academico.carga.acciones.index');
         Route::post('/acciones/{id}','modulos\CargaController@saveAcciones')->name('academico.carga.acciones.save');
         Route::post('/acciones/{id}/del','modulos\CargaController@deleteAcciones')->name('academico.carga.acciones.delete');
+        Route::get('/micargalectiva/imprimir/{id}','modulos\CargaController@imprimir')->name('academico.mi.carga.imprimir');
         Route::get('/micargalectiva/{anio}/{semestre}','modulos\CargaController@micargaLectiva')->name('academico.mi.carga.index');
         Route::get('/noLectiva/{ciclo}/{anio}','modulos\CargaController@noLectiva')->name('academico.carga.no_lectiva.index');//actividades silabos
         Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');

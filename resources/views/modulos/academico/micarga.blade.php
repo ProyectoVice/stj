@@ -66,6 +66,7 @@
                 <td>{{$curso->docente_nombre}}</td>
                 <td>
                     <a href="{{route('academico.carga.horario.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-calendar"></i></a>
+                    <a href="{{route('academico.mi.carga.imprimir',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-print"></i></a>
 
                 </td>
             </tr>
