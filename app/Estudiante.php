@@ -34,7 +34,8 @@ class Estudiante extends Model
                 '20' => 'Otros',
             */
            'f_ingreso',
-           'f_egreso' 
+           'f_egreso',
+           'anio_estudio' 
    ];
    public function user() 
    {

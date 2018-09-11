@@ -395,6 +395,7 @@ class UsersTableSeeder extends Seeder
              'modalidad_ingreso'=>'17',
              'f_ingreso'=>'2012-03-03',
              'f_egreso'=>'2017-12-20',
+             'anio_estudio'=>'0',
         ]);
 
 

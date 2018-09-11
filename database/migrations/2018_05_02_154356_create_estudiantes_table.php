@@ -45,6 +45,7 @@ class CreateEstudiantesTable extends Migration
             */
             $table->date('f_ingreso')->nullable();
             $table->date('f_egreso')->nullable();
+            $table->integer('anio_estudio')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('dependencia_escuela_id')->references('id')->on('dependencias')->onDelete('cascade');
             
