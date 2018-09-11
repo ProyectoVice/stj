@@ -184,7 +184,16 @@ class UsersTableSeeder extends Seeder
                 'email' => '00000037@hotmail.com',
                 'password' => bcrypt('00000037'),
                 'dependencia_id_depende' => 66,
-            ]
+            ],
+            [//id = 38
+            'dni' => '00000038',
+            'nombres' => 'Juan',
+            'apellido_paterno' => 'Bernardo',
+            'apellido_materno' => 'Loyola',
+            'email' => '00000038@hotmail.com',
+            'password' => bcrypt('00000038'),
+            'dependencia_id_depende' => 1,
+        ]
 
          ]);     
 
@@ -249,6 +258,12 @@ class UsersTableSeeder extends Seeder
             ['user_id' => 35,'rol_id' => 34,],
             ['user_id' => 36,'rol_id' => 34,],
             ['user_id' => 37,'rol_id' => 34,],
+            ['user_id' => 38,'rol_id' => 7,],
+            ['user_id' => 38,'rol_id' => 14,],
+            ['user_id' => 38,'rol_id' => 15,],
+            ['user_id' => 38,'rol_id' => 16,],
+            ['user_id' => 38,'rol_id' => 17,],
+            ['user_id' => 38,'rol_id' => 18,]
 
         ]);
 
@@ -310,7 +325,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 27
@@ -319,7 +334,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 28
@@ -328,7 +343,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 29
@@ -337,7 +352,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 30
@@ -346,7 +361,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 31
@@ -355,7 +370,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 32
@@ -364,7 +379,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente 33
@@ -373,7 +388,7 @@ class UsersTableSeeder extends Seeder
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
-                'dependencia_academico_id'=>54,
+                'dependencia_academico_id'=>55,
                 'h_lectivas'=>'12','h_n_lectivas'=>'12',
             ],
             [//Docente con usuario 5
@@ -405,7 +420,7 @@ class UsersTableSeeder extends Seeder
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
-             'dependencia_academico_id'=>54,
+             'dependencia_academico_id'=>55,
              'h_lectivas'=>'12','h_n_lectivas'=>'12',
         ]);
 

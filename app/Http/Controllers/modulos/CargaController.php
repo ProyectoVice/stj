@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\modulos;
 
+use App\_clases\TablaPDFF;
 use App\ActividadSilabo;
+use App\ActNoLectiva;
 use App\Ambiente;
 use App\CargaLectiva;
 use App\Curso;
@@ -12,10 +14,12 @@ use App\Http\Middleware\rol\Docente;
 use App\PlanEstudio;
 use Auth;
 use Carbon\Carbon;
+use Codedge\Fpdf\Fpdf\Fpdf;
 use function Couchbase\defaultDecoder;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Response;
 
 class CargaController extends Controller
 {
@@ -27,7 +31,10 @@ class CargaController extends Controller
     public function index($plan, $ciclo, $anio, $semestre)
     {
         $dep = Auth::user()->dependencia_id_depende;
-        $departamento = \App\Docente::find(Auth::user()->id)->dependencia_academico_id;
+        $departamento = \App\Docente::find(Auth::user()->id);
+        /*if($departamento==null)
+            dd("no tiene permiso para acceder");*/
+        $departamento = $departamento->dependencia_academico_id;
         $dep_nombre = (new \App\Dependencia)->find($departamento)->dependencia;
         $planes = PlanEstudio::getForSelectForDepartamento($departamento);
         $plan = ($plan == 'null') ? null : $plan;
@@ -84,9 +91,11 @@ class CargaController extends Controller
     }
     public function horario($id_carga){
         $dep = Auth::user()->dependencia_id_depende;
-        $horarios = Horario::where('carga_lectiva_id','=',$id_carga)->get();
-        $ambiente=Ambiente::getAmbientesByFacultad($dep);
-        $ambiente_g=Ambiente::getAmbientesByFacultades($dep);
+        $carga_lectiva = CargaLectiva::find($id_carga);
+        $curso = Curso::find($carga_lectiva->curso_id);
+        $docente = Curso::find($carga_lectiva->docente_id);
+        $horarios = Horario::select('*')->where('carga_lectiva_id','=',$id_carga)->get();
+        $ambiente=Ambiente::getAmbientesByFacultades($dep);
 
         return view('modulos.academico.carga_horario',
             [
@@ -94,15 +103,52 @@ class CargaController extends Controller
                 'horarios'=>$horarios,
                 'dias'=>[1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo'],
                 'ambiente'=>$ambiente,
-                'ambiente_g'=>$ambiente_g
+                'carga_lectiva'=>$carga_lectiva,
+                'curso'=>$curso,
+                'docente'=>$docente
             ]
         );
     }
+
+    public function imprimir($id_carga){
+
+        setlocale(LC_TIME, 'ES_PE');
+        setlocale(LC_TIME, 'es_PE.UTF-8');
+        $headers = ['Content-Type' => 'application/pdf'];
+
+        $dep = Auth::user()->dependencia_id_depende;
+        $carga_lectiva = CargaLectiva::find($id_carga);
+        $curso = Curso::find($carga_lectiva->curso_id);
+        $docente = Curso::find($carga_lectiva->docente_id);
+        $horarios = Horario::select('*')
+            ->Join('actividad_silabos', 'actividad_silabos.horario_id', '=', 'horarios.id')->where('carga_lectiva_id','=',$id_carga)
+            ->OrderBy('actividad_silabos.semana', 'ASC')
+            ->OrderBy('horarios.dia', 'ASC')
+            ->OrderBy('horarios.hora_inicio', 'ASC')
+
+            ->get();
+        $ambiente=Ambiente::getAmbientesByFacultades($dep);
+
+        //dd($horarios);
+        $pdf = new tablaPDFF('P','mm','A4');
+        $pdf->setHeader( $docente, $curso, $carga_lectiva );
+        $header = array("\nSEMANA\n", utf8_decode("\nDÍA\n"), "\nHORA\n", "\nACTIVIDAD\n");
+        $pdf->SetAutoPageBreak(false);
+        $pdf->AddPage();
+        $pdf->cargaLectivaCurso($header, $horarios, [1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo']);
+        /*$fpdf = new Fpdf();
+        $fpdf->AddPage();
+        $fpdf->SetFont('Courier', 'B', 18);
+        $fpdf->Cell(50, 25, 'Hello World!');*/
+
+        return Response::make($pdf->Output(),200,$headers);
+    }
+
     public function saveHorario($id_carga, Request $request){
-       /*if (isset($request->id))
-            $horario = Horario::find($request->id);
-        else*/
-            $horario = new Horario();
+        if (isset($request->id)&&$request->id!='new')
+             $horario = Horario::find($request->id);
+         else
+        $horario = new Horario();
 
         $horario->hora_inicio               =$request->hora_inicio ;
         $horario->hora_fin                  =$request->hora_fin;
@@ -112,7 +158,42 @@ class CargaController extends Controller
         $horario->ambiente_id               =(isset($request->ambiente_id_g))?$request->ambiente_id_g:$request->ambiente_id;
         $horario->save();
 
-        return redirect()->route('academico.carga.horario.index',[$id_carga])->with('verde','Se registró el horario correctamente '.$horario->id);
+        return redirect($request->headers->get('referer'))->with('verde','Se registró el horario correctamente');
+    }
+    public function acciones($id_horario, Request $request){
+        $actividades = ActividadSilabo::select('*')->where('horario_id','=',$id_horario)->orderBy('semana')->get();
+        $horario=Horario::find($id_horario);
+        $actividades_no_lectivas=ActNoLectiva::getAllForSelect();
+        return view('modulos.academico.carga_acciones',
+            [
+                'id_horario'=>$id_horario,
+                'horario'=>$horario,
+                'actividades'=>$actividades,
+                'es_lectiva'=>$request->es_lectiva,
+                'actividades_no_lectivas'=>$actividades_no_lectivas,
+                'dias'=>[1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo']
+            ]
+        );
+    }
+    public function saveAcciones($id_carga, Request $request){
+        if (isset($request->id)) {
+            if ($request->id == 'new')
+                $actividad = new ActividadSilabo();
+            else
+                $actividad = ActividadSilabo::find($request->id);
+            $actividad->semana=$request->semana;
+            $actividad->horario_id=$request->horario;
+            $actividad->actividad=$request->actividad;
+            $actividad->save();
+        }
+        return $this->acciones($actividad->horario_id, $request);
+    }
+    public function deleteAcciones($id_carga, Request $request){
+        if (isset($request->id)) {
+            $actividad = ActividadSilabo::find($id_carga);
+            $actividad->delete();
+        }
+        return $this->acciones($actividad->horario_id, $request);
     }
 
     public function micargaLectiva( $anio, $semestre)
@@ -122,13 +203,13 @@ class CargaController extends Controller
                 'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo', 'carga_lectivas.id as idcarga',
                 'carga_lectivas.docente_id', 'carga_lectivas.curso_id', 'users.nombres as docente_nombre',
                 'users.apellido_paterno', 'users.apellido_materno')
-            ->join('carga_lectivas', 'cursos.id', '=', 'carga_lectivas.curso_id')
+            ->leftJoin('carga_lectivas', 'cursos.id', '=', 'carga_lectivas.curso_id')
             ->join('users', 'users.id', '=', 'carga_lectivas.docente_id')
             ->where('anio', '=', $anio)
             ->where('carga_lectivas.semestre', '=', $semestre)
-            ->where('docente_id', '=', Auth::user()->id)->get();
+            ->where('docente_id', '=', Auth::user()->id);
         $cursos=[];
-        foreach ($carga as $dato){
+        foreach ($carga->get() as $dato){
             $cursos[$dato->id]=$dato;
         }
         for ($i=Carbon::now()->year;$i>2004;$i--)
@@ -166,19 +247,24 @@ class CargaController extends Controller
 
         return ['oh'=>'true','msg'=>'datos guardados correctamente'];
     }
-    public function silabo($id_carga){
-        $dep = Auth::user()->dependencia_id_depende;
-        $horarios = Horario::where('carga_lectiva_id','=',$id_carga)->get();
-        $silabo=ActividadSilabo::where('horario_id','=',$id_carga)->get();
+    public function noLectiva($semestre,$anio){
 
+        $carga=CargaLectiva::select('*')
+            ->where('semestre','=',$semestre)
+            ->where('anio','=',$anio)
+            ->where('curso_id','=',1)
+            ->where('docente_id','=',Auth::user()->id)
+            ->get();
+        if(count($carga)==1)
+            $carga=$carga[0];
+        else
+            $carga = new CargaLectiva();
+        $carga->semestre=$semestre;
+        $carga->anio=$anio;
+        $carga->curso_id=1;
+        $carga->docente_id=Auth::user()->id;
+        $carga->save();
 
-        return view('modulos.academico.silabo',
-            [
-                'id_carga'=>$id_carga,
-                'horarios'=>$horarios,
-                'dias'=>[1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo'],
-                'silabo'=>$silabo,
-            ]
-        );
+        return $this->horario($carga->id);
     }
 }

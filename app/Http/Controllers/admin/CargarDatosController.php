@@ -66,7 +66,6 @@ class CargarDatosController extends Controller
 	      $estudiante->save();
 	      $estudiante->user_id;
       }
-
       public function nuevo_usuario($value){
       	$usuario=new User;
 	      $usuario->apellido_paterno=$value->paterno;

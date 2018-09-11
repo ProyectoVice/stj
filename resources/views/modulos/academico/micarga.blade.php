@@ -31,7 +31,9 @@
       </div>
     </div>  
     <div class="col-sm-7 hidden-xs">
-      <h> Ver Carga por Docente </h><a href='{!! route('academico.reportecarga.index1')!!}', <button type="button" class="btn btn-primary btn-primary btn-sm">Ver</button> </a>
+        @if($semestre!='null'&&$anio!='null')
+      <h> Carga No Lectiva </h><a href='{{route('academico.carga.no_lectiva.index',[$semestre,$anio])}}'> <button type="button" class="btn btn-primary btn-primary btn-sm">Programar</button> </a>
+        @endif
     </div>     
     <div class="col-sm-7 hidden-xs">
       <div class="clearfix">
@@ -63,9 +65,8 @@
                 <td>{{$curso->hpractica}}</td>
                 <td>{{$curso->docente_nombre}}</td>
                 <td>
-                        <a href="{{route('academico.mi.silabo.index',$curso->idcarga)}}" title="Asignar" data-toggle="modal"
-                           data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}">
-                            <i class="fa fa-pencil"></i></a>
+                    <a href="{{route('academico.carga.horario.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-calendar"></i></a>
+                    <a href="{{route('academico.mi.carga.imprimir',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-print"></i></a>
 
                 </td>
             </tr>

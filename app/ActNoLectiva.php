@@ -15,5 +15,13 @@ class ActNoLectiva extends Model
       public function carga_no_lectiva()
     {
        return $this->hasMany(CargaNoLectiva::class);
-    }   
+    }
+    public static function  getAllForSelect(){
+        $arr=[];
+        $acts= ActNoLectiva::all();
+        foreach ($acts as $id=>$act){
+            $arr[$id]=$act->actividad;
+        }
+        return $arr;
+    }
 }

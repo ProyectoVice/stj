@@ -48,8 +48,7 @@ class Ambiente extends Model
     {
         $dependencia = Dependencia::find( $depende);
         $doc_query = \DB::table('ambientes')->select('ambientes.id', 'ambientes.ambiente', 'dependencias.dependencia')
-            ->join('dependencias', 'dependencias.id', '=', 'ambientes.dependencia_id')
-            ->where('dependencias.id', '<>', $dependencia->dependencia_id);
+            ->join('dependencias', 'dependencias.id', '=', 'ambientes.dependencia_id');
         $ambientes=[];
         /* FIN DE MOVER ESTA FRACCION DE CODIGO A LA TABLA DEPENDENCIA*/
         foreach($doc_query->get() as $d){

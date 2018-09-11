@@ -51,7 +51,9 @@ class Docente extends Model
     }
     public static function getDocentesByDependencia($eap)
     {
-        $departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $eap . ') as direccion')[0];
+
+        //$departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $eap . ') as direccion')[0];
+        $departamento = Dependencia::find($eap);
 
         if ($departamento->direccion == $eap)
             $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dependencias.dependencia')
@@ -75,7 +77,8 @@ class Docente extends Model
     }
     public static function getDocentes($eap)
     {
-        $departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $eap . ') as direccion')[0];
+        //$departamento = DB::select('SELECT dependencia_buscar_direccion_hacia_arriba(' . $eap . ') as direccion')[0];
+        $departamento = Dependencia::find($eap);
         $deps = Dependencia::getDependenciasHijosIdForDepartamento($departamento->direccion);
         $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dep.dependencia')
             ->join('users', 'users.id', '=', 'docentes.user_id')

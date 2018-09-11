@@ -181,6 +181,7 @@ return [
         Softon\SweetAlert\SweetAlertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Codedge\Fpdf\FpdfServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'SWAL' => Softon\SweetAlert\Facades\SWAL::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        //'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
     ],
 
 ];

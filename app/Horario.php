@@ -25,4 +25,5 @@ class Horario extends Model
         return $this->belongsto(CursoNcgt::class);
     }
 
+
 }
