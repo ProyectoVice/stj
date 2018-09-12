@@ -91,6 +91,7 @@ class CargarDatosController extends Controller
       	$usuario->nombres=$value->nombres;
          $usuario->email=$value->dni.'@mail.com'; 
          $usuario->dni=$value->dni;
+         $usuario->password = bcrypt($value->dni),
          $usuario->f_nac=$value->fech_nac;
          $usuario->save();
          return $usuario->id;
