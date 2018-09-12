@@ -17,7 +17,7 @@ class CreateEstudiantesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->primary('user_id');
             $table->string('cod_univ',10)->unique();
-            $table->integer('dependencia_escuela_id')->unsigned();
+            $table->integer('escuela_id')->unsigned();
             $table->string('estado',2)->default('1');
             //1: en curso, 2:retirado, 3: culminado, 4:retirado
             $table->string('modalidad_ingreso',2)->default('17');
@@ -47,7 +47,7 @@ class CreateEstudiantesTable extends Migration
             $table->date('f_egreso')->nullable();
             $table->integer('anio_estudio')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('dependencia_escuela_id')->references('id')->on('dependencias')->onDelete('cascade');
+            $table->foreign('escuela_id')->references('id')->on('dependencias')->onDelete('cascade');
             
             $table->timestamps();
         });

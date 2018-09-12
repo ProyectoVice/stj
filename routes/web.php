@@ -204,7 +204,9 @@ Route::group(['prefix' => 'calendario'],function(){
     	//cargar datos
     	Route::group(['prefix' => 'cargar'],function(){
     		//estudiantes
-    		Route::get('estudiantes','admin\CargarDatosController@estudiantes')->name('admin.cargar.index');
+    		Route::get('estudiantes','admin\CargarDatosController@estudiantes')->name('admin.cargar.docentes');
+    		//docentes
+    		Route::get('docentes','admin\CargarDatosController@docentes')->name('admin.cargar.docentes');
     	});
         
     });

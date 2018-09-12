@@ -8,7 +8,7 @@ class Estudiante extends Model
 {
     protected $table='estudiantes';
     protected $primaryKey='user_id';
-    protected $fillable=['cod_univ','dependencia_escuela_id','estado',
+    protected $fillable=['cod_univ','escuela_id','estado',
             //1: en curso, 2:retirado, 3: culminado, 4:retirado
             'modalidad_ingreso',
             /*
@@ -43,6 +43,6 @@ class Estudiante extends Model
   	}
   	public function dependencia_escuela()
     {
-      return $this->belongsto(Dependencia::class,'dependencia_escuela_id','id');
+      return $this->belongsto(Dependencia::class,'escuela_id','id');
     }
 }
