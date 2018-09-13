@@ -7,7 +7,7 @@ use Codedge\Fpdf\Fpdf\Fpdf;
 use Carbon\Carbon;
 
 
-class TablaPDFF extends Fpdf{
+class NoLectivaPDFF extends Fpdf{
 
 	var $wLine; // Maximum width of the line
 	var $hLine; // Height of the line
@@ -45,7 +45,6 @@ class TablaPDFF extends Fpdf{
 	private $himg = '';
 
     private $docente= null;
-    private $curso= null;
     private $carga= null;
 	private $fimg= '';
 	private $ftxt= '';
@@ -65,7 +64,7 @@ class TablaPDFF extends Fpdf{
             $txt = ' ';
             $this->MultiCell(190, 3, $txt, 0, 'C');
             $this->Ln();
-            $txt = 'Carga lectiva';
+            $txt = 'Carga no lectiva';
             $this->MultiCell(190, 3, $txt, 0, 'C');
             $this->Ln();
             $this->SetFontSize(9);
@@ -74,10 +73,7 @@ class TablaPDFF extends Fpdf{
             $txt = utf8_decode($this->docente->nombre);
             $this->Cell(75, 4, $txt, 0, 'L');
 
-            $this->Cell(20,6,'Curso',0,0,'L');
-            $this->Cell(5,6,':',0,0,'L');
-            $txt = utf8_decode($this->curso->nombre);
-            $this->Cell(75,6,$txt,0,0,'L');
+
             $this->Ln();
             $this->Cell(20,6,'Semestre',0,0,'L');
             $this->Cell(5,6,':',0,0,'L');
@@ -94,9 +90,8 @@ class TablaPDFF extends Fpdf{
             $this->SetTextColor(255,192,203);
 
 	}
-    function SetHeader($doc=null, $curso, $carga){
+    function SetHeader($doc=null, $carga){
         $this->docente = $doc;
-        $this->curso = $curso;
         $this->carga = $carga;
     }
     function Footer(){
@@ -878,135 +873,8 @@ class TablaPDFF extends Fpdf{
     }
 
 // Tabla coloreada
-    function LineaDeTiempo($header, $data,$especificas, $componentes, $ejecucion, $analitico, $presupuesto)
-    {
-        // Colores, ancho de línea y fuente en negrita
-        $this->SetTextColor(0);
-        $this->SetDrawColor(0,0,0);
-        $this->SetLineWidth(.2);
-        $this->SetFontSize(6.5);
-        // Cabecera
-        $w_month=16;
-        $w_acum=18;
-        $w = array(40, 47, $w_acum, $w_acum, $w_acum,
-            $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month,
-            $w_acum,$w_acum, $w_acum+1);
-        $size = 4;
-        $this->cabeceraLineaDeTeimpo($header,$w,$size);
-        // Restauración de colores y fuentes
-        $this->SetTextColor(0);
-        // Datos
-        $fill = false;
-        $x1=$this->GetX();
-        $big_y=$y=$this->GetY();
-        $max_y=$this->GetPageHeight()-($this->lMargin+$this->rMargin);
 
-
-        foreach($analitico as $comp=>$d_1) {
-            if ($comp != 't'&&$comp != 'm') {
-                if(!isset($data[$comp]))
-                    $data[$comp]=['d'=>0];
-                foreach ($d_1 as $esp => $d_2) {
-                    if ($esp != 't'&&$esp != 'm'&&!isset($data[$comp][$esp])) {
-                            $data[$comp][$esp]=['d'=>0,0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0];
-                    }
-                }
-            }
-        }
-        foreach($data as $comp=>$d1) {
-            if ($comp!='d'&&$comp!='r') {
-                $data[$comp]['r']=$this->precount($w[0], $size, 'LR', 'C', (isset($componentes[$comp]))?$componentes[$comp]:'DESCONOCIDO');
-                foreach ($d1 as $esp => $d2) {
-                    if ($esp != 'd'&&$esp!='r'&&$esp!='fisico'){
-                        $data[$comp][$esp]['r']=$this->precount($w[1], $size, 'LR', 'C', $especificas[$esp]);
-                        foreach ($d2 as $mes => $d3) {
-                            if ($mes !== 'd'&&$mes!='r') {
-
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-        $acum_total=[0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0];
-        foreach($data as $comp=>$d1) {
-            if ($comp!='d'&&$comp!='r'&&isset($analitico[$comp])) {
-                $acum_mes_comp=[0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0];
-                foreach ($d1 as $esp => $d2) {
-                    $x=$x1;
-                    $y=$big_y;
-                    $this->SetXY($x,$y);
-                    if ($esp != 'd'&&$esp!='r'&&$esp!='fisico'&&isset($analitico[$comp][$esp])){
-                        $reng=($d1['r']>$d2['r'])?$d1['r']:$d2['r'];
-                        $acum=(isset($ejecucion[$comp])&&isset($ejecucion[$comp][$esp]))?$ejecucion[$comp][$esp]:0;
-                        $pim = (isset($presupuesto[$comp])&&isset($presupuesto[$comp][$esp]))?$presupuesto[$comp][$esp]->pim:0;
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[0], $size, (isset($componentes[$comp]))?$componentes[$comp]:'DESCONOCIDO', 1, 'C', $fill, $x, $big_y, $y, $d1['r'], $reng);
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[1], $size, $especificas[$esp], 1, 'L', $fill, $x, $big_y, $y, $d2['r'], $reng);
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[2], $size, Money::toMoney($analitico[$comp][$esp]->ana_monto+$analitico[$comp][$esp]->ana_modificaciones,''), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[3], $size, Money::toMoney($acum,''), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[4], $size, Money::toMoney($pim,''), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-
-                        /*foreach ($d2 as $mes => $d3) {
-                            if ($mes !== 'd'&&$mes!=='r') {
-                                list($big_y, $x)=$this->MultiCellAndPoss($w[$mes + 5], $size, Money::toMoney($d3,'', -1), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-                                $acum_mes_comp[$mes]+=$d3;
-                                $acum_total[$mes]+=$d3;
-                            }
-                        }*/
-                        for ($i=0;$i<12;$i++)
-                        {
-                            list($big_y, $x)=$this->MultiCellAndPoss($w[$mes + 5], $size, Money::toMoney((isset($d2[$i])?$d2[$i]:0),'', -1), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-                            $acum_mes_comp[$i]+=(isset($d2[$i])?$d2[$i]:0);
-                            $acum_total[$i]+=(isset($d2[$i])?$d2[$i]:0);
-                        }
-
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[17], $size, Money::toMoney($analitico[$comp][$esp]->ana_monto+$analitico[$comp][$esp]->ana_modificaciones-$acum,''), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[18], $size, Money::toMoney($d2['d'],''), 1,  'R', $fill, $x, $big_y, $y, 1, $reng);
-                        list($big_y, $x)=$this->MultiCellAndPoss($w[19], $size, Money::toMoney($d2['d']-$pim,''), 1,  'R', $fill, $x, $big_y, $y, 1, $reng, $max_y, $header,$w);
-                }
-                }
-                $fill = !$fill;
-                $x=$x1;
-                $y=$big_y;
-                $this->SetXY($x,$y);
-                $acum=(isset($ejecucion[$comp]))?$ejecucion[$comp]['monto']:0;
-                $pim = (isset($presupuesto[$comp]))?$presupuesto[$comp]['t']:0;
-                list($big_y, $x)=$this->MultiCellAndPoss($w[0]+$w[1], $size, 'TOTAL : ('.$comp.') '.((isset($componentes[$comp]))?$componentes[$comp]:'DESCONOCIDO'), 1, 'L', $fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[2], $size, Money::toMoney($analitico[$comp]['t']+$analitico[$comp]['m'],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[3], $size, Money::toMoney($acum,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[4], $size, Money::toMoney($pim,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                for ($i=0;$i<12;$i++){
-                    list($big_y, $x)=$this->MultiCellAndPoss($w[$i + 5], $size, Money::toMoney($acum_mes_comp[$i],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                }
-                list($big_y, $x)=$this->MultiCellAndPoss($w[17], $size, Money::toMoney($analitico[$comp]['t']+$analitico[$comp]['m']-$acum,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[18], $size, Money::toMoney($d1['d'],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[19], $size, Money::toMoney($d1['d']-$pim,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1, $max_y, $header,$w);
-                $fill = !$fill;
-            }
-        }
-        //$fill = !$fill;
-        $x=$x1;
-        $y=$big_y;
-        $this->SetXY($x,$y);
-        $acum=$ejecucion['monto'];
-        $pim = $presupuesto['t'];
-        $this->SetFont('','B');
-        //$this->SetFillColor(0,112,192);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[0]+$w[1], $size, 'TOTAL DEL PROYECTO', 1, 'R', $fill, $x, $big_y, $y, 1, 1);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[2], $size, Money::toMoney($analitico['t']+$analitico['m'],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[3], $size, Money::toMoney($acum,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[4], $size, Money::toMoney($pim,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        for ($i=0;$i<12;$i++){
-            list($big_y, $x)=$this->MultiCellAndPoss($w[$i + 5], $size, Money::toMoney($acum_total[$i],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        }
-        list($big_y, $x)=$this->MultiCellAndPoss($w[17], $size, Money::toMoney($analitico['t']+$analitico['m']-$acum,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[18], $size, Money::toMoney($data['d'],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[19], $size, Money::toMoney($data['d']-$pim,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1, $max_y, $header,$w);
-        $fill = !$fill;
-    }
-
-    function cargaLectivaCurso($header, $horarios, $dias)
+    function cargaLectivaCurso($header, $acts, $actividades)
     {
         // Colores, ancho de línea y fuente en negrita
         $this->SetTextColor(0);
@@ -1016,9 +884,7 @@ class TablaPDFF extends Fpdf{
         // Cabecera
         $w_month=19;
         //$w_acum=23;
-        $w = array(15, 15, 30, 120,
-            $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month, $w_month,
-            $w_month);
+        $w = array(180, 15);
         $size = 5;
         $this->cabeceraLineaDeTeimpo($header,$w,$size);
         // Restauración de colores y fuentes
@@ -1029,84 +895,20 @@ class TablaPDFF extends Fpdf{
         $big_y=$y=$this->GetY();
         $max_y=$this->GetPageHeight()-($this->lMargin+$this->rMargin);
 
-        foreach($horarios as $id=>$horario) {
-            $horarios[$id]->r=$this->precount($w[0], $size, 'LR', 'C', $horario->actividad);
+        foreach($acts as $id=>$actividad) {
+            $acts[$id]->r=$this->precount($w[0], $size, 'LR', 'C', $actividades[$actividad->act_no_lectiva_id]);
         }
-        foreach($horarios as $id=>$horario) {
+        foreach($acts as $id=>$actividad) {
 
             $fill = !$fill;
             $x=$x1;
             $y=$big_y;
             $this->SetXY($x,$y);
 
-            list($big_y, $x)=$this->MultiCellAndPoss($w[0], $size, $horario->semana, 1, 'C', $fill, $x, $big_y, $y, $horario->r, 2);
-            list($big_y, $x)=$this->MultiCellAndPoss($w[1], $size, $dias[$horario->dia], 1, 'C', $fill, $x, $big_y, $y, $horario->r, 2);
-            list($big_y, $x)=$this->MultiCellAndPoss($w[2], $size, $horario->hora_inicio.' / '.$horario->hora_fin, 1, 'L', $fill, $x, $big_y, $y, $horario->r, 2);
-            list($big_y, $x)=$this->MultiCellAndPoss($w[3], $size, $horario->actividad, 1, 'L', $fill, $x, $big_y, $y, $horario->r, 2, $max_y, $header,$w);
+            list($big_y, $x)=$this->MultiCellAndPoss($w[0], $size, utf8_decode($actividades[$actividad->act_no_lectiva_id]), 1, 'L', $fill, $x, $big_y, $y, $actividad->r, 2);
+            list($big_y, $x)=$this->MultiCellAndPoss($w[1], $size, $actividad->horas, 1, 'L', $fill, $x, $big_y, $y, $actividad->r, 2, $max_y, $header,$w);
         }
 
-        /*$acum_total=[0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0];
-        foreach($data as $comp=>$d1) {
-            if ($comp!='d'&&$comp!='r') {
-                $acum_mes_comp=[0=>0,1=>0,2=>0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0];
-                foreach ($d1 as $esp => $d2) {
-                    $x=$x1;
-                    $y=$big_y;
-                    $this->SetXY($x,$y);
-                    if ($esp != 'd'&&$esp!='r'){
-                        foreach ($d2 as $mes => $d3) {
-                            if ($mes !== 'd'&&$mes!=='r') {
-                                $acum_mes_comp[$mes]+=$d3;
-                                $acum_total[$mes]+=$d3;
-                            }
-                        }
-                    }
-                }
-                $fill = !$fill;
-                $x=$x1;
-                $y=$big_y;
-                $this->SetXY($x,$y);
-                $pim = (isset($presupuesto[$comp]))?$presupuesto[$comp]['t']:0;
-                list($big_y, $x)=$this->MultiCellAndPoss($w[0], $size, ((isset($componentes[$comp]))?$componentes[$comp]:'DESCONOCIDO'), 1, 'L', $fill, $x, $big_y, $y, $d1['r'], 2);
-                $x2=$x;
-                list($big_y, $x)=$this->MultiCellAndPoss($w[1], $size, 'Financiero', 1,  'R', !$fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[2], $size, 'S /', 1,  'C', !$fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[3], $size, Money::toMoney($pim,''), 1,  'R', !$fill, $x, $big_y, $y, 1, 1);
-                for ($i=0;$i<12;$i++){
-                    list($big_y, $x)=$this->MultiCellAndPoss($w[$i + 4], $size, Money::toMoney($acum_mes_comp[$i],''), 1,  'R', !$fill, $x, $big_y, $y, 1, 1);
-                }
-                list($big_y, $x)=$this->MultiCellAndPoss($w[16], $size, Money::toMoney($d1['d'],''), 1,  'R', !$fill, $x, $big_y, $y, 1, 1, $max_y, $header,$w);
-
-                $x=$x2;
-                $y=$y+5;
-                $this->SetXY($x,$y);
-                $acum_fisic=0;
-                list($big_y, $x)=$this->MultiCellAndPoss($w[1], $size, 'Fisico', 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                $sec_func=isset($secs_func[$comp])?$secs_func[$comp]:null;
-                list($big_y, $x)=$this->MultiCellAndPoss($w[2], $size, ($sec_func!=null)?$unidades_medida[(int)$sec_func->UNIDAD_ME2]->NOMBRE:'NO DEFINIDO', 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                list($big_y, $x)=$this->MultiCellAndPoss($w[3], $size, ($sec_func!=null)?Money::toMoney($sec_func->CANTIDAD,'',1,1):'', 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                for ($i=0;$i<12;$i++){
-                    list($big_y, $x)=$this->MultiCellAndPoss($w[$i + 4], $size, Money::toMoney((isset($d1['fisico']))?$d1['fisico'][$i]:0,'',1,1), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-                    $acum_fisic+=(isset($d1['fisico']))?$d1['fisico'][$i]:0;
-                }
-                list($big_y, $x)=$this->MultiCellAndPoss($w[16], $size, Money::toMoney($acum_fisic,''), 1,  'R', $fill, $x, $big_y, $y, 1, 1, $max_y, $header,$w);
-                $fill = !$fill;
-            }
-        }
-        //$fill = !$fill;
-        $x=$x1;
-        $y=$big_y;
-        $this->SetXY($x,$y);
-        $acum=$ejecucion['monto'];
-        $pim = $presupuesto['t'];
-        $this->SetFont('','B');
-        //$this->SetFillColor(0,112,192);
-        list($big_y, $x)=$this->MultiCellAndPoss($w[0]+$w[1]+$w[2]+$w[3], $size, 'TOTAL DEL PROYECTO', 1, 'C', $fill, $x, $big_y, $y, 1, 1);
-        for ($i=0;$i<12;$i++){
-            list($big_y, $x)=$this->MultiCellAndPoss($w[$i + 4], $size, Money::toMoney($acum_total[$i],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1);
-        }
-        list($big_y, $x)=$this->MultiCellAndPoss($w[16], $size, Money::toMoney($data['d'],''), 1,  'R', $fill, $x, $big_y, $y, 1, 1, $max_y, $header,$w);
-        $fill = !$fill;*/
     }
     function MultiCellAndPoss($w, $h, $txt, $border, $align, $fill, $x, $big_y, $y, $cur_reng, $max_reng, $max_y=false, $header=[],$wa=[]){
 	    $reng_falt=$max_reng-$cur_reng;

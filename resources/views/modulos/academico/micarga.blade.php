@@ -12,7 +12,7 @@
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
-      <h3><u> Dependencia </u>: xxxxxx xxxxxx xxxxxxx</h3><hr><br>
+      <h3><u> Dependencia </u>: {{$departamento}}</h3><hr><br>
     </div>
     <div class="col-sm-12">
       <div class="row form-group">
@@ -32,7 +32,9 @@
     </div>  
     <div class="col-sm-7 hidden-xs">
         @if($semestre!='null'&&$anio!='null')
-      <h> Carga No Lectiva </h><a href='{{route('academico.carga.no_lectiva.index',[$semestre,$anio])}}'> <button type="button" class="btn btn-primary btn-primary btn-sm">Programar</button> </a>
+      <h> Carga No Lectiva </h>
+            <a href="#" id="carga_no_lectiva_prog"><button type="button" class="btn btn-primary btn-sm">Programar</button> </a>
+            <a href="{{route('academico.carga.no_lectiva.print',[$semestre,$anio])}}" id="carga_no_lectiva_print" target="_blank"><button type="button" class="btn btn-success btn-sm">imprimir</button></a>
         @endif
     </div>     
     <div class="col-sm-7 hidden-xs">
@@ -66,7 +68,7 @@
                 <td>{{$curso->docente_nombre}}</td>
                 <td>
                     <a href="{{route('academico.carga.horario.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-calendar"></i></a>
-                    <a href="{{route('academico.mi.carga.imprimir',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-print"></i></a>
+                    <a href="{{route('academico.mi.carga.imprimir',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Imprimir" target="_blank"><i class="fa fa-print"></i></a>
 
                 </td>
             </tr>
@@ -79,6 +81,7 @@
       <div id='calendar'></div>
     </div>
   </div>
+  <div id="carga_no_lectiva" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 @endsection
 
@@ -147,6 +150,18 @@
               _token: '{!! csrf_token() !!}',
           };
       }
+
+      $("#carga_no_lectiva_prog").click(function(e){
+          e.preventDefault()
+          $('#carga_no_lectiva').html('');
+          $.ajax({
+              method: "GET",
+              url: "{{route('academico.carga.no_lectiva.index',[$semestre,$anio])}}"
+          }).done(function( msg ) {
+                  $('#carga_no_lectiva').html(msg);
+                  $('#carga_no_lectiva').modal();
+              });
+      })
 
   })
 

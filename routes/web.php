@@ -181,7 +181,6 @@ Route::group(['prefix' => 'calendario'],function(){
     });
 // carga lectiva
     Route::group(['prefix' => 'carga'],function(){
-        Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
         Route::get('/horario/{id}','modulos\CargaController@horario')->name('academico.carga.horario.index');
         Route::post('/horario/{id}','modulos\CargaController@saveHorario')->name('academico.carga.horario.save');
         Route::get('/acciones/{id}','modulos\CargaController@acciones')->name('academico.carga.acciones.index');
@@ -189,7 +188,11 @@ Route::group(['prefix' => 'calendario'],function(){
         Route::post('/acciones/{id}/del','modulos\CargaController@deleteAcciones')->name('academico.carga.acciones.delete');
         Route::get('/micargalectiva/imprimir/{id}','modulos\CargaController@imprimir')->name('academico.mi.carga.imprimir');
         Route::get('/micargalectiva/{anio}/{semestre}','modulos\CargaController@micargaLectiva')->name('academico.mi.carga.index');
-        Route::get('/noLectiva/{ciclo}/{anio}','modulos\CargaController@noLectiva')->name('academico.carga.no_lectiva.index');//actividades silabos
+        Route::get('/noLectiva/{ciclo}/{anio}','modulos\CargaController@noLectiva')->name('academico.carga.no_lectiva.index');
+        Route::get('/noLectivaPrint/{ciclo}/{anio}','modulos\CargaController@PrintNoLectiva')->name('academico.carga.no_lectiva.print');
+        Route::post('/noLectiva/{ciclo}/{anio}','modulos\CargaController@SaveNoLectiva')->name('academico.carga.no_lectiva.save');
+        Route::post('/noLectiva/{ciclo}/{anio}/del','modulos\CargaController@DeleteNoLectiva')->name('academico.carga.no_lectiva.delete');//actividades silabos
+        Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
         Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');
 
 
