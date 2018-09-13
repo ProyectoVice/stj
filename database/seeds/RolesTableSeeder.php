@@ -52,7 +52,10 @@ class RolesTableSeeder extends Seeder
             ['rol' => 'Estudiante_doctorado', 'descripcion' => 'Estudiante de doctorado',],//36
             ['rol' => 'Estudiante_Posdoctorado', 'descripcion' => 'Estudiante de Posdoctorado',],//37
             ['rol' => 'Estudiante_Segunda_Especialidad', 'descripcion' => 'Estudiantes de Segunda Especialidad',],//38
-            ['rol' => 'Estudiante_Estudios_Complementarios', 'descripcion' => 'Estudiantes de Estudios Complementarios de Esducación',]//39
+            ['rol' => 'Estudiante_Estudios_Complementarios', 'descripcion' => 'Estudiantes de Estudios Complementarios de Esducación',],//39
+            //um par más de DRSU
+            ['rol' => 'DRSU-PS', 'descripcion' => 'Jef. U. Proyección Social',],//40
+            ['rol' => 'DRSU-EC', 'descripcion' => 'Jef. U. Estensión Cultural',],//41
         ]);
     }
 }

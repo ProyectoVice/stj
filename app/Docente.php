@@ -10,7 +10,7 @@ class Docente extends Model
     protected $table='docentes';
     protected $primaryKey='user_id';
     protected $fillable=[
-    'dependencia_escuela_id','docente_categoria_id','docente_condicion_id','docente_dedicacion_id','dependencia_academico_id',
+    'escuela_id','docente_categoria_id','docente_condicion_id','docente_dedicacion_id','dependencia_academico_id',
         'h_lectivas','h_n_lectivas', 'profesion', 'grado_magister','grado_doctor', 'fecha_ingreso','fecha_nombramiento'
     ];
 
@@ -18,9 +18,9 @@ class Docente extends Model
     {
       return $this->belongsto(User::class,'user_id','id');
   	}
-  	public function dependencia_escuela()
+  	public function escuela()
     {
-      return $this->belongsto(Dependencia::class,'dependencia_escuela_id','id');
+      return $this->belongsto(Dependencia::class,'escuela_id','id');
   	}
   	public function categoria() 
     {

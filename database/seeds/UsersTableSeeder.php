@@ -293,7 +293,7 @@ class UsersTableSeeder extends Seeder
         DB::table('docentes')->insert([
             [//usuario Docente por defecto
              'user_id'=>'2',
-             'dependencia_escuela_id'=>25,
+             'escuela_id'=>25,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
@@ -302,7 +302,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente DRSU-F
              'user_id'=>'24',
-             'dependencia_escuela_id'=>25,
+             'escuela_id'=>25,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
@@ -311,7 +311,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente DRSU
              'user_id'=>'25',
-             'dependencia_escuela_id'=>22,
+             'escuela_id'=>22,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
@@ -321,7 +321,7 @@ class UsersTableSeeder extends Seeder
             //docentes usuarios 26 al 33
             [//Docente 26
                 'user_id'=>26,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -330,7 +330,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 27
                 'user_id'=>27,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -339,7 +339,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 28
                 'user_id'=>28,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -348,7 +348,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 29
                 'user_id'=>29,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -357,7 +357,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 30
                 'user_id'=>30,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -366,7 +366,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 31
                 'user_id'=>31,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -375,7 +375,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 32
                 'user_id'=>32,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -384,7 +384,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente 33
                 'user_id'=>33,
-                'dependencia_escuela_id'=>30,
+                'escuela_id'=>30,
                 'docente_categoria_id'=>'1',
                 'docente_condicion_id'=>'1',
                 'docente_dedicacion_id'=>'1',
@@ -393,7 +393,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente con usuario 5
             'user_id'=>5,
-            'dependencia_escuela_id'=>30,
+            'escuela_id'=>30,
             'docente_categoria_id'=>'1',
             'docente_condicion_id'=>'1',
             'docente_dedicacion_id'=>'1',
@@ -405,17 +405,18 @@ class UsersTableSeeder extends Seeder
         DB::table('estudiantes')->insert([
              'user_id'=>'3',
              'cod_univ'=>'2012000012',
-             'dependencia_escuela_id'=>'42',
+             'escuela_id'=>'42',
              'estado'=>'1',
              'modalidad_ingreso'=>'17',
              'f_ingreso'=>'2012-03-03',
              'f_egreso'=>'2017-12-20',
+             'anio_estudio'=>'0',
         ]);
 
 
         DB::table('docentes')->insert([
              'user_id'=>'4',
-             'dependencia_escuela_id'=>30,
+             'escuela_id'=>30,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',

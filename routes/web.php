@@ -199,3 +199,17 @@ Route::group(['prefix' => 'calendario'],function(){
 //reporte carga
     	Route::get('reporte','modulos\CargaController@index1')->name('academico.reportecarga.index1');
     });
+
+//-------------------------------------------------------------------------------------------------------------
+
+//Administrador 
+    Route::group(['prefix' => 'admin'],function(){
+    	//cargar datos
+    	Route::group(['prefix' => 'cargar'],function(){
+    		//estudiantes
+    		Route::get('estudiantes','admin\CargarDatosController@estudiantes')->name('admin.cargar.docentes');
+    		//docentes
+    		Route::get('docentes','admin\CargarDatosController@docentes')->name('admin.cargar.docentes');
+    	});
+        
+    });

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.43 on 2018-09-08 19:31:29.
+ * Generated for Laravel 5.5.43 on 2018-09-11 06:34:52.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14419,6 +14419,155 @@ namespace Barryvdh\DomPDF {
  
 }
 
+namespace Maatwebsite\Excel\Facades { 
+
+    /**
+     * LaravelExcel Facade
+     *
+     * @category Laravel Excel
+     * @version 1.0.0
+     * @package maatwebsite/excel
+     * @copyright Copyright (c) 2013 - 2014 Maatwebsite (http://www.maatwebsite.nl)
+     * @author Maatwebsite <info@maatwebsite.nl>
+     * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+     */ 
+    class Excel {
+        
+        /**
+         * Create a new file
+         *
+         * @param $filename
+         * @param callable|null $callback
+         * @return \Maatwebsite\Excel\LaravelExcelWriter 
+         * @static 
+         */ 
+        public static function create($filename, $callback = null)
+        {
+            return \Maatwebsite\Excel\Excel::create($filename, $callback);
+        }
+        
+        /**
+         * Load an existing file
+         *
+         * @param string $file The file we want to load
+         * @param callback|null $callback
+         * @param string|null $encoding
+         * @param bool $noBasePath
+         * @param callback|null $callbackConfigReader
+         * @return \Maatwebsite\Excel\LaravelExcelReader 
+         * @static 
+         */ 
+        public static function load($file, $callback = null, $encoding = null, $noBasePath = false, $callbackConfigReader = null)
+        {
+            return \Maatwebsite\Excel\Excel::load($file, $callback, $encoding, $noBasePath, $callbackConfigReader);
+        }
+        
+        /**
+         * Set select sheets
+         *
+         * @param $sheets
+         * @return \Maatwebsite\Excel\LaravelExcelReader 
+         * @static 
+         */ 
+        public static function selectSheets($sheets = array())
+        {
+            return \Maatwebsite\Excel\Excel::selectSheets($sheets);
+        }
+        
+        /**
+         * Select sheets by index
+         *
+         * @param array $sheets
+         * @return $this 
+         * @static 
+         */ 
+        public static function selectSheetsByIndex($sheets = array())
+        {
+            return \Maatwebsite\Excel\Excel::selectSheetsByIndex($sheets);
+        }
+        
+        /**
+         * Batch import
+         *
+         * @param $files
+         * @param callback $callback
+         * @return \PHPExcel 
+         * @static 
+         */ 
+        public static function batch($files, $callback)
+        {
+            return \Maatwebsite\Excel\Excel::batch($files, $callback);
+        }
+        
+        /**
+         * Create a new file and share a view
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \Maatwebsite\Excel\LaravelExcelWriter 
+         * @static 
+         */ 
+        public static function shareView($view, $data = array(), $mergeData = array())
+        {
+            return \Maatwebsite\Excel\Excel::shareView($view, $data, $mergeData);
+        }
+        
+        /**
+         * Create a new file and load a view
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \Maatwebsite\Excel\LaravelExcelWriter 
+         * @static 
+         */ 
+        public static function loadView($view, $data = array(), $mergeData = array())
+        {
+            return \Maatwebsite\Excel\Excel::loadView($view, $data, $mergeData);
+        }
+        
+        /**
+         * Set filters
+         *
+         * @param array $filters
+         * @return \Excel 
+         * @static 
+         */ 
+        public static function registerFilters($filters = array())
+        {
+            return \Maatwebsite\Excel\Excel::registerFilters($filters);
+        }
+        
+        /**
+         * Enable certain filters
+         *
+         * @param string|array $filter
+         * @param bool|false|string $class
+         * @return \Excel 
+         * @static 
+         */ 
+        public static function filter($filter, $class = false)
+        {
+            return \Maatwebsite\Excel\Excel::filter($filter, $class);
+        }
+        
+        /**
+         * Get register, enabled (or both) filters
+         *
+         * @param string|boolean $key [description]
+         * @return array 
+         * @static 
+         */ 
+        public static function getFilters($key = false)
+        {
+            return \Maatwebsite\Excel\Excel::getFilters($key);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -16567,6 +16716,8 @@ namespace  {
     class SWAL extends \Softon\SweetAlert\Facades\SWAL {}
 
     class PDF extends \Barryvdh\DomPDF\Facade {}
+
+    class Excel extends \Maatwebsite\Excel\Facades\Excel {}
  
 }
 

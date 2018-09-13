@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nombres','apellido_paterno','apellido_materno','f_nac','dni', 'email', 'password','foto','distrito_nac','domicilio',
-        'n_domicilio','tel','cel','tipo_sangre', 'genero', 'colegio_id_iv', 'colegio_id_v','estado_login','est_civil_id','religion_id'
+        'n_domicilio','tel','cel','tipo_sangre', 'sexo', 'colegio_id_iv', 'colegio_id_v','estado_login','est_civil_id','religion_id'
     ];
     public function all_names($id){
         return User::where('id','=',$id)->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'))->first();
