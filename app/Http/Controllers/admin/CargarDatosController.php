@@ -40,9 +40,11 @@ class CargarDatosController extends Controller
                   //ponemos la fecha de nacimineto para una mejor verificación
                   ->where('f_nac',$value->fech_nac)->first();
                   if($sensorUser){
+                     $this->actualizar_usuario($user_id,$value); //si ya existe el usuario ACTUALIZAMOS Fnac
                   	$buscarIdEstudiante=Estudiante::where('user_id',$sensorUser->id)->first();
 	                  //Si NO existe agregamos
 	                  if(!$buscarIdEstudiante){
+                        $this->roles_usuario($id_user,array('4')); //enviamos ID y los roles y usuarios
 	                  	$return = $this->nuevo_estudiante($sensorUser->id,$value); echo $return;
 	                  }
 	                  continue; //saltamos el bucle
@@ -63,11 +65,14 @@ class CargarDatosController extends Controller
             	//------- Verificamos si ya existe el DNI Registrado
                   $sensorUser=User::where('dni',$value->dni)->first();
                   if($sensorUser){//Si existe revisamos que esté registrado sus datos en la tabla Docentes y actualizamos, saltamos el bucle 
+                        $this->actualizar_usuario($sensorUser->id,$value);
                   		$buscarDocente=Docente::where('user_id',$sensorUser->id)->first();
                   	if($buscarDocente){//Si ya existe el docente, solo actualizamos
+                        $this->roles_usuario($buscarDocente->user_id,array('3')); //Actualizar rol
                   		$this->actualizar_docente($buscarDocente->user_id,$value); //------------------------------------------------------------------
                   		continue;
                   	}else{ //si no existe registramos al docente (podría funcionar sin el ELSE por el "continue")
+                        $this->roles_usuario($id_user,array('3')); //enviamos ID y los roles y usuarios
                   		$return=$this->nuevo_docente($sensorUser->id,$value);
                   		echo $return;
                      	continue; //saltamos el bucle
@@ -91,10 +96,22 @@ class CargarDatosController extends Controller
       	$usuario->nombres=$value->nombres;
          $usuario->email=$value->dni.'@mail.com'; 
          $usuario->dni=$value->dni;
-         $usuario->password = bcrypt($value->dni),
+         $usuario->password = bcrypt($value->dni);
          $usuario->f_nac=$value->fech_nac;
          $usuario->save();
          return $usuario->id;
+      }
+
+      public function actualizar_usuario($id_user,$value){
+         $usuario=User::find($id_user);
+         #$usuario->apellido_paterno=$value->paterno;
+         #$usuario->apellido_materno=$value->materno;
+         #$usuario->nombres=$value->nombres;
+         #$usuario->email=$value->dni.'@mail.com'; 
+         #$usuario->dni=$value->dni;
+         #$usuario->password = bcrypt($value->dni);
+         $usuario->f_nac=$value->fech_nac;
+         $usuario->save();
       }
 
       public function nuevo_estudiante($user_id,$value){
@@ -146,11 +163,17 @@ class CargarDatosController extends Controller
       }
 
       public function roles_usuario($user_id,$roles){
+         //si ya existe el rol y usuario
       	foreach ($roles as $rol) {
-      		$rolUser=new RolUser;
-      		$rolUser->rol_id=$rol;
-      		$rolUser->user_id=$user_id;
-      		$rolUser->estado='1';
+            $rolUser=RolUser::where('rol_id',$rol)->where('user_id',$user_id)->first();
+            if($rolUser){//si ya existe solo actualizamos el estado
+              $rolUser->estado='1';
+            }else{//si no existe registramos
+               $rolUser=new RolUser;
+               $rolUser->rol_id=$rol;
+               $rolUser->user_id=$user_id;
+               $rolUser->estado='1';
+            }
       		$rolUser->save();
       	}
       }

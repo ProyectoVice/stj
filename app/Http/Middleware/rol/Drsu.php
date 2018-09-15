@@ -17,7 +17,7 @@ class Drsu
     public function handle($request, Closure $next)
     {   
         //if(Auth::user()->hasRoles(['Docente','Administrador General'])){
-        if(auth()->user()->hasRoles(['DRSU','SuperAdmin'])){
+        if(auth()->user()->hasRoles(['DRSU','Administrador General'])){
            //return  response('Exito Docente',403);
             return $next($request);
 

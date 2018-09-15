@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('foto')->default('user.png');
             //Domicilio
-            $table->integer('distrito_nac')->default('887')->unsigned();
+            $table->integer('distrito_nac')->default('090101')->unsigned(); //Ubigeo
             $table->string('domicilio')->nullable();
             $table->string('n_domicilio')->nullable();
             //Contacto
@@ -40,7 +40,7 @@ class CreateUsersTable extends Migration
             $table->integer('est_civil_id')->default('7')->unsigned();
             $table->integer('religion_id')->default('1')->unsigned();
             
-            $table->foreign('distrito_nac')->references('id')->on('distritos')->onDelete('cascade');
+            //$table->foreign('distrito_nac')->references('id')->on('distritos')->onDelete('cascade');
             $table->foreign('est_civil_id')->references('id')->on('est_civils')->onDelete('cascade');
             $table->foreign('religion_id')->references('id')->on('religions')->onDelete('cascade');
             $table->rememberToken();

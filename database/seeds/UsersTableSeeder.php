@@ -193,7 +193,26 @@ class UsersTableSeeder extends Seeder
             'email' => '00000038@hotmail.com',
             'password' => bcrypt('00000038'),
             'dependencia_id_depende' => 1,
-        ]
+            ],
+            //Proyección Social y extensión Cultural
+            [//id = 39
+            'dni' => '00000039',
+            'nombres' => 'Jef. U',
+            'apellido_paterno' => 'Proyección',
+            'apellido_materno' => 'Social',
+            'email' => '00000039@hotmail.com',
+            'password' => bcrypt('00000039'),
+            'dependencia_id_depende' => 1,
+            ],
+            [//id = 40
+            'dni' => '00000040',
+            'nombres' => 'Jef. U',
+            'apellido_paterno' => 'Extensión',
+            'apellido_materno' => 'Cultural',
+            'email' => '00000040@hotmail.com',
+            'password' => bcrypt('00000040'),
+            'dependencia_id_depende' => 1,
+            ]
 
          ]);     
 
@@ -293,7 +312,7 @@ class UsersTableSeeder extends Seeder
         DB::table('docentes')->insert([
             [//usuario Docente por defecto
              'user_id'=>'2',
-             'escuela_id'=>25,
+             'escuela_id'=>22,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
@@ -302,7 +321,7 @@ class UsersTableSeeder extends Seeder
             ],
             [//Docente DRSU-F
              'user_id'=>'24',
-             'escuela_id'=>25,
+             'escuela_id'=>22,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
@@ -416,23 +435,22 @@ class UsersTableSeeder extends Seeder
 
         DB::table('docentes')->insert([
              'user_id'=>'4',
-             'escuela_id'=>30,
+             'escuela_id'=>22,
              'docente_categoria_id'=>'1',
              'docente_condicion_id'=>'1',
              'docente_dedicacion_id'=>'1',
-             'dependencia_academico_id'=>55,
              'h_lectivas'=>'12','h_n_lectivas'=>'12',
         ]);
 
-            //DRSU
-        //DB::table('rol_users')->insert([
-                //'user_id' => '5',
-                //'rol_id' => '5',
-        //]);
-            //DRSU-F
-        //DB::table('rol_users')->insert([
-                //'user_id' => '6',
-                //'rol_id' => '6',
-        //]);
+        //Proyeccion Social
+        DB::table('rol_users')->insert([
+            'user_id' => '39',
+            'rol_id' => '5',
+        ]);
+            //Extensión Cultural
+        DB::table('rol_users')->insert([
+            'user_id' => '40',
+            'rol_id' => '5',
+        ]);
     }
 }

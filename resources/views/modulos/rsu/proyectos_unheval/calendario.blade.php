@@ -11,7 +11,7 @@
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Responsabilidad Social Universitaria</li>
 	<li class="active">Responsabilidad Social Universitaria</li>
-  <li class=""><a href="{{ route('rsu.pf.index') }}"> Proyectos UNHEVAL</a></li>
+  <li class=""><a href="{{ route('rsu.pu.index') }}"> Proyectos UNHEVAL</a></li>
 	<li class="">Calendario</li>
 </ul>
 @endsection

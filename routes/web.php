@@ -19,6 +19,13 @@ Route::get('/', function () {
 Route::post('login', 'Auth\LoginController@login');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');       
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+//Ajustar Usuario
+Route::group(['prefix' => 'ajustes'],function(){
+	Route::get('index', 'Auth\AjustesUserController@index')->name('ajustes.index');
+	Route::post('update', 'Auth\AjustesUserController@update')->name('ajustes.update');
+	Route::put('foto', 'Auth\AjustesUserController@img_update')->name('ajustes.foto');
+});
+
 //RSU
 Route::group(['prefix' => 'rsu'],function(){
 	//Mis proyectos
@@ -119,13 +126,9 @@ Route::group(['prefix' => 'usuario'],function(){
 	Route::group(['prefix' => 'nuevo'],function(){
 		Route::get('/','Auth\UsersController@index')->name('usuario.nue.index');
 		Route::get('datos','Auth\UsersController@datatables')->name('usuario.nue.datos');
-		Route::get('create/{dni}', 'Auth\UsersController@create')->name('usuario.nue.create');		
-		Route::post('store', 'Auth\UsersController@store')->name('usuario.nue.store');
-		Route::post('validar', 'Auth\UsersController@validar')->name('usuario.nue.validar');		
-		Route::get('editar/{id}','Auth\UsersController@edit')->name('usuario.nue.edit');
+		Route::post('validar', 'Auth\UsersController@validar')->name('usuario.nue.validar');	
 		Route::put('update/{id}','Auth\UsersController@update')->name('usuario.nue.update');
 		Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
-        Route::get('mostrar/{id}','Auth\UsersController@show')->name('usuario.nue.show');
 
 	});
         //Route::get('get','ReprogramacionController@get')->name('admin.reprogramacion.get');        

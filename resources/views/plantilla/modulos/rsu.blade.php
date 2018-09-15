@@ -1,4 +1,4 @@
-@if(Auth::user()->hasRoles(['Docente','Estudiante']))
+@if(Auth::user()->hasRoles(['Docente','Estudiante','DRSU']))
 						<li class="">
 							<a href="#" class="dropdown-toggle" title="Responsabilidad Social Universitaria">
 								<i class="menu-icon fa fa-leaf" ></i>
@@ -27,6 +27,7 @@
 									<b class="arrow"></b>
 								</li>
 								@endif
+								@if(Auth::user()->hasRoles(['Docente']))
 								<li class="">
 									<a href="{{ route('rsu.mp.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>
@@ -34,6 +35,7 @@
 									</a>
 									<b class="arrow"></b>
 								</li>
+								@endif
 								{{-- <li class="">
 									<a href="">
 										<i class="menu-icon fa fa-caret-right"></i>
@@ -41,6 +43,7 @@
 									</a>
 									<b class="arrow"></b>
 								</li> --}}
+								
 								<li class="">
 									<a href="{{ route('rsu.pr.index') }}">
 										<i class="menu-icon fa fa-caret-right"></i>

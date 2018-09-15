@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'personaladmision' => \App\Http\Middleware\rol\PersonalAdmision::class,
         'drsu' => \App\Http\Middleware\rol\Drsu::class,
         'drsu-f' => \App\Http\Middleware\rol\DrsuF::class,
+        'admin' => \App\Http\Middleware\rol\Admin::class,
 
     ];
 }

@@ -2,18 +2,25 @@
 @section('titulo','Usuario - Detalle')
 @section('activacion')
 @endsection
-@section('estilos')  
+@section('estilos')
+	<style type="text/css">
+		#textEditar{
+    		border: none;
+		   border-bottom: 2px solid #003399;
+		}
+	</style>  
 @endsection
 @section('ruta')
 <ul class="breadcrumb">
 	<i class="ace-icon fa fa-leaf"></i>
 	<li class="active">Expediente</li>
-	<li class=""><a href="{{ route('usuario.nue.index') }}"> Registro</a></li>
+	<li class=""><a href="{{ route('usuario.nue.index') }}"> Usuarios</a></li>
 	<li class="">Ver Más</li>
 </ul>
 @endsection
 @section('contenido')
 <div class="col-xs-12">
+		{!! Form::model($usuario,['route' => ['usuario.nue.update',$usuario->id], 'method' => 'PUT','id'=>'myform', 'class'=>'form-horizontal form-label-left', 'enctype'=>'multipart/form-data']) !!}
 								<!-- PAGE CONTENT BEGINS -->
 
 								<div class="hr dotted"></div>
@@ -22,7 +29,7 @@
 										<div class="col-xs-12 col-sm-3 center">
 											<div>
 												<span class="profile-picture">
-													<img id="avatar" alt="Alex's Avatar" src="{{URL::to('plantilla/images/avatars/profile-pic.jpg')}}" height="200px;" style="vertical-align: top;">
+													<img id="avatar" alt="Alex's Avatar" src="{{ $RutaDeMiFotoPerfil }}" style="vertical-align: top;">
 												</span>
 													
 												<div class="space-4"></div>
@@ -37,10 +44,14 @@
 											<div class="profile-contact-info">
 												<div class="profile-contact-links align-left">
 													<p><label><i class="ace-icon fa fa-hand-o-right"></i> Roles: <br></label>
-														<div class="hr dotted"></div>
-															@foreach($usuario->roles as $r)
-															<i class="ace-icon fa fa-check-square-o"></i><span >{{$r->descripcion}}<br></span>
-															@endforeach
+														<div class="hr dotted"></div>	
+														@foreach($roles as $id =>$rol)
+															<label>
+																<input type="checkbox" value="{{$id}}" {{$usuario->roles->pluck('id')->contains($id) ? 'checked':''}}  
+																name="roles[]"> {{$rol}}
+															</label> <br>
+														@endforeach		
+
 													</p>
 												</div>
 											</div>
@@ -53,97 +64,84 @@
 												<div class="profile-info-row">
 													<div class="profile-info-name"> DNI </div>
 													<div class="profile-info-value">
-														<span id="username">{{$usuario->dni}}</span>
+														<input type="text" id="textEditar" placeholder="Escribir aquí" name="dni" class="form-control" required="required" value="{!! $usuario->dni or $dni!!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Nombres </div>
 													<div class="profile-info-value">
-														<span id="country">{{$usuario->nombres}}</span>
+														<input type="text" placeholder="Escribir aquí" name="nombres" id="textEditar" class="textEditar form-control" required="required" value="{!! $usuario->nombres or old('nombres') !!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Ap. Paterno </div>
 													<div class="profile-info-value">
-														<span id="country">{{$usuario->apellido_paterno}}</span>
+														<input type="text" placeholder="Escribir aquí" name="apellido_paterno" id="textEditar" class="form-control" required="required" value="{!! $usuario->apellido_paterno or old('apellido_paterno') !!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Ap. Materno </div>
 													<div class="profile-info-value">
-														<span id="country">{{$usuario->apellido_materno}}</span>
+														<input type="text" placeholder="Escribir aquí" name="apellido_materno" id="textEditar" class="form-control" required="required" value="{!! $usuario->apellido_materno or old('apellido_materno') !!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Fecha de Nacimiento </div>
 													<div class="profile-info-value">
-														<span id="country">{{$usuario->f_nac}}</span>
+														<input type="date" placeholder="Escribir aquí" name="f_nac" class="form-control" id="textEditar" value="{!! $usuario->f_nac or old('f_nac') !!}">
 													</div>
 												</div>
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Lugar de Nacimiento</div>
-													<div class="profile-info-value">
-													<span >{{$usuario->distrito->distrito.' - '.$usuario->distrito->provincia->provincia.' - '.$usuario->distrito->provincia->departamento->departamento}}</span>
-													</div>
-												</div>
+												
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Domicilio actual</div>
 													<div class="profile-info-value">
-														<span >{{$usuario->domicilio.' '.$usuario->n_domicilio}}</span>
+														<input type="text" placeholder="Nombre de la Av., Calle, Jr., Otros" name="domicilio" class="col-sm-8" required="required" id="textEditar" value="{!! $usuario->domicilio or old('domicilio') !!}">
+														<input type="text" placeholder="N°" name="n_domicilio" class="col-sm-offset-1 col-sm-3" required="required" id="textEditar" value="{!! $usuario->n_domicilio or old('n_domicilio') !!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Telefono</div>
 													<div class="profile-info-value">
-														<span >{{$usuario->tel}}</span>
+														<input type="text" placeholder="Escribir aquí" name="tel" id="textEditar" class="form-control" value="{!! $usuario->tel or old('tel') !!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> N Celular</div>
 													<div class="profile-info-value">
-														<span >{{$usuario->cel}}</span>
+														<input type="text" placeholder="Escribir aquí" name="cel" id="textEditar" class="form-control" value="{!! $usuario->cel or old('cel') !!}">
 													</div>
 												</div>
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Genero </div>
+													<div class="profile-info-name"> E-mail</div>
 													<div class="profile-info-value">
-														<span id="country">
-															@if($usuario->genero=='1')
-																Masculino
-															@elseif($usuario->genero=='0')
-																Femenino
-															@endif
-														</span>
+														<input type="email" placeholder="Escribir aquí" name="email" class="form-control" id="textEditar" required="required" value="{!! $usuario->email or old('email') !!}">
 													</div>
-												</div>
+												</div> 
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Estado de Login </div>
+													<div class="profile-info-name"> Contraseña</div>
 													<div class="profile-info-value">
-														<span id="country">
-															@if($usuario->estado_login=='1')
-																Activo
-															@elseif($usuario->estado_login=='0')
-																Inactivo
-															@endif
-														</span>
+														<input type="password" placeholder="Opcional" name="password" id="textEditar" class="form-control">
 													</div>
 												</div>
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Estado Civil </div>
-													<div class="profile-info-value">
-														<span >{{$usuario->est_civil->est_civil}}</span>
-													</div>
-												</div>
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Religión </div>
-													<div class="profile-info-value">
-														<span >{{$usuario->religion->religion}}</span>
-													</div>
-												</div>
-											</div>
-											<br><br><br><br><br><br>
+												
 									</div>
-								</div>
+												<div class="col-sm-12 col-xs-12" >
+													<div class="hr dotted"></div>
+														<div class="form-group" align="center">
+															<button type="submit" class="width-30 btn btn-sm btn-primary">
+																<i class="ace-icon fa  fa-refresh"></i>
+																<span class="bigger-110"> Actualizar</span>
+															</button>								
+														</div>	
+														<div>
+															<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div> 
+														</div>
+												</div>
+								</div> 
 								<!-- PAGE CONTENT ENDS -->
+								
 							</div>
+	</div>
+	{!! Form::close() !!}	
+</div>
 @endsection

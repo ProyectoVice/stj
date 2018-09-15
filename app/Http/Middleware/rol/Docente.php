@@ -17,7 +17,7 @@ class Docente
     public function handle($request, Closure $next)
     {   
         //if(Auth::user()->hasRoles(['Docente','Administrador General'])){
-        if(auth()->user()->hasRoles(['Docente','SuperAdmin'])){
+        if(auth()->user()->hasRoles(['Docente','Administrador General'])){
            //return  response('Exito Docente',403);
             return $next($request);
 

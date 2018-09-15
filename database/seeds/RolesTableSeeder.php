@@ -14,7 +14,7 @@ class RolesTableSeeder extends Seeder
         DB::table('rols')->insert([
             ['rol' => 'ZenoSama', 'descripcion' => 'Super Admin',],//1
             ['rol' => 'Administrador General','descripcion' => 'Administrador General: Gestiona Usuarios',],//2
-            ['rol' => 'Docente', 'descripcion' => 'Docente: El que enseña, dicta cursos en la UNHEVAL',],//3
+            ['rol' => 'Docente', 'descripcion' => 'Docente de Pregrado',],//3
             ['rol' => 'Estudiante', 'descripcion' => 'Estudiante: Estudia en la UNHEVAL',],//4
             ['rol' => 'DRSU', 'descripcion' => 'Director de Responsabilidad Social Universitaria',],//5
             ['rol' => 'DRSU-F', 'descripcion' => 'Director de Responsabilidad Social Universitaria de Facultad',],//6

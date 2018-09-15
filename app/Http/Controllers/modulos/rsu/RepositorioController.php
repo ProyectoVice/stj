@@ -19,7 +19,7 @@ class RepositorioController extends Controller
     
     public function __construct(){
         $this->middleware('auth');
-        $this->middleware('docente');
+        //$this->middleware('docente');
     }
 
     public function index()
@@ -30,7 +30,7 @@ class RepositorioController extends Controller
     {
         $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                            ->join('docentes AS d','d.user_id','=','p.user_id')
-                           ->join('dependencias  AS e','e.id','=','d.dependencia_escuela_id')
+                           ->join('dependencias  AS e','e.id','=','d.escuela_id')
                            ->where('rsu_proyectos.etapa','4')
                            ->select('rsu_proyectos.*','e.dependencia AS escuela')->get();
         return datatables()->of($proyecto)->toJson();

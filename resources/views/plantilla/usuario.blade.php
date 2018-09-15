@@ -1,8 +1,14 @@
 <!DOCTYPE html>
+<?php 
+	if(Auth::user()->foto==null || Auth::user()->foto!='user.png'){
+		$RutaDeMiFotoPerfil=Storage::url(Auth::user()->foto);
+	 } else{
+	  	$RutaDeMiFotoPerfil=URL::to('plantilla/images/avatars/user.png');
+	  } 
+?>
 <html lang="es">
 <?php 
 $variable="";
-
 ?>
 
 	<head>
@@ -138,9 +144,11 @@ $variable="";
 						</li> --}}					
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{URL::to('plantilla/images/avatars/avatar.png')}}"
+								<img class="nav-user-photo" src="{{$RutaDeMiFotoPerfil}}"
 								alt="Foto" />
 								<span class="user-info">
+									<!-- ubicamos la ruta de la FOTO -->
+
 									<small>{{ Auth::user()->nombres }}</small>
 									{{ Auth::user()->apellido_paterno.' '.Auth::user()->apellido_materno }}
 								</span>
@@ -149,13 +157,13 @@ $variable="";
 							</a>
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#">
+									<a href="{{ route('ajustes.index') }}">
 										<i class="ace-icon fa fa-cog"></i>
 										Ajustes
 									</a>
 								</li>
 								<li>
-									<a href="{{url('manual/manual-rsu.pdf')}}" target="_black">
+									<a href="#" target="_black"  data-toggle="modal" data-target="#DescargarManual">
 										<i class="ace-icon fa fa-exclamation"></i>
 										Ayuda
 									</a>
@@ -337,4 +345,25 @@ $variable="";
 		@yield('script')
 		<!--FIN de Otros Scripts-->
 	</body>
+	     <!-- Small modal -->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="DescargarManual">
+      <div class="modal-dialog modal-sm">
+         <div class="modal-content">
+			<div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title">Descargar Manual</h4>
+            </div>
+            <div class="modal-body">  
+                  @foreach(Auth::user()->roles as $rol)
+                  	<ul>
+                  		<li><a href="{{url('manual/'.$rol->id.'.pdf')}}" target="_black" style="font-size: 15px;">
+                  			<i class="ace-icon fa fa-download"></i> {{$rol->rol}}</a>
+                  		</li>
+                  	</ul>
+                  @endforeach
+             </div>
+         </div>
+      </div>
+    </div>
+    <!--FIN modal-->
 </html>

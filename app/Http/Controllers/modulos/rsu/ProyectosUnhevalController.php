@@ -33,7 +33,7 @@ class ProyectosUnhevalController extends Controller
      */
     public function __construct(){
         $this->middleware('auth');
-        $this->middleware('docente');
+        //$this->middleware('docente');
         $this->middleware('drsu');
     }
 
@@ -45,7 +45,7 @@ class ProyectosUnhevalController extends Controller
     {
         $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                            ->join('docentes AS d','d.user_id','=','p.user_id')
-                           ->join('dependencias  AS e','e.id','=','d.dependencia_escuela_id')
+                           ->join('dependencias  AS e','e.id','=','d.escuela_id')
                            ->select('rsu_proyectos.*','e.dependencia AS escuela')->get();
         return datatables()->of($proyecto)->toJson();
     }
@@ -87,7 +87,7 @@ class ProyectosUnhevalController extends Controller
     }
     public function cal_index($id)
     {
-        $escuela=Docente::find(Auth::user()->id)->dependencia_escuela;
+        $escuela=Docente::find(Auth::user()->id)->escuela;
          $proyecto=RsuProyecto::find($id);
         return view('modulos.rsu.proyectos_unheval.calendario',compact('proyecto','escuela'));    
     }
@@ -109,7 +109,7 @@ class ProyectosUnhevalController extends Controller
        $docentes=RsuParticipante::join('users','users.id','=','rsu_participantes.user_id')
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('docentes AS doc','doc.user_id','=','users.id')
-               ->join('dependencias  AS e','e.id','=','doc.dependencia_escuela_id')
+               ->join('dependencias  AS e','e.id','=','doc.escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->join('rol_users AS ru','users.id','=','ru.user_id')
                ->where('ru.rol_id','3')
@@ -121,7 +121,7 @@ class ProyectosUnhevalController extends Controller
                ->join('rsu_responsabilidads AS r','r.id','=','rsu_participantes.rsu_responsabilidad_id')
                ->join('estudiantes AS doc','doc.user_id','=','users.id')
                //->join('escuelas','escuelas.id','=','doc.escuela_id')
-               ->join('dependencias  AS e','e.id','=','doc.dependencia_escuela_id')
+               ->join('dependencias  AS e','e.id','=','doc.escuela_id')
                ->where('rsu_participantes.rsu_proyecto_id',$id)
                ->where('rsu_participantes.rsu_responsabilidad_id','=',3)
                ->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'), 'users.id AS id_user','users.dni AS dni', 'r.rsu_responsabilidad AS tipo', 'r.id AS id_responsabilidad','e.dependencia AS escuela', 'rsu_participantes.id AS id')->get();

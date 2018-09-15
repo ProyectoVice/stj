@@ -13,6 +13,6 @@ class DashboardController extends Controller
     }
     public function index(){
     	$roles=RolUser::where('user_id',Auth::user()->id)->get();
-    	return view('plantilla.usuario',compact('roles'));
+    	return view('dashboard',compact('roles'));
     }
 }
