@@ -15,9 +15,10 @@ class CreateCargaNoLectivasTable extends Migration
     {
         Schema::create('carga_no_lectivas', function (Blueprint $table) {
             $table->increments('id');
-            $table->time('hora');
+            $table->integer('horas')->unsigned();
             $table->string('estado');
             $table->string('semestre');
+            $table->integer('anio')->unsigned();
             $table->integer('docente_id')->unsigned();
             $table->integer('act_no_lectiva_id')->unsigned();
 

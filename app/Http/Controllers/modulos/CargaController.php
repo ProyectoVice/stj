@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\modulos;
 
+use App\_clases\NoLectivaPDFF;
 use App\_clases\TablaPDFF;
 use App\ActividadSilabo;
 use App\ActNoLectiva;
 use App\Ambiente;
 use App\CargaLectiva;
+use App\CargaNoLectiva;
 use App\Curso;
 use App\Dependencia;
 use App\Horario;
@@ -131,6 +133,7 @@ class CargaController extends Controller
 
         //dd($horarios);
         $pdf = new tablaPDFF('P','mm','A4');
+        $pdf->SetTitle('Carga lectiva');
         $pdf->setHeader( $docente, $curso, $carga_lectiva );
         $header = array("\nSEMANA\n", utf8_decode("\nDÍA\n"), "\nHORA\n", "\nACTIVIDAD\n");
         $pdf->SetAutoPageBreak(false);
@@ -198,6 +201,11 @@ class CargaController extends Controller
 
     public function micargaLectiva( $anio, $semestre)
     {
+        $departamento = \App\Docente::find(Auth::user()->id);
+        /*if($departamento==null)
+            dd("no tiene permiso para acceder");*/
+        $departamento = $departamento->dependencia_academico_id;
+        $dep_nombre = (new \App\Dependencia)->find($departamento)->dependencia;
         $carga = DB::table('cursos')
             ->select('cursos.id', 'cursos.codigo', 'cursos.nombre', 'cursos.creditos',
                 'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo', 'carga_lectivas.id as idcarga',
@@ -222,6 +230,7 @@ class CargaController extends Controller
                 'anio'=>$anio,
                 'semestre'=>$semestre,
                 'cursos'=>$cursos,
+                'departamento'=>$dep_nombre,
                 'docente'=>null
             ]
         );
@@ -248,23 +257,78 @@ class CargaController extends Controller
         return ['oh'=>'true','msg'=>'datos guardados correctamente'];
     }
     public function noLectiva($semestre,$anio){
-
-        $carga=CargaLectiva::select('*')
+        $actividades = CargaNoLectiva::select('*')
             ->where('semestre','=',$semestre)
             ->where('anio','=',$anio)
-            ->where('curso_id','=',1)
-            ->where('docente_id','=',Auth::user()->id)
+            ->where('docente_id', '=', Auth::user()->id)
             ->get();
-        if(count($carga)==1)
-            $carga=$carga[0];
-        else
-            $carga = new CargaLectiva();
-        $carga->semestre=$semestre;
-        $carga->anio=$anio;
-        $carga->curso_id=1;
-        $carga->docente_id=Auth::user()->id;
-        $carga->save();
+        $actividades_no_lectivas=ActNoLectiva::getAllForSelect();
+        return view('modulos.academico.no_lectivas',
+            [
+                'anio'=>$anio,
+                'semestre'=>$semestre,
+                'actividades'=>$actividades,
+                'actividades_no_lectivas'=>$actividades_no_lectivas,
+                'dias'=>[1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo']
+            ]
+        );
+    }
 
-        return $this->horario($carga->id);
+    public function SaveNoLectiva( $semestre,$anio, Request $request)
+    {
+        if (isset($request->id)) {
+            if ($request->id == 'new')
+                $actividad = new CargaNoLectiva();
+            else
+                $actividad = CargaNoLectiva::find($request->id);
+            $actividad->docente_id=$request->docente;
+            $actividad->horas=$request->horas;
+            $actividad->estado=1;
+            $actividad->semestre=$semestre;
+            $actividad->anio=$anio;
+            $actividad->act_no_lectiva_id=$request->actividad;
+            $actividad->save();
+        }
+        return 'success';
+        //return $this->acciones($actividad->horario_id, $request);
+    }
+    public function DeleteNoLectiva( $semestre,$anio, Request $request)
+    {
+        if (isset($request->id)) {
+            $actividad = CargaNoLectiva::find($request->id);
+            $actividad->delete();
+        }
+        return 'success';
+    }
+    public function PrintNoLectiva($semestre,$anio, Request $request){
+
+            $cargas = CargaNoLectiva::select('*')
+                ->where('anio', '=', $anio)
+                ->where('semestre', '=', $semestre )
+                ->where('docente_id', '=', Auth::user()->id)
+                ->get();
+            if(count($cargas)>0) {
+                $carga = $cargas[0];
+                setlocale(LC_TIME, 'ES_PE');
+                setlocale(LC_TIME, 'es_PE.UTF-8');
+                $headers = ['Content-Type' => 'application/pdf'];
+
+                $dep = Auth::user()->dependencia_id_depende;
+                $docente = Curso::find($carga->docente_id);
+                $ambiente = Ambiente::getAmbientesByFacultades($dep);
+
+                //dd($horarios);
+                $pdf = new NoLectivaPDFF('P', 'mm', 'A4');
+                $pdf->SetTitle('Carga no lectiva');
+                $pdf->setHeader($docente, $carga);
+                $header = array("\nACTIVIDAD\n", "\nHORAS\n");
+                $pdf->SetAutoPageBreak(false);
+                $pdf->AddPage();
+                $pdf->cargaLectivaCurso($header, $cargas, ActNoLectiva::getAllForSelect());
+
+                return Response::make($pdf->Output(), 200, $headers);
+            }else
+                return 'no hay registros';
+
     }
 }
