@@ -25,15 +25,24 @@
 					<b class="arrow"></b>
 				</li>
 			@endif
-			@if(Auth::user()->hasRoles(['DirEscuela']))
-				<li class="">
-					<a href="{{ route('academico.carga.index', ['null','null','null','null']) }}">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Carga Lectiva
-					</a>
-					<b class="arrow"></b>
-				</li>
-			@endif
+				@if(Auth::user()->hasRoles(['DirEscuela']))
+					<li class="">
+						<a href="{{ route('academico.carga.index', ['null','null']) }}">
+							<i class="menu-icon fa fa-caret-right"></i>
+							Carga Lectiva {{\Carbon\Carbon::now()->year}}
+						</a>
+						<b class="arrow"></b>
+					</li>
+				@endif
+				@if(Auth::user()->hasRoles(['DirEscuela']))
+					<li class="">
+						<a href="{{ route('academico.carga.show', ['null','null','null']) }}">
+							<i class="menu-icon fa fa-caret-right"></i>
+							Carga Lectiva Historico
+						</a>
+						<b class="arrow"></b>
+					</li>
+				@endif
 		</ul>
 	</li>
 @endif
@@ -49,7 +58,7 @@
 				<li class="">
 					<a href="{{ route('academico.mi.carga.index', ['null','null']) }}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Mi Carga Lectiva
+						Mi Carga
 					</a>
 					<b class="arrow"></b>
 				</li>

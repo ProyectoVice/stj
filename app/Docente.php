@@ -92,4 +92,17 @@ class Docente extends Model
         }
         return $docentes;
     }
+    public static function getDocentes_all()
+    {
+        $doc_query = DB::table('docentes')->select('users.id', 'users.nombres', 'dep.dependencia')
+            ->join('users', 'users.id', '=', 'docentes.user_id')
+            ->join('dependencias', 'dependencias.id', '=', 'docentes.dependencia_escuela_id')
+            ->join('dependencias as dep', 'dep.id', '=', 'dependencias.departamento_dependencia_id');
+        $docentes=[];
+        /* FIN DE MOVER ESTA FRACCION DE CODIGO A LA TABLA DEPENDENCIA*/
+        foreach($doc_query->get() as $d){
+            $docentes[$d->dependencia][$d->id]=$d->nombres;
+        }
+        return $docentes;
+    }
 }

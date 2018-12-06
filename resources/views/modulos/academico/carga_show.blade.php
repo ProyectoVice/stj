@@ -9,10 +9,6 @@
   <li class="">Carga Lectiva</li>
 </ul>
 @endsection
-
-@section('estilos')
-{!!Html::style('plantilla/css/bootstrap-select.min.css')!!}
-@endsection
 @section('contenido')
   <div class="row">
     <div class="col-sm-12">
@@ -24,6 +20,12 @@
         <div class="col-sm-2">
           <div class="clearfix">
             {!!Form::select('planes',$planes ,$plan,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
+          </div>
+        </div>
+        <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Año</label>
+        <div class="col-sm-2">
+          <div class="clearfix">
+            {!!Form::select('anios',$anios,$anio,['class'=>'col-xs-12 col-sm-9', 'placeholder' => 'Seleccione...'])!!}
           </div>
         </div>
         <label class="col-sm-1 control-label no-padding-right" for="form-field-1">Semestre</label>
@@ -68,15 +70,7 @@
                 <td>{{$curso->hteoria}}</td>
                 <td>{{$curso->hpractica}}</td>
                 <td>{{$curso->docente_nombre}}</td>
-                <td>
-                    @if(!isset($curso->idcarga))
-                        <a href="#asignar_docente" class="stj-acciones enviarId" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}" data-idcarga="-" data-docente_id="-"><i class="fa fa-plus"></i></a>
-                    @else
-                        <a href="#asignar_docente" class="stj-acciones editar" title="Asignar" data-toggle="modal" data-id="{{$curso->id}}" data-idcarga="{{$curso->idcarga}}" data-docente_id="{{$curso->docente_id}}"><i class="fa fa-pencil"></i></a>
-                        <a href="{{route('academico.carga.horario.index',$curso->idcarga)}}" class="stj-acciones horario_curso" title="Horario"><i class="fa fa-calendar"></i></a>
-                        @endif
-
-                </td>
+                <td></td>
             </tr>
             @endforeach
             </tbody>
@@ -107,7 +101,13 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Docente Departamento Academico</label>
                               <div class="col-sm-9">
-                                  {{Form::select('docente',$docentes,$docente,['required', 'class'=>'col-xs-12 col-sm-9 selectpicker','placeholder' => 'Docente', 'data-live-search'=>'true'])}}
+                                  {{Form::select('docente',$docentes,$docente,['required', 'class'=>'col-xs-12 col-sm-9','placeholder' => 'Docente'])}}
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Docente Otros DEpartamentos Academicos</label>
+                              <div class="col-sm-9">
+                                  {{Form::select('docente_g',$docentes_g,$docente,['class'=>'col-xs-12 col-sm-9','placeholder' => 'Docente'])}}
                               </div>
                           </div>
                       </form>
@@ -129,25 +129,17 @@
   {!!Html::script('/plantilla/js/jquery.dataTables.min.js')!!}
   {!!Html::script('/plantilla/js/jquery.dataTables.bootstrap.min.js')!!}
   {!!Html::script('/plantilla/js/dataTables.buttons.min.js')!!}
-  {!!Html::script('/plantilla/js/bootstrap-select.min.js')!!}
   <script>
   $(document).ready(function () {
 
       $('[name=planes]').change(function (e) {
           e.preventDefault();
           plan=($(this).val()=='')  ?'null':$(this).val();
+          anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
           semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
-          ruta = '{{route('academico.carga.index', ['%p','%s'])}}';
+          ruta = '{{route('academico.carga.show', ['%p','%a','%s'])}}';
           ruta =ruta.replace(/%p/g, plan);
-          ruta =ruta.replace(/%s/g, semestre);
-          window.location = ruta;
-      });
-      $('[name=ciclo]').change(function (e) {
-          e.preventDefault();
-          plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
-          semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
-          ruta = '{{route('academico.carga.index', ['%p','%s'])}}';
-          ruta =ruta.replace(/%p/g, plan);
+          ruta =ruta.replace(/%a/g, anio);
           ruta =ruta.replace(/%s/g, semestre);
           window.location = ruta;
       });
@@ -156,17 +148,20 @@
           plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
           anio=($(this).val()=='')  ?'null':$(this).val();
           semestre=($('[name=semestre]').val()=='')  ?'null':$('[name=semestre]').val();
-          ruta = '{{route('academico.carga.index', ['%p','%s'])}}';
+          ruta = '{{route('academico.carga.show', ['%p','%a','%s'])}}';
           ruta =ruta.replace(/%p/g, plan);
+          ruta =ruta.replace(/%a/g, anio);
           ruta =ruta.replace(/%s/g, semestre);
           window.location = ruta;
       });
       $('[name=semestre]').change(function (e) {
           e.preventDefault();
           plan=($('[name=planes]').val()=='')  ?'null':$('[name=planes]').val();
+          anio=($('[name=anios]').val()=='')  ?'null':$('[name=anios]').val();
           semestre=($(this).val()=='')  ?'null':$(this).val();
-          ruta = '{{route('academico.carga.index', ['%p','%s'])}}';
+          ruta = '{{route('academico.carga.show', ['%p','%a','%s'])}}';
           ruta =ruta.replace(/%p/g, plan);
+          ruta =ruta.replace(/%a/g, anio);
           ruta =ruta.replace(/%s/g, semestre);
           window.location = ruta;
       });
@@ -174,45 +169,13 @@
           e.preventDefault();
           $('[name=curso]').val($(this).data('id'))
           $('[name=id_carga]').val(null);
-          $("[name=docente] option:selected").removeAttr("selected")
-          $('[name=docente]').selectpicker('refresh');
       });
       $(".editar").click(function (e) {
           event.preventDefault();
           $('[name=curso]').val($(this).data('id'));
           $('[name=docente]').val($(this).data('docente_id'));
-          $('[name=docente]').selectpicker('refresh');
           $('[name=id_carga]').val($(this).data('idcarga'))
       });
-
-      $('#btn_guardar').click(function (e) {
-          e.preventDefault();
-          recolectarDatos()
-          /*if(!=''){
-              alert('Llene todos los campos');
-              return 0;
-          }*/
-          $.ajax({
-              url: '{{ route('academico.carga.store',[$plan,'null',$anio,$semestre]) }}',
-              type: 'POST',
-              data: datos_carga_lectiva,
-              success: function (data) {
-                  location.reload();
-                  $('#asignar_docente').modal('toggle');
-              },
-              error: function(error){
-                  console.log(error);
-              }
-          })
-      });
-      function recolectarDatos() {
-          return datos_carga_lectiva = {
-              idcarga: $('[name=id_carga]').val(),
-              docente: $('[name=docente]').val(),
-              curso: $('[name=curso]').val(),
-              _token: '{!! csrf_token() !!}',
-          };
-      }
 
   })
 
