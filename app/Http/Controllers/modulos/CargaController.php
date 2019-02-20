@@ -30,8 +30,9 @@ class CargaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($plan, $ciclo, $anio, $semestre)
+    public function index($plan, $semestre)
     {
+        $anio = Carbon::now()->year;
         $dep = Auth::user()->dependencia_id_depende;
         $departamento = \App\Docente::find(Auth::user()->id);
         /*if($departamento==null)
@@ -40,11 +41,8 @@ class CargaController extends Controller
         $dep_nombre = (new \App\Dependencia)->find($departamento)->dependencia;
         $planes = PlanEstudio::getForSelectForDepartamento($departamento);
         $plan = ($plan == 'null') ? null : $plan;
-        $ciclo = ($ciclo == 'null') ? null : $ciclo;
         $anios = [];
         $where=[['plan_estudio_id', '=', $plan]];
-        if ($ciclo>0)
-            $where[]=['ciclo', '=', $ciclo];
         $cursos_query = DB::table('cursos')->select('cursos.id', 'cursos.codigo', 'cursos.nombre', 'cursos.creditos',
             'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo', DB::raw('null as docente_nombre'))
             ->where($where)
@@ -58,7 +56,7 @@ class CargaController extends Controller
         $cursos=[];
         foreach ($cursos_query as $dato){
             if (is_numeric($semestre)&&$dato->ciclo%2==$semestre%2)
-            $cursos[$dato->id]=$dato;
+                $cursos[$dato->id]=$dato;
         }
         foreach ($carga as $dato){
             if(isset($cursos[$dato->curso_id])) {
@@ -68,19 +66,73 @@ class CargaController extends Controller
             }
         }
         //dd($carga);
-        $docentes = \App\Docente::getDocentesByDependencia($dep);
-        $docentes_g = \App\Docente::getDocentes($dep);
+        $docentes = \App\Docente::getDocentes_all();
         for ($i=Carbon::now()->year;$i>2004;$i--)
         {
             $anios[$i]=$i;
         }
         return view('modulos.academico.carga',
             [
+                'dependencia'=>$dep_nombre,
+                'planes'=>$planes,
+                'plan'=>$plan,
+                'ciclos'=>[1=>'I',2=>'II',3=>'III',4=>'IV',5=>'V',6=>'VI',7=>'VII',8=>'VIII',9=>'IX',10=>'X'],
+                'anios'=>$anios,
+                'anio'=>$anio,
+                'semestre'=>$semestre,
+                'cursos'=>$cursos,
+                'docentes'=>$docentes,
+                'docente'=>null
+            ]
+        );
+    }
+    public function show($plan, $anio, $semestre)
+{
+    $dep = Auth::user()->dependencia_id_depende;
+    $departamento = \App\Docente::find(Auth::user()->id);
+    /*if($departamento==null)
+        dd("no tiene permiso para acceder");*/
+    $departamento = $departamento->dependencia_academico_id;
+    $dep_nombre = (new \App\Dependencia)->find($departamento)->dependencia;
+    $planes = PlanEstudio::getForSelectForDepartamento($departamento);
+    $plan = ($plan == 'null') ? null : $plan;
+    $anios = [];
+    $where=[['plan_estudio_id', '=', $plan]];
+    $cursos_query = DB::table('cursos')->select('cursos.id', 'cursos.codigo', 'cursos.nombre', 'cursos.creditos',
+        'cursos.hteoria', 'cursos.hpractica', 'cursos.ciclo', DB::raw('null as docente_nombre'))
+        ->where($where)
+        ->get();
+    $carga = DB::table('cursos')
+        ->select('carga_lectivas.id', 'carga_lectivas.docente_id', 'carga_lectivas.curso_id', 'users.nombres', 'users.apellido_paterno', 'users.apellido_materno')
+        ->join('carga_lectivas', 'cursos.id', '=', 'carga_lectivas.curso_id')
+        ->join('users', 'users.id', '=', 'carga_lectivas.docente_id')
+        ->where('anio', '=', $anio)->get();
+
+    $cursos=[];
+    foreach ($cursos_query as $dato){
+        if (is_numeric($semestre)&&$dato->ciclo%2==$semestre%2)
+            $cursos[$dato->id]=$dato;
+    }
+    foreach ($carga as $dato){
+        if(isset($cursos[$dato->curso_id])) {
+            $cursos[$dato->curso_id]->docente_nombre = $dato->nombres;
+            $cursos[$dato->curso_id]->docente_id = $dato->docente_id;
+            $cursos[$dato->curso_id]->idcarga = $dato->id;
+        }
+    }
+    //dd($carga);
+    $docentes = \App\Docente::getDocentesByDependencia($dep);
+    $docentes_g = \App\Docente::getDocentes($dep);
+    for ($i=Carbon::now()->year;$i>2004;$i--)
+    {
+        $anios[$i]=$i;
+    }
+    return view('modulos.academico.carga_show',
+        [
             'dependencia'=>$dep_nombre,
             'planes'=>$planes,
             'plan'=>$plan,
             'ciclos'=>[1=>'I',2=>'II',3=>'III',4=>'IV',5=>'V',6=>'VI',7=>'VII',8=>'VIII',9=>'IX',10=>'X'],
-            'ciclo'=>$ciclo,
             'anios'=>$anios,
             'anio'=>$anio,
             'semestre'=>$semestre,
@@ -88,9 +140,9 @@ class CargaController extends Controller
             'docentes'=>$docentes,
             'docentes_g'=>$docentes_g,
             'docente'=>null
-            ]
-        );
-    }
+        ]
+    );
+}
     public function horario($id_carga){
         $dep = Auth::user()->dependencia_id_depende;
         $carga_lectiva = CargaLectiva::find($id_carga);
@@ -224,6 +276,13 @@ class CargaController extends Controller
         {
             $anios[$i]=$i;
         }
+        $actividades = CargaNoLectiva::select('*')
+            ->where('semestre','=',$semestre)
+            ->where('anio','=',$anio)
+            ->where('docente_id', '=', Auth::user()->id)
+            ->get();
+        $actividades_no_lectivas=ActNoLectiva::getAllForSelect();
+
         return view('modulos.academico.micarga',
             [
                 'anios'=>$anios,
@@ -231,7 +290,10 @@ class CargaController extends Controller
                 'semestre'=>$semestre,
                 'cursos'=>$cursos,
                 'departamento'=>$dep_nombre,
-                'docente'=>null
+                'docente'=>null,
+                'actividades'=>$actividades,
+                'actividades_no_lectivas'=>$actividades_no_lectivas,
+                'dias'=>[1=>'Lunes',2=>'Martes',3=>'Miercoles',4=>'Jueves',5=>'Viernes',6=>'Sabado',7=>'Domingo']
             ]
         );
     }

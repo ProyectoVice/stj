@@ -200,7 +200,8 @@ Route::group(['prefix' => 'calendario'],function(){
         Route::get('/noLectivaPrint/{ciclo}/{anio}','modulos\CargaController@PrintNoLectiva')->name('academico.carga.no_lectiva.print');
         Route::post('/noLectiva/{ciclo}/{anio}','modulos\CargaController@SaveNoLectiva')->name('academico.carga.no_lectiva.save');
         Route::post('/noLectiva/{ciclo}/{anio}/del','modulos\CargaController@DeleteNoLectiva')->name('academico.carga.no_lectiva.delete');//actividades silabos
-        Route::get('/{plan}/{ciclo}/{anio}/{semestre}','modulos\CargaController@index')->name('academico.carga.index');
+        Route::get('/{plan}/{anio}/{semestre}/show','modulos\CargaController@show')->name('academico.carga.show');
+        Route::get('/{plan}/{semestre}/edit','modulos\CargaController@index')->name('academico.carga.index');
         Route::post('/{plan}/{ciclo}/{anio}/{semestre}/store','modulos\CargaController@store')->name('academico.carga.store');
 
 

@@ -45,8 +45,8 @@ $variable="";
 		<!-- ace settings handler -->
 		{!!Html::script('plantilla/js/ace-extra.min.js')!!}
 		{!!Html::style('plantilla/css/stj/stj.css')!!}
-		@yield('activacion')
-		@yield('estilos')
+	@yield('activacion')
+	@yield('estilos')
 
 	</head>
 	<body class="no-skin">
