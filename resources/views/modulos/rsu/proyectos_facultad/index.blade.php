@@ -125,7 +125,7 @@
         	  $(document).on('click', '.stj-acciones-comen', function(event) {
 		         var id = $(this).data('id');
 		         	$.ajax({ 
-					            url: '/rsu/proyectos_facultad/show-msj/',
+					            url: '/rsu/proyectos_facultad/show-msj',
 					            type: 'POST',
 					            data: {_token: '{{csrf_token()}}', proyecto_id:id },
 					            success: function (data) {
@@ -156,7 +156,7 @@
 			});
 			function actualizarEtapa($id,$NuevaEtapa){
 				$.ajax({ 
-					url: '/rsu/proyectos_facultad/estado/',
+					url: '/rsu/proyectos_facultad/estado',
 					type: 'POST',
 					data: {_token: '{{csrf_token()}}', proyecto_id:$id, nuevaEtapa:$NuevaEtapa },
 					success: function (data) {

@@ -63,8 +63,8 @@ class UsersController extends Controller
         $myInscrito->n_domicilio=$request->get('n_domicilio');
         $myInscrito->tel=$request->get('tel');
         $myInscrito->cel=$request->get('cel');
-        if($request->get('pasword')){
-            $myInscrito->password=$request->get('pasword');
+        if($request->get('password')){
+            $myInscrito->password=$request->get('password');
         }
         $myInscrito->save();
         $myInscrito->roles()->sync($request->roles);

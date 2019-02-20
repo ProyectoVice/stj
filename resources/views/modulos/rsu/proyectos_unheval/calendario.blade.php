@@ -18,7 +18,7 @@
 @section('contenido')
 	<div class="row">
 		<div class="col-sm-12">
-			<h3><u> Proyecto</u>: {{ $proyecto->titulo }}</h3><label> {{ $escuela->dependencia}}</label><hr><br>
+			<h3><u> Proyecto</u>: {{ $proyecto->titulo }}</h3><label> Equipo:</label><hr><br>
 			{{ csrf_field() }}
 		</div>
 		<div class="col-sm-7 hidden-xs">

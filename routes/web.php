@@ -15,6 +15,11 @@ Route::get('/', function () {
 	return view('ingreso');
 });
 
+Route::get('apilogin', function () {
+    //return view('plantilla.usuario');
+	return url('http://egresados.unheval.edu.pe/vra/login/2012110690/NMA3618');
+});
+
 // Authentication Routes...
 Route::post('login', 'Auth\LoginController@login');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');       

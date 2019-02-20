@@ -23,6 +23,11 @@ class User extends Authenticatable
         return User::where('id','=',$id)->select(DB::raw('CONCAT(users.apellido_paterno," ",users.apellido_materno,", ", users.nombres) AS nombres'))->first();
     }
 
+    public function setPasswordAttribute($valor){
+        if (!empty($valor)) {
+            $this->attributes['password'] = \Hash::Make($valor);
+        }
+    }
 
 
     public function docente(){

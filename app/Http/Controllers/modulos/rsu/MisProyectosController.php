@@ -36,7 +36,7 @@ class MisProyectosController extends Controller
 
     public function __construct(){
         $this->middleware('auth');
-        $this->middleware('docente');
+        $this->middleware('docente')->except('cal_table');
     }
 
     public function index()
@@ -167,7 +167,7 @@ class MisProyectosController extends Controller
     {
 
        $this->validate(request(),[
-         'el_título'=>'unique:rsu_proyectos,titulo|max:30'
+         'el_título'=>'unique:rsu_proyectos,titulo|max:500'
       ]);
 
        //$data=request()->all();
@@ -319,11 +319,18 @@ class MisProyectosController extends Controller
     public function destroy($id)
     {
         $myProyect= RsuProyecto::find($id);
-        Storage::delete($myProyect->file_aprobacion);
-        Storage::delete($myProyect->file_culminacion);
-        Storage::delete($myProyect->file_satisfaccion);
-         RsuProyecto::destroy($id);
-        
+        $es_responsable_del_proyecto=RsuParticipante::where('user_id',Auth::user()->id)
+                    ->where('rsu_proyecto_id',$id)
+                    ->where('rsu_responsabilidad_id','1')->first();
+        if(!$es_responsable_del_proyecto){
+            return "no";
+        }else{ 
+            Storage::delete($myProyect->file_aprobacion);
+            Storage::delete($myProyect->file_culminacion);
+            Storage::delete($myProyect->file_satisfaccion);
+            RsuProyecto::destroy($id);
+            return "si";
+        }        
     }
 
     //Metodos CONTROLLER

@@ -182,17 +182,26 @@
 					               data: {_token: '{{csrf_token()}}' },
 					               success: function (data) {
 					                   myTable.ajax.reload();
-					                   swal(
-										      '¡Eliminado!',
-										      'Tu proyecto se ha eliminado',
-										      'success'
-										    )
+					                   if(data=='no'){
+					                   	swal(
+											      'No cuenta con permisos para eliminar este proyecto',
+											      'Solo puedes eliminar los proyectos que registraste',
+											      'error'
+											    )
+					                   }else{
+
+						                   swal(
+											      '¡Eliminado!',
+											      'Tu proyecto se ha eliminado',
+											      'success'
+											    )
+									   }
 					               },
 					               complete: function (data) {
 					                   button.prop('disabled', false);
 					                   $('#modal_admin').hide();
 					               },
-					                	error: function(error){
+					               error: function(error){
 				                   var r = error.responseJSON.message;
 				                   swal("Error",r, "error");
 			                   }

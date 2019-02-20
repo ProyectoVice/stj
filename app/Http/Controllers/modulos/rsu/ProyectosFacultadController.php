@@ -46,12 +46,13 @@ class ProyectosFacultadController extends Controller
     public function datatables()
     {
         $escuela=Docente::find(Auth::user()->id)->escuela->id;
-        $proyecto=RsuProyecto::join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
+        $proyecto=RsuProyecto::distinct()->join('rsu_participantes AS p','p.rsu_proyecto_id','=','rsu_proyectos.id')
                           // ->join('users AS u','u.id','=','p.user_id')
                            ->join('docentes AS d','d.user_id','=','p.user_id')
                            ->join('dependencias  AS e','e.id','=','d.escuela_id')
                            ->where('e.id','=',$escuela)
                            ->select('rsu_proyectos.*')->get();
+        
         return datatables()->of($proyecto)->toJson();
     }
     

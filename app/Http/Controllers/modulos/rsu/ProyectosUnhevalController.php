@@ -34,7 +34,7 @@ class ProyectosUnhevalController extends Controller
     public function __construct(){
         $this->middleware('auth');
         //$this->middleware('docente');
-        $this->middleware('drsu');
+        $this->middleware('drsu')->except('datatables');
     }
 
     public function index()
@@ -87,9 +87,9 @@ class ProyectosUnhevalController extends Controller
     }
     public function cal_index($id)
     {
-        $escuela=Docente::find(Auth::user()->id)->escuela;
-         $proyecto=RsuProyecto::find($id);
-        return view('modulos.rsu.proyectos_unheval.calendario',compact('proyecto','escuela'));    
+        //$escuela=Docente::find(Auth::user()->id)->escuela;
+        $proyecto=RsuProyecto::find($id);
+        return view('modulos.rsu.proyectos_unheval.calendario',compact('proyecto'));    
     }
     public function estado(Request $request){
       $id=$request->get('proyecto_id');
@@ -99,10 +99,10 @@ class ProyectosUnhevalController extends Controller
         
     }
     public function ver_detalle($id){
-        $proyecto=RsuProyecto::find($id);
-         $escuela=Docente::find(Auth::user()->id)->escuela;
+          $proyecto=RsuProyecto::find($id);
+         //$escuela=Docente::find(Auth::user()->id)->escuela;
          $equipo=$this->equipo($id);
-        return view('modulos.rsu.proyectos_unheval.ver_detalles',compact('proyecto','escuela','equipo'));
+        return view('modulos.rsu.proyectos_unheval.ver_detalles',compact('proyecto','equipo'));
     }
 
     public function equipo($id){
