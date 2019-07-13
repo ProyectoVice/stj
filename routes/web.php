@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +17,6 @@ Route::get('/', function () {
 	return view('ingreso');
 });
 
-Route::get('apilogin', function () {
-    //return view('plantilla.usuario');
-	return url('http://egresados.unheval.edu.pe/vra/login/2012110690/NMA3618');
-});
 
 // Authentication Routes...
 Route::post('login', 'Auth\LoginController@login');
@@ -128,6 +126,7 @@ Route::group(['prefix' => 'diplomado'],function(){
 });
 //Usuarios
 Route::group(['prefix' => 'usuario'],function(){
+	Route::get('actualizar','Auth\UsersController@actualizar')->name('usuario.nue.actualizar');
 	Route::group(['prefix' => 'nuevo'],function(){
 		Route::get('/','Auth\UsersController@index')->name('usuario.nue.index');
 		Route::get('datos','Auth\UsersController@datatables')->name('usuario.nue.datos');

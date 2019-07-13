@@ -46,7 +46,6 @@ class LoginController extends Controller
         //return $credentials;
         #Verificamos si las credenciales son correctas
         if(Auth::attempt($credentials)){
-
             return redirect()->route('dashboard');
         }
         return back()

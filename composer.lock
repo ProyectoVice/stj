@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "16d063380662a271fe700b8bd27cdc83",
+    "content-hash": "fdfecac5f003e75f1aba0f29f5b9db85",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
